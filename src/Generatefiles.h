@@ -16,8 +16,6 @@ public:
 	Generate_files();
 	virtual ~Generate_files();
 
-
-
 	//
 	// Funções Gerais
 
@@ -37,17 +35,15 @@ public:
 	void create_mi_ESBMC_S_Mathsat(Set ex, int prec);
 
 	void create_mi_ESBMC_C_Boolector(Set ex, int prec);
-	void create_mi_ESBMC_C_Z3(string name_f, string code_f, string space_limitP, string type, string f_i, int prec, string librarys);
-	void create_mi_ESBMC_C_Mathsat(string name_f, string code_f, string space_limitP, string type, string f_i, int prec, string librarys);
-
+	void create_mi_ESBMC_C_Z3(Set ex, int prec);
+	void create_mi_ESBMC_C_Mathsat(Set ex, int prec);
 
 	//
 	// Geração de arquivos referentes ao CBMC
 
-	void create_mi_CBMC_G_Minisat(string name_f, string code_f, string space_limitP, string type, string f_i, int prec, string librarys);
-	void create_mi_CBMC_S_Minisat(string name_f, string code_f, string space_limitP, string type, string f_i, int prec, string librarys);
-	void create_mi_CBMC_C_Minisat(string name_f, string code_f, string space_limitP, string type, string f_i, int prec, string librarys);
-
+	void create_mi_CBMC_G_Minisat(Set ex, int prec);
+	void create_mi_CBMC_S_Minisat(Set ex, int prec);
+	void create_mi_CBMC_C_Minisat(Set ex, int prec);
 
 	string convertDoubleString(double value);
 	string convertIntString(int value);

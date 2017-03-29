@@ -61,7 +61,7 @@ public:
 	bool segment_matrix_format_2(Set ex, string Mat);
 	bool segment_matrix_format_1(Set ex, string Mat);
 	string remove_space(string str);
-	string generate_assumes(Set ex);
+	string generate_assumes(Set ex, int p);
 
 
 	int convertStringInt(string str);

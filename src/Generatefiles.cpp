@@ -529,63 +529,67 @@
 		file_min << "	}\n";
 		file_min.close();
 
-
 	}
 
 
 	//****************************************************************************************************************************
 	//	Função cria o arquivo min_<função>.c (ESBMC + Z3 + CONVEX)
 
-	void Generate_files::create_mi_ESBMC_C_Z3(string name_f, string code_f, string space_limitP, string type, string f_i, int prec, string librarys){
+	void Generate_files::create_mi_ESBMC_C_Z3(Set ex, int prec){
 
 		ostringstream convert;
 		string precS;
 		convert << prec;
 		precS = convert.str();
 
-		string library_user="\n";
+		string library_user="";
 
-		if(librarys != ""){
-			library_user = "#include \"" + librarys + "\" \n";
+		if(ex.library != ""){
+			library_user = "\n#include \"" + ex.library + "\" \n";
+		}else{
+			library_user = "\n\n";
 		}
 
 		string name;
-		name = "min_" + name_f + ".c";
+		name = "min_" + ex.name_function + ".c";
 		ofstream file_min;
 		file_min.open(name.c_str());
 
 		file_min << "#define p "+ precS +"\n";
+		file_min << "#define nv "+ convertIntString(ex.n) +"\n";
+		file_min << "#define nr "+ convertIntString(ex.nr) +"\n";
+
 		file_min << library_user;
 		file_min << "#include <math.h>\n";
-		file_min << "int nondet_int();\n";
-		file_min << type + " nondet_"+type+"();\n";
 		file_min << "\n";
-		file_min << "	int main() {\n\n";
+		file_min << "    int nondet_int();\n";
+		file_min << "    " + ex.typeData + " nondet_" + ex.typeData + "();\n";
 		file_min << "\n";
-		file_min << "		"+type+" f_i = "<< f_i << ";\n";
-		file_min << "\n";
-		file_min << "		int x[3], i;\n";
-		file_min << "		"+type+" X[3];\n";
-		file_min << "		"+type+" fobj;\n";
-		file_min << "\n";
-		file_min << " 		" + space_limitP + "\n";
-		file_min << "\n";
-		file_min << "		for (i = 0; i<2; i++){\n";
+		file_min << "    int main() {\n";
+
+		file_min << "		\n";
+		file_min << "		"+ ex.typeData +" f_i = "<< ex.fobj_current << ";\n\n";
+
+		file_min << "		int i,j;\n";
+		file_min << "		int x[" + convertIntString(ex.n+1) +  "];\n";
+		file_min << "		"+ ex.typeData +" X[" + convertIntString(ex.n) +  "];\n";
+		file_min << "		"+ ex.typeData +" fobj;\n\n";
+
+		file_min << "		for (i = 0; i<" + convertIntString(ex.n) +  "; i++){\n";
 		file_min << "			x[i] = nondet_int();\n";
-		file_min << "			X[i] = nondet_"+type+"();\n";
+		file_min << "			X[i] = nondet_"+ ex.typeData +"();\n";
 		file_min << "		}\n";
-		file_min << "\n";
-		file_min << "		for (i = 0; i<2; i++){\n";
-		file_min << "			__ESBMC_assume( (x[i]>=lim[2*i]) && (x[i]<=lim[2*i+1]) );\n";
-		file_min << "			__ESBMC_assume( X[i] == ("+type+") x[i]/p	);\n";
-		file_min << "		}\n";
-		file_min << "\n";
-		file_min << "		" + code_f;
-		file_min << "\n";
-		file_min << "		__ESBMC_assume(fobj < f_i );\n";
-		file_min << "\n";
+
+
+		file_min << ex.restrictions;
+
+
+		file_min << "		" + ex.code_function_modified + "\n";
+
+		file_min << "		__ESBMC_assume(fobj < f_i );\n\n";
+
 		file_min << "		assert(fobj > f_i);\n";
-		file_min << "\n";
+
 		file_min << "		return 0;\n";
 		file_min << "	}\n";
 		file_min.close();
@@ -596,56 +600,61 @@
 	//****************************************************************************************************************************
 	//	Função cria o arquivo min_<função>.c (ESBMC + MATHSAT + CONVEX)
 
-	void Generate_files::create_mi_ESBMC_C_Mathsat(string name_f, string code_f, string space_limitP, string type, string f_i, int prec, string librarys){
+	void Generate_files::create_mi_ESBMC_C_Mathsat(Set ex, int prec){
 
 		ostringstream convert;
 		string precS;
 		convert << prec;
 		precS = convert.str();
 
-		string library_user="\n";
+		string library_user="";
 
-		if(librarys != ""){
-			library_user = "#include \"" + librarys + "\" \n";
+		if(ex.library != ""){
+			library_user = "\n#include \"" + ex.library + "\" \n";
+		}else{
+			library_user = "\n\n";
 		}
 
 		string name;
-		name = "min_" + name_f + ".c";
+		name = "min_" + ex.name_function + ".c";
 		ofstream file_min;
 		file_min.open(name.c_str());
 
 		file_min << "#define p "+ precS +"\n";
+		file_min << "#define nv "+ convertIntString(ex.n) +"\n";
+		file_min << "#define nr "+ convertIntString(ex.nr) +"\n";
+
 		file_min << library_user;
 		file_min << "#include <math.h>\n";
-		file_min << "int nondet_int();\n";
-		file_min << type + " nondet_"+type+"();\n";
 		file_min << "\n";
-		file_min << "	int main() {\n\n";
+		file_min << "    int nondet_int();\n";
+		file_min << "    " + ex.typeData + " nondet_" + ex.typeData + "();\n";
 		file_min << "\n";
-		file_min << "		"+type+" f_i = "<< f_i << ";\n";
-		file_min << "\n";
-		file_min << "		int x[3], i;\n";
-		file_min << "		"+type+" X[3];\n";
-		file_min << "		"+type+" fobj;\n";
-		file_min << "\n";
-		file_min << " 		" + space_limitP + "\n";
-		file_min << "\n";
-		file_min << "		for (i = 0; i<2; i++){\n";
+		file_min << "    int main() {\n";
+
+		file_min << "		\n";
+		file_min << "		"+ ex.typeData +" f_i = "<< ex.fobj_current << ";\n\n";
+
+		file_min << "		int i,j;\n";
+		file_min << "		int x[" + convertIntString(ex.n+1) +  "];\n";
+		file_min << "		"+ ex.typeData +" X[" + convertIntString(ex.n) +  "];\n";
+		file_min << "		"+ ex.typeData +" fobj;\n\n";
+
+		file_min << "		for (i = 0; i<" + convertIntString(ex.n) +  "; i++){\n";
 		file_min << "			x[i] = nondet_int();\n";
-		file_min << "			X[i] = nondet_"+type+"();\n";
+		file_min << "			X[i] = nondet_"+ ex.typeData +"();\n";
 		file_min << "		}\n";
-		file_min << "\n";
-		file_min << "		for (i = 0; i<2; i++){\n";
-		file_min << "			__ESBMC_assume( (x[i]>=lim[2*i]) && (x[i]<=lim[2*i+1]) );\n";
-		file_min << "			__ESBMC_assume( X[i] == ("+type+") x[i]/p	);\n";
-		file_min << "		}\n";
-		file_min << "\n";
-		file_min << "		" + code_f;
-		file_min << "\n";
-		file_min << "		__ESBMC_assume(fobj < f_i );\n";
-		file_min << "\n";
+
+
+		file_min << ex.restrictions;
+
+
+		file_min << "		" + ex.code_function_modified + "\n";
+
+		file_min << "		__ESBMC_assume(fobj < f_i );\n\n";
+
 		file_min << "		assert(fobj > f_i);\n";
-		file_min << "\n";
+
 		file_min << "		return 0;\n";
 		file_min << "	}\n";
 		file_min.close();
@@ -654,114 +663,129 @@
 
 	//****************************************************************************************************************************
 
-	void Generate_files::create_mi_CBMC_G_Minisat(string name_f, string code_f, string space_limitP, string type, string f_i, int prec, string librarys){
+	void Generate_files::create_mi_CBMC_G_Minisat(Set ex, int prec){
 
-			ostringstream convert;
-			string precS;
-			convert << prec;
-			precS = convert.str();
+		ostringstream convert;
+		string precS;
+		convert << prec;
+		precS = convert.str();
 
-			string library_user="\n";
+		string library_user="";
 
-			if(librarys != ""){
-				library_user = "#include \"" + librarys + "\" \n";
-			}
+		if(ex.library != ""){
+			library_user = "\n#include \"" + ex.library + "\" \n";
+		}else{
+			library_user = "\n\n";
+		}
 
-			string name;
-			name = "min_" + name_f + ".c";
-			ofstream file_min;
-			file_min.open(name.c_str());
+		string name;
+		name = "min_" + ex.name_function + ".c";
+		ofstream file_min;
+		file_min.open(name.c_str());
 
-			file_min << "#define p "+ precS +"\n";
-			file_min << library_user;
-			file_min << "#include <math.h>\n";
-			file_min << "int nondet_int();\n";
-			file_min << type + " nondet_"+type+"();\n";
-			file_min << "\n";
-			file_min << "	int main() {\n\n";
+		file_min << "#define p "+ precS +"\n";
+		file_min << "#define nv "+ convertIntString(ex.n) +"\n";
+		file_min << "#define nr "+ convertIntString(ex.nr) +"\n";
 
-			file_min << "		\n";
-			file_min << "		"+type+" f_i = "<< f_i << ";\n\n";
+		file_min << library_user;
+		file_min << "#include <math.h>\n";
+		file_min << "\n";
+		file_min << "    int nondet_int();\n";
+		file_min << "    " + ex.typeData + " nondet_" + ex.typeData + "();\n";
+		file_min << "\n";
+		file_min << "    int main() {\n";
 
-			file_min << "		int x[3], i;\n";
-			file_min << "		"+type+" X[2];\n";
-			file_min << "		"+type+" fobj;\n\n";
+		file_min << "		\n";
+		file_min << "		"+ ex.typeData +" f_i = "<< ex.fobj_current << ";\n\n";
 
-			file_min << "		" + space_limitP + "\n\n";
+		file_min << "		int i,j;\n";
+		file_min << "		int x[" + convertIntString(ex.n+1) +  "];\n";
+		file_min << "		"+ ex.typeData +" X[" + convertIntString(ex.n) +  "];\n";
+		file_min << "		"+ ex.typeData +" fobj;\n\n";
 
-			file_min << "		for (i = 0; i<2; i++){\n";
-			file_min << "			x[i] = nondet_int();\n";
-			file_min << "			X[i] = nondet_"+type+"();\n";
-			file_min << "		}\n\n";
+		file_min << "		for (i = 0; i<" + convertIntString(ex.n) +  "; i++){\n";
+		file_min << "			x[i] = nondet_int();\n";
+		file_min << "			X[i] = nondet_"+ ex.typeData +"();\n";
+		file_min << "		}\n";
 
-			file_min << "		for (i = 0; i<2; i++){\n";
-			file_min << "			__CPROVER_assume( (x[i]>=lim[2*i]) && (x[i]<=lim[2*i+1]) );\n";
-			file_min << "			__CPROVER_assume( X[i] == ("+type+") x[i]/p	);\n";
-			file_min << "		}\n\n";
 
-			file_min << "		" + code_f + "\n\n";
+		file_min << ex.restrictions;
 
-			file_min << "		__CPROVER_assume(fobj < f_i );\n\n";
 
-			file_min << "		//printf(\"###>%d\",fobj);\n";
+		file_min << "		" + ex.code_function_modified + "\n";
 
-			file_min << "		__CPROVER_assert(fobj > f_i,\"\");\n";
+		file_min << "		__CPROVER_assume(fobj < f_i );\n\n";
 
-			file_min << "		return 0;\n";
-			file_min << "	}\n";
-			file_min.close();
+		file_min << "		//printf(\"###>%d\",fobj);\n";
+
+		file_min << "		__CPROVER_assert(fobj > f_i,\"\");\n";
+
+		file_min << "		return 0;\n";
+		file_min << "	}\n";
+		file_min.close();
 
 	}
 
 	//****************************************************************************************************************************
 
-	void Generate_files::create_mi_CBMC_S_Minisat(string name_f, string code_f, string space_limitP, string type, string f_i, int prec, string librarys){
+	void Generate_files::create_mi_CBMC_S_Minisat(Set ex, int prec){
+
+		ostringstream convert;
+		string precS;
+		convert << prec;
+		precS = convert.str();
+
+		string library_user="";
+
+		if(ex.library != ""){
+			library_user = "\n#include \"" + ex.library + "\" \n";
+		}else{
+			library_user = "\n\n";
+		}
 
 		string name;
-		name = "min_" + name_f + ".c";
+		name = "min_" + ex.name_function + ".c";
 		ofstream file_min;
 		file_min.open(name.c_str());
 
-		string library_user="\n";
+		file_min << "#define p "+ precS +"\n";
+		file_min << "#define nv "+ convertIntString(ex.n) +"\n";
+		file_min << "#define nr "+ convertIntString(ex.nr) +"\n";
 
-		if(librarys != ""){
-			library_user = "#include \"" + librarys + "\" \n";
-		}
-
-		file_min << "#define p "+ convertDoubleString(prec) +"\n";
 		file_min << library_user;
 		file_min << "#include <math.h>\n";
-		file_min << "int nondet_int();\n";
-		file_min << type+" nondet_"+type+"();\n";
 		file_min << "\n";
-		file_min << "	int main() {\n\n";
+		file_min << "    int nondet_int();\n";
+		file_min << "    " + ex.typeData + " nondet_" + ex.typeData + "();\n";
+		file_min << "\n";
+		file_min << "    int main() {\n";
 
-		file_min << "		"+type+" f_c = 0;\n";
-		file_min << "		"+type+" f_i = "<< f_i << ";\n\n";
-		file_min << "		int x[3], i;\n";
-		file_min << "		"+type+" X[2];\n";
-		file_min << "		"+type+" fobj;\n\n";
+		file_min << "		\n";
+		file_min << "		"+ ex.typeData +" f_c = 0;\n";
+		file_min << "		"+ ex.typeData +" f_i = "<< ex.fobj_current << ";\n\n";
 
-		file_min << "		" + space_limitP + "\n\n";
+		file_min << "		int i,j;\n";
+		file_min << "		int x[" + convertIntString(ex.n+1) +  "];\n";
+		file_min << "		"+ ex.typeData +" X[" + convertIntString(ex.n) +  "];\n";
+		file_min << "		"+ ex.typeData +" fobj;\n\n";
 
-		file_min << "		for (i = 0; i<2; i++){\n";
+		file_min << "		for (i = 0; i<" + convertIntString(ex.n) +  "; i++){\n";
 		file_min << "			x[i] = nondet_int();\n";
-		file_min << "			X[i] = nondet_"+type+"();\n";
-		file_min << "		}\n\n";
+		file_min << "			X[i] = nondet_"+ ex.typeData +"();\n";
+		file_min << "		}\n";
 
-		file_min << "		for (i = 0; i<2; i++){\n";
-		file_min << "			__CPROVER_assume( (x[i]>=lim[2*i]) && (x[i]<=lim[2*i+1]) );\n";
-		file_min << "			__CPROVER_assume( X[i] == ("+type+") x[i]/p	);\n";
-		file_min << "		}\n\n";
 
-		file_min << "		" + code_f + "\n\n";
+		file_min << ex.restrictions;
 
-		file_min << "		__CPROVER_assume(fobj < f_i );\n\n";
 
-		file_min << "		"+type+" delta = (f_i-f_c)/5;\n";
+		file_min << "		" + ex.code_function_modified + "\n";
+
+		file_min << "		__ESBMC_assume(fobj < f_i );\n\n";
+
+		file_min << "		" + ex.typeData + " delta = (f_i-f_c)/5;\n";
 		file_min << "		if ((f_i-f_c) > 0.00001){\n";
 		file_min << "			while (f_c <= f_i){\n";
-		file_min << "				__CPROVER_assert(fobj > f_i,\"\");\n";
+		file_min << "				assert(fobj > f_c);\n";
 		file_min << "				f_c += delta;\n";
 		file_min << "			}\n";
 		file_min << "		}\n\n";
@@ -769,64 +793,75 @@
 		file_min << "		return 0;\n";
 		file_min << "	}\n";
 		file_min.close();
+
+//		file_min << "		" + space_limitP + "\n\n";
+
+//		file_min << "		for (i = 0; i<2; i++){\n";
+//		file_min << "			__CPROVER_assume( (x[i]>=lim[2*i]) && (x[i]<=lim[2*i+1]) );\n";
+//		file_min << "			__CPROVER_assume( X[i] == ("+type+") x[i]/p	);\n";
+//		file_min << "		}\n\n";
+
 	}
 
 	//****************************************************************************************************************************
 
-	void Generate_files::create_mi_CBMC_C_Minisat(string name_f, string code_f, string space_limitP, string type, string f_i, int prec, string librarys){
+	void Generate_files::create_mi_CBMC_C_Minisat(Set ex, int prec){
 
 		ostringstream convert;
 		string precS;
 		convert << prec;
 		precS = convert.str();
 
-		string library_user="\n";
+		string library_user="";
 
-		if(librarys != ""){
-			library_user = "#include \"" + librarys + "\" \n";
+		if(ex.library != ""){
+			library_user = "\n#include \"" + ex.library + "\" \n";
+		}else{
+			library_user = "\n\n";
 		}
 
 		string name;
-		name = "min_" + name_f + ".c";
+		name = "min_" + ex.name_function + ".c";
 		ofstream file_min;
 		file_min.open(name.c_str());
 
-		file_min << "\n";
 		file_min << "#define p "+ precS +"\n";
+		file_min << "#define nv "+ convertIntString(ex.n) +"\n";
+		file_min << "#define nr "+ convertIntString(ex.nr) +"\n";
+
 		file_min << library_user;
 		file_min << "#include <math.h>\n";
+		file_min << "\n";
 		file_min << "    int nondet_int();\n";
-		file_min << "    "+ type + " nondet_"+type+"();\n";
+		file_min << "    " + ex.typeData + " nondet_" + ex.typeData + "();\n";
 		file_min << "\n";
-		file_min << "	int main() {\n";
-		file_min << "\n";
-		file_min << "		"+type+" f_i = "<< f_i << ";\n";
-		file_min << "\n";
-		file_min << "		int x[3], i;\n";
-		file_min << "		"+type+" X[3];\n";
-		file_min << "		"+type+" fobj;\n";
-		file_min << "\n";
-		file_min << " 		" + space_limitP + "\n";
-		file_min << "\n";
-		file_min << "		for (i = 0; i<2; i++){\n";
+		file_min << "    int main() {\n";
+		file_min << "		\n";
+		file_min << "		"+ ex.typeData +" f_i = "<< ex.fobj_current << ";\n\n";
+
+		file_min << "		int i,j;\n";
+		file_min << "		int x[" + convertIntString(ex.n+1) +  "];\n";
+		file_min << "		"+ ex.typeData +" X[" + convertIntString(ex.n) +  "];\n";
+		file_min << "		"+ ex.typeData +" fobj;\n\n";
+
+		file_min << "		for (i = 0; i<" + convertIntString(ex.n) +  "; i++){\n";
 		file_min << "			x[i] = nondet_int();\n";
-		file_min << "			X[i] = nondet_"+type+"();\n";
+		file_min << "			X[i] = nondet_"+ ex.typeData +"();\n";
 		file_min << "		}\n";
-		file_min << "\n";
-		file_min << "		for (i = 0; i<2; i++){\n";
-		file_min << "			__CPROVER_assume( (x[i]>=lim[2*i]) && (x[i]<=lim[2*i+1]) );\n";
-		file_min << "			__CPROVER_assume( X[i] == ("+type+") x[i]/p	);\n";
-		file_min << "		}\n";
-		file_min << "\n";
-		file_min << "		" + code_f;
-		file_min << "\n";
-		file_min << "		__CPROVER_assume(fobj < f_i );\n";
-		file_min << "\n";
-		file_min << "		__CPROVER_assert(fobj > f_i,\"\");\n";
-		file_min << "\n";
+
+		file_min << ex.restrictions;
+
+
+		file_min << "		" + ex.code_function_modified + "\n";
+
+		file_min << "		__ESBMC_assume(fobj < f_i );\n\n";
+
+		file_min << "		assert(fobj > f_i);\n";
+
 		file_min << "		return 0;\n";
 		file_min << "	}\n";
 		file_min.close();
+
 
 	}
 
