@@ -27,8 +27,13 @@ using namespace std;
 		// TODO Auto-generated destructor stub
 	}
 
-	//****************************************************************************************************************************
-	// Execution Management
+
+	/*******************************************************************************************************\
+	Method: execute_experiment(Set ex)
+	Inputs: ex: Optimization configuration
+	Outputs: Void	
+	Purpose: Execution Management
+	\*******************************************************************************************************/
 
 	void Run_algorithm::execute_experiment(Set ex){
 
@@ -72,249 +77,160 @@ using namespace std;
 	}
 
 
-	//****************************************************************************************************************************
-	//ESBMC GENERALIZED
+	/*******************************************************************************************************\
+	Method: run_ESBMC_BOOLECTOR_G(Set ex)
+	Inputs: ex: Optimization configuration
+	Outputs: Void	
+	Purpose: Performs optimization with ( ESBMC + BOOLECTOR + CEGIO-G)
+	\*******************************************************************************************************/
 
-	void Run_algorithm::run_ESBMC_BOOLECTOR_G(Set ex){
+	void Run_algorithm::run_ESBMC_BOOLECTOR_G(Set ex)
+	{
+
+//		cout << "\n * * OptCE 1.0 - Copyright (C) 2017 ";
+//    	cout << "(" + convert.convertIntString(sizeof(void *)*8)  << "-bit version)" << endl;
+//   	cout << " * *"<< endl;
+//		cout << "* * Higo Albuquerque, Rodrigo Araujo, Iury Bessa, Lucas Cordeiro, and Eddie Batista * *"<< endl;
+//		cout << "* * Federal University of Amazonas, University of Oxford * *"<< endl;
+//		cout << "* * optce@gmail.com * *" << endl;
 
 		cout << "#############################################" << endl;
 		cout << "#     ESBMC - Boolector - Alg Generalized   #" << endl;
 		cout << "#############################################" << endl;
 
-		// Variáveis de Manipulação com Objetos e funções
-			Generate_files gerar_arquivos;
-			Tcexamples tratar_contra_exemplo;
-			Tcexamples list_fobj;
-			list<Tcexamples> conjunto_fobj;
+		// Manipulation Variables with Objects and Functions
+		Generate_files gerar_arquivos;
+		Tcexamples tratar_contra_exemplo;
+		Tcexamples list_fobj;
+		list<Tcexamples> set_fobj;
 
-		// Variáveis de Ajustes
-			string command = "";
-			int p = 1;
-			bool manter_precisao = true;
-			bool minimo_existente_maior = false;
-			string new_fiS;
-			float compensar_fobj;
-			string compensar_fobjS;
-			int v_log = 1;
-			string v_logS;
-			int precisionLoop = pow(10,ex.precision);
+		// Adjustment Variables
+		string command = "";
+		int p = 1;
+		bool keep_precision = true;
+		bool minimo_existente_maior = false;
+		string new_fiS;
+		float compensar_fobj;
+		string compensar_fobjS;
+		int v_log = 1;
+		string v_logS;
+		int precisionLoop = pow(10,ex.precision);
 
-			ex.restrictions = generate_assumes(ex,p);
+		ex.restrictions = generate_assumes(ex,p);
 
-			gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		//
-			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Cria o binário do função
-			system(command.c_str());														//
+		gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		
+		command  = "gcc " + ex.name_function + ".c -o value_min";						// Creates the function binary
+		system(command.c_str());														
 
-			cout << endl << "            Start Value: " + ex.l_sup << endl;
-																																							//
-			gerar_arquivos.create_mi_ESBMC_G_Boolector(ex, p); 	// Cria o primeiro arquivo min
+		cout << endl << "            Start Value: " + ex.l_sup << endl;
+																																						
+		gerar_arquivos.create_mi_ESBMC_G_Boolector(ex, p); 	// Creates the first min file
 
-											//
-			compensar_fobj =  0.00001;		//	Definir compensador padrão
-											//
-																																		//
+		compensar_fobj =  0.00001;		//	Set standard compensator
 
-			while( p<=precisionLoop ){
+		while( p<=precisionLoop )
+		{
 
-				cout << endl << " ******************************** " << endl ;
+			cout << endl << " ******************************** " << endl ;
 
-				while( manter_precisao ){
-																									//
-					v_logS = "log_" + convert.convertDoubleString(v_log);									// Incrementa Log
-																									//
-					command  = "./esbmc min_" + ex.name_function + ".c --boolector > " + v_logS;	// Executar Verificação
-					system(command.c_str());														//
+			while( keep_precision )
+			{
+																								//
+				v_logS = "log_" + convert.convertDoubleString(v_log);							// Increase Log
+																								//
+				command  = "./esbmc min_" + ex.name_function + ".c --boolector > " + v_logS;	// Run Verification
+				system(command.c_str());														//
 
-																			//
-					tratar_contra_exemplo.take_CE_ESBMC_Boolector(v_logS,p);		//	Busca corretamente o estado da verificação (Sucesso ou Falha)
-																			//	Busca valores de x1, x2 e fobj
+																				//
+				tratar_contra_exemplo.take_CE_ESBMC_Boolector(v_logS,p);		//	Search the status of the verification (Success or Failure)
+																				//	Find values of x1, x2 and fobj
 
+				if(tratar_contra_exemplo._verification == 1)						//	Verification Success
+				{						
+					v_log++;
+					keep_precision = false;										//
+					break;															//	Stop While Internal
+																					//	Precision Switching
+				}else
+				{
 
-					if(tratar_contra_exemplo._verification == 1){						//	Verificação Sucesso
-						v_log++;
-						manter_precisao = false;										//
-						break;															//	Parar while Interno
-																						//	Muda de Precisão
-					}else{
-
-						for (list<Tcexamples>::const_iterator it = conjunto_fobj.begin(); it != conjunto_fobj.end(); ++it){		//
-							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) ){		// Verifica se Já existe esse Fobj igual
-								minimo_existente_maior = true;																	// Verifica se esse Fobj é maior que os outros encontrados
-							}																									//
-						}
-
-						if(minimo_existente_maior){														// Se verificaou valor
-
-							compensar_fobj = compensar_fobj * 10;										// Aumenta o Compensador
-							minimo_existente_maior = false;												// 	Resetar condição deste erro, deste if
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);			// Generates the new F_I Compensated
-							ex.fobj_current = new_fiS;
-
-							gerar_arquivos.create_mi_ESBMC_G_Boolector(ex, p); 							// Cria arquivos min considerando novo F_I com novo compensador
-
-						}else{
-
-							ex.fobj_current /*fobj_valido*/ = tratar_contra_exemplo._fjob;												// Atualiza ultimo valor mínimo Válido
-							v_log++;																				// Incrmenta Log
-							conjunto_fobj.push_front(tratar_contra_exemplo);										// Salva na Lista de Mínimos
-
-							cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
-
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
-							ex.fobj_current = new_fiS;
-
-							gerar_arquivos.create_mi_ESBMC_G_Boolector(ex, p); 	// Cria os outros arquivos min
-						}
-
+					for (list<Tcexamples>::const_iterator it = set_fobj.begin(); it != set_fobj.end(); ++it)
+					{						//
+						if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) )		// Checks if this Fobj already exists
+						{																													// Check if this Fobj is larger than the others found
+							minimo_existente_maior = true;																					
+						}																													
 					}
-						//
-				}		//	Fim While Interno
-						//
 
-				p = p * 10;
-				manter_precisao = true;
-				compensar_fobj =  0.00001;				// Reset compensator
+					if(minimo_existente_maior)
+					{																						// If value check
+						compensar_fobj = compensar_fobj * 10;												// Increase the Compensator
+						minimo_existente_maior = false;														// Reset condition of this error, if this
+						new_fiS = ex.fobj_current + " -" + convert.convertDoubleString(compensar_fobj);		// Generates the new F_I Compensated
+						ex.fobj_current = new_fiS;
 
-				new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
-				ex.fobj_current = new_fiS;
+						gerar_arquivos.create_mi_ESBMC_G_Boolector(ex, p); 									// Creates min files considering new F_I with new compensator
 
-				gerar_arquivos.create_mi_ESBMC_G_Boolector(ex, p);
+					}else
+					{
 
-			}
+						ex.fobj_current = tratar_contra_exemplo._fjob;							// Update last minimum value Valid
+						v_log++;																// Incrmenta Log
+						set_fobj.push_front(tratar_contra_exemplo);						// Saved in the Minimal List
 
-			cout << "####################################" << endl ;
-			cout << " Global Minimum f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
+						cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
+
+						new_fiS = ex.fobj_current + " -" + convert.convertDoubleString(compensar_fobj);		// Generates the new F_I Compensated
+						ex.fobj_current = new_fiS;
+
+						gerar_arquivos.create_mi_ESBMC_G_Boolector(ex, p); 	// Create the other files min
+					}
+
+				}
+
+			}		//	Fim While Interno
+
+			p = p * 10;
+			keep_precision = true;
+			compensar_fobj =  0.00001;		// Reset compensator
+
+			new_fiS = ex.fobj_current + " -" + convert.convertDoubleString(compensar_fobj);			// Generates the new F_I Compensated
+			ex.fobj_current = new_fiS;
+
+			gerar_arquivos.create_mi_ESBMC_G_Boolector(ex, p);
 
 		}
 
-	void Run_algorithm::run_ESBMC_Z3_G(Set ex){
+		cout << "####################################" << endl ;
+		cout << " Global Minimum f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
+
+	}
+
+
+	/*******************************************************************************************************\
+	Method: run_ESBMC_Z3_G(Set ex)
+	Inputs: ex: Optimization configuration
+	Outputs: Void	
+	Purpose: Performs optimization with ( ESBMC + Z3 + CEGIO-G)
+	\*******************************************************************************************************/
+
+	void Run_algorithm::run_ESBMC_Z3_G(Set ex)
+	{
 
 		cout << "###########################################" << endl;
 		cout << "#     ESBMC - Z3 - Alg Generalized        #" << endl;
 		cout << "###########################################" << endl;
 
-		// Variáveis de Manipulação com Objetos e funções
-			Generate_files gerar_arquivos;
-			Tcexamples tratar_contra_exemplo;
-			Tcexamples list_fobj;
-			list<Tcexamples> conjunto_fobj;
-
-		// Variáveis de Ajustes
-			string command = "";
-			int p = 1;
-			bool manter_precisao = true;
-			bool minimo_existente_maior = false;
-			string new_fiS;
-			float compensar_fobj;
-			string compensar_fobjS;
-			int v_log = 1;
-			string v_logS;
-			int precisionLoop = pow(10,ex.precision);
-
-			ex.restrictions = generate_assumes(ex,p);
-
-			gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		//
-			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Cria o binário do função
-			system(command.c_str());														//
-
-			cout << endl << "            Start Value: " + ex.l_sup << endl;
-																																							//
-			gerar_arquivos.create_mi_ESBMC_G_Z3(ex, p); 	// Cria o primeiro arquivo min
-
-											//
-			compensar_fobj =  0.00001;		//	Definir compensador padrão
-											//
-																																		//
-
-			while( p<=precisionLoop ){
-
-				cout << endl << " ******************************** " << endl ;
-
-				while( manter_precisao ){
-																									//
-					v_logS = "log_" + convert.convertDoubleString(v_log);									// Incrementa Log
-																									//
-					command  = "./esbmc min_" + ex.name_function + ".c --z3 > " + v_logS;	// Executar Verificação
-					system(command.c_str());														//
-
-																			//
-					tratar_contra_exemplo.take_CE_ESBMC_Z3(v_logS,p);		//	Busca corretamente o estado da verificação (Sucesso ou Falha)
-																			//	Busca valores de x1, x2 e fobj
-
-
-					if(tratar_contra_exemplo._verification == 1){						//	Verificação Sucesso
-						v_log++;
-						manter_precisao = false;										//
-						break;															//	Parar while Interno
-																						//	Muda de Precisão
-					}else{
-
-						for (list<Tcexamples>::const_iterator it = conjunto_fobj.begin(); it != conjunto_fobj.end(); ++it){		//
-							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) ){		// Verifica se Já existe esse Fobj igual
-								minimo_existente_maior = true;																	// Verifica se esse Fobj é maior que os outros encontrados
-							}																									//
-						}
-
-						if(minimo_existente_maior){														// Se verificaou valor
-
-							compensar_fobj = compensar_fobj * 10;										// Aumenta o Compensador
-							minimo_existente_maior = false;												// 	Resetar condição deste erro, deste if
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);			// Generates the new F_I Compensated
-							ex.fobj_current = new_fiS;
-
-							gerar_arquivos.create_mi_ESBMC_G_Z3(ex, p); 							// Cria arquivos min considerando novo F_I com novo compensador
-
-						}else{
-
-							ex.fobj_current /*fobj_valido*/ = tratar_contra_exemplo._fjob;												// Atualiza ultimo valor mínimo Válido
-							v_log++;																				// Incrmenta Log
-							conjunto_fobj.push_front(tratar_contra_exemplo);										// Salva na Lista de Mínimos
-
-							cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
-
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
-							ex.fobj_current = new_fiS;
-
-							gerar_arquivos.create_mi_ESBMC_G_Z3(ex, p); 	// Cria os outros arquivos min
-						}
-
-					}
-						//
-				}		//	Fim While Interno
-						//
-
-				p = p * 10;
-				manter_precisao = true;
-				compensar_fobj =  0.00001;				// Reset compensator
-
-				new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
-				ex.fobj_current = new_fiS;
-
-				gerar_arquivos.create_mi_ESBMC_G_Z3(ex, p);
-
-			}
-
-			cout << "####################################" << endl ;
-			cout << " Global Minimum f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
-
-		}
-
-	void Run_algorithm::run_ESBMC_MATHSAT_G(Set ex){
-
-		cout << "#############################################" << endl;
-		cout << "#     ESBMC - Mathsat - Alg Generalized     #" << endl;
-		cout << "#############################################" << endl;
-
-	// Variáveis de Manipulação com Objetos e funções
+		// Manipulation Variables with Objects and Functions
 		Generate_files gerar_arquivos;
 		Tcexamples tratar_contra_exemplo;
 		Tcexamples list_fobj;
-		list<Tcexamples> conjunto_fobj;
+		list<Tcexamples> set_fobj;
 
-	// Variáveis de Ajustes
+		// Adjustment Variables
 		string command = "";
 		int p = 1;
-		bool manter_precisao = true;
+		bool keep_precision = true;
 		bool minimo_existente_maior = false;
 		string new_fiS;
 		float compensar_fobj;
@@ -326,71 +242,202 @@ using namespace std;
 		ex.restrictions = generate_assumes(ex,p);
 
 		gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		//
-		command  = "gcc " + ex.name_function + ".c -o value_min";						//  Cria o binário do função
+		command  = "gcc " + ex.name_function + ".c -o value_min";						//  Creates the function binary
 		system(command.c_str());														//
 
 		cout << endl << "            Start Value: " + ex.l_sup << endl;
-																																						//
-		gerar_arquivos.create_mi_ESBMC_G_Mathsat(ex, p); 	// Cria o primeiro arquivo min
+																																						
+		gerar_arquivos.create_mi_ESBMC_G_Z3(ex, p); 	// Creates the first min file
 
-										//
-		compensar_fobj =  0.00001;		//	Definir compensador padrão
-										//
+		compensar_fobj =  0.00001;		//	Set standard compensator
+																																
 
-		while( p<=precisionLoop ){
+		while( p<=precisionLoop )
+		{
+
+			cout << endl << " ******************************** " << endl ;
+
+			while( keep_precision )
+			{
+																								//
+				v_logS = "log_" + convert.convertDoubleString(v_log);							// Increase Log
+																								//
+				command  = "./esbmc min_" + ex.name_function + ".c --z3 > " + v_logS;			// Run Verification
+				system(command.c_str());														//
+
+																		//
+				tratar_contra_exemplo.take_CE_ESBMC_Z3(v_logS,p);		//	Search the status of the verification (Success or Failure)
+																		//	Find values of x1, x2 and fobj
+
+
+				if(tratar_contra_exemplo._verification == 1)
+				{																	//	Verification Success
+					v_log++;
+					keep_precision = false;										//
+					break;															//	Stop While Internal
+																					//	Changes from precision
+				}else
+				{
+
+					for (list<Tcexamples>::const_iterator it = set_fobj.begin(); it != set_fobj.end(); ++it)
+					{						//
+						if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) )
+						{																													// Checks if this Fobj already exists
+							minimo_existente_maior = true;																					// Check if this Fobj is larger than the others found
+						}																													//
+					}
+
+					if(minimo_existente_maior)
+					{																											// If value check
+
+						compensar_fobj = compensar_fobj * 10;																	// Increase the Compensator
+						minimo_existente_maior = false;																			// 	Reset condition of this error, if this
+						new_fiS = ex.fobj_current + " -" + convert.convertDoubleString(compensar_fobj);							// Generates the new F_I Compensated
+						ex.fobj_current = new_fiS;
+
+						gerar_arquivos.create_mi_ESBMC_G_Z3(ex, p); 							// Creates min files considering new F_I with new compensator
+
+					}else
+					{
+
+						ex.fobj_current = tratar_contra_exemplo._fjob;							// Update last minimum value Valid
+						v_log++;																				// Incrmenta Log
+						set_fobj.push_front(tratar_contra_exemplo);										// Saved in the Minimal List
+
+						cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
+
+						new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
+						ex.fobj_current = new_fiS;
+
+						gerar_arquivos.create_mi_ESBMC_G_Z3(ex, p); 	// Create the other files min
+					}
+
+				}
+					
+			}		//	Fim While Interno
+
+			p = p * 10;
+			keep_precision = true;
+			compensar_fobj =  0.00001;				// Reset compensator
+
+			new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
+			ex.fobj_current = new_fiS;
+
+			gerar_arquivos.create_mi_ESBMC_G_Z3(ex, p);
+
+		}
+
+		cout << "####################################" << endl ;
+		cout << " Global Minimum f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
+
+	}
+
+
+	/*******************************************************************************************************\
+	Method: run_ESBMC_Mathsat_G(Set ex)
+	Inputs: ex: Optimization configuration
+	Outputs: Void	
+	Purpose: Performs optimization with ( ESBMC + MathSAT + CEGIO-G)
+	\*******************************************************************************************************/
+
+	void Run_algorithm::run_ESBMC_MATHSAT_G(Set ex)
+	{
+
+		cout << "#############################################" << endl;
+		cout << "#     ESBMC - Mathsat - Alg Generalized     #" << endl;
+		cout << "#############################################" << endl;
+
+	// Manipulation Variables with Objects and Functions
+		Generate_files gerar_arquivos;
+		Tcexamples tratar_contra_exemplo;
+		Tcexamples list_fobj;
+		list<Tcexamples> set_fobj;
+
+	// Adjustment Variables
+		string command = "";
+		int p = 1;
+		bool keep_precision = true;
+		bool minimo_existente_maior = false;
+		string new_fiS;
+		float compensar_fobj;
+		string compensar_fobjS;
+		int v_log = 1;
+		string v_logS;
+		int precisionLoop = pow(10,ex.precision);
+
+		ex.restrictions = generate_assumes(ex,p);
+
+		gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		//
+		command  = "gcc " + ex.name_function + ".c -o value_min";						//  Creates the function binary
+		system(command.c_str());														//
+
+		cout << endl << "            Start Value: " + ex.l_sup << endl;
+																																						
+		gerar_arquivos.create_mi_ESBMC_G_Mathsat(ex, p); 	// Creates the first min file
+
+		compensar_fobj =  0.00001;		//	Set standard compensator
+
+		while( p<=precisionLoop )
+		{
 
 			cout << endl << " ******************************** " << endl ;
 
 			//break;
 
-			while( manter_precisao ){
+			while( keep_precision )
+			{
 																								//
-				v_logS = "log_" + convert.convertDoubleString(v_log);									// Incrementa Log
+				v_logS = "log_" + convert.convertDoubleString(v_log);							// Increase Log
 																								//
 
-
-				command  = "./esbmc min_" + ex.name_function + ".c --floatbv --mathsat > " + v_logS;	// Executar Verificação
-				system(command.c_str());														//
+				command  = "./esbmc min_" + ex.name_function + ".c --floatbv --mathsat > " + v_logS;	// Run Verification
+				system(command.c_str());														
 
 																			//
-				tratar_contra_exemplo.take_CE_ESBMC_Mathsat(v_logS,p);		//	Busca corretamente o estado da verificação (Sucesso ou Falha)
-																			//	Busca valores de x1, x2 e fobj
+				tratar_contra_exemplo.take_CE_ESBMC_Mathsat(v_logS,p);		//	Search the status of the verification (Success or Failure)
+																			//	Find values of x1, x2 and fobj
 
-																					//
-				if(tratar_contra_exemplo._verification == 1){						//	Verificação Sucesso
+																					
+				if(tratar_contra_exemplo._verification == 1)						
+				{																	//	Verification Success
 					v_log++;
-					manter_precisao = false;										//
-					break;															//	Parar while Interno
-																					//	Muda de Precisão
-				}else{
+					keep_precision = false;										//
+					break;															//	Stop While Internal
+																					//	Changes from precision
+				}else
+				{
 
-					for (list<Tcexamples>::const_iterator it = conjunto_fobj.begin(); it != conjunto_fobj.end(); ++it){		//
-						if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) ){		// Verifica se Já existe esse Fobj igual
-							minimo_existente_maior = true;																	// Verifica se esse Fobj é maior que os outros encontrados
-						}																									//
+					for (list<Tcexamples>::const_iterator it = set_fobj.begin(); it != set_fobj.end(); ++it)
+					{																													//
+						if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) )
+						{																												// Checks if this Fobj already exists
+							minimo_existente_maior = true;																				// Check if this Fobj is larger than the others found
+						}																												//
 					}
 
-					if(minimo_existente_maior){														// Se verificaou valor
+					if(minimo_existente_maior)
+					{																		// If value check
 
-						compensar_fobj = compensar_fobj * 10;										// Aumenta o Compensador
-						minimo_existente_maior = false;												// 	Resetar condição deste erro, deste if
-						new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);			// Generates the new F_I Compensated
+						compensar_fobj = compensar_fobj * 10;														// Increase the Compensator
+						minimo_existente_maior = false;																// 	Reset condition of this error, if this
+						new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);			// Generates the new F_I Compensated
 						ex.fobj_current = new_fiS;
 
-						gerar_arquivos.create_mi_ESBMC_G_Mathsat(ex, p); 							// Cria arquivos min considerando novo F_I com novo compensador
+						gerar_arquivos.create_mi_ESBMC_G_Mathsat(ex, p); 							// Creates min files considering new F_I with new compensator
 
-					}else{
+					}else
+					{
 
-						ex.fobj_current /*fobj_valido*/ = tratar_contra_exemplo._fjob;												// Atualiza ultimo valor mínimo Válido
+						ex.fobj_current  = tratar_contra_exemplo._fjob;											// Update last minimum value Valid
 						v_log++;																				// Incrmenta Log
-						conjunto_fobj.push_front(tratar_contra_exemplo);										// Salva na Lista de Mínimos
+						set_fobj.push_front(tratar_contra_exemplo);										// Saved in the Minimal List
 
 						cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
 
-						new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
+						new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);		// Generates the new F_I Compensated
 						ex.fobj_current = new_fiS;
 
-						gerar_arquivos.create_mi_ESBMC_G_Mathsat(ex, p); 	// Cria os outros arquivos min
+						gerar_arquivos.create_mi_ESBMC_G_Mathsat(ex, p); 	// Create the other files min
 					}
 
 				}
@@ -398,10 +445,10 @@ using namespace std;
 			}		//	Fim While Interno
 
 			p = p * 10;
-			manter_precisao = true;
+			keep_precision = true;
 			compensar_fobj =  0.00001;				// Reset compensator
 
-			new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
+			new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
 			ex.fobj_current = new_fiS;
 
 			gerar_arquivos.create_mi_ESBMC_G_Mathsat(ex, p);
@@ -413,25 +460,31 @@ using namespace std;
 
 	}
 
-	//****************************************************************************************************************************
-	//ESBMC POSITIVE
 
-	void Run_algorithm::run_ESBMC_BOOLECTOR_S(Set ex){
+	/*******************************************************************************************************\
+	Method: run_ESBMC_BOOLECTOR_S(Set ex)
+	Inputs: ex: Optimization configuration
+	Outputs: Void	
+	Purpose: Performs optimization with ( ESBMC + Boolector + GEGIO-S )
+	\*******************************************************************************************************/
+
+	void Run_algorithm::run_ESBMC_BOOLECTOR_S(Set ex)
+	{
 
 		cout << "#############################################" << endl;
 		cout << "#     ESBMC - Alg Positive - Boolector      #" << endl;
 		cout << "#############################################" << endl;
 
-		// Variáveis de Manipulação com Objetos e funções
+		// Manipulation Variables with Objects and Functions
 			Generate_files gerar_arquivos;
 			Tcexamples tratar_contra_exemplo;
 			Tcexamples list_fobj;
-			list<Tcexamples> conjunto_fobj;
+			list<Tcexamples> set_fobj;
 
-		// Variáveis de Ajustes
+		// Adjustment Variables
 			string command = "";
 			int p = 1;
-			bool manter_precisao = true;
+			bool keep_precision = true;
 			bool minimo_existente_maior = false;
 			string new_fiS;
 			float compensar_fobj;
@@ -443,70 +496,78 @@ using namespace std;
 			ex.restrictions = generate_assumes(ex,p);
 
 			gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		//
-			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Cria o binário do função
+			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Creates the function binary
 			system(command.c_str());														//
 
 			cout << endl << "            Start Value: " + ex.l_sup << endl;
-																																							//
-			gerar_arquivos.create_mi_ESBMC_S_Boolector(ex, p); 	// Cria o primeiro arquivo min
+																																							
+			gerar_arquivos.create_mi_ESBMC_S_Boolector(ex, p); 	// Creates the first min file
 
 											//
-			compensar_fobj =  0.00001;		//	Definir compensador padrão
+			compensar_fobj =  0.00001;		//	Set standard compensator
 											//
 			int cont=0, cont2=0;
 
-			while( p<=precisionLoop ){
+			while( p<=precisionLoop )
+			{
 
 				cout << endl << " ******************************** " << endl ;
 
-				while( manter_precisao  /*&& cont2<=0 */){
+				while( keep_precision )
+				{
 																									//
-					v_logS = "log_" + convert.convertDoubleString(v_log);									// Incrementa Log
+					v_logS = "log_" + convert.convertDoubleString(v_log);							// Increase Log
 																									//
 
-																											//
-					command  = "./esbmc min_" + ex.name_function + ".c --boolector > " + v_logS;	// Executar Verificação
-					system(command.c_str());																//
+																									//
+					command  = "./esbmc min_" + ex.name_function + ".c --boolector > " + v_logS;	// Run Verification
+					system(command.c_str());														//
 
 																				//
-					tratar_contra_exemplo.take_CE_ESBMC_Boolector(v_logS,p);		//	Busca corretamente o estado da verificação (Sucesso ou Falha)
-																				//	Busca valores de x1, x2 e fobj
+					tratar_contra_exemplo.take_CE_ESBMC_Boolector(v_logS,p);	//	Search the status of the verification (Success or Failure)
+																				//	Find values of x1, x2 and fobj
 
 																						//
-					if(tratar_contra_exemplo._verification == 1){						//	Verificação Sucesso
+					if(tratar_contra_exemplo._verification == 1)
+					{																	//	Verification Success
 						v_log++;
-						manter_precisao = false;										//
-						break;															//	Parar while Interno
-																						//	Muda de Precisão
-					}else{
+						keep_precision = false;											//
+						break;															//	Stop While Internal
+																						//	Changes from precision
+					}else
+					{
 
-						for (list<Tcexamples>::const_iterator it = conjunto_fobj.begin(); it != conjunto_fobj.end(); ++it){		//
-							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) ){		// Verifica se Já existe esse Fobj igual
-								minimo_existente_maior = true;																	// Verifica se esse Fobj é maior que os outros encontrados
-							}																									//
+						for (list<Tcexamples>::const_iterator it = set_fobj.begin(); it != set_fobj.end(); ++it)
+						{						//
+							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) )
+							{																													// Checks if this Fobj already exists
+								minimo_existente_maior = true;																					// Check if this Fobj is larger than the others found
+							}																													//
 						}
 
-						if(minimo_existente_maior){														// Se verificaou valor
+						if(minimo_existente_maior)
+						{																						// If value check
 
-							compensar_fobj = compensar_fobj * 10;										// Aumenta o Compensador
-							minimo_existente_maior = false;												// 	Resetar condição deste erro, deste if
+							compensar_fobj = compensar_fobj * 10;												// Increase the Compensator
+							minimo_existente_maior = false;														// 	Reset condition of this error, if this
 
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);			// Generates the new F_I Compensated
+							new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);	// Generates the new F_I Compensated
 							ex.fobj_current = new_fiS;
-							gerar_arquivos.create_mi_ESBMC_S_Boolector(ex, p); 							// Cria arquivos min considerando novo F_I com novo compensador
+							gerar_arquivos.create_mi_ESBMC_S_Boolector(ex, p); 									// Creates min files considering new F_I with new compensator
 
 
-						}else{
+						}else
+						{
 
-							ex.fobj_current /*fobj_valido*/ = tratar_contra_exemplo._fjob;												// Atualiza ultimo valor mínimo Válido
+							ex.fobj_current  = tratar_contra_exemplo._fjob;											// Update last minimum value Valid
 							v_log++;																				// Incrmenta Log
-							conjunto_fobj.push_front(tratar_contra_exemplo);										// Salva na Lista de Mínimos
+							set_fobj.push_front(tratar_contra_exemplo);												// Saved in the Minimal List
 
 							cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
 
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
+							new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
 							ex.fobj_current = new_fiS;
-							gerar_arquivos.create_mi_ESBMC_S_Boolector(ex, p); 	// Cria os outros arquivos min
+							gerar_arquivos.create_mi_ESBMC_S_Boolector(ex, p); 	// Create the other files min
 						}
 
 					}
@@ -517,10 +578,10 @@ using namespace std;
 				cont2++;
 
 				p = p * 10;
-				manter_precisao = true;
+				keep_precision = true;
 				compensar_fobj =  0.00001;				// Reset compensator
 
-				new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
+				new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
 				ex.fobj_current = new_fiS;
 				gerar_arquivos.create_mi_ESBMC_S_Boolector(ex, p);
 
@@ -531,256 +592,295 @@ using namespace std;
 
 	}
 
-	void Run_algorithm::run_ESBMC_Z3_S(Set ex){
+
+	/*******************************************************************************************************\
+	Method: run_ESBMC_Z3_S(Set ex)
+	Inputs: ex: Optimization configuration
+	Outputs: Void	
+	Purpose: Performs optimization with ( ESBMC + Z3 + GEGIO-S )
+	\*******************************************************************************************************/
+
+	void Run_algorithm::run_ESBMC_Z3_S(Set ex)
+	{
 
 		cout << "#############################################" << endl;
 		cout << "#     ESBMC - Alg Positive - Z3             #" << endl;
 		cout << "#############################################" << endl;
 
-		// Variáveis de Manipulação com Objetos e funções
-			Generate_files gerar_arquivos;
-			Tcexamples tratar_contra_exemplo;
-			Tcexamples list_fobj;
-			list<Tcexamples> conjunto_fobj;
+		// Manipulation Variables with Objects and Functions
+		Generate_files gerar_arquivos;
+		Tcexamples tratar_contra_exemplo;
+		Tcexamples list_fobj;
+		list<Tcexamples> set_fobj;
 
-		// Variáveis de Ajustes
-			string command = "";
-			int p = 1;
-			bool manter_precisao = true;
-			bool minimo_existente_maior = false;
-			string new_fiS;
-			float compensar_fobj;
-			string compensar_fobjS;
-			int v_log = 1;
-			string v_logS;
-			int precisionLoop = pow(10,ex.precision);
+		// Adjustment Variables
+		string command = "";
+		int p = 1;
+		bool keep_precision = true;
+		bool minimo_existente_maior = false;
+		string new_fiS;
+		float compensar_fobj;
+		string compensar_fobjS;
+		int v_log = 1;
+		string v_logS;
+		int precisionLoop = pow(10,ex.precision);
 
-			ex.restrictions = generate_assumes(ex,p);
+		ex.restrictions = generate_assumes(ex,p);
 
-			gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		//
-			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Cria o binário do função
-			system(command.c_str());														//
+		gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		//
+		command  = "gcc " + ex.name_function + ".c -o value_min";						//  Creates the function binary
+		system(command.c_str());														//
 
-			cout << endl << "            Start Value: " + ex.l_sup << endl;
-																																							//
-			gerar_arquivos.create_mi_ESBMC_S_Z3(ex, p); 	// Cria o primeiro arquivo min
+		cout << endl << "            Start Value: " + ex.l_sup << endl;
+																																						
+		gerar_arquivos.create_mi_ESBMC_S_Z3(ex, p); 	// Creates the first min file
 
-											//
-			compensar_fobj =  0.00001;		//	Definir compensador padrão
-											//
-			int cont=0, cont2=0;
+										//
+		compensar_fobj =  0.00001;		//	Set standard compensator
+										//
+		int cont=0, cont2=0;
 
-			while( p<=precisionLoop ){
+		while( p<=precisionLoop )
+		{
 
-				cout << endl << " ******************************** " << endl ;
+			cout << endl << " ******************************** " << endl ;
 
-				while( manter_precisao  /*&& cont2<=0 */){
-																									//
-					v_logS = "log_" + convert.convertDoubleString(v_log);									// Incrementa Log
-																									//
+			while( keep_precision )
+			{
+																								//
+				v_logS = "log_" + convert.convertDoubleString(v_log);							// Increase Log
+																								//
 
-																											//
-					command  = "./esbmc min_" + ex.name_function + ".c --z3 > " + v_logS;	// Executar Verificação
-					system(command.c_str());																//
+																										//
+				command  = "./esbmc min_" + ex.name_function + ".c --z3 > " + v_logS;					// Run Verification
+				system(command.c_str());																//
 
-																				//
-					tratar_contra_exemplo.take_CE_ESBMC_Z3(v_logS,p);		//	Busca corretamente o estado da verificação (Sucesso ou Falha)
-																				//	Busca valores de x1, x2 e fobj
+																			//
+				tratar_contra_exemplo.take_CE_ESBMC_Z3(v_logS,p);			//	Search the status of the verification (Success or Failure)
+																			//	Find values of x1, x2 and fobj
 
-																						//
-					if(tratar_contra_exemplo._verification == 1){						//	Verificação Sucesso
-						v_log++;
-						manter_precisao = false;										//
-						break;															//	Parar while Interno
-																						//	Muda de Precisão
-					}else{
+																					//
+				if(tratar_contra_exemplo._verification == 1)
+				{																	//	Verification Success
+					v_log++;
+					keep_precision = false;											//
+					break;															//	Stop While Internal
+																					//	Changes from precision
+				}else
+				{
 
-						for (list<Tcexamples>::const_iterator it = conjunto_fobj.begin(); it != conjunto_fobj.end(); ++it){		//
-							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) ){		// Verifica se Já existe esse Fobj igual
-								minimo_existente_maior = true;																	// Verifica se esse Fobj é maior que os outros encontrados
-							}																									//
-						}
-
-						if(minimo_existente_maior){														// Se verificaou valor
-
-							compensar_fobj = compensar_fobj * 10;										// Aumenta o Compensador
-							minimo_existente_maior = false;												// 	Resetar condição deste erro, deste if
-
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);			// Generates the new F_I Compensated
-							ex.fobj_current = new_fiS;
-							gerar_arquivos.create_mi_ESBMC_S_Z3(ex, p); 							// Cria arquivos min considerando novo F_I com novo compensador
-
-
-						}else{
-
-							ex.fobj_current /*fobj_valido*/ = tratar_contra_exemplo._fjob;												// Atualiza ultimo valor mínimo Válido
-							v_log++;																				// Incrmenta Log
-							conjunto_fobj.push_front(tratar_contra_exemplo);										// Salva na Lista de Mínimos
-
-							cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
-
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
-							ex.fobj_current = new_fiS;
-							gerar_arquivos.create_mi_ESBMC_S_Z3(ex, p); 	// Cria os outros arquivos min
-						}
-
+					for (list<Tcexamples>::const_iterator it = set_fobj.begin(); it != set_fobj.end(); ++it)
+					{		//
+						if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) )
+						{																									// Checks if this Fobj already exists
+							minimo_existente_maior = true;																	// Check if this Fobj is larger than the others found
+						}																									//
 					}
 
-					cont++;
-				}		//	Fim While Interno
+					if(minimo_existente_maior)
+					{																							// If value check
 
-				cont2++;
+						compensar_fobj = compensar_fobj * 10;													// Increase the Compensator
+						minimo_existente_maior = false;															// 	Reset condition of this error, if this
 
-				p = p * 10;
-				manter_precisao = true;
-				compensar_fobj =  0.00001;				// Reset compensator
+						new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);		// Generates the new F_I Compensated
+						ex.fobj_current = new_fiS;
+						gerar_arquivos.create_mi_ESBMC_S_Z3(ex, p); 											// Creates min files considering new F_I with new compensator
 
-				new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
-				ex.fobj_current = new_fiS;
-				gerar_arquivos.create_mi_ESBMC_S_Z3(ex, p);
 
-			}
+					}else
+					{
 
-			cout << "####################################" << endl ;
-			cout << " Global Minimum f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
+						ex.fobj_current  = tratar_contra_exemplo._fjob;											// Update last minimum value Valid
+						v_log++;																				// Incrmenta Log
+						set_fobj.push_front(tratar_contra_exemplo);												// Saved in the Minimal List
+
+						cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
+
+						new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
+						ex.fobj_current = new_fiS;
+						gerar_arquivos.create_mi_ESBMC_S_Z3(ex, p); 	// Create the other files min
+					}
+
+				}
+
+				cont++;
+			}		//	Fim While Interno
+
+			cont2++;
+
+			p = p * 10;
+			keep_precision = true;
+			compensar_fobj =  0.00001;				// Reset compensator
+
+			new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
+			ex.fobj_current = new_fiS;
+			gerar_arquivos.create_mi_ESBMC_S_Z3(ex, p);
+
+		}
+
+		cout << "####################################" << endl ;
+		cout << " Global Minimum f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
 
 	}
 
-	void Run_algorithm::run_ESBMC_MATHSAT_S(Set ex){
+
+	/*******************************************************************************************************\
+	Method: run_ESBMC_MATHSAT_S(Set ex)
+	Inputs: ex: Optimization configuration
+	Outputs: Void	
+	Purpose: Performs optimization with ( ESBMC + Mathsat + GEGIO-S )
+	\*******************************************************************************************************/
+
+	void Run_algorithm::run_ESBMC_MATHSAT_S(Set ex)
+	{
 
 		cout << "#############################################" << endl;
 		cout << "#     ESBMC - Mathsat - Alg Simplified      #" << endl;
 		cout << "#############################################" << endl;
 
-		// Variáveis de Manipulação com Objetos e funções
-			Generate_files gerar_arquivos;
-			Tcexamples tratar_contra_exemplo;
-			Tcexamples list_fobj;
-			list<Tcexamples> conjunto_fobj;
+		// Manipulation Variables with Objects and Functions
+		Generate_files gerar_arquivos;
+		Tcexamples tratar_contra_exemplo;
+		Tcexamples list_fobj;
+		list<Tcexamples> set_fobj;
 
-		// Variáveis de Ajustes
-			string command = "";
-			int p = 1;
-			bool manter_precisao = true;
-			bool minimo_existente_maior = false;
-			string new_fiS;
-			float compensar_fobj;
-			string compensar_fobjS;
-			int v_log = 1;
-			string v_logS;
-			int precisionLoop = pow(10,ex.precision);
+		// Adjustment Variables
+		string command = "";
+		int p = 1;
+		bool keep_precision = true;
+		bool minimo_existente_maior = false;
+		string new_fiS;
+		float compensar_fobj;
+		string compensar_fobjS;
+		int v_log = 1;
+		string v_logS;
+		int precisionLoop = pow(10,ex.precision);
 
-			ex.restrictions = generate_assumes(ex,p);
+		ex.restrictions = generate_assumes(ex,p);
 
-			gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		//
-			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Cria o binário do função
-			system(command.c_str());														//
+		gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		//
+		command  = "gcc " + ex.name_function + ".c -o value_min";						//  Creates the function binary
+		system(command.c_str());														//
 
-			cout << endl << "            Start Value: " + ex.l_sup << endl;
-																																							//
-			gerar_arquivos.create_mi_ESBMC_S_Mathsat(ex, p); 	// Cria o primeiro arquivo min
+		cout << endl << "            Start Value: " + ex.l_sup << endl;
+																																					
+		gerar_arquivos.create_mi_ESBMC_S_Mathsat(ex, p); 	// Creates the first min file
 
-											//
-			compensar_fobj =  0.00001;		//	Definir compensador padrão
-											//
-			int cont=0, cont2=0;
+										//
+		compensar_fobj =  0.00001;		//	Set standard compensator
+										//
+		int cont=0, cont2=0;
 
-			while( p<=precisionLoop ){
+		while( p<=precisionLoop )
+		{
 
-				cout << endl << " ******************************** " << endl ;
+			cout << endl << " ******************************** " << endl ;
 
-				while( manter_precisao  /*&& cont2<=0 */){
-																									//
-					v_logS = "log_" + convert.convertDoubleString(v_log);									// Incrementa Log
-																									//
+			while( keep_precision )
+			{
+																								//
+				v_logS = "log_" + convert.convertDoubleString(v_log);									// Increase Log
+																								//
 
-																											//
-					command  = "./esbmc min_" + ex.name_function + ".c --mathsat --floatbv > " + v_logS;	// Executar Verificação
-					system(command.c_str());																//
+																										//
+				command  = "./esbmc min_" + ex.name_function + ".c --mathsat --floatbv > " + v_logS;	// Run Verification
+				system(command.c_str());																//
 
-																				//
-					tratar_contra_exemplo.take_CE_ESBMC_Mathsat(v_logS,p);		//	Busca corretamente o estado da verificação (Sucesso ou Falha)
-																				//	Busca valores de x1, x2 e fobj
+																			//
+				tratar_contra_exemplo.take_CE_ESBMC_Mathsat(v_logS,p);		//	Search the status of the verification (Success or Failure)
+																			//	Find values of x1, x2 and fobj
 
-																						//
-					if(tratar_contra_exemplo._verification == 1){						//	Verificação Sucesso
-						v_log++;
-						manter_precisao = false;										//
-						break;															//	Parar while Interno
-																						//	Muda de Precisão
-					}else{
+																				
+				if(tratar_contra_exemplo._verification == 1)
+				{																//	Verification Success
+					v_log++;
+					keep_precision = false;										//
+					break;														//	Stop While Internal
+																				//	Changes from precision
+				}else
+				{
 
-						for (list<Tcexamples>::const_iterator it = conjunto_fobj.begin(); it != conjunto_fobj.end(); ++it){		//
-							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) ){		// Verifica se Já existe esse Fobj igual
-								minimo_existente_maior = true;																	// Verifica se esse Fobj é maior que os outros encontrados
-							}																									//
-						}
-
-						if(minimo_existente_maior){														// Se verificaou valor
-
-							compensar_fobj = compensar_fobj * 10;										// Aumenta o Compensador
-							minimo_existente_maior = false;												// 	Resetar condição deste erro, deste if
-
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);			// Generates the new F_I Compensated
-							ex.fobj_current = new_fiS;
-							gerar_arquivos.create_mi_ESBMC_S_Mathsat(ex, p); 							// Cria arquivos min considerando novo F_I com novo compensador
-
-
-						}else{
-
-							ex.fobj_current /*fobj_valido*/ = tratar_contra_exemplo._fjob;												// Atualiza ultimo valor mínimo Válido
-							v_log++;																				// Incrmenta Log
-							conjunto_fobj.push_front(tratar_contra_exemplo);										// Salva na Lista de Mínimos
-
-							cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
-
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
-							ex.fobj_current = new_fiS;
-							gerar_arquivos.create_mi_ESBMC_S_Mathsat(ex, p); 	// Cria os outros arquivos min
-						}
-
+					for (list<Tcexamples>::const_iterator it = set_fobj.begin(); it != set_fobj.end(); ++it)
+					{						//
+						if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) )
+						{																// Checks if this Fobj already exists
+							minimo_existente_maior = true;							    // Check if this Fobj is larger than the others found
+						}																
 					}
 
-					cont++;
-				}		//	Fim While Interno
+					if(minimo_existente_maior)
+					{																								// If value check
 
-				cont2++;
+						compensar_fobj = compensar_fobj * 10;														// Increase the Compensator
+						minimo_existente_maior = false;																// 	Reset condition of this error, if this
 
-				p = p * 10;
-				manter_precisao = true;
-				compensar_fobj =  0.00001;				// Reset compensator
+						new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);			// Generates the new F_I Compensated
+						ex.fobj_current = new_fiS;	
+						gerar_arquivos.create_mi_ESBMC_S_Mathsat(ex, p); 											// Creates min files considering new F_I with new compensator
 
-				new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
-				ex.fobj_current = new_fiS;
-				gerar_arquivos.create_mi_ESBMC_S_Mathsat(ex, p);
 
-			}
+					}else
+					{
 
-			cout << "####################################" << endl ;
-			cout << " Global Minimum f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
+						ex.fobj_current  = tratar_contra_exemplo._fjob;												// Update last minimum value Valid
+						v_log++;																					// Incrmenta Log
+						set_fobj.push_front(tratar_contra_exemplo);													// Saved in the Minimal List
+
+						cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
+
+						new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);			// Generates the new F_I Compensated
+						ex.fobj_current = new_fiS;
+						gerar_arquivos.create_mi_ESBMC_S_Mathsat(ex, p); 	// Create the other files min
+					}
+
+				}
+
+				cont++;
+			}		//	Fim While Interno
+
+			cont2++;
+
+			p = p * 10;
+			keep_precision = true;
+			compensar_fobj =  0.00001;				// Reset compensator
+
+			new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
+			ex.fobj_current = new_fiS;
+			gerar_arquivos.create_mi_ESBMC_S_Mathsat(ex, p);
+
+		}
+
+		cout << "####################################" << endl ;
+		cout << " Global Minimum f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
 
 	}
 
 
-	//****************************************************************************************************************************
-	//ESBMC CONVEX
+	/*******************************************************************************************************\
+	Method: run_ESBMC_BOOLECTOR_C(Set ex)
+	Inputs: ex: Optimization configuration
+	Outputs: Void	
+	Purpose: Performs optimization with ( ESBMC + Boolector + GEGIO-F )
+	\*******************************************************************************************************/
 
-	void Run_algorithm::run_ESBMC_BOOLECTOR_C(Set ex){
+	void Run_algorithm::run_ESBMC_BOOLECTOR_C(Set ex)
+	{
 
 		cout << "###########################################" << endl;
 		cout << "#     ESBMC - BOOLECTOR - Alg CONVEX      #" << endl;
 		cout << "###########################################" << endl;
 
-		// Variáveis de Manipulação com Objetos e funções
+		// Manipulation Variables with Objects and Functions
 			Generate_files gerar_arquivos;
 			Tcexamples tratar_contra_exemplo;
 			Tcexamples list_fobj;
-			list<Tcexamples> conjunto_fobj;
+			list<Tcexamples> set_fobj;
 
-		// Variáveis de Ajustes
+		// Adjustment Variables
 			string command = "";
 			int p = 1;
-			bool manter_precisao = true;
+			bool keep_precision = true;
 			bool minimo_existente_maior = false;
 			string new_fiS;
 			float compensar_fobj;
@@ -790,75 +890,82 @@ using namespace std;
 			int precisionLoop = pow(10,ex.precision);
 
 			gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		//
-			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Cria o binário do função
+			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Creates the function binary
 			system(command.c_str());														//
 
 			ex.type_restrictions = 0;
 			ex.restrictions = generate_assumes(ex, p);																																							//
-			gerar_arquivos.create_mi_ESBMC_C_Boolector(ex, p); 		// Cria o primeiro arquivo min
-			compensar_fobj =  0.00001;								//	Definir compensador padrão
+			gerar_arquivos.create_mi_ESBMC_C_Boolector(ex, p); 		// Creates the first min file
+			compensar_fobj =  0.00001;								//	Set standard compensator
 
 			cout << endl << "            Start Value: " + ex.l_sup << endl;
 
 
-			while( p<=precisionLoop ){
+			while( p<=precisionLoop )
+			{
 
 				cout << endl << " ******************************** " << endl ;
 
-				while( manter_precisao ){
+				while( keep_precision )
+				{
 
-					v_logS = "log_" + convert.convertDoubleString(v_log);									// Incrementa Log
+					v_logS = "log_" + convert.convertDoubleString(v_log);							// Increase Log
 
-					command  = "./esbmc min_" + ex.name_function + ".c --boolector > " + v_logS;	// Executar Verificação
+					command  = "./esbmc min_" + ex.name_function + ".c --boolector > " + v_logS;	// Run Verification
 					system(command.c_str());
 
-					tratar_contra_exemplo.take_CE_ESBMC_Boolector(v_logS,p);	//	Busca corretamente o estado da verificação (Sucesso ou Falha)
-																				//	Busca valores de x1, x2 e fobj
+					tratar_contra_exemplo.take_CE_ESBMC_Boolector(v_logS,p);	//	Search the status of the verification (Success or Failure)
+																				//	Find values of x1, x2 and fobj
 
-					if(tratar_contra_exemplo._verification == 1){				//	Verificação Sucesso
-						v_log++;
-						manter_precisao = false;								//
-						break;													//	Parar while Interno
-																				//	Muda de Precisão
-					}else{
+					if(tratar_contra_exemplo._verification == 1)
+					{															//	Verification Success
+						v_log++;				
+						keep_precision = false;								    //
+						break;													//	Stop While Internal
+																				//	Changes from precision
+					}else
+					{
 
-						for (list<Tcexamples>::const_iterator it = conjunto_fobj.begin(); it != conjunto_fobj.end(); ++it){		//
-							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) ){		// Verifica se Já existe esse Fobj igual
-								minimo_existente_maior = true;																	// Verifica se esse Fobj é maior que os outros encontrados
-							}																									//
+						for (list<Tcexamples>::const_iterator it = set_fobj.begin(); it != set_fobj.end(); ++it)
+						{						//
+							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) )
+							{																							// Checks if this Fobj already exists
+								minimo_existente_maior = true;															// Check if this Fobj is larger than the others found
+							}																							//
 						}
 
-						if(minimo_existente_maior){														// Se verificaou valor
+						if(minimo_existente_maior)
+						{																							// If value check
 
-							compensar_fobj = compensar_fobj * 10;										// Aumenta o Compensador
-							minimo_existente_maior = false;												// 	Resetar condição deste erro, deste if
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);		// Generates the new F_I Compensated
+							compensar_fobj = compensar_fobj * 10;													// Increase the Compensator
+							minimo_existente_maior = false;															// 	Reset condition of this error, if this
+							new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);		// Generates the new F_I Compensated
 							ex.fobj_current = new_fiS;
 							gerar_arquivos.create_mi_ESBMC_C_Boolector(ex, p);
-						}else{
+						}else
+						{
 
-							ex.fobj_current = tratar_contra_exemplo._fjob;											// Atualiza ultimo valor mínimo Válido
+							ex.fobj_current = tratar_contra_exemplo._fjob;											// Update last minimum value Valid
 							v_log++;																				// Incrmenta Log
-							conjunto_fobj.push_front(tratar_contra_exemplo);										// Salva na Lista de Mínimos
+							set_fobj.push_front(tratar_contra_exemplo);												// Saved in the Minimal List
 
 							cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
 
 							new_fiS = ex.fobj_current + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
 							ex.fobj_current = new_fiS;
 
-							gerar_arquivos.create_mi_ESBMC_C_Boolector(ex, p); 	// Cria os outros arquivos min
+							gerar_arquivos.create_mi_ESBMC_C_Boolector(ex, p); 	// Create the other files min
 
 						}
 
 					}
 
-						//
 				}		//	Fim While Interno
-						//
+
 				ex.type_restrictions = 1;
 
 				p = p * 10;
-				manter_precisao = true;
+				keep_precision = true;
 
 				compensar_fobj =  0.00001;				// Reset compensator
 
@@ -870,7 +977,7 @@ using namespace std;
 
 				ex.restrictions = generate_assumes(ex, p);
 
-				gerar_arquivos.create_mi_ESBMC_C_Boolector(ex, p); 	// Cria os outros arquivos min
+				gerar_arquivos.create_mi_ESBMC_C_Boolector(ex, p); 	// Create the other files min
 			}
 
 			cout << "####################################" << endl ;
@@ -878,18 +985,27 @@ using namespace std;
 
 	}
 
-	void Run_algorithm::run_ESBMC_Z3_C(Set ex){
 
-		// Variáveis de Manipulação com Objetos e funções
+	/*******************************************************************************************************\
+	Method: run_ESBMC_Z3_C(Set ex)
+	Inputs: ex: Optimization configuration
+	Outputs: Void	
+	Purpose: Performs optimization with ( ESBMC + Z3 + GEGIO-F )
+	\*******************************************************************************************************/
+
+	void Run_algorithm::run_ESBMC_Z3_C(Set ex)
+	{
+
+		// Manipulation Variables with Objects and Functions
 			Generate_files gerar_arquivos;
 			Tcexamples tratar_contra_exemplo;
 			Tcexamples list_fobj;
-			list<Tcexamples> conjunto_fobj;
+			list<Tcexamples> set_fobj;
 
-		// Variáveis de Ajustes
+		// Adjustment Variables
 			string command = "";
 			int p = 1;
-			bool manter_precisao = true;
+			bool keep_precision = true;
 			bool minimo_existente_maior = false;
 			string new_fiS;
 			float compensar_fobj;
@@ -899,75 +1015,82 @@ using namespace std;
 			int precisionLoop = pow(10,ex.precision);
 
 			gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		//
-			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Cria o binário do função
+			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Creates the function binary
 			system(command.c_str());														//
 
 			ex.type_restrictions = 0;
 			ex.restrictions = generate_assumes(ex, p);																																							//
-			gerar_arquivos.create_mi_ESBMC_C_Z3(ex, p); 		// Cria o primeiro arquivo min
-			compensar_fobj =  0.00001;							//	Definir compensador padrão
+			gerar_arquivos.create_mi_ESBMC_C_Z3(ex, p); 		// Creates the first min file
+			compensar_fobj =  0.00001;							//	Set standard compensator
 
 			cout << endl << "            Start Value: " + ex.l_sup << endl;
 
 
-			while( p<=precisionLoop ){
+			while( p<=precisionLoop )
+			{
 
 				cout << endl << " ******************************** " << endl ;
 
-				while( manter_precisao ){
+				while( keep_precision )
+				{
 
-					v_logS = "log_" + convert.convertDoubleString(v_log);									// Incrementa Log
+					v_logS = "log_" + convert.convertDoubleString(v_log);					// Increase Log
 
-					command  = "./esbmc min_" + ex.name_function + ".c --z3 > " + v_logS;	// Executar Verificação
+					command  = "./esbmc min_" + ex.name_function + ".c --z3 > " + v_logS;	// Run Verification
 					system(command.c_str());
 
-					tratar_contra_exemplo.take_CE_ESBMC_Z3(v_logS,p);		//	Busca corretamente o estado da verificação (Sucesso ou Falha)
-																				//	Busca valores de x1, x2 e fobj
+					tratar_contra_exemplo.take_CE_ESBMC_Z3(v_logS,p);			//	Search the status of the verification (Success or Failure)
+																				//	Find values of x1, x2 and fobj
 
-					if(tratar_contra_exemplo._verification == 1){						//	Verificação Sucesso
+					if(tratar_contra_exemplo._verification == 1)
+					{															//	Verification Success
 						v_log++;
-						manter_precisao = false;										//
-						break;															//	Parar while Interno
-																						//	Muda de Precisão
-					}else{
+						keep_precision = false;									//
+						break;													//	Stop While Internal
+																				//	Changes from precision
+					}else
+					{
 
-						for (list<Tcexamples>::const_iterator it = conjunto_fobj.begin(); it != conjunto_fobj.end(); ++it){		//
-							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) ){		// Verifica se Já existe esse Fobj igual
-								minimo_existente_maior = true;																	// Verifica se esse Fobj é maior que os outros encontrados
-							}																									//
+						for (list<Tcexamples>::const_iterator it = set_fobj.begin(); it != set_fobj.end(); ++it)
+						{	
+							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) )
+							{																					// Checks if this Fobj already exists
+								minimo_existente_maior = true;													// Check if this Fobj is larger than the others found
+							}																					//
 						}
 
-						if(minimo_existente_maior){														// Se verificaou valor
+						if(minimo_existente_maior)
+						{																							// If value check
 
-							compensar_fobj = compensar_fobj * 10;										// Aumenta o Compensador
-							minimo_existente_maior = false;												// 	Resetar condição deste erro, deste if
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);		// Generates the new F_I Compensated
+							compensar_fobj = compensar_fobj * 10;													// Increase the Compensator
+							minimo_existente_maior = false;															// 	Reset condition of this error, if this
+							new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);		// Generates the new F_I Compensated
 							ex.fobj_current = new_fiS;
 							gerar_arquivos.create_mi_ESBMC_C_Z3(ex, p);
-						}else{
+						}else
+						{
 
-							ex.fobj_current = tratar_contra_exemplo._fjob;												// Atualiza ultimo valor mínimo Válido
+							ex.fobj_current = tratar_contra_exemplo._fjob;											// Update last minimum value Valid
 							v_log++;																				// Incrmenta Log
-							conjunto_fobj.push_front(tratar_contra_exemplo);										// Salva na Lista de Mínimos
+							set_fobj.push_front(tratar_contra_exemplo);												// Saved in the Minimal List
 
 							cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
 
 							new_fiS = ex.fobj_current + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
 							ex.fobj_current = new_fiS;
 
-							gerar_arquivos.create_mi_ESBMC_C_Z3(ex, p); 	// Cria os outros arquivos min
+							gerar_arquivos.create_mi_ESBMC_C_Z3(ex, p); 	// Create the other files min
 
 						}
 
 					}
 
-						//
 				}		//	Fim While Interno
-						//
+
 				ex.type_restrictions = 1;
 
 				p = p * 10;
-				manter_precisao = true;
+				keep_precision = true;
 
 				compensar_fobj =  0.00001;				// Reset compensator
 
@@ -978,7 +1101,7 @@ using namespace std;
 				ex._x2 = convert.convertStringDouble(tratar_contra_exemplo._x2);
 
 				ex.restrictions = generate_assumes(ex, p);
-				gerar_arquivos.create_mi_ESBMC_C_Z3(ex, p); 	// Cria os outros arquivos min
+				gerar_arquivos.create_mi_ESBMC_C_Z3(ex, p); 	// Create the other files min
 			}
 
 			cout << "####################################" << endl ;
@@ -987,6 +1110,12 @@ using namespace std;
 		}
 
 
+	/*******************************************************************************************************\
+	Method: run_ESBMC_MATHSAT_C(Set ex)
+	Inputs: ex: Optimization configuration
+	Outputs: Void	
+	Purpose: Performs optimization with ( ESBMC + M<athsat + GEGIO-F )
+	\*******************************************************************************************************/
 
 	void Run_algorithm::run_ESBMC_MATHSAT_C(Set ex){
 
@@ -994,16 +1123,16 @@ using namespace std;
 		cout << "#     ESBMC - MATHSAT - Alg CONVEX        #" << endl;
 		cout << "###########################################" << endl;
 
-		// Variáveis de Manipulação com Objetos e funções
+		// Manipulation Variables with Objects and Functions
 			Generate_files gerar_arquivos;
 			Tcexamples tratar_contra_exemplo;
 			Tcexamples list_fobj;
-			list<Tcexamples> conjunto_fobj;
+			list<Tcexamples> set_fobj;
 
-		// Variáveis de Ajustes
+		// Adjustment Variables
 			string command = "";
 			int p = 1;
-			bool manter_precisao = true;
+			bool keep_precision = true;
 			bool minimo_existente_maior = false;
 			string new_fiS;
 			float compensar_fobj;
@@ -1013,75 +1142,82 @@ using namespace std;
 			int precisionLoop = pow(10,ex.precision);
 
 			gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		//
-			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Cria o binário do função
+			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Creates the function binary
 			system(command.c_str());														//
 
 			ex.type_restrictions = 0;
 			ex.restrictions = generate_assumes(ex, p);																																							//
-			gerar_arquivos.create_mi_ESBMC_C_Mathsat(ex, p); 		// Cria o primeiro arquivo min
-			compensar_fobj =  0.00001;							//	Definir compensador padrão
+			gerar_arquivos.create_mi_ESBMC_C_Mathsat(ex, p); 		// Creates the first min file
+			compensar_fobj =  0.00001;								//	Set standard compensator
 
 			cout << endl << "            Start Value: " + ex.l_sup << endl;
 
 
-			while( p<=precisionLoop ){
+			while( p<=precisionLoop )
+			{
 
 				cout << endl << " ******************************** " << endl ;
 
-				while( manter_precisao ){
+				while( keep_precision )
+				{
 
-					v_logS = "log_" + convert.convertDoubleString(v_log);									// Incrementa Log
+					v_logS = "log_" + convert.convertDoubleString(v_log);									// Increase Log
 
-					command  = "./esbmc min_" + ex.name_function + ".c --mathsat --floatbv > " + v_logS;	// Executar Verificação
+					command  = "./esbmc min_" + ex.name_function + ".c --mathsat --floatbv > " + v_logS;	// Run Verification
 					system(command.c_str());
 
-					tratar_contra_exemplo.take_CE_ESBMC_Mathsat(v_logS,p);		//	Busca corretamente o estado da verificação (Sucesso ou Falha)
-																				//	Busca valores de x1, x2 e fobj
+					tratar_contra_exemplo.take_CE_ESBMC_Mathsat(v_logS,p);		//	Search the status of the verification (Success or Failure)
+																				//	Find values of x1, x2 and fobj
 
-					if(tratar_contra_exemplo._verification == 1){						//	Verificação Sucesso
+					if(tratar_contra_exemplo._verification == 1)
+					{																//	Verification Success
 						v_log++;
-						manter_precisao = false;										//
-						break;															//	Parar while Interno
-																						//	Muda de Precisão
-					}else{
+						keep_precision = false;										//
+						break;														//	Stop While Internal
+																					//	Changes from precision
+					}else
+					{
 
-						for (list<Tcexamples>::const_iterator it = conjunto_fobj.begin(); it != conjunto_fobj.end(); ++it){		//
-							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) ){		// Verifica se Já existe esse Fobj igual
-								minimo_existente_maior = true;																	// Verifica se esse Fobj é maior que os outros encontrados
-							}																									//
+						for (list<Tcexamples>::const_iterator it = set_fobj.begin(); it != set_fobj.end(); ++it)
+						{								//
+							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) )
+							{																													// Checks if this Fobj already exists
+								minimo_existente_maior = true;																					// Check if this Fobj is larger than the others found
+							}																													//
 						}
 
-						if(minimo_existente_maior){														// Se verificaou valor
+						if(minimo_existente_maior)
+						{																							// If value check
 
-							compensar_fobj = compensar_fobj * 10;										// Aumenta o Compensador
-							minimo_existente_maior = false;												// 	Resetar condição deste erro, deste if
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);		// Generates the new F_I Compensated
+							compensar_fobj = compensar_fobj * 10;													// Increase the Compensator
+							minimo_existente_maior = false;															// 	Reset condition of this error, if this
+							new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);		// Generates the new F_I Compensated
 							ex.fobj_current = new_fiS;
 							gerar_arquivos.create_mi_ESBMC_C_Mathsat(ex, p);
-						}else{
+						}else
+						{
 
-							ex.fobj_current = tratar_contra_exemplo._fjob;												// Atualiza ultimo valor mínimo Válido
+							ex.fobj_current = tratar_contra_exemplo._fjob;											// Update last minimum value Valid
 							v_log++;																				// Incrmenta Log
-							conjunto_fobj.push_front(tratar_contra_exemplo);										// Salva na Lista de Mínimos
+							set_fobj.push_front(tratar_contra_exemplo);												// Saved in the Minimal List
 
 							cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
 
-							new_fiS = ex.fobj_current + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
+							new_fiS = ex.fobj_current + " -" + convert.convertDoubleString(compensar_fobj);			// Generates the new F_I Compensated
 							ex.fobj_current = new_fiS;
 
-							gerar_arquivos.create_mi_ESBMC_C_Mathsat(ex, p); 	// Cria os outros arquivos min
+							gerar_arquivos.create_mi_ESBMC_C_Mathsat(ex, p); 	// Create the other files min
 
 						}
 
 					}
 
-						//
 				}		//	Fim While Interno
-						//
+
 				ex.type_restrictions = 1;
 
 				p = p * 10;
-				manter_precisao = true;
+				keep_precision = true;
 
 				compensar_fobj =  0.00001;				// Reset compensator
 
@@ -1093,7 +1229,7 @@ using namespace std;
 
 				ex.restrictions = generate_assumes(ex, p);
 
-				gerar_arquivos.create_mi_ESBMC_C_Mathsat(ex, p); 	// Cria os outros arquivos min
+				gerar_arquivos.create_mi_ESBMC_C_Mathsat(ex, p); 	// Create the other files min
 			}
 
 			cout << "####################################" << endl ;
@@ -1101,8 +1237,13 @@ using namespace std;
 
 	}
 
-	//****************************************************************************************************************************
-	//CBMC GENERALIZED
+
+	/*******************************************************************************************************\
+	Method: run_CBMC_MINISAT_G(Set ex)
+	Inputs: ex: Optimization configuration
+	Outputs: Void	
+	Purpose: Performs optimization with ( CBMC + MiniSAT + GEGIO-G )
+	\*******************************************************************************************************/
 
 	void Run_algorithm::run_CBMC_MINISAT_G(Set ex){
 
@@ -1110,16 +1251,16 @@ using namespace std;
 		cout << "#     CBMC - Minisat - Alg Generalized      #" << endl;
 		cout << "#############################################" << endl;
 
-		// Variáveis de Manipulação com Objetos e funções
+		// Manipulation Variables with Objects and Functions
 			Generate_files gerar_arquivos;
 			Tcexamples tratar_contra_exemplo;
 			Tcexamples list_fobj;
-			list<Tcexamples> conjunto_fobj;
+			list<Tcexamples> set_fobj;
 
-		// Variáveis de Ajustes
+		// Adjustment Variables
 			string command = "";
 			int p = 1;
-			bool manter_precisao = true;
+			bool keep_precision = true;
 			bool minimo_existente_maior = false;
 			string new_fiS;
 			float compensar_fobj;
@@ -1132,68 +1273,76 @@ using namespace std;
 			ex.restrictions = generate_assumes(ex,p);
 
 			gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		//
-			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Cria o binário do função
+			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Creates the function binary
 			system(command.c_str());														//
 
 			cout << endl << "            Start Value: " + ex.l_sup << endl;
-																																							//
-			gerar_arquivos.create_mi_CBMC_G_Minisat(ex, p); 	// Cria o primeiro arquivo min
+																																							
+			gerar_arquivos.create_mi_CBMC_G_Minisat(ex, p); 	// Creates the first min file
 
 											//
-			compensar_fobj =  0.00001;		//	Definir compensador padrão
+			compensar_fobj =  0.00001;		//	Set standard compensator
 											//
-																																		//
+																																		
 
-			while( p<=precisionLoop ){
+			while( p<=precisionLoop )
+			{
 
 				cout << endl << " ******************************** " << endl ;
 
-				while( manter_precisao ){
-																									//
-					v_logS = "log_" + convert.convertDoubleString(v_log);									// Incrementa Log
-																									//
-					command  = "./cbmc min_" + ex.name_function + ".c  > " + v_logS + " 2>> " + v_logS;	// Executar Verificação
-					system(command.c_str());														//
+				while( keep_precision )
+				{
+																											//
+					v_logS = "log_" + convert.convertDoubleString(v_log);									// Increase Log
+																											//
+					command  = "./cbmc min_" + ex.name_function + ".c  > " + v_logS + " 2>> " + v_logS;		// Run Verification
+					system(command.c_str());																//
 
-																			//
-					tratar_contra_exemplo.take_CE_CBMC_Minisat(v_logS,p);		//	Busca corretamente o estado da verificação (Sucesso ou Falha)
-																			//	Busca valores de x1, x2 e fobj
+																				//
+					tratar_contra_exemplo.take_CE_CBMC_Minisat(v_logS,p);		//	Search the status of the verification (Success or Failure)
+																				//	Find values of x1, x2 and fobj
 
 
-					if(tratar_contra_exemplo._verification == 1){						//	Verificação Sucesso
+					if(tratar_contra_exemplo._verification == 1)
+					{					//	Verification Success
 						v_log++;
-						manter_precisao = false;										//
-						break;															//	Parar while Interno
-																						//	Muda de Precisão
-					}else{
+						keep_precision = false;										//
+						break;															//	Stop While Internal
+																						//	Changes from precision
+					}else
+					{
 
-						for (list<Tcexamples>::const_iterator it = conjunto_fobj.begin(); it != conjunto_fobj.end(); ++it){		//
-							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) ){		// Verifica se Já existe esse Fobj igual
-								minimo_existente_maior = true;																	// Verifica se esse Fobj é maior que os outros encontrados
-							}																									//
+						for (list<Tcexamples>::const_iterator it = set_fobj.begin(); it != set_fobj.end(); ++it)
+						{																														//
+							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) )
+							{																													// Checks if this Fobj already exists
+								minimo_existente_maior = true;																					// Check if this Fobj is larger than the others found
+							}																													//
 						}
 
-						if(minimo_existente_maior){														// Se verificaou valor
+						if(minimo_existente_maior)
+						{																						// If value check
 
-							compensar_fobj = compensar_fobj * 10;										// Aumenta o Compensador
-							minimo_existente_maior = false;												// 	Resetar condição deste erro, deste if
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);			// Generates the new F_I Compensated
+							compensar_fobj = compensar_fobj * 10;												// Increase the Compensator
+							minimo_existente_maior = false;														// 	Reset condition of this error, if this
+							new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);	// Generates the new F_I Compensated
 							ex.fobj_current = new_fiS;
 
-							gerar_arquivos.create_mi_CBMC_G_Minisat(ex, p); 							// Cria arquivos min considerando novo F_I com novo compensador
+							gerar_arquivos.create_mi_CBMC_G_Minisat(ex, p); 									// Creates min files considering new F_I with new compensator
 
-						}else{
+						}else
+						{
 
-							ex.fobj_current /*fobj_valido*/ = tratar_contra_exemplo._fjob;												// Atualiza ultimo valor mínimo Válido
-							v_log++;																				// Incrmenta Log
-							conjunto_fobj.push_front(tratar_contra_exemplo);										// Salva na Lista de Mínimos
+							ex.fobj_current  = tratar_contra_exemplo._fjob;										// Update last minimum value Valid
+							v_log++;																			// Incrmenta Log
+							set_fobj.push_front(tratar_contra_exemplo);											// Saved in the Minimal List
 
 							cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
 
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
+							new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
 							ex.fobj_current = new_fiS;
 
-							gerar_arquivos.create_mi_CBMC_G_Minisat(ex, p); 	// Cria os outros arquivos min
+							gerar_arquivos.create_mi_CBMC_G_Minisat(ex, p); 	// Create the other files min
 						}
 
 					}
@@ -1201,10 +1350,10 @@ using namespace std;
 				}		//	Fim While Interno
 
 				p = p * 10;
-				manter_precisao = true;
+				keep_precision = true;
 				compensar_fobj =  0.00001;				// Reset compensator
 
-				new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
+				new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
 				ex.fobj_current = new_fiS;
 
 				gerar_arquivos.create_mi_CBMC_G_Minisat(ex, p);
@@ -1216,26 +1365,30 @@ using namespace std;
 		}
 
 
+	/*******************************************************************************************************\
+	Method: run_CBMC_MINISAT_S(Set ex)
+	Inputs: ex: Optimization configuration
+	Outputs: Void	
+	Purpose: Performs optimization with ( CBMC + MiniSAT + GEGIO-S )
+	\*******************************************************************************************************/
 
-	//****************************************************************************************************************************
-	//CBMC POSITIVE
-
-	void Run_algorithm::run_CBMC_MINISAT_S(Set ex){
+	void Run_algorithm::run_CBMC_MINISAT_S(Set ex)
+	{
 
 		cout << "#############################################" << endl;
 		cout << "#     CBMC - Minisat  - Alg Simplified      #" << endl;
 		cout << "#############################################" << endl;
 
-		// Variáveis de Manipulação com Objetos e funções
+		// Manipulation Variables with Objects and Functions
 			Generate_files gerar_arquivos;
 			Tcexamples tratar_contra_exemplo;
 			Tcexamples list_fobj;
-			list<Tcexamples> conjunto_fobj;
+			list<Tcexamples> set_fobj;
 
-		// Variáveis de Ajustes
+		// Adjustment Variables
 			string command = "";
 			int p = 1;
-			bool manter_precisao = true;
+			bool keep_precision = true;
 			bool minimo_existente_maior = false;
 			string new_fiS;
 			float compensar_fobj;
@@ -1248,65 +1401,73 @@ using namespace std;
 			ex.restrictions = generate_assumes(ex,p);
 
 			gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		//
-			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Cria o binário do função
+			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Creates the function binary
 			system(command.c_str());														//
 
 			cout << endl << "            Start Value: " + ex.l_sup << endl;
-																																							//
-			gerar_arquivos.create_mi_CBMC_S_Minisat(ex, p); 	// Cria o primeiro arquivo min
+																																							
+			gerar_arquivos.create_mi_CBMC_S_Minisat(ex, p); 								// Creates the first min file
 
-			compensar_fobj =  0.00001;		//	Definir compensador padrão
+			compensar_fobj =  0.00001;														//	Set standard compensator
 			int cont=0, cont2=0;
 
-			while( p<=precisionLoop ){
+			while( p<=precisionLoop )
+			{
 
 				cout << endl << " ******************************** " << endl ;
 
-				while( manter_precisao  /*&& cont2<=0 */){
+				while( keep_precision )
+				{
 
-					v_logS = "log_" + convert.convertDoubleString(v_log);											// Incrementa Log
+					v_logS = "log_" + convert.convertDoubleString(v_log);											// Increase Log
 
-					command  = "./cbmc min_" + ex.name_function + ".c  > " + v_logS + " 2>> " + v_logS;		// Executar Verificação
+					command  = "./cbmc min_" + ex.name_function + ".c  > " + v_logS + " 2>> " + v_logS;		// Run Verification
 					system(command.c_str());																//
 
-					tratar_contra_exemplo.take_CE_CBMC_Minisat(v_logS,p);		//	Busca corretamente o estado da verificação (Sucesso ou Falha)
-																					//	Busca valores de x1, x2 e fobj
+					tratar_contra_exemplo.take_CE_CBMC_Minisat(v_logS,p);			//	Search the status of the verification (Success or Failure)
+																					//	Find values of x1, x2 and fobj
 
 																						//
-					if(tratar_contra_exemplo._verification == 1){						//	Verificação Sucesso
+					if(tratar_contra_exemplo._verification == 1)
+					{																	//	Verification Success
 						v_log++;
-						manter_precisao = false;										//
-						break;															//	Parar while Interno
-																						//	Muda de Precisão
-					}else{
+						keep_precision = false;											//
+						break;															//	Stop While Internal
+																						//	Changes from precision
+					}else
+					{
 
-						for (list<Tcexamples>::const_iterator it = conjunto_fobj.begin(); it != conjunto_fobj.end(); ++it){		//
-							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) ){		// Verifica se Já existe esse Fobj igual
-								minimo_existente_maior = true;																	// Verifica se esse Fobj é maior que os outros encontrados
+						for (list<Tcexamples>::const_iterator it = set_fobj.begin(); it != set_fobj.end(); ++it)
+						{		
+							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) )
+							{																									// Checks if this Fobj already exists
+								minimo_existente_maior = true;																	// Check if this Fobj is larger than the others found
 							}																									//
 						}
 
-						if(minimo_existente_maior){														// Se verificaou valor
+						if(minimo_existente_maior)
+						{														// If value check
 
-							compensar_fobj = compensar_fobj * 10;										// Aumenta o Compensador
-							minimo_existente_maior = false;												// 	Resetar condição deste erro, deste if
+							compensar_fobj = compensar_fobj * 10;										// Increase the Compensator
+							minimo_existente_maior = false;												// 	Reset condition of this error, if this
 
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);			// Generates the new F_I Compensated
+							new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);			// Generates the new F_I Compensated
 							ex.fobj_current = new_fiS;
-							gerar_arquivos.create_mi_CBMC_S_Minisat(ex, p); 							// Cria arquivos min considerando novo F_I com novo compensador
+							gerar_arquivos.create_mi_CBMC_S_Minisat(ex, p); 							// Creates min files considering new F_I with new compensator
 
 
-						}else{
+						}else
+						{
 
-							ex.fobj_current /*fobj_valido*/ = tratar_contra_exemplo._fjob;												// Atualiza ultimo valor mínimo Válido
+							ex.fobj_current  = tratar_contra_exemplo._fjob;												// Update last minimum value Valid
 							v_log++;																				// Incrmenta Log
-							conjunto_fobj.push_front(tratar_contra_exemplo);										// Salva na Lista de Mínimos
+							set_fobj.push_front(tratar_contra_exemplo);										// Saved in the Minimal List
 
 							cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
 
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
+							new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
 							ex.fobj_current = new_fiS;
-							gerar_arquivos.create_mi_CBMC_S_Minisat(ex, p); 	// Cria os outros arquivos min
+							gerar_arquivos.create_mi_CBMC_S_Minisat(ex, p); 	// Create the other files min
 						}
 
 					}
@@ -1317,10 +1478,10 @@ using namespace std;
 				cont2++;
 
 				p = p * 10;
-				manter_precisao = true;
+				keep_precision = true;
 				compensar_fobj =  0.00001;				// Reset compensator
 
-				new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
+				new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
 				ex.fobj_current = new_fiS;
 				gerar_arquivos.create_mi_CBMC_S_Minisat(ex, p);
 
@@ -1331,24 +1492,29 @@ using namespace std;
 
 	}
 
-	//****************************************************************************************************************************
-	//CBMC CONVEX
+	/*******************************************************************************************************\
+	Method: run_CBMC_MINISAT_C(Set ex)
+	Inputs: ex: Optimization configuration
+	Outputs: Void	
+	Purpose: Performs optimization with ( CBMC + MiniSAT + GEGIO-F )
+	\*******************************************************************************************************/
 
-	void Run_algorithm::run_CBMC_MINISAT_C(Set ex){
+	void Run_algorithm::run_CBMC_MINISAT_C(Set ex)
+	{
 		cout << "###########################################" << endl;
 		cout << "#     CBMC - MINISAT - Alg CONVEX        #" << endl;
 		cout << "###########################################" << endl;
 
-		// Variáveis de Manipulação com Objetos e funções
+		// Manipulation Variables with Objects and Functions
 			Generate_files gerar_arquivos;
 			Tcexamples tratar_contra_exemplo;
 			Tcexamples list_fobj;
-			list<Tcexamples> conjunto_fobj;
+			list<Tcexamples> set_fobj;
 
-		// Variáveis de Ajustes
+		// Adjustment Variables
 			string command = "";
 			int p = 1;
-			bool manter_precisao = true;
+			bool keep_precision = true;
 			bool minimo_existente_maior = false;
 			string new_fiS;
 			float compensar_fobj;
@@ -1358,75 +1524,82 @@ using namespace std;
 			int precisionLoop = pow(10,ex.precision);
 
 			gerar_arquivos.create_f(ex.name_function, ex.code_function, ex.typeData);		//
-			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Cria o binário do função
+			command  = "gcc " + ex.name_function + ".c -o value_min";						//  Creates the function binary
 			system(command.c_str());
 
 			ex.type_restrictions = 3;
 			ex.restrictions = generate_assumes(ex, p);																																							//
-			gerar_arquivos.create_mi_CBMC_C_Minisat(ex, p); 		// Cria o primeiro arquivo min
-			compensar_fobj =  0.00001;								//	Definir compensador padrão
+			gerar_arquivos.create_mi_CBMC_C_Minisat(ex, p); 		// Creates the first min file
+			compensar_fobj =  0.00001;								//	Set standard compensator
 
 			cout << endl << "            Start Value: " + ex.l_sup << endl;
 
 
-			while( p<=precisionLoop ){
+			while( p<=precisionLoop )
+			{
 
 				cout << endl << " ******************************** " << endl ;
 
-				while( manter_precisao ){
+				while( keep_precision )
+				{
 
-					v_logS = "log_" + convert.convertDoubleString(v_log);									// Incrementa Log
+					v_logS = "log_" + convert.convertDoubleString(v_log);									// Increase Log
 
-					command  = "./cbmc min_" + ex.name_function + ".c  > " + v_logS + " 2>> " + v_logS;		// Executar Verificação
+					command  = "./cbmc min_" + ex.name_function + ".c  > " + v_logS + " 2>> " + v_logS;		// Run Verification
 					system(command.c_str());
 
-					tratar_contra_exemplo.take_CE_CBMC_Minisat(v_logS,p);	//	Busca corretamente o estado da verificação (Sucesso ou Falha)
-																				//	Busca valores de x1, x2 e fobj
+					tratar_contra_exemplo.take_CE_CBMC_Minisat(v_logS,p);	//	Search the status of the verification (Success or Failure)
+																			//	Find values of x1, x2 and fobj
 
-					if(tratar_contra_exemplo._verification == 1){				//	Verificação Sucesso
+					if(tratar_contra_exemplo._verification == 1)
+					{														//	Verification Success
 						v_log++;
-						manter_precisao = false;								//
-						break;													//	Parar while Interno
-																				//	Muda de Precisão
-					}else{
+						keep_precision = false;								//
+						break;												//	Stop While Internal
+																			//	Changes from precision
+					}else
+					{
 
-						for (list<Tcexamples>::const_iterator it = conjunto_fobj.begin(); it != conjunto_fobj.end(); ++it){		//
-							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) ){		// Verifica se Já existe esse Fobj igual
-								minimo_existente_maior = true;																	// Verifica se esse Fobj é maior que os outros encontrados
-							}																									//
+						for (list<Tcexamples>::const_iterator it = set_fobj.begin(); it != set_fobj.end(); ++it)
+						{								//
+							if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) )
+							{																// Checks if this Fobj already exists
+								minimo_existente_maior = true;								// Check if this Fobj is larger than the others found
+							}																//
 						}
 
-						if(minimo_existente_maior){														// Se verificaou valor
+						if(minimo_existente_maior)
+						{																	// If value check
 
-							compensar_fobj = compensar_fobj * 10;										// Aumenta o Compensador
-							minimo_existente_maior = false;												// 	Resetar condição deste erro, deste if
-							new_fiS = ex.fobj_current /*fobj_valido*/ + " -" + convert.convertDoubleString(compensar_fobj);		// Generates the new F_I Compensated
+							compensar_fobj = compensar_fobj * 10;										// Increase the Compensator
+							minimo_existente_maior = false;												// 	Reset condition of this error, if this
+							new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);		// Generates the new F_I Compensated
 							ex.fobj_current = new_fiS;
 							gerar_arquivos.create_mi_CBMC_C_Minisat(ex, p);
-						}else{
+						}else
+						{
 
-							ex.fobj_current = tratar_contra_exemplo._fjob;											// Atualiza ultimo valor mínimo Válido
+							ex.fobj_current = tratar_contra_exemplo._fjob;											// Update last minimum value Valid
 							v_log++;																				// Incrmenta Log
-							conjunto_fobj.push_front(tratar_contra_exemplo);										// Salva na Lista de Mínimos
+							set_fobj.push_front(tratar_contra_exemplo);										// Saved in the Minimal List
 
 							cout << "	f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
 
 							new_fiS = ex.fobj_current + " -" + convert.convertDoubleString(compensar_fobj);						// Generates the new F_I Compensated
 							ex.fobj_current = new_fiS;
 
-							gerar_arquivos.create_mi_CBMC_C_Minisat(ex, p); 	// Cria os outros arquivos min
+							gerar_arquivos.create_mi_CBMC_C_Minisat(ex, p); 	// Create the other files min
 
 						}
 
 					}
 
-						//
 				}		//	Fim While Interno
-						//
+
 				ex.type_restrictions = 3;
 
 				p = p * 10;
-				manter_precisao = true;
+				keep_precision = true;
 
 				compensar_fobj =  0.00001;				// Reset compensator
 
@@ -1438,7 +1611,7 @@ using namespace std;
 
 				ex.restrictions = generate_assumes(ex, p);
 
-				gerar_arquivos.create_mi_CBMC_C_Minisat(ex, p); 	// Cria os outros arquivos min
+				gerar_arquivos.create_mi_CBMC_C_Minisat(ex, p); 	// Create the other files min
 			}
 
 			cout << "####################################" << endl ;
@@ -1662,15 +1835,6 @@ using namespace std;
 		l_B = cont_B + 1;
 		c_B = 1;
 
-/*
- 	 	 for(i=0;i<l_A;i++){
-			for(j=0;j<c_A;j++){
-				cout << matrixA[i][j];
-			}
-			cout << endl;
-		}
-		cout << endl;
-*/
 		return true;
 	}
 
@@ -1748,15 +1912,7 @@ using namespace std;
 
 		l_A = cont_A + 1;
 		c_A = Qvariable;
-/*
-	 	for(i=0;i<l_A;i++){
-			for(j=0;j<c_A;j++){
-				cout << matrixA[i][j];
-			}
-			cout << endl;
-		}
-		cout << endl;
-*/
+
 		return true;
 	}
 
@@ -1779,13 +1935,9 @@ using namespace std;
 
 	string Run_algorithm::generate_assumes(Set ex, int p){
 
-//		cout << "Gera ASSUME "<< endl;
 
 		string generate_assumes = "";
 		int i,j;
-
-//		cout << "Input: " ;
-	//	cout <<	ex.type_restrictions << endl;
 
 		if(ex.type_restrictions == 0){
 
@@ -1864,18 +2016,6 @@ using namespace std;
 
 				string new_spaceS = "\n	int lim[4] = { " + convert.convertDoubleString((ex._x1*p-1)*10) + ", " + convert.convertDoubleString((ex._x1*p+1)*10) + ", " + convert.convertDoubleString((ex._x2*p-1)*10) + ", " + convert.convertDoubleString((ex._x2*p+1)*10) + " };";
 
-//				cout << "AQUI:" << new_spaceS << endl;
-
-/*
- 				generate_assumes = generate_assumes + "     \n        int lim[4] = {";
-
-				generate_assumes = generate_assumes + "("+convertDoubleString(ex._x1)+"*"+convertIntString(p)+"-1)*10,";
-				generate_assumes = generate_assumes + "("+convertDoubleString(ex._x1)+"*"+convertIntString(p)+"+1)*10,";
-				generate_assumes = generate_assumes + "("+convertDoubleString(ex._x2)+"*"+convertIntString(p)+"-1)*10,";
-				generate_assumes = generate_assumes + "("+convertDoubleString(ex._x2)+"*"+convertIntString(p)+"+1)*10";
-
-				generate_assumes = generate_assumes + "};";
-*/
 
 				generate_assumes = generate_assumes + new_spaceS;
 
@@ -1934,14 +2074,6 @@ using namespace std;
 
 					generate_assumes = generate_assumes + "     \n        //-----------------------------------------------------------	";
 					generate_assumes = generate_assumes + "     \n        // Restrictions\n";
-
-//					file_min << "		" + space_limitP + "\n\n";
-
-//					file_min << "		for (i = 0; i<2; i++){\n";
-//					file_min << "			__CPROVER_assume( (x[i]>=lim[2*i]) && (x[i]<=lim[2*i+1]) );\n";
-//					file_min << "			__CPROVER_assume( X[i] == ("+type+") x[i]/p	);\n";
-//					file_min << "		}\n\n";
-
 
 					generate_assumes = generate_assumes + "     \n        int lim[4] = {";
 
@@ -2015,18 +2147,6 @@ using namespace std;
 
 					string new_spaceS = "\n	int lim[4] = { " + convert.convertDoubleString((ex._x1*p-1)*10) + ", " + convert.convertDoubleString((ex._x1*p+1)*10) + ", " + convert.convertDoubleString((ex._x2*p-1)*10) + ", " + convert.convertDoubleString((ex._x2*p+1)*10) + " };";
 
-	//				cout << "AQUI:" << new_spaceS << endl;
-
-	/*
-	 				generate_assumes = generate_assumes + "     \n        int lim[4] = {";
-
-					generate_assumes = generate_assumes + "("+convertDoubleString(ex._x1)+"*"+convertIntString(p)+"-1)*10,";
-					generate_assumes = generate_assumes + "("+convertDoubleString(ex._x1)+"*"+convertIntString(p)+"+1)*10,";
-					generate_assumes = generate_assumes + "("+convertDoubleString(ex._x2)+"*"+convertIntString(p)+"-1)*10,";
-					generate_assumes = generate_assumes + "("+convertDoubleString(ex._x2)+"*"+convertIntString(p)+"+1)*10";
-
-					generate_assumes = generate_assumes + "};";
-	*/
 
 					generate_assumes = generate_assumes + new_spaceS;
 
@@ -2084,34 +2204,3 @@ using namespace std;
 		return generate_assumes;
 
 	}
-
-
-
-
-
-
-
-	//////////////////////////////////////////////////////////////////
-	///  Type conversion functions	/////////////////////////////////
-	////////////////////////////////////////////////////////////////
-/*
-	int Run_algorithm::convertStringInt(string str){
-		return atoi(str.c_str());
-	}
-
-	double Run_algorithm::convertStringDouble(string str){
-		return atof(str.c_str());
-	}
-
-	string Run_algorithm::convertDoubleString(double value){
-		ostringstream convert;
-		convert << value;
-		return convert.str();
-	}
-
-	string Run_algorithm::convertIntString(int value){
-		ostringstream convert;
-		convert << value;
-		return convert.str();
-	}
-*/

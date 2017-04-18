@@ -1,8 +1,8 @@
 /*
- * Tflags.cpp
+ * 	Tflags.cpp
  *
  *  Created on: 03/02/2017
- *      Author: higo
+ *  Author: higo
  */
 
 #include <iostream>
@@ -14,18 +14,28 @@ using namespace std;
 
 #include "Tflags.h"
 
-	Tflags::Tflags() {
+	Tflags::Tflags() 
+	{
 		// TODO Auto-generated constructor stub
 	}
 
-	Tflags::~Tflags() {
+	Tflags::~Tflags() 
+	{
 		// TODO Auto-generated destructor stub
 	}
 
 
-	// Flag management
-	//***********************************************
-	bool Tflags::Checks(int argc, char *argv[]){
+
+	/*******************************************************************************************************\
+	Method: Checks(int argc, char *argv[])
+	Inputs: argc: Nuber of flags
+			argv[]: flags 
+	Outputs: flase, if there are errors, true for OK	
+	Purpose: Treats All input flags
+	\*******************************************************************************************************/
+
+	bool Tflags::Checks(int argc, char *argv[])
+	{
 
 		int i;
 		size_t found;
@@ -33,25 +43,33 @@ using namespace std;
 		string flag_command;
 		string flag_value;
 		int vet_flag[20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-							//
-		if( argc == 2 ){	// Check Help, Version and Standard Execution, 2 tickets
-							//
-			if(string(argv[1]) == "--help"){
-
+							
+		if( argc == 2 ) // Check Help, Version and Standard Execution, 2 tickets
+		{	
+							
+			if(string(argv[1]) == "--help")
+			{
+			
 				print_value();
 				return false;
-
-			} else if(string(argv[1]) == "--version"){
+			
+			} else if(string(argv[1]) == "--version")
+			{
 
 				print_version();
 				return false;
 
-			} else {
+			} else 
+			{
 
-				if(check_input_file_format(string(argv[1])) == false){
+				if(check_input_file_format(string(argv[1])) == false)
+				{
+
 					cout << "Incorrect file extension" << endl;
 					return false;
-				}else {
+
+				}else 
+				{
 
 					mc = 1;
 					solver = 3;
@@ -66,99 +84,136 @@ using namespace std;
 				}
 
 			}
-						//
-		}else{	 		// Check variations of executions, variations tickets
-						//
-			if(check_input_file_format(string(argv[1])) == false){
+						
+		}else // Check variations of executions, variations tickets
+		{	 		
+						
+			if(check_input_file_format(string(argv[1])) == false)
+			{
 				cout << "Incorrect file extension" << endl;
 				return false;
 			}
 
 			for(i=2;i<argc;i++){
 
-				if(string(argv[i]) == "--esbmc" ){
+				if(string(argv[i]) == "--esbmc" )
+				{
 					vet_flag[0]++;
-				}else if(string(argv[i]) == "--cbmc" ){
+				}else if(string(argv[i]) == "--cbmc" )
+				{
 					vet_flag[1]++;
-				}else if(string(argv[i]) == "--cpachecker" ){
+				}else if(string(argv[i]) == "--cpachecker" )
+				{
 					vet_flag[2]++;
-				}else if(string(argv[i]) == "--boolector" ){
+				}else if(string(argv[i]) == "--boolector" )
+				{
 					vet_flag[3]++;
-				}else if(string(argv[i]) == "--z3" ){
+				}else if(string(argv[i]) == "--z3" )
+				{
 					vet_flag[4]++;
-				}else if(string(argv[i]) == "--mathsat" ){
+				}else if(string(argv[i]) == "--mathsat" )
+				{
 					vet_flag[5]++;
-				}else if(string(argv[i]) == "--minisat" ){
+				}else if(string(argv[i]) == "--minisat" )
+				{
 					vet_flag[6]++;
-				}else if(string(argv[i]) == "--smtinterpol" ){
+				}else if(string(argv[i]) == "--smtinterpol" )
+				{
 					vet_flag[7]++;
-				}else if(string(argv[i]) == "--generalized" ){
+				}else if(string(argv[i]) == "--generalized" )
+				{
 					vet_flag[8]++;
-				}else if(string(argv[i]) == "--positive" ){
+				}else if(string(argv[i]) == "--positive" )
+				{
 					vet_flag[9]++;
-				}else if(string(argv[i]) == "--convex" ){
+				}else if(string(argv[i]) == "--convex" )
+				{
 					vet_flag[10]++;
-				}else if(string(argv[i]) == "--float" ){
+				}else if(string(argv[i]) == "--float" )
+				{
 					vet_flag[11]++;
-				}else if(string(argv[i]) == "--double" ){
+				}else if(string(argv[i]) == "--double" )
+				{
 					vet_flag[12]++;
-				}else if(string(argv[i]) == "--minmax" ){
+				}else if(string(argv[i]) == "--minmax" )
+				{
 					vet_flag[13]++;
-				}else{
+				}else
+				{
 
 					auxS = string(argv[i]);
 					found = auxS.find("=");
 
-					if(found!=string::npos){ // has sign =
+					if(found!=string::npos)	// There is "="
+					{ 
 
 						flag_command = auxS.substr(0,found);
 						flag_value = auxS.substr(found+1,auxS.length());
 
-						if(flag_command == "--start-value" ){
+						if(flag_command == "--start-value" )
+						{
 							vet_flag[14]++;
-								if(check_if_number(flag_value)){
-									l_sup = flag_value;
-								}else{
-									cout << "Unknown value: " + string(argv[i]) << endl;
-									return false;
-								}
-						}else if(flag_command == "--library" ){
-								vet_flag[15]++;
-								library = flag_value;
-
-						}else if(flag_command == "--timeout-global" ){
-								vet_flag[16]++;
-								if(check_if_number(flag_value)){
-									timeout_global = convertValue.convertStringDouble(flag_value);
-								}else{
-									cout << "Unknown value: " + string(argv[i]) << endl;
-									return false;
-								}
-
-						}else if(flag_command == "--timeout-verification" ){
-								vet_flag[17]++;
-								if(check_if_number(flag_value)){
-									timeout_verification = convertValue.convertStringDouble(flag_value);
-								}else{
-									cout << "Unknown value: " + string(argv[i]) << endl;
-									return false;
-								}
-
-						}else if(flag_command == "--precision"){
-							vet_flag[18]++;
-							if(check_if_number(flag_value)){
-								precision = convertValue.convertStringInt(flag_value);
-							}else{
+							if(check_if_number(flag_value))
+							{
+								l_sup = flag_value;
+							}else
+							{
 								cout << "Unknown value: " + string(argv[i]) << endl;
 								return false;
 							}
 
-						}else{
-								cout << "Flag unknown: " + string(argv[i]) << endl;
+						}else if(flag_command == "--library" )
+						{
+							vet_flag[15]++;
+							library = flag_value;
+
+						}else if(flag_command == "--timeout-global" )
+						{
+							vet_flag[16]++;
+
+							if(check_if_number(flag_value))
+							{
+								timeout_global = convertValue.convertStringDouble(flag_value);
+							}else
+							{
+								cout << "Unknown value: " + string(argv[i]) << endl;
 								return false;
+							}
+
+						}else if(flag_command == "--timeout-verification" )
+						{
+							vet_flag[17]++;
+
+							if(check_if_number(flag_value))
+							{
+								timeout_verification = convertValue.convertStringDouble(flag_value);
+							}else
+							{
+								cout << "Unknown value: " + string(argv[i]) << endl;
+								return false;
+							}
+
+						}else if(flag_command == "--precision")
+						{
+
+							vet_flag[18]++;
+							if(check_if_number(flag_value))
+							{
+								precision = convertValue.convertStringInt(flag_value);
+							}else
+							{
+								cout << "Unknown value: " + string(argv[i]) << endl;
+								return false;
+							}
+
+						}else
+						{
+							cout << "Flag unknown: " + string(argv[i]) << endl;
+							return false;
 						}
 
-					}else{	// There is not =
+					}else 	// There is not =
+					{	
 						cout << "Flag unknown: " + string(argv[i]) << endl;
 						return false;
 					}
@@ -170,111 +225,150 @@ using namespace std;
 
 			// Delete option when delimiting solver without delimiting MC
 			//************************************************
-			if(vet_flag[0]==0 && vet_flag[1]==0 && vet_flag[2]==0 && (vet_flag[3]>=1 || vet_flag[4]>=1 || vet_flag[5]>=1 || vet_flag[6]>=1 || vet_flag[7]>=1)){
+			if(vet_flag[0]==0 && vet_flag[1]==0 && vet_flag[2]==0 && (vet_flag[3]>=1 || vet_flag[4]>=1 || vet_flag[5]>=1 || vet_flag[6]>=1 || vet_flag[7]>=1))
+			{
 				cout << "Vc nao pode escolher um solver sem escolher um MC" << endl;
 				return false;
 			}
 
 			// Check the Model Check
 			//***************************************************
-			if(vet_flag[0]==0 && vet_flag[1]==0 && vet_flag[2]==0){	// Choosing the default MC
+			if(vet_flag[0]==0 && vet_flag[1]==0 && vet_flag[2]==0) // Choosing the default MC
+			{	
 				mc = 1;
-			} else if(vet_flag[0]>1 || vet_flag[1]>1 || vet_flag[2]>1){
+
+			} else if(vet_flag[0]>1 || vet_flag[1]>1 || vet_flag[2]>1)
+			{
 				cout << "Choose only one MC"<< endl;
 				return false;
-			} else if(vet_flag[0]>vet_flag[1] && vet_flag[0]>vet_flag[2]){
+
+			} else if(vet_flag[0]>vet_flag[1] && vet_flag[0]>vet_flag[2])
+			{
 				mc = 1;
-			} else if(vet_flag[1]>vet_flag[0] && vet_flag[1]>vet_flag[2]){
+
+			} else if(vet_flag[1]>vet_flag[0] && vet_flag[1]>vet_flag[2])
+			{
 				mc = 2;
-			} else if(vet_flag[2]>vet_flag[0] && vet_flag[2]>vet_flag[1]){
+
+			} else if(vet_flag[2]>vet_flag[0] && vet_flag[2]>vet_flag[1])
+			{
 				mc = 3;
 			}
 
 			// Check the Solver
 			//***************************************************
-			if( mc == 1 ){
+			if( mc == 1 )
+			{
 
-				if(vet_flag[3]==0 && vet_flag[4]==0 && vet_flag[5]==0){
+				if(vet_flag[3]==0 && vet_flag[4]==0 && vet_flag[5]==0)
+				{
 					solver = 3;
-				}else if(vet_flag[3]>1 || vet_flag[4]>1 || vet_flag[5]>1){
+				}else if(vet_flag[3]>1 || vet_flag[4]>1 || vet_flag[5]>1)
+				{
 					cout << "Choose only one SOLVER"<< endl;
 					return false;
-				}else if(vet_flag[3]>vet_flag[4] && vet_flag[3]>vet_flag[5]){
+				}else if(vet_flag[3]>vet_flag[4] && vet_flag[3]>vet_flag[5])
+				{
 					solver = 1;//Boolector
-				}else if(vet_flag[4]>vet_flag[3] && vet_flag[4]>vet_flag[5]){
+				}else if(vet_flag[4]>vet_flag[3] && vet_flag[4]>vet_flag[5])
+				{
 					solver = 2;//Z3
-				}else if(vet_flag[5]>vet_flag[3] && vet_flag[5]>vet_flag[4]){
+				}else if(vet_flag[5]>vet_flag[3] && vet_flag[5]>vet_flag[4])
+				{
 					solver = 3;//Mathsat
 				}
 
-			}else if( mc == 2 ){
+			}else if( mc == 2 )
+			{
 
-				if(vet_flag[6]==0){
+				if(vet_flag[6]==0)
+				{
 					solver = 4;//MiniSat
-				}else if(vet_flag[6]>1){
+				}else if(vet_flag[6]>1)
+				{
 					cout << "Choose only one SOLVER"<< endl;
 					return false;
-				}else if(vet_flag[4]>0){
+				}else if(vet_flag[4]>0)
+				{
 					solver = 4;//MiniSat
 				}
 
-			}	else if( mc == 3 ){
+			}	else if( mc == 3 )
+			{
 				solver = 3;
 			}
 
+
 			// Verifica Algoritmo
 			//************************************************
-			if(vet_flag[8]==0 && vet_flag[9]==0 && vet_flag[10]==0){	// Choosing the default ALG
+			if(vet_flag[8]==0 && vet_flag[9]==0 && vet_flag[10]==0) // Choosing the default ALG
+			{	
 				alg = 1;
-			} else if(vet_flag[8]>1 || vet_flag[9]>1 || vet_flag[10]>1){
+			} else if(vet_flag[8]>1 || vet_flag[9]>1 || vet_flag[10]>1)
+			{
 				cout << "Choose only one Algorithm"<< endl;
 				return false;
-			} else if(vet_flag[8]>vet_flag[9] && vet_flag[8]>vet_flag[10]){
+			} else if(vet_flag[8]>vet_flag[9] && vet_flag[8]>vet_flag[10])
+			{
 				alg = 1;
-			} else if(vet_flag[9]>vet_flag[8] && vet_flag[9]>vet_flag[10]){
+			} else if(vet_flag[9]>vet_flag[8] && vet_flag[9]>vet_flag[10])
+			{
 				alg = 2;
-			} else if(vet_flag[10]>vet_flag[8] && vet_flag[10]>vet_flag[9]){
+			} else if(vet_flag[10]>vet_flag[8] && vet_flag[10]>vet_flag[9])
+			{
 				alg = 3;
 			}
 
+
 			// Verifica Tipo de Dados
 			//************************************************
-			if(vet_flag[11]==0 && vet_flag[12]==0){	// Choosing the default ALG
+			if(vet_flag[11]==0 && vet_flag[12]==0) // Choosing the default Type
+			{	
 				typeData = "float";
-			} else if(vet_flag[11]>1 || vet_flag[12]>1){
+			} else if(vet_flag[11]>1 || vet_flag[12]>1)
+			{
 				cout << "Choose only one Type of Data"<< endl;
 				return false;
-			} else if(vet_flag[11]>vet_flag[12]){
+			} else if(vet_flag[11]>vet_flag[12])
+			{
 				typeData = "float";
-			} else if(vet_flag[12]>vet_flag[11]){
+			} else if(vet_flag[12]>vet_flag[11])
+			{
 				typeData = "double";
 			}
 
+
 			// Verifica a modelagem da restrição
 			//***************************************************
-			if(vet_flag[13] == 0){
+			if(vet_flag[13] == 0)
+			{
 				input_formt = 0;
-			}else{
+			}else
+			{
 				input_formt = 1;
 			}
 
 
 			// Verifica a inicialização
 			//***************************************************
-			if(vet_flag[14] == 0){
+			if(vet_flag[14] == 0)
+			{
 				l_sup = create_value();
 			}
 
 			// Verifica se a biblioteca inserida existe
 			//***************************************************
-			if(vet_flag[15]>0){
-				if(!check_exist_file(library)){
+			if(vet_flag[15]>0)
+			{
+				if(!check_exist_file(library))
+				{
 					cout << "Library not found -> " + library << endl;
 					return false;
 				}
 			}
 
-			if(vet_flag[18]==0){
+			if(vet_flag[18]==0)
+			{
 				precision = 3;
 			}
 		}
@@ -283,17 +377,30 @@ using namespace std;
 	}
 
 
-	// Print Version
-	//***************************************************
-	void Tflags::print_version(){
+	/*******************************************************************************************************\
+	Method: print_version()
+	Inputs: void 
+	Outputs: Void	
+	Purpose: Prints the version of the tool
+	\*******************************************************************************************************/
+
+	void Tflags::print_version()
+	{
 		cout << endl;
 		cout << " optSMT version 1.0 64-bit x86_64 linux" << endl;
 		cout << endl;
 	}
 
-	// Print HELP
-	//***************************************************
-	void Tflags::print_value(){
+
+	/*******************************************************************************************************\
+	Method: print_value()
+	Inputs: Void
+	Outputs: Void	
+	Purpose: Prints the help screen of the tool
+	\*******************************************************************************************************/
+
+	void Tflags::print_value()
+	{
 		cout << endl;
 		cout << "############# optSMT 1.0 ##########################################################" << endl;
 		cout << endl;
@@ -334,20 +441,35 @@ using namespace std;
 		cout << endl;
 	}
 
-	// Generates a random value
-	//***************************************************
-	string Tflags::create_value(){
+
+	/*******************************************************************************************************\
+	Method: create_value()
+	Inputs: void
+	Outputs: void	
+	Purpose: Generates a random value less than 100
+	\*******************************************************************************************************/
+
+	string Tflags::create_value()
+	{
 		srand((unsigned)time(0));
 		float aux = rand() % 100;
 		return convertValue.convertDoubleString(aux);
 	}
 
-	// Checks whether a file exists
-	//***************************************************
-	bool Tflags::check_exist_file(string fileS){
+
+	/*******************************************************************************************************\
+	Method: check_exist_file(string fileS)
+	Inputs: fileS: Name of file
+	Outputs: True for existing files, False for nonexistent files 	
+	Purpose: Checks whether a file exists
+	\*******************************************************************************************************/
+
+	bool Tflags::check_exist_file(string fileS)
+	{
 		ifstream file;
 		file.open(fileS.c_str());
-		if(file.is_open( )){
+		if(file.is_open( ))
+		{
 			file.clear( );
 			file.close();
 			return true;
@@ -356,16 +478,25 @@ using namespace std;
 		return false;
 	}
 
-	// Check the file format
-	//***************************************************
-	bool Tflags::check_input_file_format(string name){
+	
+	/*******************************************************************************************************\
+	Method: check_input_file_format(string name)
+	Inputs: name: input file
+	Outputs: True for existing format, False for format nonexistent 	
+	Purpose: Check the file format
+	\*******************************************************************************************************/
+
+	bool Tflags::check_input_file_format(string name)
+	{
 
 		size_t found = name.find(".");
 
-		if(found!=string::npos){
+		if(found!=string::npos)
+		{
 			string aux = name.substr(found,name.length());
 
-			if(aux == ".func"){
+			if(aux == ".func")
+			{
 				name_function = name.substr(0,found);
 				return true;
 			}
@@ -374,73 +505,102 @@ using namespace std;
 		return false;
 	}
 
-	// Check if the value is a real value
-	//***************************************************
-	bool Tflags::check_if_number(string value){
+
+	/*******************************************************************************************************\
+	Method: check_if_number(string value)
+	Inputs: value: integer value 
+	Outputs: True for integer value	
+	Purpose: Check if the value is a real value
+	\*******************************************************************************************************/
+
+	bool Tflags::check_if_number(string value)
+	{
 
 	    bool valid = false;
 	    string numero = "0123456789.";
 
 	    if ((value[0] == '+' || value[0] == '-') && value.size() > 1)
+	    {	
 	    	value = value.substr(1);
+	    }
 
 	    if (count(value.begin(), value.end(), '.') <= 1 && value.find_first_not_of(numero) > value.size())
+	    {	
 	        valid = true;
+	    }
 
 	    if (value[0] == '.' && value.size() == 1)
+	    {
 	        valid = false;
+	    }
 
 	    return valid;
 	}
 
-	//////////////////////////////////////////////////////////////////
-	///  Data collection functions	/////////////////////////////////
-	////////////////////////////////////////////////////////////////
 
-	string Tflags::get_name_function(){
+	/*******************************************************************************************************\
+	Method: get_*()
+	Inputs: void 
+	Outputs: Values of the variables	
+	Purpose: Return values of variables of the optimization configuration
+	\*******************************************************************************************************/
+
+	string Tflags::get_name_function()
+	{
 		return name_function;
 	}
 
-	int Tflags::get_mc(){
+	int Tflags::get_mc()
+	{
 		return mc;
 	}
 
-	int Tflags::get_solver(){
+	int Tflags::get_solver()
+	{
 		return solver;
 	}
 
-	int Tflags::get_alg(){
+	int Tflags::get_alg()
+	{
 		return alg;
 	}
 
-	float Tflags::get_l_inf(){
+	float Tflags::get_l_inf()
+	{
 		return l_inf;
 	}
 
-	string Tflags::get_l_sup(){
+	string Tflags::get_l_sup()
+	{
 		return l_sup;
 	}
 
-	string Tflags::get_typeData(){
+	string Tflags::get_typeData()
+	{
 		return typeData;
 	}
 
-	float Tflags::get_timeout_global(){
+	float Tflags::get_timeout_global()
+	{
 		return timeout_global;
 	}
 
-	float Tflags::get_timeout_verification(){
+	float Tflags::get_timeout_verification()
+	{
 		return timeout_verification;
 	}
 
-	string Tflags::get_library(){
+	string Tflags::get_library()
+	{
 		return library;
 	}
 
-	int Tflags::get_input_formt(){
+	int Tflags::get_input_formt()
+	{
 		return input_formt;
 	}
 
-	int Tflags::get_precision(){
+	int Tflags::get_precision()
+	{
 		return precision;
 	}

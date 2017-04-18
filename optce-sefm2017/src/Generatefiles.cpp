@@ -26,9 +26,9 @@
 
 	/*******************************************************************************************************\
 	Method: create_f(string name_f, string code_f, string type)
-	Inputs: name_f Name of function 
-			code_f Description of the function of the input file
-			type   Data type
+	Inputs: name_f: Name of function 
+			code_f: Description of the function of the input file
+			type:   Data type
 	Outputs: Void	
 	Purpose: Function creates the <function>.c file to obtain the Fobj according to the parameters
 	\*******************************************************************************************************/

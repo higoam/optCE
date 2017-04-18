@@ -31,27 +31,32 @@ using namespace std;
 
 	/*******************************************************************\
 	Method: take_file(string fileS)
-	Inputs:  fileS file
-	Outputs: string with file
+	Inputs:  fileS: file 
+	Outputs: string: string with file
 	Purpose: Function Loads the Log file
 	\*******************************************************************/
 
-	string Tcexamples::take_file(string fileS){
+	string Tcexamples::take_file(string fileS)
+	{
 
 		char letter;
 		ifstream file;
 
 		file.open(fileS.c_str());
-		if(!file.is_open( )){
+		if(!file.is_open( ))
+		{
 			cout<<"Could not open file with function!Q\n";
 			file.clear( ); //Reset the read object to clear system memory
 		}
 
 		// Loads the file into string
 		string file_result;
-		while (file.get(letter)) {
+		
+		while (file.get(letter)) 
+		{
 			file_result = file_result + letter;
 		}
+
 		file.close();
 
 		return file_result;
@@ -59,16 +64,17 @@ using namespace std;
 
 
 	/*******************************************************************\
-	Method: convertStringInt(string str)
-	Inputs:  log
-			 prec	
-	Outputs: string with file
-	Purpose: Function treats the Contra Example of BOOLECTOR
+	Method: take_CE_ESBMC_Boolector(string log, int prec)
+	Inputs:  log: Log file name
+			 prec: Precision current of algorithm 	
+	Outputs: void
+	Purpose: Treats the counterexample of the ESBMC Boolector, and obtains the decision variables and candidate functions
 	\*******************************************************************/
 
-	void Tcexamples::take_CE_ESBMC_Boolector(string log, int prec){
+	void Tcexamples::take_CE_ESBMC_Boolector(string log, int prec)
+	{
 
-		// Variáveis de Ajustes
+		// Adjustment Variables
 		string command = "";
 		string file_log;
 		string current_coordinates[2];
@@ -77,75 +83,80 @@ using namespace std;
 		string aux_string = "";
 	 	size_t position;
 
-		file_log = take_file(log);							// Carrega o Log e
-		std::size_t found_F = file_log.find("FAILED");		// Procura pela palavra FAILED no contra exemplo
-		std::size_t found_S = file_log.find("SUCCESSFUL");	// Procura pela palavra SUCCESSFUL no contra exemplo
+		file_log = take_file(log);							// Load Log
+		std::size_t found_F = file_log.find("FAILED");		// Search for the word FAILED in the counterexample
+		std::size_t found_S = file_log.find("SUCCESSFUL");	// Search for the word SUCCESSFUL in the counterexample 
 
-												//
-		if(found_F!=std::string::npos){			//	Entra se houver falha no contra exemplo
-												//
-
-															//
-		 	_verification = 0;								// 	Atribui 0 para variável q identifica o estão do contra exemplo
-															//
-
+												
+		if(found_F!=std::string::npos)			//	Enter if there is a failure in the counterexample
+		{											
+															
+		 	_verification = 0;								// 	Assign 0 for variable that identifies the state of the counter example
 
 			position = file_log.rfind(word);										//
 																					//
 			aux_string = file_log.substr(position + 5,file_log.length());			//
-			position = aux_string.find(",");										//	Busca valores de X1 e X2 no contra Exemplo
+			position = aux_string.find(",");										//	Find values of X1 and X2 in the counter Example
 			current_coordinates[0] = aux_string.substr(0,position);					//
 																					//
 			aux_string = aux_string.substr(position + 2,aux_string.length());		//
 			position = aux_string.find(",");										//
 			current_coordinates[1] = aux_string.substr(0,position);					//
 
-																					//
-		    double _x1D = convertValue.convertStringDouble(current_coordinates[0].c_str());		//	Converte Valores de X1 e X2 em string para Double
+																								
+		    double _x1D = convertValue.convertStringDouble(current_coordinates[0].c_str());		//	Converts Values of X1 and X2 into string for Double
 		    double _x2D = convertValue.convertStringDouble(current_coordinates[1].c_str());		//
 
 
-		    if(_x1D > 1000){										//	Para X1
+		    if(_x1D > 1000)
+		    {														//	For X1
 				_x1D = ((_x1D -4294967296)/prec);					//
-				_x1 = convertValue.convertDoubleString(_x1D);					//	Avalia se é um overflow do ESBCM
-			}else{													//  arruma o valor
-				_x1 = convertValue.convertDoubleString(_x1D/prec);				//
+				_x1 = convertValue.convertDoubleString(_x1D);		//	Evaluates whether it is a BMG overflow and set the value
+			}else													//	
+			{														//  
+				_x1 = convertValue.convertDoubleString(_x1D/prec);	//
 			}														//
 
-			if(_x2D > 1000){										// Para X2
+			if(_x2D > 1000)
+			{														//  ForX2
 				_x2D = ((_x2D -4294967296)/prec);					//
-				_x2 = convertValue.convertDoubleString(_x2D);					//	e
-			}else{													//	arruma o valor
-				_x2 = convertValue.convertDoubleString(_x2D/prec);				//
+				_x2 = convertValue.convertDoubleString(_x2D);		//	Evaluates whether it is a BMG overflow and set the value
+			}else													//
+			{														//	
+				_x2 = convertValue.convertDoubleString(_x2D/prec);	//
 			}														//
 
 
 			//Generates the minimum														//
-			command  = "./value_min " + _x1 + " " + _x2 + " > min_temporary.txt";		//	Gera o valor Fobj com x1 e x2 encontrado
-			system(command.c_str());													//	Armazena em "min_temporary.txt"
+			command  = "./value_min " + _x1 + " " + _x2 + " > min_temporary.txt";		//	Generates the Fobj value with x1 and x2 found
+			system(command.c_str());													//	Stores in "min_temporary.txt"
 
+			string minimumS = take_file("min_temporary.txt");					//	Load the generated Fojb
+			_fjob = minimumS.substr(0,minimumS.size()).c_str();					//	Convert to float and assign
 
-			string minimumS = take_file("min_temporary.txt");					//	Carrega o Fojb gerado
-			_fjob = minimumS.substr(0,minimumS.size()).c_str();					//	Converte para float e atribui
-
-
-		}else if(found_S!=std::string::npos){					//
-																// If the verification was successful
-			_verification = 1;									// Caso não enconte a falha, "SUCESSO"
-
-		}else {
-
-			cout << "CONTRA EXEMPLO DESCONHECIDO" << endl;
-
+		}else if(found_S!=std::string::npos)
+		{														// If the verification was successful
+			_verification = 1;									// If you can not find the fault, "SUCCESS"
+		}else 
+		{
+			cout << "COUNTEREXAMPLE UNKNOWN" << endl;
 		}
 
 	}
 
-	//	Função trata o Contra Exemplo Z3
-	//*********************************************************************************
-	void Tcexamples::take_CE_ESBMC_Z3(string log, int prec){
 
-		// Variáveis de Ajustes
+	/*******************************************************************\
+	Method: take_CE_ESBMC_Z3(string log, int prec)
+	Inputs:  log: Log file name
+			 prec: Precision current of algorithm 	
+	Outputs: void
+	Purpose: Treats the counterexample of the ESBMC Z3, and obtains the decision variables and candidate functions
+	\*******************************************************************/
+
+	void Tcexamples::take_CE_ESBMC_Z3(string log, int prec)
+	{
+
+		// Adjustment Variables
 		string command = "";
 		string file_log;
 		string current_coordinates[2];
@@ -154,77 +165,78 @@ using namespace std;
 		string aux_string = "";
 	 	size_t position;
 
-		file_log = take_file(log);							// Carrega o Log e
-		std::size_t found_F = file_log.find("FAILED");		// Procura pela palavra FAILED no contra exemplo
-		std::size_t found_S = file_log.find("SUCCESSFUL");	// Procura pela palavra SUCCESSFUL no contra exemplo
+		file_log = take_file(log);							// Load Log
+		std::size_t found_F = file_log.find("FAILED");		// Search for the word FAILED in the counterexample
+		std::size_t found_S = file_log.find("SUCCESSFUL");	// Search for the word SUCCESSFUL in the counterexample
 
-												//
-		if(found_F!=std::string::npos){			//	Entra se houver falha no contra exemplo
-												//
-
-															//
-		 	_verification = 0;								// 	Atribui 0 para variável q identifica o estão do contra exemplo
-															//
-
-
+												
+		if(found_F!=std::string::npos)			//	Enter if there is a failure in the counterexample
+		{			
+																											//
+		 	_verification = 0;								// 	Assign 0 for variable that identifies the state of the counter example
+															
 			position = file_log.rfind(word);										//
 																					//
 			aux_string = file_log.substr(position + 5,file_log.length());			//
-			position = aux_string.find(",");										//	Busca valores de X1 e X2 no contra Exemplo
+			position = aux_string.find(",");										//	Find values of X1 and X2 in the counter Example
 			current_coordinates[0] = aux_string.substr(0,position);					//
 																					//
 			aux_string = aux_string.substr(position + 2,aux_string.length());		//
 			position = aux_string.find(",");										//
 			current_coordinates[1] = aux_string.substr(0,position);					//
-
-																					//
-		    double _x1D = convertValue.convertStringDouble(current_coordinates[0].c_str());		//	Converte Valores de X1 e X2 em string para Double
+																				
+		    double _x1D = convertValue.convertStringDouble(current_coordinates[0].c_str());		//	Converts Values of X1 and X2 into string for Double
 		    double _x2D = convertValue.convertStringDouble(current_coordinates[1].c_str());		//
 
+		    if(_x1D > 1000)					
+		    {																//	For X1
+				_x1D = ((_x1D -4294967296)/prec);							//
+				_x1 = convertValue.convertDoubleString(_x1D);				//	Evaluates whether it is a BMG overflow and set the value
+			}else															//
+			{																//  
+				_x1 = convertValue.convertDoubleString(_x1D/prec);			//
+			}																//
 
-		    if(_x1D > 1000){										//	Para X1
-				_x1D = ((_x1D -4294967296)/prec);					//
-				_x1 = convertValue.convertDoubleString(_x1D);					//	Avalia se é um overflow do ESBCM
-			}else{													//  arruma o valor
-				_x1 = convertValue.convertDoubleString(_x1D/prec);				//
-			}														//
-
-			if(_x2D > 1000){										// Para X2
-				_x2D = ((_x2D -4294967296)/prec);					//
-				_x2 = convertValue.convertDoubleString(_x2D);					//	e
-			}else{													//	arruma o valor
-				_x2 = convertValue.convertDoubleString(_x2D/prec);				//
-			}														//
-
+			if(_x2D > 1000)
+			{																// For X2
+				_x2D = ((_x2D -4294967296)/prec);							//
+				_x2 = convertValue.convertDoubleString(_x2D);				//	Evaluates whether it is a BMG overflow and set the value
+			}else															//		
+			{																//	
+				_x2 = convertValue.convertDoubleString(_x2D/prec);			//
+			}																//
 
 			//Generates the minimum														//
-			command  = "./value_min " + _x1 + " " + _x2 + " > min_temporary.txt";		//	Gera o valor Fobj com x1 e x2 encontrado
-			system(command.c_str());													//	Armazena em "min_temporary.txt"
+			command  = "./value_min " + _x1 + " " + _x2 + " > min_temporary.txt";		//	Generates the Fobj value with x1 and x2 found
+			system(command.c_str());													//	Stores in "min_temporary.txt"
 
+			string minimumS = take_file("min_temporary.txt");					//	Load the generated Fojb
+			_fjob = minimumS.substr(0,minimumS.size()).c_str();					//	Convert to float and assign
 
-			string minimumS = take_file("min_temporary.txt");					//	Carrega o Fojb gerado
-			_fjob = minimumS.substr(0,minimumS.size()).c_str();					//	Converte para float e atribui
-
-
-		}else if(found_S!=std::string::npos){					//
+		}else if(found_S!=std::string::npos)
+		{														//
 																// If the verification was successful
-			_verification = 1;									// Caso não enconte a falha, "SUCESSO"
+			_verification = 1;									// If you can not find the fault, "SUCCESS"
 
-		}else {
-
-			cout << "CONTRA EXEMPLO DESCONHECIDO" << endl;
-
+		}else 
+		{
+			cout << "COUNTEREXAMPLE UNKNOWN" << endl;
 		}
 
 	}
 
 
-//****************************************************************************************************************************
-//			Função trata o Contra Exemplo MATHSAT
+	/*******************************************************************\
+	Method: take_CE_ESBMC_Mathsat(string log, int prec)
+	Inputs:  log: Log file name
+			 prec: Precision current of algorithm 	
+	Outputs: void
+	Purpose: Treats the counterexample of the ESBMC Mathsat, and obtains the decision variables and candidate functions
+	\*******************************************************************/
 
 	void Tcexamples::take_CE_ESBMC_Mathsat(string log, int prec){
 
-		// Variáveis de Ajustes
+		// Adjustment Variables
 		string command = "";
 		string file_log;
 		string current_coordinates[2];
@@ -233,76 +245,79 @@ using namespace std;
 		string aux_string = "";
 	 	size_t position;
 
-		file_log = take_file(log);							// Carrega o Log e
-		std::size_t found_F = file_log.find("FAILED");		// Procura pela palavra FAILED no contra exemplo
-		std::size_t found_S = file_log.find("SUCCESSFUL");	// Procura pela palavra SUCCESSFUL no contra exemplo
+		file_log = take_file(log);							// Load Log
+		std::size_t found_F = file_log.find("FAILED");		// Search for the word FAILED in the counterexample
+		std::size_t found_S = file_log.find("SUCCESSFUL");	// Search for the word SUCCESSFUL in the counterexample
 
-												//
-		if(found_F!=std::string::npos){			//	Entra se houver falha no contra exemplo
-												//
+		if(found_F!=std::string::npos)						//	Enter if there is a failure in the counterexample
+		{
 
-															//
-		 	_verification = 0;								// 	Atribui 0 para variável q identifica o estão do contra exemplo
-															//
+		 	_verification = 0;								// 	Assign 0 for variable that identifies the state of the counter example
 
 			position = file_log.rfind(word);										//
 																					//
 			aux_string = file_log.substr(position + 5,file_log.length());			//
-			position = aux_string.find(",");										//	Busca valores de X1 e X2 no contra Exemplo
+			position = aux_string.find(",");										//	Find values of X1 and X2 in the counter Example
 			current_coordinates[0] = aux_string.substr(0,position);					//
 																					//
 			aux_string = aux_string.substr(position + 2,aux_string.length());		//
 			position = aux_string.find(",");										//
 			current_coordinates[1] = aux_string.substr(0,position);					//
 
-																					//
-		    double _x1D = convertValue.convertStringDouble(current_coordinates[0].c_str());		//	Converte Valores de X1 e X2 em string para Double
+
+		    double _x1D = convertValue.convertStringDouble(current_coordinates[0].c_str());		//	Converts Values of X1 and X2 into string for Double
 		    double _x2D = convertValue.convertStringDouble(current_coordinates[1].c_str());		//
 
 
-		    if(_x1D > 1000){										//	Para X1
+		    if(_x1D > 1000)
+		    {														//	For X1
 				_x1D = ((_x1D -4294967296)/prec);					//
-				_x1 = convertValue.convertDoubleString(_x1D);					//	Avalia se é um overflow do ESBCM
-			}else{													//  arruma o valor
-				_x1 = convertValue.convertDoubleString(_x1D/prec);				//
+				_x1 = convertValue.convertDoubleString(_x1D);		//	Evaluates whether it is a BMG overflow and set the value
+			}else													//		
+			{														// 
+				_x1 = convertValue.convertDoubleString(_x1D/prec);	//
 			}														//
 
-			if(_x2D > 1000){										// Para X2
+			if(_x2D > 1000)
+			{														//  For X2
 				_x2D = ((_x2D -4294967296)/prec);					//
-				_x2 = convertValue.convertDoubleString(_x2D);					//	e
-			}else{													//	arruma o valor
-				_x2 = convertValue.convertDoubleString(_x2D/prec);				//
+				_x2 = convertValue.convertDoubleString(_x2D);		//	Evaluates whether it is a BMG overflow and set the value
+			}else													//
+			{														//	
+				_x2 = convertValue.convertDoubleString(_x2D/prec);	//
 			}														//
 
 			//Generates the minimum														//
-			command  = "./value_min " + _x1 + " " + _x2 + " > min_temporary.txt";		//	Gera o valor Fobj com x1 e x2 encontrado
-			system(command.c_str());													//	Armazena em "min_temporary.txt"
+			command  = "./value_min " + _x1 + " " + _x2 + " > min_temporary.txt";		//	Generates the Fobj value with x1 and x2 found
+			system(command.c_str());													//	Stores in "min_temporary.txt"
 
 
-			string minimumS = take_file("min_temporary.txt");					//	Carrega o Fojb gerado
-			_fjob = minimumS.substr(0,minimumS.size()).c_str();					//	Converte para float e atribui
+			string minimumS = take_file("min_temporary.txt");					//	Load the generated Fojb
+			_fjob = minimumS.substr(0,minimumS.size()).c_str();					//	Convert to float and assign
 
-
-		}else if(found_S!=std::string::npos){					//
+		}else if(found_S!=std::string::npos)
+		{					//
 																// If the verification was successful
-			_verification = 1;									// Caso não enconte a falha, "SUCESSO"
-
-		}else {
-
-			cout << "CONTRA EXEMPLO DESCONHECIDO" << endl;
-
+			_verification = 1;									// If you can not find the fault, "SUCCESS"
+		}else 
+		{
+			cout << "COUNTEREXAMPLE UNKNOWN" << endl;
 		}
 	}
 
 
+	/*******************************************************************\
+	Method: take_CE_CBMC_Minisat(string log, int prec)
+	Inputs:  log: Log file name
+			 prec: Precision current of algorithm 	
+	Outputs: void
+	Purpose: Treats the counterexample of the CBMC Minisat, and obtains the decision variables and candidate functions
+	\*******************************************************************/
 
+	void Tcexamples::take_CE_CBMC_Minisat(string log, int prec)
+	{
 
-	//****************************************************************************************************************************
-	//			Função trata o Contra Exemplo MATHSAT
-
-	void Tcexamples::take_CE_CBMC_Minisat(string log, int prec){
-
-			// Variáveis de Ajustes
+			// Adjustment Variables
 			string command = "";
 			string file_log;
 			string current_coordinates[2];
@@ -318,17 +333,15 @@ using namespace std;
 			ostringstream convert;
 			string aux_string = "";
 
-			file_log = take_file(log);							// Carrega o Log e
-			std::size_t found_F = file_log.find("FAILED");		// Procura pela palavra FAILED no contra exemplo
-			std::size_t found_S = file_log.find("SUCCESSFUL");	// Procura pela palavra SUCCESSFUL no contra exemplo
+			file_log = take_file(log);							// Load Log
+			std::size_t found_F = file_log.find("FAILED");		// Search for the word FAILED in the counterexample
+			std::size_t found_S = file_log.find("SUCCESSFUL");	// Search for the word SUCCESSFUL in the counterexample
 
-													//
-			if(found_F!=std::string::npos){			//	Entra se houver falha no contra exemplo
-													//
-
-																//
-			 	_verification = 0;								// 	Atribui 0 para variável q identifica o estão do contra exemplo
-																//
+													
+			if(found_F!=std::string::npos)			
+			{													//	Enter if there is a failure in the counterexample
+													
+			 	_verification = 0;								// 	Assign 0 for variable that identifies the state of the counter example
 
 				position1 = file_log.rfind(word1);
 				position2 = file_log.rfind(word2);
@@ -346,128 +359,13 @@ using namespace std;
 				parenthesis = aux_string.find(" ");
 				_fjob = aux_string.substr(0,parenthesis);
 
-				//Generates the minimum														//
-//				command  = "./value_min " + _x1 + " " + _x2 + " > min_temporary.txt";		//	Gera o valor Fobj com x1 e x2 encontrado
-//				system(command.c_str());													//	Armazena em "min_temporary.txt"
 
-//				string minimumS = take_file("min_temporary.txt");					//	Carrega o Fojb gerado
-//				_fjob = minimumS.substr(0,minimumS.size()).c_str();					//	Converte para float e atribui
-
-			}else if(found_S!=std::string::npos){					//
+			}else if(found_S!=std::string::npos)
+			{					
 																	// If the verification was successful
-				_verification = 1;									// Caso não enconte a falha, "SUCESSO"
-
-			}else {
-
-				cout << "CONTRA EXEMPLO DESCONHECIDO" << endl;
-
+				_verification = 1;									// If you can not find the fault, "SUCCESS"
+			}else 
+			{
+				cout << "COUNTEREXAMPLE UNKNOWN" << endl;
 			}
 		}
-
-
-
-
-
-
-
-/*
-	void Tcexamples::take_CE_ESBMC_C_Boolector(string log, int prec){
-
-		// Variáveis de Ajustes
-		string command = "";
-		string file_log;
-		string current_coordinates[2];
-		string word = ":x=";
-		ostringstream convert;
-		string aux_string = "";
-	 	size_t position;
-
-		file_log = take_file(log);								// Carrega o Log e
-		std::size_t found_F = file_log.find("FAILED");			// Procura pela palavra FAILED no contra exemplo
-		std::size_t found_S = file_log.find("SUCCESSFUL");		// Procura pela palavra SUCCESSFUL no contra exemplo
-
-
-												//
-		if(found_F!=std::string::npos){			//	Entra se houver falha no contra exemplo
-												//
-
-															//
-		 	_verification = 0;								// 	Atribui 0 para variável q identifica o estão do contra exemplo
-															//
-
-			position = file_log.rfind(word);										//
-																					//
-			aux_string = file_log.substr(position + 5,file_log.length());			//
-			position = aux_string.find(",");										//	Busca valores de X1 e X2 no contra Exemplo
-			current_coordinates[0] = aux_string.substr(0,position);					//
-																					//
-			aux_string = aux_string.substr(position + 2,aux_string.length());		//
-			position = aux_string.find(",");										//
-			current_coordinates[1] = aux_string.substr(0,position);					//
-
-
-			cout << "---------------------" << endl;				//
-			cout << "X1 e X2 no Tratamento" << endl;				//
-																	//
-			cout << "X2: ";											//	Teste, Imprime para comparar com a conversão em caso de overflow
-			cout << current_coordinates[0] << endl;					//
-																	//
-			cout << "X1: ";											//
-			cout << current_coordinates[1] << endl;					//
-
-
-																	//
-		    double _x1D = atof(current_coordinates[0].c_str());		//	Converte Valores de X1 e X2 em string para Double
-		    double _x2D = atof(current_coordinates[1].c_str());		//
-
-
-		    if(_x1D > 1000){										//	Para X1
-				_x1D = ((_x1D -4294967296)/prec);					//
-				convert << _x1D;									//	Avalia se é um overflow do ESBCM
-				_x1 = convert.str();								//	e
-			}else{													//  arruma o valor
-				_x1 = convertDoubleString(_x1D/prec);						//
-			}														//
-
-
-			if(_x2D > 1000){										// Para X2
-				_x2D = ((_x2D -4294967296)/prec);					//
-				convert << _x2D;									//	Avalia se é um overflow do ESBCM
-				_x2 = convert.str();								//	e
-			}else{													//	arruma o valor
-				_x2 = convertDoubleString(_x2D/prec);						//
-			}														//
-
-
-			cout << "X1 Conversão: ";								//
-			cout << _x1 << endl;									//	Valores de X1 e X2 Arrumados
-																	//	Teste, Imprime para comparar com a conversão em caso de overflow
-			cout << "X2 Conversão: ";								//
-			cout << _x2 << endl;									//
-
-
-			//Generates the minimum														//
-			command  = "./value_min " + _x1 + " " + _x2 + " > min_temporary.txt";		//	Gera o valor Fobj com x1 e x2 encontrado
-			system(command.c_str());													//	Armazena em "min_temporary.txt"
-
-
-			string minimumS = take_file("min_temporary.txt");							//	Carrega o Fojb gerado
-
-//			cout << minimumS << endl;
-
-			_fjob = minimumS;					//	Converte para float e atribui
-
-			cout << "Fobj Final: ";									//
-			cout << _fjob << endl;									//	Teste, Imprimri
-
-		}else if(found_S!=std::string::npos){										//
-			// If the verification was successful	// Caso não enconte a falha, "SUCESSO"
-			_verification = 1;						//
-
-		}else {
-
-			cout << "OUTRO CONTRA EXEMPLO DESCONHECIDO" << endl;
-
-		}
-	}
-*/

@@ -12,54 +12,55 @@ using namespace std;
 #ifndef TFLAGS_H_
 #define TFLAGS_H_
 
-class Tflags {
+	class Tflags 
+	{
 
-	private:
-		string name_function;
-		int mc;
-		int solver;
-		int alg;
-		float l_inf;
-		string l_sup;
-		string typeData;
-		float timeout_global;
-		float timeout_verification;
-		string library;
-		int precision;
-		int input_formt;
+		private:
+			string name_function;
+			int mc;
+			int solver;
+			int alg;
+			float l_inf;
+			string l_sup;
+			string typeData;
+			float timeout_global;
+			float timeout_verification;
+			string library;
+			int precision;
+			int input_formt;
 
-		Ajusts convertValue;
+			Ajusts convertValue;
 
-	public:
-		Tflags();
-		virtual ~Tflags();
+		public:
+			Tflags();
+			virtual ~Tflags();
 
-		bool Checks(int argc, char *argv[]);
+			bool Checks(int argc, char *argv[]);
 
-		string take_alg_flags(string alg_l_sup);
-		string take_f_i_flags(string alg_l_sup);
-		string get_name_function();
+			string take_alg_flags(string alg_l_sup);
+			string take_f_i_flags(string alg_l_sup);
+			string get_name_function();
 
-		int get_mc();
-		int get_solver();
-		int get_alg();
-		float get_l_inf();
+			int get_mc();
+			int get_solver();
+			int get_alg();
+			float get_l_inf();
 
-		string get_l_sup();
-		string get_typeData();
-		float get_timeout_global();
-		float get_timeout_verification();
-		string get_library();
-		int get_input_formt();
-		int get_precision();
+			string get_l_sup();
+			string get_typeData();
+			float get_timeout_global();
+			float get_timeout_verification();
+			string get_library();
+			int get_input_formt();
+			int get_precision();
 
-		void print_version();
-		void print_value();
-		string create_value();
-		bool check_exist_file(string fileS);
-		bool check_input_file_format(string name);
-		bool check_if_number(string value);
+			void print_version();
+			void print_value();
+			string create_value();
+			bool check_exist_file(string fileS);
+			bool check_input_file_format(string name);
+			bool check_if_number(string value);
 
-};
+	};
 
 #endif /* TFLAGS_H_ */
