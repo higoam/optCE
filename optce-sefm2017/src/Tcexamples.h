@@ -1,14 +1,14 @@
 /*
- * Tcexamples.h
+ *  Tcexamples.h
  *
  *  Created on: 03/02/2017
- *      Author: higo
+ *  uthor: higo
  */
 
 #include <iostream>
-#include "Ajusts.h"
 using namespace std;
 
+#include "Adjust.h"
 
 #ifndef TCEXAMPLES_H_
 #define TCEXAMPLES_H_

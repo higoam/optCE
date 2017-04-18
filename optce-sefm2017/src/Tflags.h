@@ -5,10 +5,9 @@
  *      Author: higo
  */
 #include <iostream>
-
 using namespace std;
 
-#include "Ajusts.h"
+#include "Adjust.h"
 
 #ifndef TFLAGS_H_
 #define TFLAGS_H_

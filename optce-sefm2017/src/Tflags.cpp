@@ -10,7 +10,6 @@
 #include <stdlib.h>
 #include <fstream>
 #include <algorithm>
-
 using namespace std;
 
 #include "Tflags.h"

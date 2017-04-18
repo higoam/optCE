@@ -15,7 +15,7 @@
 #include "Set.h"
 #include "Tcexamples.h"
 #include "Runalgorithm.h"
-#include "Ajusts.h"
+#include "Adjust.h"
 
 using namespace std;
 

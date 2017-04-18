@@ -1,8 +1,8 @@
 /*
- * Tcexamples.cpp
+ *  Tcexamples.cpp
  *
  *  Created on: 03/02/2017
- *      Author: higo
+ *  Author: higo
  */
 
 #include <iostream>
@@ -10,27 +10,32 @@
 #include <sstream>
 #include <stdlib.h>
 #include <list>
-
-#include "Tcexamples.h"
-#include "Ajusts.h"
-
 using namespace std;
 
+#include "Tcexamples.h"
+#include "Adjust.h"
 
-	Tcexamples::Tcexamples() {
 
+
+
+	Tcexamples::Tcexamples() 
+	{
 		_verification = 0;
-		// TODO Auto-generated constructor stub
+	}
+
+	Tcexamples::~Tcexamples() 
+	{
 
 	}
 
-	Tcexamples::~Tcexamples() {
-		// TODO Auto-generated destructor stub
-	}
 
+	/*******************************************************************\
+	Method: take_file(string fileS)
+	Inputs:  fileS file
+	Outputs: string with file
+	Purpose: Function Loads the Log file
+	\*******************************************************************/
 
-	//			Função Carrega o arquivo Log
-	//*********************************************************************************************
 	string Tcexamples::take_file(string fileS){
 
 		char letter;
@@ -52,8 +57,15 @@ using namespace std;
 		return file_result;
 	}
 
-	//			Função trata o Contra Exemplo BOOLECTOR
-	//*********************************************************************************************
+
+	/*******************************************************************\
+	Method: convertStringInt(string str)
+	Inputs:  log
+			 prec	
+	Outputs: string with file
+	Purpose: Function treats the Contra Example of BOOLECTOR
+	\*******************************************************************/
+
 	void Tcexamples::take_CE_ESBMC_Boolector(string log, int prec){
 
 		// Variáveis de Ajustes

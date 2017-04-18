@@ -8,7 +8,7 @@
 #include "Set.h"
 #include "Tcexamples.h"
 #include "Generatefiles.h"
-#include "Ajusts.h"
+#include "Adjust.h"
 
 #ifndef RUNALGORITHM_H_
 #define RUNALGORITHM_H_
