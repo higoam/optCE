@@ -2,7 +2,7 @@
  * 	Ajusts.h
  *
  *  Created on: 15/04/2017
- *  Author: higo
+ *  Author: Higo Albuquerque
  */
 
 #ifndef ADJUST_H_

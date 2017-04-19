@@ -2,7 +2,7 @@
  * 	Tflags.cpp
  *
  *  Created on: 03/02/2017
- *  Author: higo
+ *  Author: Higo Albuquerque
  */
 
 #include <iostream>
@@ -24,8 +24,6 @@ using namespace std;
 		// TODO Auto-generated destructor stub
 	}
 
-
-
 	/*******************************************************************************************************\
 	Method: Checks(int argc, char *argv[])
 	Inputs: argc: Nuber of flags
@@ -43,6 +41,14 @@ using namespace std;
 		string flag_command;
 		string flag_value;
 		int vet_flag[20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+		if( argc == 1 ) // Check Help, Version and Standard Execution, 2 tickets
+		{	
+			cout << "Insert an input file." << endl;
+			cout << "Try 'optCE --help' for more information." << endl;
+
+			return false;
+		}
 							
 		if( argc == 2 ) // Check Help, Version and Standard Execution, 2 tickets
 		{	
@@ -401,8 +407,21 @@ using namespace std;
 
 	void Tflags::print_value()
 	{
+
+
+//"* * Higo Albuquerque, Rodrigo Araujo, Iury Bessa, Lucas Cordeiro, and Eddie Batista * *\n"
+//"* * Federal University of Amazonas, University of Oxford * *\n"
+
+
 		cout << endl;
-		cout << "############# optSMT 1.0 ##########################################################" << endl;
+		cout << "###################################################################################" << endl;
+		cout << "               OptCE 1.0 - Copyright (C) 2017 (" +  convertValue.convertIntString(sizeof(void *)*8) + "-bit version)" << endl;
+		cout << "  -------------------------------------------------------------------------------  " << endl;
+		cout << "  Higo Albuquerque, Rodrigo Araujo, Iury Bessa, Lucas Cordeiro, and Eddie Batista  " << endl;
+		cout << "               Federal University of Amazonas, University of Oxford                " << endl;	
+		cout << "###################################################################################" << endl;	
+
+
 		cout << endl;
 		cout << " Usage:                                                  Purpose:" << endl;
 		cout << endl;
@@ -411,7 +430,8 @@ using namespace std;
 		cout << " optSMT <name_function>.func                             Minimum global check of the function with the default setting" << endl;
 		cout << " optSMT <name_function>.func [--start-value=value]       Indicates the initialization of the algorithm                " << endl;
 		cout << " optSMT <name_function>.func [--library=name_library]    Uses user function implementation							   " << endl;
-		cout << " optSMT <name_function>.func [--timeout-global=time]     Configure time limit in seconds							   " << endl;
+		cout << " optSMT <name_function>.func [--precision=value]         Configure the precison of solution						   " << endl;
+		cout << " optSMT <name_function>.func [--timeout=time]            Configure time limit in seconds							   " << endl;
 		cout << endl;
 		cout << " Additonal options:" << endl;
 		cout << endl;

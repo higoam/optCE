@@ -2,7 +2,7 @@
  *  Runalgorithm.h
  *
  *  Created on: 03/02/2017
- *  Author: higo
+ *  Author: Higo Albuquerque
  */
 
 #include "Set.h"

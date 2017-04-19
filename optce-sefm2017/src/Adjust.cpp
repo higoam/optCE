@@ -2,7 +2,7 @@
  * 	Ajusts.cpp
  *
  *  Created on: 15/04/2017
- *  Author: higo
+ *  Author: Higo Albuquerque
  */
 
 

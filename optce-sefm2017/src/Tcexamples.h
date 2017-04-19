@@ -2,7 +2,7 @@
  *  Tcexamples.h
  *
  *  Created on: 03/02/2017
- *  uthor: higo
+ *  uthor: Higo Albuquerque
  */
 
 #include <iostream>
