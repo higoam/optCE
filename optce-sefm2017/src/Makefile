@@ -1,7 +1,7 @@
-main: Adjust.o Tflags.o Set.o Tcexamples.o Generatefiles.o Runalgorithm.o project.o
+main: Adjust.o Tflags.o Set.o Tcexamples.o Generatefiles.o Runalgorithm.o Adjust.o project.o
 	g++ -o optCE Adjust.o Tflags.o Set.o Tcexamples.o Generatefiles.o Runalgorithm.o project.o
 
-Tflags.o: Adjust.cpp Adjust.h
+Adjust.o: Adjust.cpp Adjust.h
 	g++ -c Adjust.cpp
 
 projeto.o: project.cpp
@@ -23,4 +23,4 @@ Runalgorithm.o: Runalgorithm.cpp Runalgorithm.h
 	g++ -c Runalgorithm.cpp
 
 clean:
-	rm optCE project.o Adjust.o Tflags.o Set.o Tcexamples.o Generatefiles.o Runalgorithm.o
+	rm optCE *.o
