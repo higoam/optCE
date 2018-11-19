@@ -16,9 +16,9 @@ using namespace std;
 
 int main(int argc, char *argv[ ])
 {
-  	Tflags       	flags;
-  	Set    			experiment;
-    Run_algorithm  	run;
+  Tflags       flags;
+  Set       experiment;
+    Run_algorithm  run;
 
     // Check input flags and Prepares the inputs to the experiment
   if(flags.Checks(argc, argv))
