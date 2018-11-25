@@ -8,17 +8,21 @@
 
 #include <iostream>
 #include "Tflags.h"
+#include "Tinput.h"
 #include "Setup.h"
 #include "Execution.h"
+#include "Adjust.h"
 
 using namespace std;
 using namespace TFLAGS;
+using namespace TINPUT;
 using namespace SETUP;
 using namespace EXCUTION;
 
 int main(int argc, char *argv[ ]) {
 
 	Tflags flags;
+	Tinput input_file;
 	Setup  setup_optimization;
 	Execution execution_optimization;
 	string result_optimization;
@@ -27,24 +31,43 @@ int main(int argc, char *argv[ ]) {
 	cout << "####### OptCE v2.0 ######" << endl;
 	cout << "#########################" << endl << endl;
 
-	// Organizes all input data for optimization
+
+
+	// Organiza todas as entradas definidas no terminal
 	setup_optimization = flags.Checks(argc, argv);
 
-	if(setup_optimization.isAbleInput() == true){
+		if(setup_optimization.isInputSetup() == true){
 
-		setup_optimization.printSetupExperiment();
+		}else{
+			//Imprime mensagem de erro
+			return 0;
+		}
 
-		result_optimization = execution_optimization.run(setup_optimization);
+	// Organiza todos os dados do arquivo de entrada
+	setup_optimization = input_file.Checks(setup_optimization);
 
-//		cout << "###### Resultado ######" << endl;
-//		cout << result_optimization << endl;
+		if(setup_optimization.isInputFile() == true){
 
-	}else{
+		}else{
+			//Imprime mensagem de erro
+			return 0;
+		}
 
-		// Deve Imprimir a msg de erro
-		cout << "com problemas#####" << endl;
-		//setup_experiment.
-	}
+	// Executa Otimização
+	setup_optimization.printSetupExperiment();
+	result_optimization = execution_optimization.run(setup_optimization);
+
+
+	// Apresenta resultados
+
 
 	return 0;
 }
+
+
+//	Error
+//
+//	1 - "Incorect extesion";
+//
+//
+//

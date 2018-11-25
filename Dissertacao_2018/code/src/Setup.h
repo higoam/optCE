@@ -18,17 +18,24 @@ public:
 	virtual ~Setup();
 	Setup();
 
-	bool 	ableINPUT;
-    int 	failure;
+	bool 	hv;
+	bool 	input_setup;
+	bool 	input_file;
+
+	int 	failure;
     string 	name_function;
     int 	bmc;
     int 	solver;
     int 	alg;
 
+
+    string fc;
+
     float l_sup_x1;
     float l_inf_x1;
     float l_sup_x2;
     float l_inf_x2;
+
 
     string fc_current;
     string x1_current;
@@ -56,20 +63,15 @@ public:
     string x1_result;
     string x2_result;
 
+    string msg_error;
 
 	void printSetupExperiment();
 
 
+
+	// ---------------------------------------------------------------------------------------------
 	int getAlg() const;
-	const string& getNameFunction() const;
-	int getSolver() const;
-
 	void setAlg(int alg);
-	void setNameFunction(const string& nameFunction);
-	void setSolver(int solver);
-
-	bool isAbleInput() const;
-	void setAbleInput(bool ableInput);
 	int getBmc() const;
 	void setBmc(int bmc);
 	const string& getCodeFunction() const;
@@ -82,8 +84,12 @@ public:
 	void setFcCurrent(const string& fcCurrent);
 	const string& getFobjResult() const;
 	void setFobjResult(const string& fobjResult);
+	bool isInputFile() const;
+	void setInputFile(bool inputFile);
 	int getInputFormat() const;
 	void setInputFormat(int inputFormat);
+	bool isInputSetup() const;
+	void setInputSetup(bool inputSetup);
 	float getInfX1() const;
 	void setInfX1(float infX1);
 	float getInfX2() const;
@@ -96,12 +102,16 @@ public:
 	void setLibrary(const string& library);
 	int getN() const;
 	void setN(int n);
+	const string& getNameFunction() const;
+	void setNameFunction(const string& nameFunction);
 	int getNr() const;
 	void setNr(int nr);
 	int getPrecision() const;
 	void setPrecision(int precision);
 	const string& getRestrictions() const;
 	void setRestrictions(const string& restrictions);
+	int getSolver() const;
+	void setSolver(int solver);
 	const string& getSpaceLimit() const;
 	void setSpaceLimit(const string& spaceLimit);
 	float getTimeoutGlobal() const;
@@ -120,6 +130,14 @@ public:
 	void setX2Current(const string& x2Current);
 	const string& getX2Result() const;
 	void setX2Result(const string& x2Result);
+	const string& getMsgError() const;
+	void setMsgError(const string& msgError);
+	bool isHv() const;
+	void setHv(bool hv);
+	const string& getSup() const;
+	void setSup(const string& sup);
+	const string& getFc() const;
+	void setFc(const string& fc);
 };
 
 } /* namespace SETUP */

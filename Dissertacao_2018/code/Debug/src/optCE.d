@@ -1,8 +1,10 @@
 src/optCE.d: ../src/optCE.cpp ../src/Tflags.h ../src/Setup.h \
- ../src/Execution.h
+ ../src/Tinput.h ../src/Execution.h
 
 ../src/Tflags.h:
 
 ../src/Setup.h:
+
+../src/Tinput.h:
 
 ../src/Execution.h:
