@@ -11,18 +11,17 @@ namespace TFLAGS {
 
 Tflags::Tflags() {
 	// TODO Auto-generated constructor stub
-
 }
 
 Tflags::~Tflags() {
 	// TODO Auto-generated destructor stub
 }
 
-
-
-Setup Tflags::Checks(int argc, char *argv[])
+Setup* Tflags::Checks(int argc, char *argv[])
 {
+	Setup *setup_experiment_r = new Setup;
 	Setup setup_experiment;
+
 	string msg = "";
 	ADJUST::Adjust auxConvert;
 
@@ -37,57 +36,59 @@ Setup Tflags::Checks(int argc, char *argv[])
 	// Caso tenha apenas 1 argumento, implica dizer não foi inserido a função
     if( argc == 1 )
     {
-    	msg = "Insert an input file. \n Try 'optCE --help' for more information.";
+    	cout << " Insert an input file. Try 'optCE --help' for more information." << endl;
+ 	    setup_experiment.setInputSetup(false);
 
-		  setup_experiment.setMsgError(msg);
-		  setup_experiment.setInputSetup(false);
-
-		  return setup_experiment;
-    }
-
-	// Verifica se o usuário deseja ver HELP, versão ou execução padrão.
-    if( argc == 2 )
+    }else if( argc == 2 ) // Verifica se o usuário deseja ver HELP, versão ou execução padrão.
     {
     	if(string(argv[1]) == "--help")
     	{
-    		setup_experiment.setInputSetup(true);
 			setup_experiment.setHv(true);
 			print_help();
-			return setup_experiment;
     	}
     	else if(string(argv[1]) == "--version")
     	{
     		setup_experiment.setHv(true);
     		print_version();
-    		return setup_experiment;
     	}
     	else
     	{
-    		if(check_input_file_format(string(argv[1])) == false)
+    		setup_experiment = check_input_file_format(string(argv[1]),setup_experiment);
+    		if(setup_experiment.getFailure() != 0)
     		{
-        		msg = "Incorect extesion";
-        		setup_experiment.setMsgError(msg);
+            	cout << "Formato Incorreto" << endl;
         		setup_experiment.setFailure(1);
-        		return setup_experiment;
     		}
     		else
     		{
+            	cout << "Formato Correto" << endl;
     			setup_experiment.setBmc(1);
     			setup_experiment.setSolver(3);
     			setup_experiment.setAlg(1);
     			setup_experiment.setTypeData("float");
     			setup_experiment.setFc(create_value());
     			setup_experiment.setLibrary("");
+
+    			setup_experiment.setHv(false);
+    			setup_experiment.setInputSetup(true);
+
+    			setup_experiment_r = &setup_experiment;
+    	        return setup_experiment_r;
     		}
     	}
     }
     else //Verificar todos os caminhos de execução
     {
-    	if(check_input_file_format(string(argv[1])) == false)
+		setup_experiment = check_input_file_format(string(argv[1]),setup_experiment);
+    	if(setup_experiment.getFailure() != 0)
     	{
     		cout << "Incorrect file extension" << endl;
             setup_experiment.setFailure(true);
-            return setup_experiment;    	}
+			setup_experiment.setInputFile(false);
+
+	        setup_experiment_r = &setup_experiment;
+	        return setup_experiment_r;
+    	}
 
     	for(i=2; i<argc; i++){
 
@@ -168,7 +169,9 @@ Setup Tflags::Checks(int argc, char *argv[])
 						{
 							cout << "Unknown value: " + string(argv[i]) << endl;
 					          setup_experiment.setFailure(true);
-					          return setup_experiment;
+
+					          setup_experiment_r = &setup_experiment;
+					      	  return setup_experiment_r;
 						}
 					}
 					else if(flag_command == "--library" )
@@ -188,7 +191,9 @@ Setup Tflags::Checks(int argc, char *argv[])
 						{
 							cout << "Unknown value: " + string(argv[i]) << endl;
 					          setup_experiment.setFailure(true);
-					          return setup_experiment;
+
+					          setup_experiment_r = &setup_experiment;
+					          return setup_experiment_r;
 						}
 					}
 					else if(flag_command == "--timeout-verification" )
@@ -203,7 +208,9 @@ Setup Tflags::Checks(int argc, char *argv[])
 						{
 							cout << "Unknown value: " + string(argv[i]) << endl;
 					          setup_experiment.setFailure(true);
-					          return setup_experiment;
+
+					          setup_experiment_r = &setup_experiment;
+					      	  return setup_experiment_r;
 						}
 					}
 					else if(flag_command == "--precision")
@@ -217,21 +224,27 @@ Setup Tflags::Checks(int argc, char *argv[])
 						{
 							cout << "Unknown value: " + string(argv[i]) << endl;
 					          setup_experiment.setFailure(true);
-					          return setup_experiment;
+
+					          setup_experiment_r = &setup_experiment;
+					          return setup_experiment_r;
 						}
 					}
 					else
 					{
 						cout << "Flag unknown: " + string(argv[i]) << endl;
 				          setup_experiment.setFailure(true);
-				          return setup_experiment;
+
+				          setup_experiment_r = &setup_experiment;
+				          return setup_experiment_r;
 					}
 				}
 				else   // There is not =
 				{
 					cout << "Flag unknown: " + string(argv[i]) << endl;
 			          setup_experiment.setFailure(true);
-			          return setup_experiment;
+
+			          setup_experiment_r = &setup_experiment;
+			          return setup_experiment_r;
 				}
 			}
     	}
@@ -244,8 +257,10 @@ Setup Tflags::Checks(int argc, char *argv[])
     	{
     		cout << "Vc nao pode escolher um solver sem escolher um MC" << endl;
             setup_experiment.setFailure(true);
-            return setup_experiment;
-    	}
+
+            setup_experiment_r = &setup_experiment;
+            return setup_experiment_r;
+     	}
 
     	// Check the Model Check
     	//***************************************************
@@ -257,7 +272,10 @@ Setup Tflags::Checks(int argc, char *argv[])
     	{
     		cout << "Choose only one MC"<< endl;
             setup_experiment.setFailure(true);
-            return setup_experiment;
+
+            setup_experiment_r = &setup_experiment;
+           	return setup_experiment_r;
+
     	}
     	else if(vet_flag[0]>vet_flag[1] && vet_flag[0]>vet_flag[2])
     	{
@@ -276,45 +294,49 @@ Setup Tflags::Checks(int argc, char *argv[])
       //***************************************************
       if( setup_experiment.getBmc() == 1 )
       {
-        if(vet_flag[3]==0 && vet_flag[4]==0 && vet_flag[5]==0)
-        {
-          setup_experiment.setSolver(3);
-        }
-        else if(vet_flag[3]>1 || vet_flag[4]>1 || vet_flag[5]>1)
-        {
-          cout << "Choose only one SOLVER"<< endl;
-          setup_experiment.setFailure(true);
-          return setup_experiment;
-        }
-        else if(vet_flag[3]>vet_flag[4] && vet_flag[3]>vet_flag[5])
-        {
-        	setup_experiment.setSolver(1);
-        }
-        else if(vet_flag[4]>vet_flag[3] && vet_flag[4]>vet_flag[5])
-        {
-        	setup_experiment.setSolver(2);
-        }
-        else if(vet_flag[5]>vet_flag[3] && vet_flag[5]>vet_flag[4])
-        {
-        	setup_experiment.setSolver(3);
-        }
+    	  if(vet_flag[3]==0 && vet_flag[4]==0 && vet_flag[5]==0)
+    	  {
+    		  setup_experiment.setSolver(3);
+    	  }
+    	  else if(vet_flag[3]>1 || vet_flag[4]>1 || vet_flag[5]>1)
+    	  {
+    		  cout << "Choose only one SOLVER"<< endl;
+    		  setup_experiment.setFailure(true);
+
+    		  setup_experiment_r = &setup_experiment;
+    		  return setup_experiment_r;
+    	  }
+    	  else if(vet_flag[3]>vet_flag[4] && vet_flag[3]>vet_flag[5])
+    	  {
+    		  setup_experiment.setSolver(1);
+    	  }
+    	  else if(vet_flag[4]>vet_flag[3] && vet_flag[4]>vet_flag[5])
+    	  {
+    		  setup_experiment.setSolver(2);
+    	  }
+    	  else if(vet_flag[5]>vet_flag[3] && vet_flag[5]>vet_flag[4])
+    	  {
+    		  setup_experiment.setSolver(3);
+    	  }
       }
       else if( setup_experiment.getBmc() == 2 )
       {
-        if(vet_flag[6]==0)
-        {
-        	setup_experiment.setSolver(4);
-        }
-        else if(vet_flag[6]>1)
-        {
-          cout << "Choose only one SOLVER"<< endl;
-          setup_experiment.setFailure(true);
-          return setup_experiment;
-        }
-        else if(vet_flag[4]>0)
-        {
-        	setup_experiment.setSolver(4);
-        }
+    	  if(vet_flag[6]==0)
+    	  {
+    		  setup_experiment.setSolver(4);
+    	  }
+    	  else if(vet_flag[6]>1)
+    	  {
+    		  cout << "Choose only one SOLVER"<< endl;
+    		  setup_experiment.setFailure(true);
+
+    		  setup_experiment_r = &setup_experiment;
+	          return setup_experiment_r;
+    	  }
+    	  else if(vet_flag[4]>0)
+    	  {
+    		  setup_experiment.setSolver(4);
+    	  }
       }
       else if( setup_experiment.getBmc() == 3 )
       {
@@ -332,7 +354,9 @@ Setup Tflags::Checks(int argc, char *argv[])
       {
     	  cout << "Choose only one Algorithm"<< endl;
           setup_experiment.setFailure(true);
-          return setup_experiment;
+
+		  setup_experiment_r = &setup_experiment;
+          return setup_experiment_r;
       }
       else if(vet_flag[8]>vet_flag[9] && vet_flag[8]>vet_flag[10])
       {
@@ -352,21 +376,23 @@ Setup Tflags::Checks(int argc, char *argv[])
       //************************************************
       if(vet_flag[11]==0 && vet_flag[12]==0) // Choosing the default Type
       {
-    	  typeData = "float";
+    	  setup_experiment.setTypeData("float");
       }
       else if(vet_flag[11]>1 || vet_flag[12]>1)
       {
     	  cout << "Choose only one Type of Data"<< endl;
           setup_experiment.setFailure(true);
-          return setup_experiment;
+
+		  setup_experiment_r = &setup_experiment;
+          return setup_experiment_r;
       }
       else if(vet_flag[11]>vet_flag[12])
       {
-    	  typeData = "float";
+    	  setup_experiment.setTypeData("float");
       }
       else if(vet_flag[12]>vet_flag[11])
       {
-    	  typeData = "double";
+    	  setup_experiment.setTypeData("double");
       }
 
 
@@ -374,11 +400,11 @@ Setup Tflags::Checks(int argc, char *argv[])
       //***************************************************
       if(vet_flag[13] == 0)
       {
-    	  input_formt = 0;
+    	  setup_experiment.setInputFormat(0);
       }
       else
       {
-    	  input_formt = 1;
+    	  setup_experiment.setInputFormat(0);
       }
 
 
@@ -386,30 +412,32 @@ Setup Tflags::Checks(int argc, char *argv[])
       //***************************************************
       if(vet_flag[14] == 0)
       {
-        l_sup = create_value();
+    	  setup_experiment.setFc(create_value());
       }
 
       // Verifica se a biblioteca inserida existe
       //***************************************************
       if(vet_flag[15]>0)
       {
-        if(!check_exist_file(library))
-        {
-          cout << "Library not found -> " + library << endl;
-          setup_experiment.setFailure(true);
-          return setup_experiment;
-        }
+    	  if(!check_exist_file(setup_experiment.getLibrary()))
+    	  {
+    		  cout << "Library not found -> " + setup_experiment.getLibrary() << endl;
+    		  setup_experiment.setFailure(true);
+
+    		  setup_experiment_r = &setup_experiment;
+	          return setup_experiment_r;
+    	  }
       }
 
       if(vet_flag[18]==0)
       {
-        precision = 3;
+    	  setup_experiment.setPrecision(3);
       }
     }
 
 
-
-  return setup_experiment;
+    setup_experiment_r = &setup_experiment;
+	return setup_experiment_r;
 }
 
 
@@ -497,23 +525,27 @@ bool Tflags::check_exist_file(string fileS)
   return false;
 }
 
-bool Tflags::check_input_file_format(string name)
+// Mudar
+Setup Tflags::check_input_file_format(string name, Setup experiment)
 {
-  size_t found = name.find(".");
+	size_t found = name.find(".");
 
-  if(found!=string::npos)
-  {
-    string aux = name.substr(found, name.length());
-    if(aux == ".func")
-    {
-      name_function = name.substr(0, found);
-      return true;
-    }
-  }
-
-  return false;
+	if(found!=string::npos)
+	{
+		string aux = name.substr(found, name.length());
+		if(aux == ".func")
+		{
+			experiment.setNameFunction(name.substr(0, found));
+			return experiment;
+		}else{
+			experiment.setFailure(2);
+			return experiment;
+		}
+	}
+	return experiment;
 }
 
+//
 bool Tflags::check_if_number(string value)
 {
     bool valid = false;
@@ -535,66 +567,6 @@ bool Tflags::check_if_number(string value)
     }
 
     return valid;
-}
-
-string Tflags::get_name_function()
-{
-  return name_function;
-}
-
-int Tflags::get_mc()
-{
-  return mc;
-}
-
-int Tflags::get_solver()
-{
-  return solver;
-}
-
-int Tflags::get_alg()
-{
-  return alg;
-}
-
-float Tflags::get_l_inf()
-{
-  return l_inf;
-}
-
-string Tflags::get_l_sup()
-{
-  return l_sup;
-}
-
-string Tflags::get_typeData()
-{
-  return typeData;
-}
-
-float Tflags::get_timeout_global()
-{
-  return timeout_global;
-}
-
-float Tflags::get_timeout_verification()
-{
-  return timeout_verification;
-}
-
-string Tflags::get_library()
-{
-  return library;
-}
-
-int Tflags::get_input_formt()
-{
-  return input_formt;
-}
-
-int Tflags::get_precision()
-{
-  return precision;
 }
 
 

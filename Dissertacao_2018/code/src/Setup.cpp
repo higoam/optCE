@@ -14,14 +14,22 @@ Setup::~Setup() {
 }
 
 Setup::Setup() {
-	// TODO Auto-generated constructor stub
 
+	this->failure = 0;
+	this->hv = false;
+	this->input_file = false;
 }
 
 void Setup::printSetupExperiment()
 {
   cout << "####### SETUP ######"<< endl;
-//  cout << "Name Function " + getNameFunction() << endl;
+  cout << "ALG :" << endl;
+  cout << this->alg << endl;
+  cout << "Name Function " + getNameFunction() << endl;
+  cout << "Fc :" << endl;
+  cout << this->getFc() << endl;
+  cout << "BMC " + this->getBmc() << endl;
+
 
 }
 

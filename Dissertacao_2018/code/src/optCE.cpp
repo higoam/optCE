@@ -23,39 +23,50 @@ int main(int argc, char *argv[ ]) {
 
 	Tflags flags;
 	Tinput input_file;
-	Setup  setup_optimization;
+	Setup  *setup_optimization_re;
 	Execution execution_optimization;
 	string result_optimization;
 
 	cout << "#########################" << endl;
-	cout << "####### OptCE v2.0 ######" << endl;
+	cout << "####### OptCE v2.1 ######" << endl;
 	cout << "#########################" << endl << endl;
 
+	// Organiza todas as flags definidas no terminal
+	setup_optimization_re = flags.Checks(argc, argv);
 
+		if(setup_optimization_re->hv){
+			return 0;
+		}
 
-	// Organiza todas as entradas definidas no terminal
-	setup_optimization = flags.Checks(argc, argv);
-
-		if(setup_optimization.isInputSetup() == true){
+		if(setup_optimization_re->isInputSetup()){
 
 		}else{
-			//Imprime mensagem de erro
+			cout << "####### Erro de flag #######" << endl;
 			return 0;
 		}
 
 	// Organiza todos os dados do arquivo de entrada
-	setup_optimization = input_file.Checks(setup_optimization);
+	//setup_optimization = input_file.Checks(setup_optimization);
 
-		if(setup_optimization.isInputFile() == true){
+/*		if(setup_optimization_re->isInputFile() == true){
 
 		}else{
-			//Imprime mensagem de erro
+			cout << "####### Erro de arquivo entrada #######" << endl;
 			return 0;
 		}
-
+*/
 	// Executa Otimização
-	setup_optimization.printSetupExperiment();
-	result_optimization = execution_optimization.run(setup_optimization);
+
+
+
+		cout << "Algoritmo: ";
+		cout << setup_optimization_re->alg << endl;
+		cout << "BMC: ";
+		cout << setup_optimization_re->bmc << endl;
+		cout << "Solver: ";
+		cout << setup_optimization_re->solver << endl;
+
+	    result_optimization = execution_optimization.run(setup_optimization_re);
 
 
 	// Apresenta resultados

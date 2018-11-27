@@ -21,7 +21,7 @@ public:
 	Execution();
 	virtual ~Execution();
 
-	string run(Setup experiment);
+	string run(Setup* experiment);
 
 };
 

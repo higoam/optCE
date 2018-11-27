@@ -6,6 +6,10 @@
  */
 #include <string>
 #include <iostream>
+#include <stdlib.h>
+#include <fstream>
+#include <algorithm>
+
 #include "Setup.h"
 #include "Adjust.h"
 
@@ -22,12 +26,13 @@ public:
 	Tflags();
 	virtual ~Tflags();
 
-	Setup Checks(int argc, char *argv[]);
+	Setup* Checks(int argc, char *argv[]);
 
 	void print_help();
 	void print_version();
 	string create_value();
 	bool check_exist_file(string fileS);
+	Setup check_input_file_format(string name, Setup experiment);
 	bool check_input_file_format(string name);
 	bool check_if_number(string value);
 	string get_name_function();

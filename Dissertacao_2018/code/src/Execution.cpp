@@ -18,7 +18,12 @@ Execution::~Execution() {
 	// TODO Auto-generated destructor stub
 }
 
-string Execution::run(Setup experiment) {
+string Execution::run(Setup* experiment) {
+
+	cout << "Execucao" << endl;
+	cout << experiment->alg << endl;
+	cout << experiment->solver << endl;
+
 
 	string result_experiment;
 
