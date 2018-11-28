@@ -6,6 +6,13 @@
  */
 
 #include <iostream>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <stdlib.h>
+#include <list>
+#include <math.h>
+
 #include "Setup.h"
 
 using namespace SETUP;
@@ -22,7 +29,8 @@ public:
 	Tinput();
 	virtual ~Tinput();
 
-	Setup Checks(Setup setup_aux);
+	Setup* Checks(Setup* setup_aux);
+//	bool Tinput::segment_matrix_format(Setup ex, string Mat);
 
 };
 

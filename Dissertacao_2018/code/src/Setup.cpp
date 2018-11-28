@@ -18,6 +18,7 @@ Setup::Setup() {
 	this->failure = 0;
 	this->hv = false;
 	this->input_file = false;
+	this->library = "";
 }
 
 void Setup::printSetupExperiment()
@@ -165,8 +166,8 @@ const string& Setup::getNameFunction() const {
 	return name_function;
 }
 
-void Setup::setNameFunction(const string& nameFunction) {
-	name_function = nameFunction;
+void Setup::setNameFunction(string nameFunction) {
+	this->name_function = nameFunction;
 }
 
 int Setup::getNr() const {

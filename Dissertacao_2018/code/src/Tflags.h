@@ -32,8 +32,8 @@ public:
 	void print_version();
 	string create_value();
 	bool check_exist_file(string fileS);
-	Setup check_input_file_format(string name, Setup experiment);
-	bool check_input_file_format(string name);
+//	Setup check_input_file_format(string name, Setup experiment);
+	string check_input_file_format(string name);
 	bool check_if_number(string value);
 	string get_name_function();
 	int get_mc();

@@ -21,9 +21,9 @@ Execution::~Execution() {
 string Execution::run(Setup* experiment) {
 
 	cout << "Execucao" << endl;
-	cout << experiment->alg << endl;
-	cout << experiment->solver << endl;
 
+//	cout << experiment->alg << endl;
+//	cout << experiment->name_function << endl;
 
 	string result_experiment;
 

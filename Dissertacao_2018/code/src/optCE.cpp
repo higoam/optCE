@@ -34,39 +34,52 @@ int main(int argc, char *argv[ ]) {
 	// Organiza todas as flags definidas no terminal
 	setup_optimization_re = flags.Checks(argc, argv);
 
-		if(setup_optimization_re->hv){
+		if(setup_optimization_re->hv == true){
 			return 0;
 		}
 
-		if(setup_optimization_re->isInputSetup()){
-
-		}else{
+		if(!setup_optimization_re->isInputSetup()){
 			cout << "####### Erro de flag #######" << endl;
 			return 0;
 		}
 
 	// Organiza todos os dados do arquivo de entrada
-	//setup_optimization = input_file.Checks(setup_optimization);
-
-/*		if(setup_optimization_re->isInputFile() == true){
-
-		}else{
+	setup_optimization_re = input_file.Checks(setup_optimization_re);
+/*
+		if(!setup_optimization_re->isInputFile()){
 			cout << "####### Erro de arquivo entrada #######" << endl;
 			return 0;
 		}
 */
 	// Executa Otimização
 
+		cout << endl << "### Parametros Refrente a Flags" << endl << endl;
 
-
-		cout << "Algoritmo: ";
-		cout << setup_optimization_re->alg << endl;
-		cout << "BMC: ";
+		cout << "   Nome Função: ";
+ 		cout << setup_optimization_re->name_function << endl;
+ 		cout << "   Algoritmo: ";
+ 		cout << setup_optimization_re->alg << endl;
+		cout << "   BMC: ";
 		cout << setup_optimization_re->bmc << endl;
-		cout << "Solver: ";
+		cout << "   Solver: ";
 		cout << setup_optimization_re->solver << endl;
+		cout << "   Inicialização: ";
+		cout << setup_optimization_re->fc << endl;
+		cout << "   Biblioteca: ";
+		cout << setup_optimization_re->library << endl;
+		cout << "   Precisão: ";
+		cout << setup_optimization_re->precision << endl;
+
+		cout << endl << "### Parametros Refrente Arquivo de antrada" << endl << endl;
+
+		cout << "   CODE: ";
+		cout << setup_optimization_re->code_function << endl;
+		cout << "   CODE: ";
+		cout << setup_optimization_re->code_function_modified << endl;
 
 	    result_optimization = execution_optimization.run(setup_optimization_re);
+
+
 
 
 	// Apresenta resultados

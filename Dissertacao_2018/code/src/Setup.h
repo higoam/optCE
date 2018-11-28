@@ -23,11 +23,11 @@ public:
 	bool 	input_file;
 
 	int 	failure;
-    string 	name_function;
+	char 	*ch_name_function[64];
+	string  name_function;
     int 	bmc;
     int 	solver;
     int 	alg;
-
 
     string fc;
 
@@ -103,7 +103,8 @@ public:
 	int getN() const;
 	void setN(int n);
 	const string& getNameFunction() const;
-	void setNameFunction(const string& nameFunction);
+	void setNameFunction(string nameFunction);
+	//void setNameFunction(const string& nameFunction);
 	int getNr() const;
 	void setNr(int nr);
 	int getPrecision() const;
@@ -138,6 +139,7 @@ public:
 	void setSup(const string& sup);
 	const string& getFc() const;
 	void setFc(const string& fc);
+	const char* getChNameFunction() const;
 };
 
 } /* namespace SETUP */
