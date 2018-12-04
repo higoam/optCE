@@ -55,7 +55,11 @@ public:
     string library;
 
     int input_format;
+
+    int precision_test;
+    int precision_current;
     int precision;
+
     int n;
     int nr;
 
@@ -140,6 +144,10 @@ public:
 	const string& getFc() const;
 	void setFc(const string& fc);
 	const char* getChNameFunction() const;
+	int getPrecisionCurrent() const;
+	void setPrecisionCurrent(int precisionCurrent);
+	int getPrecisionTest() const;
+	void setPrecisionTest(int precisionTest);
 };
 
 } /* namespace SETUP */

@@ -37,7 +37,8 @@ Setup* Tflags::Checks(int argc, char *argv[])
     if( argc == 1 )
     {
     	cout << " Insert an input file. Try 'optCE --help' for more information." << endl << endl;
- 	    setup_experiment_flags.setInputSetup(false);
+ 	    setup_experiment_flags.setFailure(1);
+        return &setup_experiment_flags;
 
     }else if( argc == 2 ) // Verifica se o usuário deseja ver HELP, versão ou execução padrão.
     {
@@ -45,27 +46,23 @@ Setup* Tflags::Checks(int argc, char *argv[])
     	{
 			setup_experiment_flags.setHv(true);
 			print_help();
+	        return &setup_experiment_flags;
     	}
     	else if(string(argv[1]) == "--version")
     	{
     		setup_experiment_flags.setHv(true);
     		print_version();
+            return &setup_experiment_flags;
     	}
     	else
     	{
     		name_funcion = check_input_file_format(string(argv[1]));
 
-//    		cout << "NOME COLETADO ";
-//    		cout << name_funcion << endl;
-
     		if(name_funcion == "")
     		{
             	cout << "Nome do arquivo de entrada com problema"  << endl;
         		setup_experiment_flags.setFailure(1);
-
-        		//setup_experiment_flags_r = &setup_experiment_flags;
     	        return &setup_experiment_flags;
-
     		}
     		else
     		{
@@ -77,16 +74,9 @@ Setup* Tflags::Checks(int argc, char *argv[])
     			setup_experiment_flags.setTypeData("float");
     			setup_experiment_flags.setFc(create_value());
     			setup_experiment_flags.setLibrary("");
-    			setup_experiment_flags.setPrecision(3);
-
-
- //           	cout << "Apos armazenar";
- //           	cout << setup_experiment_flags.getNameFunction() << endl;
-
+    			setup_experiment_flags.setPrecisionTest(3);
     			setup_experiment_flags.setHv(false);
-    			setup_experiment_flags.setInputSetup(true);
-
-//        		setup_experiment_flags_r = &setup_experiment_flags;
+        		setup_experiment_flags.setFailure(0);
     	        return &setup_experiment_flags;
     		}
     	}
@@ -94,15 +84,14 @@ Setup* Tflags::Checks(int argc, char *argv[])
     else //Verificar todos os caminhos de execução
     {
     	name_funcion = check_input_file_format(string(argv[1]));
-    	if(name_funcion == "s")
+    	if(name_funcion == "")
     	{
-    		cout << "Incorrect file extension" << endl;
-            setup_experiment_flags.setFailure(true);
-			setup_experiment_flags.setInputFile(false);
-
-	//        setup_experiment_flags_r = &setup_experiment_flags;
-	 //       return setup_experiment_flags_r;
+        	cout << "Nome do arquivo de entrada com problema"  << endl;
+    		setup_experiment_flags.setFailure(1);
+	        return &setup_experiment_flags;
     	}
+
+		setup_experiment_flags.setNameFunction(name_funcion);
 
     	for(i=2; i<argc; i++){
 
@@ -232,7 +221,7 @@ Setup* Tflags::Checks(int argc, char *argv[])
 						vet_flag[18]++;
 						if(check_if_number(flag_value))
 						{
-							setup_experiment_flags.setPrecision(auxConvert.convertStringInt(flag_value));
+							setup_experiment_flags.setPrecisionTest(auxConvert.convertStringInt(flag_value));
 						}
 						else
 						{
@@ -445,7 +434,7 @@ Setup* Tflags::Checks(int argc, char *argv[])
 
       if(vet_flag[18]==0)
       {
-    	  setup_experiment_flags.setPrecision(3);
+    	  setup_experiment_flags.setPrecisionTest(3);
       }
     }
 
@@ -539,7 +528,6 @@ bool Tflags::check_exist_file(string fileS)
   return false;
 }
 
-// Mudar
 string Tflags::check_input_file_format(string name)
 {
   size_t found = name.find(".");
@@ -549,7 +537,6 @@ string Tflags::check_input_file_format(string name)
     string aux = name.substr(found, name.length());
     if(aux == ".func")
     {
-//      name_function = name.substr(0, found);
       return name.substr(0, found);
     }
   }

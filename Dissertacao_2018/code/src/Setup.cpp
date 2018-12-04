@@ -301,3 +301,18 @@ void SETUP::Setup::setFc(const string& fc) {
 	this->fc = fc;
 }
 
+int SETUP::Setup::getPrecisionCurrent() const {
+	return precision_current;
+}
+
+void SETUP::Setup::setPrecisionCurrent(int precisionCurrent) {
+	precision_current = precisionCurrent;
+}
+
+int SETUP::Setup::getPrecisionTest() const {
+	return precision_test;
+}
+
+void SETUP::Setup::setPrecisionTest(int precisionTest) {
+	precision_test = precisionTest;
+}

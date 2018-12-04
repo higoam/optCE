@@ -18,4 +18,96 @@ Generatefiles::~Generatefiles() {
 	// TODO Auto-generated destructor stub
 }
 
+
+void Generatefiles::create_f(Setup* setup_aux)
+{
+	string name;
+	name = setup_aux->getNameFunction() + ".c";
+	ofstream file;
+	file.open(name.c_str());
+
+	file << "\n";
+	file << "    #include <stdio.h> \n";
+	file << "    #include <stdlib.h> \n";
+	file << "    #include \"math2.h\" \n";
+  file << "\n";
+  file << "  int main(int argc, char *argv[ ]) {\n";
+  file << "\n";
+  file << "    "+ setup_aux->getTypeData() +" fobj,x1,x2;\n";
+  file << "    x1 = atof(argv[1]);\n";
+  file << "    x2 = atof(argv[2]);\n";
+  file << "\n\n";
+  file << "    " + setup_aux->getCodeFunction() + "\n";
+  file << "\n\n";
+  file << "    printf(\"%f\", fobj);\n";
+  file << "\n";
+  file << "    return 0;\n";
+  file << "  }\n";
+  file.close();
+}
+
+
+void Generatefiles::create_mi_ESBMC_G_Boolector(Setup* setup_aux)
+{
+	ostringstream convert;
+	string precS;
+	precS = convert.str();
+
+	string library_user="";
+
+  if(setup_aux->getLibrary() != "")
+  {
+    library_user = "\n#include \"" + setup_aux->getLibrary() + "\" \n";
+  }
+  else
+  {
+    library_user = "\n\n";
+  }
+
+  string name;
+  name = "min_" + setup_aux->getNameFunction() + ".c";
+  ofstream file_min;
+  file_min.open(name.c_str());
+
+  file_min << "#define p "+ precS +"\n";
+//  file_min << "#define nv "+ convertValue.convertIntString(ex.n) +"\n";
+//  file_min << "#define nr "+ convertValue.convertIntString(ex.nr) +"\n";
+
+  file_min << library_user;
+  file_min << "#include <math.h>\n";
+  file_min << "\n";
+  file_min << "    int nondet_int();\n";
+  file_min << "    " + setup_aux->getTypeData() + " nondet_" + setup_aux->getTypeData()  + "();\n";
+  file_min << "\n";
+  file_min << "    int main() {\n";
+
+  file_min << "    \n";
+  file_min << "    "+ setup_aux->getTypeData() +" f_i = "<< setup_aux->getFcCurrent() << ";\n\n";
+
+  file_min << "    int i,j;\n";
+//  file_min << "    int x[" + convertValue.convertIntString(ex.n+1) +  "];\n";
+//  file_min << "    "+ setup_aux->getTypeData() +" X[" + convertValue.convertIntString(ex.n) +  "];\n";
+  file_min << "    "+ setup_aux->getTypeData() +" fobj;\n\n";
+
+//  file_min << "    for (i = 0; i<" + convertValue.convertIntString(ex.n) +  "; i++){\n";
+  file_min << "      x[i] = nondet_int();\n";
+  file_min << "      X[i] = nondet_"+ setup_aux->getTypeData() +"();\n";
+  file_min << "    }\n";
+
+
+  file_min << setup_aux->getRestrictions();
+
+
+  file_min << "    " + setup_aux->getCodeFunctionModified() + "\n";
+
+  file_min << "    __ESBMC_assume(fobj < f_i );\n\n";
+
+  file_min << "    assert(fobj > f_i);\n";
+
+  file_min << "    return 0;\n";
+  file_min << "  }\n";
+  file_min.close();
+}
+
+
 } /* namespace GENERATEFILES */

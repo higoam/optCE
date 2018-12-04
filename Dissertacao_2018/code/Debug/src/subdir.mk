@@ -7,7 +7,6 @@ CPP_SRCS += \
 ../src/Adjust.cpp \
 ../src/Execution.cpp \
 ../src/Generatefiles.cpp \
-../src/Runalgorithm.cpp \
 ../src/Setup.cpp \
 ../src/Tcexamples.cpp \
 ../src/Tflags.cpp \
@@ -18,7 +17,6 @@ OBJS += \
 ./src/Adjust.o \
 ./src/Execution.o \
 ./src/Generatefiles.o \
-./src/Runalgorithm.o \
 ./src/Setup.o \
 ./src/Tcexamples.o \
 ./src/Tflags.o \
@@ -29,7 +27,6 @@ CPP_DEPS += \
 ./src/Adjust.d \
 ./src/Execution.d \
 ./src/Generatefiles.d \
-./src/Runalgorithm.d \
 ./src/Setup.d \
 ./src/Tcexamples.d \
 ./src/Tflags.d \
