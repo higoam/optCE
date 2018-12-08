@@ -17,7 +17,7 @@ Setup::Setup() {
 
 	this->failure = 0;
 	this->hv = false;
-	this->input_file = false;
+//	this->input_file = false;
 	this->library = "";
 }
 
@@ -28,7 +28,6 @@ void Setup::printSetupExperiment()
   cout << this->alg << endl;
   cout << "Name Function " + getNameFunction() << endl;
   cout << "Fc :" << endl;
-  cout << this->getFc() << endl;
   cout << "BMC " + this->getBmc() << endl;
 
 
@@ -74,13 +73,6 @@ void Setup::setFailure(int failure) {
 	this->failure = failure;
 }
 
-const string& Setup::getFcCurrent() const {
-	return fc_current;
-}
-
-void Setup::setFcCurrent(const string& fcCurrent) {
-	fc_current = fcCurrent;
-}
 
 const string& Setup::getFobjResult() const {
 	return fobj_result;
@@ -88,30 +80,6 @@ const string& Setup::getFobjResult() const {
 
 void Setup::setFobjResult(const string& fobjResult) {
 	fobj_result = fobjResult;
-}
-
-bool Setup::isInputFile() const {
-	return input_file;
-}
-
-void Setup::setInputFile(bool inputFile) {
-	input_file = inputFile;
-}
-
-int Setup::getInputFormat() const {
-	return input_format;
-}
-
-void Setup::setInputFormat(int inputFormat) {
-	input_format = inputFormat;
-}
-
-bool Setup::isInputSetup() const {
-	return input_setup;
-}
-
-void Setup::setInputSetup(bool inputSetup) {
-	input_setup = inputSetup;
 }
 
 float Setup::getInfX1() const {
@@ -153,7 +121,7 @@ const string& Setup::getLibrary() const {
 void Setup::setLibrary(const string& library) {
 	this->library = library;
 }
-
+/*
 int Setup::getN() const {
 	return n;
 }
@@ -161,7 +129,7 @@ int Setup::getN() const {
 void Setup::setN(int n) {
 	this->n = n;
 }
-
+*/
 const string& Setup::getNameFunction() const {
 	return name_function;
 }
@@ -169,7 +137,7 @@ const string& Setup::getNameFunction() const {
 void Setup::setNameFunction(string nameFunction) {
 	this->name_function = nameFunction;
 }
-
+/*
 int Setup::getNr() const {
 	return nr;
 }
@@ -185,6 +153,7 @@ int Setup::getPrecision() const {
 void Setup::setPrecision(int precision) {
 	this->precision = precision;
 }
+*/
 
 const string& Setup::getRestrictions() const {
 	return restrictions;
@@ -242,28 +211,12 @@ void Setup::setTypeData(const string& typeData) {
 	this->typeData = typeData;
 }
 
-const string& Setup::getX1Current() const {
-	return x1_current;
-}
-
-void Setup::setX1Current(const string& x1Current) {
-	x1_current = x1Current;
-}
-
 const string& Setup::getX1Result() const {
 	return x1_result;
 }
 
 void Setup::setX1Result(const string& x1Result) {
 	x1_result = x1Result;
-}
-
-const string& Setup::getX2Current() const {
-	return x2_current;
-}
-
-void Setup::setX2Current(const string& x2Current) {
-	x2_current = x2Current;
 }
 
 const string& Setup::getX2Result() const {
@@ -292,7 +245,7 @@ bool SETUP::Setup::isHv() const {
 void SETUP::Setup::setHv(bool hv) {
 	this->hv = hv;
 }
-
+/*
 const string& SETUP::Setup::getFc() const {
 	return fc;
 }
@@ -300,7 +253,7 @@ const string& SETUP::Setup::getFc() const {
 void SETUP::Setup::setFc(const string& fc) {
 	this->fc = fc;
 }
-
+*/
 int SETUP::Setup::getPrecisionCurrent() const {
 	return precision_current;
 }
@@ -315,4 +268,92 @@ int SETUP::Setup::getPrecisionTest() const {
 
 void SETUP::Setup::setPrecisionTest(int precisionTest) {
 	precision_test = precisionTest;
+}
+
+int SETUP::Setup::getColumnInput() const {
+	return N_column_input;
+}
+
+void SETUP::Setup::setColumnInput(int columnInput) {
+	N_column_input = columnInput;
+}
+
+int SETUP::Setup::getLineInput() const {
+	return N_line_input;
+}
+
+void SETUP::Setup::setLineInput(int lineInput) {
+	N_line_input = lineInput;
+}
+
+const string& SETUP::Setup::getInputFunction() const {
+	return input_function;
+}
+
+void SETUP::Setup::setInputFunction(const string& inputFunction) {
+	input_function = inputFunction;
+}
+
+const string& SETUP::Setup::getInputRestrictions() const {
+	return input_restrictions;
+}
+
+const string& SETUP::Setup::getFcStart() const {
+	return fc_start;
+}
+
+double SETUP::Setup::getFcCurrent() const {
+	return fc_current;
+}
+
+double SETUP::Setup::getX1Current() const {
+	return x1_current;
+}
+
+void SETUP::Setup::setX1Current(double x1Current) {
+	x1_current = x1Current;
+}
+
+double SETUP::Setup::getX2Current() const {
+	return x2_current;
+}
+
+void SETUP::Setup::setX2Current(double x2Current) {
+	x2_current = x2Current;
+}
+
+void SETUP::Setup::setFcCurrent(double fcCurrent) {
+	fc_current = fcCurrent;
+}
+
+void SETUP::Setup::setFcStart(const string& fcStart) {
+	fc_start = fcStart;
+}
+
+void SETUP::Setup::setInputRestrictions(const string& inputRestrictions) {
+	input_restrictions = inputRestrictions;
+}
+
+double SETUP::Setup::getFcFc() const {
+	return fc_fc;
+}
+
+void SETUP::Setup::setFcFc(double fcFc) {
+	fc_fc = fcFc;
+}
+
+const string& SETUP::Setup::getFi() const {
+	return fi;
+}
+
+void SETUP::Setup::setFi(const string& fi) {
+	this->fi = fi;
+}
+
+int SETUP::Setup::getStatusCe() const {
+	return status_CE;
+}
+
+void SETUP::Setup::setStatusCe(int statusCe) {
+	status_CE = statusCe;
 }

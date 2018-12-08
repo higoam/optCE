@@ -20,8 +20,6 @@ Execution::~Execution() {
 
 string Execution::run(Setup* experiment) {
 
-	cout << "Execucao" << endl;
-
 	if(experiment->bmc == 1)
 	{
 		if(experiment->alg == 1)
@@ -119,55 +117,31 @@ string Execution::run(Setup* experiment) {
 
 void Execution::run_ESBMC_G_BOOLECTOR(Setup* experiment)
 {
-	cout << "#############################################" << endl;
-	cout << "#     ESBMC - Boolector - Alg Generalized   #" << endl;
-	cout << "#############################################" << endl;
-
-	cout << endl << "### Parametros Refrente a Flags" << endl << endl;
-	cout << "   Nome Função: ";
-	cout << experiment->name_function << endl;
-	cout << "   Algoritmo: ";
-	cout << experiment->alg << endl;
-	cout << "   BMC: ";
-	cout << experiment->bmc << endl;
-	cout << "   Solver: ";
-	cout << experiment->solver << endl;
-	cout << "   Inicialização: ";
-	cout << experiment->fc << endl;
-	cout << "   Biblioteca: ";
-	cout << experiment->library << endl;
-	cout << "   Precisão: ";
-	cout << experiment->precision_test << endl;
-
-
-	cout << endl << "### Parametros Refrente Arquivo de antrada" << endl << endl;
-	cout << "   CODE: ";
-	cout << experiment->code_function << endl;
-	cout << "   CODE: ";
-	cout << experiment->code_function_modified << endl;
-
-
-
+	cout << endl;
+	cout << " Configuration Optimization" << endl;
+	cout << endl;
+	cout << "     Function: " + experiment->getNameFunction()<< endl;
+	cout << "    Algorithm: CEGIO-G" << endl;
+	cout << "          BMC: ESBMC" << endl;
+	cout << "       Solver: Boolector" << endl;
 
 	// Adjustment Variables
 	string command = "";
 	experiment->setPrecisionCurrent(1);
+    experiment->setFcCurrent( convertValue.convertStringDouble(experiment->getFcStart()) );
 
+	bool stay_precision = true;
 
-
-//  bool keep_precision = true;
-//  bool minimo_existente_maior = false;
+// bool minimo_existente_maior = false;
 	string new_fiS;
-	float compensar_fobj;
+	float compensar_fobj =  0.00001;
 	string compensar_fobjS;
-//  int v_log = 1;
-	string v_logS;
-  //int precisionLoop = pow(10, ex.precision);
+	int v_log = 1;
+	string v_log_CE;
 
 
-
-	// Gerar Restrições
-  	experiment->setRestrictions( generate_assumes(experiment,1) );
+	// Gerar Restrições ASSUMES
+  	experiment->setRestrictions( generate_assumes(experiment) );
 
   	// Gerar Arquivo C para calcular Mínimo
   	generatefilesAUX.create_f(experiment);
@@ -177,78 +151,62 @@ void Execution::run_ESBMC_G_BOOLECTOR(Setup* experiment)
   	// Gerar Especificação
   	generatefilesAUX.create_mi_ESBMC_G_Boolector(experiment);
 
-  	compensar_fobj =  0.00001;
+  	// Loop de Otimização
+  	while(experiment->getPrecisionCurrent() <= experiment->getPrecisionTest())
+  	{
+  		cout << endl << " ******************************** " << endl;
 
+  		while( stay_precision )
+		{
 
+  			v_log_CE = "log_" + convertValue.convertDoubleString(v_log); // Increase Log
+  			command = "./esbmc min_" +experiment->name_function + ".c --boolector > " +v_log_CE;
+  			system(command.c_str());
 
-/*
+  			tratar_contra_exemplo.take_CE_ESBMC_Boolector(v_log_CE, experiment);
 
-  while( p<=precisionLoop )
-  {
-    cout << endl << " ******************************** " << endl;
+  	        if(experiment->getStatusCe() == 1)		//  Verification Success
+  	        {
+  	        	v_log++;
+  	        	stay_precision = false;
+  	        	break;                              //  Stop While Internal
+  	        }
+  	        else
+  	        {
+  	        	if( experiment->getFcFc() < experiment->getFcCurrent() ){
+  	  	            experiment->setFcCurrent(experiment->getFcFc());		// Update last minimum value Valid
+  	  	            v_log++;                                        		// Incrmenta Log
+  	  	            cout << "  f(" + convertValue.convertDoubleString(experiment->getX1Current()) + "," + convertValue.convertDoubleString(experiment->getX2Current()) + ") = " + convertValue.convertDoubleString(experiment->getFcCurrent());
+  	  	            experiment->setFcCurrent( experiment->getFcCurrent() - compensar_fobj);
+  	  	            generatefilesAUX.create_mi_ESBMC_G_Boolector(experiment);
+  	        	}
+  	        	else
+  	        	{
+  	 	            compensar_fobj = compensar_fobj * 10;                   // Increase the Compensator
+  	  	            experiment->setFcCurrent( experiment->getFcCurrent() - compensar_fobj);
+  	  	            generatefilesAUX.create_mi_ESBMC_G_Boolector(experiment);
+  	        	}
+  	        }
+  		}
 
-    while( keep_precision )
-    {
-      v_logS = "log_" + convert.convertDoubleString(v_log); // Increase Log
+        experiment->setPrecisionCurrent(experiment->getPrecisionCurrent() + 1);
+		stay_precision = true;
+        compensar_fobj =  0.00001;
 
-      command = "./esbmc min_" +ex.name_function+ ".c --boolector > " +v_logS;
-      system(command.c_str());
+        experiment->setFcCurrent( experiment->getFcCurrent() - compensar_fobj);
+        generatefilesAUX.create_mi_ESBMC_G_Boolector(experiment);
 
-      tratar_contra_exemplo.take_CE_ESBMC_Boolector(v_logS, p);
+	}
 
-      if(tratar_contra_exemplo._verification == 1)
-      {
-        v_log++;
-        keep_precision = false;
-        break;
-      }
-      else
-      {
-        for(list<Tcexamples>::const_iterator it = set_fobj.begin(); it != set_fobj.end(); ++it)
-        {
-          if((  convert.convertStringDouble(tratar_contra_exemplo._fjob) >= convert.convertStringDouble((*it)._fjob)) )
-          {
-            minimo_existente_maior = true;
-          }
-        }
-
-        if(minimo_existente_maior)
-        {
-          compensar_fobj = compensar_fobj * 10;
-          minimo_existente_maior = false;
-          new_fiS = ex.fobj_current + " -" + convert.convertDoubleString(compensar_fobj);
-          ex.fobj_current = new_fiS;
-          gerar_arquivos.create_mi_ESBMC_G_Boolector(ex, p);
-        }
-        else
-        {
-          ex.fobj_current = tratar_contra_exemplo._fjob;
-          v_log++;
-          set_fobj.push_front(tratar_contra_exemplo);
-          cout << "  f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
-          new_fiS = ex.fobj_current + " -" + convert.convertDoubleString(compensar_fobj);
-          ex.fobj_current = new_fiS;
-          gerar_arquivos.create_mi_ESBMC_G_Boolector(ex, p);
-        }
-      }
-    }    //  Fim While Interno
-
-    p = p * 10;
-    keep_precision = true;
-    compensar_fobj =  0.00001;    // Reset compensator
-
-    new_fiS = ex.fobj_current + " -" + convert.convertDoubleString(compensar_fobj);
-    ex.fobj_current = new_fiS;
-    gerar_arquivos.create_mi_ESBMC_G_Boolector(ex, p);
-  }
-*/
-  cout << "####################################" << endl;
-//  cout << " Global Minimum f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
+    cout << "####################################" << endl ;
+    cout << " Global Minimum: " ;
+    cout << "f(" + convertValue.convertDoubleString(experiment->getX1Current()) + "," + convertValue.convertDoubleString(experiment->getX2Current()) + ") = " + convertValue.convertDoubleString(experiment->getFcCurrent()) << endl;
+    cout << "####################################" << endl ;
 }
 
 
 
-string Execution::generate_assumes(Setup* experiment,int p){
+string Execution::generate_assumes(Setup* experiment){
 
 	string string_assumes = "";
 	int i,j;
@@ -260,22 +218,16 @@ string Execution::generate_assumes(Setup* experiment,int p){
 
 		string_assumes = string_assumes + "     \n        int lim[4] = {";
 
-		for(i=0;i<l_A;i++){
-			for(j=0;j<c_A;j++){
-				string_assumes = string_assumes + convert.convertIntString(matrixA[i][j]);
-				string_assumes = string_assumes + "*p, ";
-			}
-		}
-
-		string_assumes = string_assumes.substr(0,string_assumes.size()-2);
-		string_assumes = string_assumes + "};";
+		string_assumes = string_assumes + convertValue.convertIntString(experiment->getInfX1()) + "*p, ";
+		string_assumes = string_assumes + convertValue.convertIntString(experiment->getSupX1()) + "*p, ";
+		string_assumes = string_assumes + convertValue.convertIntString(experiment->getInfX2()) + "*p, ";
+		string_assumes = string_assumes + convertValue.convertIntString(experiment->getSupX2()) + "*p}; ";
 
 		string_assumes = string_assumes + "\n";
 		string_assumes = string_assumes + "\n        for (i = 0; i < nv; i++) {";
 		string_assumes = string_assumes + "\n            __ESBMC_assume( (x[i]>=lim[2*i]) && (x[i]<=lim[2*i+1]) );";
 		string_assumes = string_assumes + "\n            __ESBMC_assume( X[i] == (float) x[i]/p  ); ";
 		string_assumes = string_assumes + "\n        }\n";
-
 
 		string_assumes = string_assumes + "     \n        //-----------------------------------------------------------  \n\n";
 
@@ -307,12 +259,12 @@ string Execution::generate_assumes(Setup* experiment,int p){
 
         string_assumes = string_assumes + "     \n        int lim[4] = {";
 
-        for(i=0;i<l_A;i++){
-          for(j=0;j<c_A;j++){
-            string_assumes = string_assumes + convert.convertIntString(matrixA[i][j]);
-            string_assumes = string_assumes + "*p, ";
-          }
-        }
+//        for(i=0;i<l_A;i++){
+//         for(j=0;j<c_A;j++){
+//            string_assumes = string_assumes + convert.convertIntString(matrixA[i][j]);
+//            string_assumes = string_assumes + "*p, ";
+//          }
+//        }
 
         string_assumes = string_assumes.substr(0,string_assumes.size()-2);
         string_assumes = string_assumes + "};";
@@ -354,7 +306,7 @@ string Execution::generate_assumes(Setup* experiment,int p){
 }
 
 
-
+/*
 bool Execution::segment_matrix_format_1(Setup ex, string Mat){
 
   size_t find;
@@ -412,7 +364,7 @@ bool Execution::segment_matrix_format_1(Setup ex, string Mat){
         value = value + m_a[i];
         i++;
       }
-      matrixA[j][k] = convert.convertStringInt(value);
+//      matrixA[j][k] = convert.convertStringInt(value);
       k++;
       value = "";
 
@@ -423,14 +375,14 @@ bool Execution::segment_matrix_format_1(Setup ex, string Mat){
     m_a = m_a.substr(1,m_a.size());
   }
 
-  l_A = cont_A + 1;
-  c_A = Qvariable;
+//  l_A = cont_A + 1;
+//  c_A = Qvariable;
 
   return true;
 }
+*/
 
-
-
+/*
 string Execution::remove_space(string str){
   int i=0;
   while(str[i] == ' '){
@@ -439,7 +391,7 @@ string Execution::remove_space(string str){
   str = str.substr(i,str.size());
   return str;
 }
-
+*/
 
 
 

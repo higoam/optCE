@@ -19,34 +19,40 @@ public:
 	Setup();
 
 	bool 	hv;
-	bool 	input_setup;
-	bool 	input_file;
 
 	int 	failure;
-	char 	*ch_name_function[64];
 	string  name_function;
     int 	bmc;
     int 	solver;
     int 	alg;
-
-    string fc;
 
     float l_sup_x1;
     float l_inf_x1;
     float l_sup_x2;
     float l_inf_x2;
 
+    int N_line_input;
+    int N_column_input;
 
-    string fc_current;
-    string x1_current;
-    string x2_current;
+    int status_CE;
+
+    string fc_start;
+    string fi;
+    double fc_current;
+    double fc_fc;
+    double x1_current;
+    double x2_current;
     string typeData;
 
     float timeout_global;
     float timeout_verification;
 
+    string input_function;
+    string input_restrictions;
+
     string code_function;
     string code_function_modified;
+
     string space_limit;
     string restrictions;
 
@@ -54,14 +60,8 @@ public:
 
     string library;
 
-    int input_format;
-
     int precision_test;
     int precision_current;
-    int precision;
-
-    int n;
-    int nr;
 
     string fobj_result;
     string x1_result;
@@ -84,8 +84,7 @@ public:
 	void setCodeFunctionModified(const string& codeFunctionModified);
 	int getFailure() const;
 	void setFailure(int failure);
-	const string& getFcCurrent() const;
-	void setFcCurrent(const string& fcCurrent);
+
 	const string& getFobjResult() const;
 	void setFobjResult(const string& fobjResult);
 	bool isInputFile() const;
@@ -127,12 +126,11 @@ public:
 	void setTypeRestrictions(int typeRestrictions);
 	const string& getTypeData() const;
 	void setTypeData(const string& typeData);
-	const string& getX1Current() const;
-	void setX1Current(const string& x1Current);
+
 	const string& getX1Result() const;
 	void setX1Result(const string& x1Result);
-	const string& getX2Current() const;
-	void setX2Current(const string& x2Current);
+
+
 	const string& getX2Result() const;
 	void setX2Result(const string& x2Result);
 	const string& getMsgError() const;
@@ -148,6 +146,29 @@ public:
 	void setPrecisionCurrent(int precisionCurrent);
 	int getPrecisionTest() const;
 	void setPrecisionTest(int precisionTest);
+	int getColumnInput() const;
+	void setColumnInput(int columnInput);
+	int getLineInput() const;
+	void setLineInput(int lineInput);
+	const string& getInputFunction() const;
+	void setInputFunction(const string& inputFunction);
+	const string& getInputRestrictions() const;
+	void setInputRestrictions(const string& inputRestrictions);
+
+	const string& getFcStart() const;
+	void setFcStart(const string& fcStart);
+	double getFcCurrent() const;
+	void setFcCurrent(double fcCurrent);
+	double getX1Current() const;
+	void setX1Current(double x1Current);
+	double getX2Current() const;
+	void setX2Current(double x2Current);
+	double getFcFc() const;
+	void setFcFc(double fcFc);
+	const string& getFi() const;
+	void setFi(const string& fi);
+	int getStatusCe() const;
+	void setStatusCe(int statusCe);
 };
 
 } /* namespace SETUP */

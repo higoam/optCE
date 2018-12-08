@@ -14,10 +14,12 @@
 #include <math.h>
 
 #include "Setup.h"
+#include "Adjust.h"
+
 
 using namespace SETUP;
+using namespace ADJUST;
 using namespace std;
-
 
 #ifndef TINPUT_H_
 #define TINPUT_H_
@@ -26,11 +28,18 @@ namespace TINPUT {
 
 class Tinput {
 public:
+
+    Adjust convertValue;
+
+    int matrixA[10][10];
+
+
 	Tinput();
 	virtual ~Tinput();
 
 	Setup* Checks(Setup* setup_aux);
-//	bool Tinput::segment_matrix_format(Setup ex, string Mat);
+	Setup* segment_matrix(Setup* setup_aux);
+	string remove_space(string str);
 
 };
 

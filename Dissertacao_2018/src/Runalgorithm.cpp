@@ -1677,13 +1677,13 @@ using namespace std;
     ifstream file_min;
     file_min.open(name_original.c_str());
 
-    // Opens the original function file
+    // Opens the original function files OK
     if(!file_min.is_open( )){
       cout<<"Could not open file with function!\n";
       file_min.clear( ); //reseta o objeto leitura, para limpar memória do sistema}
     }
 
-    // Loads the file into string
+    // Loads the file into string OK
     while (file_min.get(letter)) {
       file_original_aux = file_original_aux + letter;
     }

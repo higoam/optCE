@@ -27,10 +27,6 @@ int main(int argc, char *argv[ ]) {
 	Execution execution_optimization;
 	string result_optimization;
 
-	cout << "#########################" << endl;
-	cout << "####### Start ######" << endl;
-	cout << "#########################" << endl << endl;
-
 	// Organiza todas as flags definidas no terminal
 	setup_optimization_re = flags.Checks(argc, argv);
 

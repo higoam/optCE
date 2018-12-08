@@ -72,7 +72,7 @@ Setup* Tflags::Checks(int argc, char *argv[])
     			setup_experiment_flags.setSolver(3);
     			setup_experiment_flags.setAlg(1);
     			setup_experiment_flags.setTypeData("float");
-    			setup_experiment_flags.setFc(create_value());
+    			setup_experiment_flags.setFcStart(create_value());
     			setup_experiment_flags.setLibrary("");
     			setup_experiment_flags.setPrecisionTest(3);
     			setup_experiment_flags.setHv(false);
@@ -166,7 +166,7 @@ Setup* Tflags::Checks(int argc, char *argv[])
 						vet_flag[14]++;
 						if(check_if_number(flag_value))
 						{
-							setup_experiment_flags.setFc(flag_value);
+							setup_experiment_flags.setFcStart(flag_value);
 						}
 						else
 						{
@@ -403,11 +403,11 @@ Setup* Tflags::Checks(int argc, char *argv[])
       //***************************************************
       if(vet_flag[13] == 0)
       {
-    	  setup_experiment_flags.setInputFormat(0);
+//    	  setup_experiment_flags.setInputFormat(0);
       }
       else
       {
-    	  setup_experiment_flags.setInputFormat(0);
+//    	  setup_experiment_flags.setInputFormat(0);
       }
 
 
@@ -415,7 +415,7 @@ Setup* Tflags::Checks(int argc, char *argv[])
       //***************************************************
       if(vet_flag[14] == 0)
       {
-    	  setup_experiment_flags.setFc(create_value());
+    	  setup_experiment_flags.setFcStart(create_value());
       }
 
       // Verifica se a biblioteca inserida existe

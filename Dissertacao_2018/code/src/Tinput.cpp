@@ -18,51 +18,47 @@ Tinput::~Tinput() {
 	// TODO Auto-generated destructor stub
 }
 
-Setup setup_experiment_input;
+Setup setup_setup_aux_input;
+
 
 Setup* Tinput::Checks(Setup* setup_aux)
 {
+
+	// Variáveis Auxiliares
     int i=0;
     std::size_t marcador;
-
-    string input_original = setup_aux->getNameFunction() + ".func";
     string file_aux = "";
-
     string function_original = "";
     string function_tratada = "";
-    string restrictions = "";
- //   string assumes = "";
-
     string matrix_A = "";
     string matrix_B = "";
 
+    // Abrindo arquivo de entrada
+    string input_file = setup_aux->getNameFunction() + ".func";
     char letter;
     ifstream file_min;
-    file_min.open(input_original.c_str());
+    file_min.open(input_file.c_str());
 
-
-
-
-//    string vet_space[4];
-
-
-    // Opens the original function file
+    // Em caso de erro na leitura
     if(!file_min.is_open( )){
       cout<<"Could not open file with function!\n";
       file_min.clear( ); //reseta o objeto leitura, para limpar memória do sistema}
     }
 
-    // Loads the file into string
+    // Converte para string arquivo de entrada
     while (file_min.get(letter)) {
     	file_aux = file_aux + letter;
     }
 
-    // Divides the part of the function and the limits
+    // Divide as partes de função e Restrição
     marcador = file_aux.find("#");
-    function_original = file_aux.substr(0,marcador);
-    restrictions = file_aux.substr(marcador+2,file_aux.size());
+    setup_aux->setInputFunction( file_aux.substr(0,marcador) );
+    setup_aux->setInputRestrictions(file_aux.substr(marcador+2,file_aux.size()));
 
-    // Treats the function, x1 -> x [0], x2 -> x [1]
+    // Variável Auxiliar para rescrever a função com variáveis grandes
+    function_original = setup_aux->getInputFunction();
+
+    // Rescreve a função com variáveis grandes
     while( i <= (int)function_original.size() ){
 
       if(function_original[i] == 'x'){
@@ -88,148 +84,112 @@ Setup* Tinput::Checks(Setup* setup_aux)
       i++;
     }
 
+    //     Armazena
     setup_aux->setCodeFunction( function_original.substr(0,function_original.size()-1) );
     setup_aux->setCodeFunctionModified( function_tratada.substr(0,function_tratada.size()-1) );
 
+    segment_matrix(setup_aux);
 
-/*
-    if(ex.input_format == 0){
-      if( ! segment_matrix_format_1(ex, restrictions_aux)){
-        return false;
-      }
-    }else{
-      if( ! segment_matrix_format_2(ex, restrictions_aux)){
-        return false;
-      }
-    }
+    return setup_aux;
+}
 
-    return true;
-*/
+
+Setup*  Tinput::segment_matrix(Setup* setup_aux){
+
+	size_t find;
+	string m_a;
+	int i,j,k;
+	string value;
+
+	//  Segmenta Linha da Matriz A
+	find =setup_aux->getInputRestrictions().find("\n");
+	m_a = setup_aux->getInputRestrictions().substr(0,find);
+
+	//  Segmenta Valores da Matriz A
+	int cont_A=0;
+	find = m_a.find("[");
+	m_a = m_a.substr(find+1);
+	find = m_a.find("]");
+	m_a = m_a.substr(0,find+1);
+
+	//  Conta a quantidade de Variáveis do Problema
+	i=0;
+	while(i <= m_a.size()){
+		if(m_a[i] == ';'){
+			cont_A++;
+		}
+		i++;
+	}
+
+	//  Descobre se os limites inferiores e superiores estão corretos
+	i=0;
+	int variable = 0;
+	int Qvariable = 0;
+
+	while( (m_a[i] != ';') && (m_a[i] != ']') ){
+                                    //
+		if( (m_a[i]!=' ') && (variable==0)){
+			Qvariable++;
+			variable = 1;
+		}else if(m_a[i]==' '){
+			variable = 0;
+		}
+		i++;
+	}
+
+	if(Qvariable != 2){
+		cout << "Error in Matrix2" << endl;
+		return false;
+	}
+
+	// Monta Matrix de A
+	value = "";
+	for(j=0;j<=cont_A;j++){
+
+		m_a = remove_space(m_a);
+		k=0;
+		while (m_a[0] != ';' && m_a[0] != ']'){
+
+			i=0;
+			while(  (m_a[i] != ' ') && (m_a[i] != ';') && (m_a[i] != ']')  ){
+				value = value + m_a[i];
+				i++;
+			}
+			matrixA[j][k] = convertValue.convertStringInt(value);
+
+			k++;
+			value = "";
+
+			m_a = m_a.substr(i,m_a.size());
+			m_a = remove_space(m_a);
+
+		}
+		m_a = m_a.substr(1,m_a.size());
+	}
+
+	setup_aux->setInfX1(matrixA[0][0]);
+	setup_aux->setSupX1(matrixA[0][1]);
+	setup_aux->setInfX2(matrixA[1][0]);
+	setup_aux->setSupX2(matrixA[1][1]);
+
+	setup_aux->setLineInput(cont_A + 1);
+	setup_aux->setColumnInput(Qvariable);
 
   return setup_aux;
 }
 
 
 
-//****************************************************************************************************************************
-// Organize Matrices format 2
-/*
-bool Tinput::segment_matrix_format(Setup ex, string Mat){
 
-  size_t find;
-  string m_a, m_b;
-  int i,j,k;
-  string value;
-
-  // Treats the restrictions
-  find = Mat.find("\n");                        //  Segmenta Linha da Matriz A
-  m_a = Mat.substr(0,find);                      //
-  find = Mat.find("B");                        //  Segmenta Linha da Matriz B
-  m_b = Mat.substr(find,Mat.size());                  //
-
-  int cont_A=0;                            //
-  find = m_a.find("[");                        //
-  m_a = m_a.substr(find+1);                      //  Segmenta Valores da Matriz A
-  find = m_a.find("]");                        //
-  m_a = m_a.substr(0,find+1);                      //
-
-  i=0;                                //
-  while(i <= m_a.size()){                        //
-    if(m_a[i] == ';'){                        //
-      cont_A++;                          //  Conta a quantidade de Restrições de A (Equações)
-    }                                //
-    i++;                              //
-  }                                  //
-
-  int cont_B=0;                            //
-  find = m_b.find("[");                        //
-  m_b = m_b.substr(find+1);                      //  Segmenta Valores da Matriz B
-  find = m_b.find("]");                        //
-  m_b = m_b.substr(0,find+1);                      //
-
-  i=0;                                //
-  while(i <= m_b.size()){                        //
-    if(m_b[i] == ';'){                        //
-      cont_B++;                          //  Conta a quantidade de Restrições de B (Equações)
-    }                                //
-    i++;                              //
-  }                                  //
-
-  if(cont_A != cont_B){
-    cout << "Error in Matrices!" << endl;
-    return false;
-  }
-
-  i=0;                                //
-  int variable = 0;                          //
-  int Qvariable = 0;                          //
-  while( (m_a[i] != ';') && (m_a[i] != ']') ){            //
-                                    //
-    if( (m_a[i]!=' ') && (variable==0)){              //  Descobre quantidade de váriáveis <Qvariable>
-      Qvariable++;                        //
-      variable = 1;                        //
-    }else if(m_a[i]==' '){                      //
-      variable = 0;                        //
-    }                                //
-                                    //
-    i++;                              //
-  }                                  //
-
-  value = "";                                    //
-  for(j=0;j<=cont_A;j++){                              // Monta Matrix de A
-                                          //
-    m_a = remove_space(m_a);
-    k=0;
-    while (m_a[0] != ';' && m_a[0] != ']'){
-
-      i=0;
-      while(  (m_a[i] != ' ') && (m_a[i] != ';') && (m_a[i] != ']')  ){
-        value = value + m_a[i];
-        i++;
-      }
-      matrixA[j][k] = convert.convertStringInt(value);
-      k++;
-      value = "";
-
-      m_a = m_a.substr(i,m_a.size());
-      m_a = remove_space(m_a);
-
-    }
-    m_a = m_a.substr(1,m_a.size());
-  }
-
-  value = "";                                    //
-  for(j=0;j<=cont_B;j++){                              // Monta Matrix de B
-                                          //
-    m_b = remove_space(m_b);
-    k=0;
-    while (m_b[0] != ';' && m_b[0] != ']'){
-
-      i=0;
-      while(  (m_b[i] != ' ') && (m_b[i] != ';') && (m_b[i] != ']')  ){
-        value = value + m_b[i];
-        i++;
-      }
-      matrixB[j] = convert.convertStringInt(value);
-      k++;
-      value = "";
-
-      m_b = m_b.substr(i,m_b.size());
-      m_b = remove_space(m_b);
-
-    }
-    m_b = m_b.substr(1,m_b.size());
-  }
-
-  l_A = cont_A + 1;
-  c_A = Qvariable;
-  l_B = cont_B + 1;
-  c_B = 1;
-
-  return true;
-}
-*/
-
+// OK
+	  string Tinput::remove_space(string str){
+	    int i=0;
+	    while(str[i] == ' '){
+	      i++;
+	    }
+	    str = str.substr(i,str.size());
+	    return str;
+	  }
 
 
 } /* namespace TINPUT */

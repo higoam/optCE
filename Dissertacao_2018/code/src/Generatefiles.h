@@ -30,7 +30,7 @@ namespace GENERATEFILES {
 class Generatefiles {
 public:
 
-    //ADJUST convertValue;
+    Adjust convertValue;
 
 	Generatefiles();
 	virtual ~Generatefiles();

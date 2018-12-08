@@ -5,14 +5,17 @@
  *      Author: higo
  */
 
+#include <math.h>
 #include <iostream>
 #include "Setup.h"
 #include "Adjust.h"
 #include "Generatefiles.h"
+#include "Tcexamples.h"
 
 using namespace SETUP;
 using namespace ADJUST;
 using namespace GENERATEFILES;
+using namespace TCEXAMPLES;
 
 using namespace std;
 
@@ -25,15 +28,9 @@ class Execution {
 public:
 
 	Generatefiles generatefilesAUX;
+	Tcexamples tratar_contra_exemplo;
 
-    int matrixA[10][10];
-    int matrixB[10];
-    int l_A;
-    int c_A;
-    int l_B;
-    int c_B;
-
-    Adjust convert;
+    Adjust convertValue;
 
 	Execution();
 	virtual ~Execution();
@@ -58,7 +55,7 @@ public:
 
     bool segment_matrix_format_1(Setup ex, string Mat);
     string remove_space(string str);
-    string generate_assumes(Setup* experiment, int p);
+    string generate_assumes(Setup* experiment);
 
 
 };
