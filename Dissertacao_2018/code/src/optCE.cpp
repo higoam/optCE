@@ -6,6 +6,7 @@
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
+#include <pthread.h>
 #include <iostream>
 #include "Tflags.h"
 #include "Tinput.h"
@@ -21,9 +22,19 @@ using namespace EXCUTION;
 
 int main(int argc, char *argv[ ]) {
 
+	pthread_t thread1;
+	int  iret1, iret2;
+
 	Tflags flags;
 	Tinput input_file;
 	Setup  *setup_optimization_re;
+	Setup  optimization_Part_1;
+	Setup  optimization_Part_2;
+	Setup  optimization_Part_3;
+	Setup  optimization_Part_4;
+
+    Adjust convertValue;
+
 	Execution execution_optimization;
 	string result_optimization;
 
@@ -48,29 +59,75 @@ int main(int argc, char *argv[ ]) {
 	}
 
 
+	if(setup_optimization_re->getCore() != 0){
 
-	// Executa Otimização
+		cout << endl;
+		cout << "PARALELO" << endl;
+		optimization_Part_1 = *setup_optimization_re;
+		optimization_Part_2 = *setup_optimization_re;
+		optimization_Part_3 = *setup_optimization_re;
+		optimization_Part_4 = *setup_optimization_re;
+		cout << endl;
+
+		optimization_Part_1.setSupX1( setup_optimization_re->getSupX1() );
+		optimization_Part_1.setInfX1( 0 );
+		optimization_Part_1.setSupX2( setup_optimization_re->getSupX2() );
+		optimization_Part_1.setInfX2( 0 );
+
+		optimization_Part_2.setSupX1( 0 );
+		optimization_Part_2.setInfX1( setup_optimization_re->getInfX1() );
+		optimization_Part_2.setSupX2( setup_optimization_re->getSupX2() );
+		optimization_Part_2.setInfX2( 0 );
+
+		optimization_Part_3.setSupX1( 0 );
+		optimization_Part_3.setInfX1( setup_optimization_re->getInfX1() );
+		optimization_Part_3.setSupX2( 0 );
+		optimization_Part_3.setInfX2( setup_optimization_re->getInfX2() );
+
+		optimization_Part_4.setSupX1( setup_optimization_re->getSupX1() );
+		optimization_Part_4.setInfX1( 0 );
+		optimization_Part_4.setSupX2( 0 );
+		optimization_Part_4.setInfX2( setup_optimization_re->getInfX2() );
+
+
+
+		cout << "PARTE 1" << endl;
+		cout <<  convertValue.convertDoubleString(optimization_Part_1.l_inf_x1) + " < X1 < " + convertValue.convertDoubleString(optimization_Part_1.l_sup_x1) << endl;
+		cout <<  convertValue.convertDoubleString(optimization_Part_1.l_inf_x2) + " < X2 < " + convertValue.convertDoubleString(optimization_Part_1.l_sup_x2) << endl;
+		result_optimization = execution_optimization.run(&optimization_Part_1);
+		cout << endl;
+
+		cout << "PARTE 2" << endl;
+		cout <<  convertValue.convertDoubleString(optimization_Part_2.l_inf_x1) + " < X1 < " + convertValue.convertDoubleString(optimization_Part_2.l_sup_x1) << endl;
+		cout <<  convertValue.convertDoubleString(optimization_Part_2.l_inf_x2) + " < X2 < " + convertValue.convertDoubleString(optimization_Part_2.l_sup_x2) << endl;
+		result_optimization = execution_optimization.run(&optimization_Part_2);
+		cout << endl;
+
+		cout << "PARTE 3" << endl;
+		cout <<  convertValue.convertDoubleString(optimization_Part_3.l_inf_x1) + " < X1 < " + convertValue.convertDoubleString(optimization_Part_3.l_sup_x1) << endl;
+		cout <<  convertValue.convertDoubleString(optimization_Part_3.l_inf_x2) + " < X2 < " + convertValue.convertDoubleString(optimization_Part_3.l_sup_x2) << endl;
+		result_optimization = execution_optimization.run(&optimization_Part_3);
+		cout << endl;
+
+
+		cout << "PARTE 4" << endl;
+		cout <<  convertValue.convertDoubleString(optimization_Part_4.l_inf_x1) + " < X1 < " + convertValue.convertDoubleString(optimization_Part_4.l_sup_x1) << endl;
+		cout <<  convertValue.convertDoubleString(optimization_Part_4.l_inf_x2) + " < X2 < " + convertValue.convertDoubleString(optimization_Part_4.l_sup_x2) << endl;
+		result_optimization = execution_optimization.run(&optimization_Part_4);
+		cout << endl;
 
 
 
 
+		cout << "GERAL" << endl;
+//		result_optimization = execution_optimization.run(setup_optimization_re);
 
+	}else{
 
-	    result_optimization = execution_optimization.run(setup_optimization_re);
+		result_optimization = execution_optimization.run(setup_optimization_re);
 
-
-
-
-	// Apresenta resultados
+	}
 
 
 	return 0;
 }
-
-
-//	Error
-//
-//	1 - "Incorect extesion";
-//
-//
-//

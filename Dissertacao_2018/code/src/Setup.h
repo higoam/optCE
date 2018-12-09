@@ -39,10 +39,13 @@ public:
     string fc_start;
     string fi;
     double fc_current;
+    string fc_current_string;
     double fc_fc;
     double x1_current;
     double x2_current;
     string typeData;
+
+    int core;
 
     float timeout_global;
     float timeout_verification;
@@ -169,6 +172,10 @@ public:
 	void setFi(const string& fi);
 	int getStatusCe() const;
 	void setStatusCe(int statusCe);
+	const string& getFcCurrentString() const;
+	void setFcCurrentString(const string& fcCurrentString);
+	int getCore() const;
+	void setCore(int core);
 };
 
 } /* namespace SETUP */

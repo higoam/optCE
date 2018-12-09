@@ -17,7 +17,7 @@ Setup::Setup() {
 
 	this->failure = 0;
 	this->hv = false;
-//	this->input_file = false;
+	this->core = 0;
 	this->library = "";
 }
 
@@ -352,6 +352,22 @@ void SETUP::Setup::setFi(const string& fi) {
 
 int SETUP::Setup::getStatusCe() const {
 	return status_CE;
+}
+
+const string& SETUP::Setup::getFcCurrentString() const {
+	return fc_current_string;
+}
+
+int SETUP::Setup::getCore() const {
+	return core;
+}
+
+void SETUP::Setup::setCore(int core) {
+	this->core = core;
+}
+
+void SETUP::Setup::setFcCurrentString(const string& fcCurrentString) {
+	fc_current_string = fcCurrentString;
 }
 
 void SETUP::Setup::setStatusCe(int statusCe) {

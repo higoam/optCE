@@ -20,6 +20,9 @@ Execution::~Execution() {
 
 string Execution::run(Setup* experiment) {
 
+
+
+
 	if(experiment->bmc == 1)
 	{
 		if(experiment->alg == 1)
@@ -118,27 +121,27 @@ string Execution::run(Setup* experiment) {
 void Execution::run_ESBMC_G_BOOLECTOR(Setup* experiment)
 {
 	cout << endl;
-	cout << " Configuration Optimization" << endl;
-	cout << endl;
-	cout << "     Function: " + experiment->getNameFunction()<< endl;
-	cout << "    Algorithm: CEGIO-G" << endl;
-	cout << "          BMC: ESBMC" << endl;
-	cout << "       Solver: Boolector" << endl;
+//	cout << " Configuration Optimization" << endl;
+//	cout << endl;
+//	cout << "     Function: " + experiment->getNameFunction()<< endl;
+//	cout << "    Algorithm: CEGIO-G" << endl;
+//	cout << "          BMC: ESBMC" << endl;
+//	cout << "       Solver: Boolector" << endl;
+//	cout << endl;
 
 	// Adjustment Variables
-	string command = "";
 	experiment->setPrecisionCurrent(1);
-    experiment->setFcCurrent( convertValue.convertStringDouble(experiment->getFcStart()) );
-
+	int precisionLoop = pow(10, experiment->getPrecisionTest());
+	string command = "";
 	bool stay_precision = true;
-
-// bool minimo_existente_maior = false;
 	string new_fiS;
 	float compensar_fobj =  0.00001;
 	string compensar_fobjS;
 	int v_log = 1;
 	string v_log_CE;
 
+    experiment->setFcCurrent( convertValue.convertStringDouble(experiment->getFcStart()) );
+    experiment->setFcCurrentString( experiment->getFcStart() );
 
 	// Gerar Restrições ASSUMES
   	experiment->setRestrictions( generate_assumes(experiment) );
@@ -152,20 +155,24 @@ void Execution::run_ESBMC_G_BOOLECTOR(Setup* experiment)
   	generatefilesAUX.create_mi_ESBMC_G_Boolector(experiment);
 
   	// Loop de Otimização
-  	while(experiment->getPrecisionCurrent() <= experiment->getPrecisionTest())
+  	while(experiment->getPrecisionCurrent() <= precisionLoop)
   	{
-  		cout << endl << " ******************************** " << endl;
 
   		while( stay_precision )
 		{
 
+  		  	cout << " ### Verificação " + convertValue.convertDoubleString(v_log)<< endl;
   			v_log_CE = "log_" + convertValue.convertDoubleString(v_log); // Increase Log
   			command = "./esbmc min_" +experiment->name_function + ".c --boolector > " +v_log_CE;
   			system(command.c_str());
 
   			tratar_contra_exemplo.take_CE_ESBMC_Boolector(v_log_CE, experiment);
 
-  	        if(experiment->getStatusCe() == 1)		//  Verification Success
+  			if(experiment->getStatusCe() == 2){
+
+  				break;                              //  Stop While Internal
+
+  			}else if(experiment->getStatusCe() == 1)		//  Verification Success
   	        {
   	        	v_log++;
   	        	stay_precision = false;
@@ -173,25 +180,36 @@ void Execution::run_ESBMC_G_BOOLECTOR(Setup* experiment)
   	        }
   	        else
   	        {
+
   	        	if( experiment->getFcFc() < experiment->getFcCurrent() ){
   	  	            experiment->setFcCurrent(experiment->getFcFc());		// Update last minimum value Valid
   	  	            v_log++;                                        		// Incrmenta Log
-  	  	            cout << "  f(" + convertValue.convertDoubleString(experiment->getX1Current()) + "," + convertValue.convertDoubleString(experiment->getX2Current()) + ") = " + convertValue.convertDoubleString(experiment->getFcCurrent());
-  	  	            experiment->setFcCurrent( experiment->getFcCurrent() - compensar_fobj);
+
+  	  	            new_fiS =  new_fiS + convertValue.convertDoubleString(experiment->getFcCurrent())  + " -" + convertValue.convertDoubleString(compensar_fobj);
+  	  	            experiment->setFcCurrentString(new_fiS);
+
   	  	            generatefilesAUX.create_mi_ESBMC_G_Boolector(experiment);
   	        	}
   	        	else
   	        	{
   	 	            compensar_fobj = compensar_fobj * 10;                   // Increase the Compensator
-  	  	            experiment->setFcCurrent( experiment->getFcCurrent() - compensar_fobj);
+
+  	 	            new_fiS = new_fiS + convertValue.convertDoubleString(experiment->getFcCurrent())  + " -" + convertValue.convertDoubleString(compensar_fobj);
+  	  	            experiment->setFcCurrentString(new_fiS);
+  	  	            v_log++;                                        		// Incrmenta Log
   	  	            generatefilesAUX.create_mi_ESBMC_G_Boolector(experiment);
   	        	}
   	        }
-  		}
+  		} // Fim While Interno
 
-        experiment->setPrecisionCurrent(experiment->getPrecisionCurrent() + 1);
+	  	cout << " ### Saiu do Loop Interno " << endl;
+
+        experiment->setPrecisionCurrent(experiment->getPrecisionCurrent() * 10);
 		stay_precision = true;
         compensar_fobj =  0.00001;
+
+        new_fiS = new_fiS + convertValue.convertDoubleString(experiment->getFcCurrent())  + " -" + convertValue.convertDoubleString(compensar_fobj);
+        experiment->setFcCurrentString(new_fiS);
 
         experiment->setFcCurrent( experiment->getFcCurrent() - compensar_fobj);
         generatefilesAUX.create_mi_ESBMC_G_Boolector(experiment);

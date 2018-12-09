@@ -49,9 +49,9 @@ void Generatefiles::create_f(Setup* setup_aux)
 
 void Generatefiles::create_mi_ESBMC_G_Boolector(Setup* setup_aux)
 {
-	ostringstream convert;
-	string precS;
-	precS = convert.str();
+//	ostringstream convert;
+//	string precS;
+//	precS = convert.str();
 
 	string library_user="";
 
@@ -69,7 +69,7 @@ void Generatefiles::create_mi_ESBMC_G_Boolector(Setup* setup_aux)
 	ofstream file_min;
 	file_min.open(name.c_str());
 
-	file_min << "#define p 1  \n";//+ convertValue.convertIntString( setup_aux->getPrecisionCurrent() ) +"\n";
+    file_min << "#define p "+ convertValue.convertDoubleString(setup_aux->getPrecisionCurrent()) +"\n";
 	file_min << "#define nv 2 \n";//+ convertValue.convertIntString(2) +"\n";
   	file_min << "#define nr 2 \n";//+ convertValue.convertIntString(2) +"\n";
 
@@ -82,7 +82,7 @@ void Generatefiles::create_mi_ESBMC_G_Boolector(Setup* setup_aux)
   	file_min << "    int main() {\n";
 
   	file_min << "    \n";
-  	file_min << "    "+ setup_aux->getTypeData() +" f_i = "<< setup_aux->getFcCurrent() << ";\n\n";
+  	file_min << "    "+ setup_aux->getTypeData() +" f_i = " + setup_aux->fc_current_string + ";\n\n";
 
   	file_min << "    int i,j;\n";
   	file_min << "    int x[3];\n";

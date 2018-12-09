@@ -1,0 +1,58 @@
+ESBMC version 3.1 64-bit x86_64 linux
+file min_zirilli.c: Parsing
+Converting
+Type-checking min_zirilli
+Generating GOTO Program
+GOTO program creation time: 0.096s
+GOTO program processing time: 0.013s
+Starting Bounded Model Checking
+Unwinding loop 4 iteration 1 file min_zirilli.c line 20 function main
+Unwinding loop 4 iteration 2 file min_zirilli.c line 20 function main
+Unwinding loop 5 iteration 1 file min_zirilli.c line 30 function main
+Unwinding loop 5 iteration 2 file min_zirilli.c line 30 function main
+Symex completed in: 0.001s
+size of program expression: 32 assignments
+Slicing time: 0.000s
+Generated 31 VCC(s), 1 remaining after simplification
+Encoding remaining VCC(s) using bit-vector arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Boolector 2.2.0
+Runtime decision procedure: 0.808s
+Building error trace
+
+Counterexample:
+
+State 1 file min_zirilli.c line 21 function main thread 0
+<main invocation>
+----------------------------------------------------
+  min_zirilli::main::1::x={ 1, nil, nil, nil }
+
+State 2 file min_zirilli.c line 22 function main thread 0
+<main invocation>
+----------------------------------------------------
+  min_zirilli::main::1::X={ 65536, nil }
+
+State 3 file min_zirilli.c line 21 function main thread 0
+<main invocation>
+----------------------------------------------------
+  min_zirilli::main::1::x={ 1, 0, nil, nil }
+
+State 4 file min_zirilli.c line 22 function main thread 0
+<main invocation>
+----------------------------------------------------
+  min_zirilli::main::1::X={ 65536, nil }
+
+State 9 file min_zirilli.c line 37 function main thread 0
+<main invocation>
+----------------------------------------------------
+  min_zirilli::main::1::fobj=9831f (00100110011001110000000000000000)
+
+State 11 file min_zirilli.c line 41 function main thread 0
+<main invocation>
+----------------------------------------------------
+Violated property:
+  file min_zirilli.c line 41 function main
+  assertion
+  fobj > f_i
+
+VERIFICATION FAILED

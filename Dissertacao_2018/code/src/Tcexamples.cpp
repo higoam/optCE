@@ -47,6 +47,8 @@ string Tcexamples::take_file(string fileS)
 
 void Tcexamples::take_CE_ESBMC_Boolector(string name_file_log, Setup* setup_aux)
 {
+//  	cout << " ### Tratou CE " << endl;
+
 	// Adjustment Variables
 	string command = "";
 	string file_log;
@@ -55,7 +57,7 @@ void Tcexamples::take_CE_ESBMC_Boolector(string name_file_log, Setup* setup_aux)
 	ostringstream convert;
 	string aux_string = "";
 	size_t position;
-	int prec = pow(10, setup_aux->getPrecisionCurrent());
+	int prec = setup_aux->getPrecisionCurrent();
 
 	file_log = take_file(name_file_log);
 	std::size_t found_F = file_log.find("FAILED");
@@ -82,7 +84,8 @@ void Tcexamples::take_CE_ESBMC_Boolector(string name_file_log, Setup* setup_aux)
 
 		if(_x1D > 1000)
 		{
-			setup_aux->setX1Current( (_x1D -4294967296)/prec );
+	        _x1D = ((_x1D -4294967296)/prec);
+			setup_aux->setX1Current( _x1D );
 		}
 		else
 		{
@@ -91,14 +94,15 @@ void Tcexamples::take_CE_ESBMC_Boolector(string name_file_log, Setup* setup_aux)
 
 		if(_x2D > 1000)
 		{
-			setup_aux->setX2Current((_x2D -4294967296)/prec);
+	        _x2D = ((_x2D -4294967296)/prec);
+			setup_aux->setX2Current( _x2D );
 		}
 		else
 		{
 			setup_aux->setX2Current(_x2D/prec);
 		}
 
-		command  = "./value_min " + convertValue.convertDoubleString(setup_aux->getX1Current()) + " " + convertValue.convertDoubleString(setup_aux->getX2Current()) + " > min_temporary.txt";
+		command  = "./value_min " + convertValue.convertDoubleString( _x1D ) + " " + convertValue.convertDoubleString( _x2D ) + " > min_temporary.txt";
 		system(command.c_str());
 
 		string minimumS = take_file("min_temporary.txt");
@@ -111,6 +115,7 @@ void Tcexamples::take_CE_ESBMC_Boolector(string name_file_log, Setup* setup_aux)
 	}
 	else
 	{
+		setup_aux->setStatusCe(2);
 		cout << "COUNTEREXAMPLE UNKNOWN" << endl;
 	}
 }

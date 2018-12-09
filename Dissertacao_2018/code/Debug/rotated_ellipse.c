@@ -10,7 +10,7 @@
     x2 = atof(argv[2]);
 
 
-    fobj = 0.25*x1*x1*x1*x1 -0.5*x1*x1 + 0.1*x1 + 0.5*x2*x2;
+    fobj = 7*x1*x1 -6*sqrt2(3)*x1*x2 + 13*x2*x2;
 
 
     printf("%f", fobj);

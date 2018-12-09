@@ -3,21 +3,21 @@ file min_cosine.c: Parsing
 Converting
 Type-checking min_cosine
 Generating GOTO Program
-GOTO program creation time: 0.119s
-GOTO program processing time: 0.016s
+GOTO program creation time: 0.116s
+GOTO program processing time: 0.015s
 Starting Bounded Model Checking
 Unwinding loop 4 iteration 1 file min_cosine.c line 20 function main
 Unwinding loop 4 iteration 2 file min_cosine.c line 20 function main
 Unwinding loop 5 iteration 1 file min_cosine.c line 30 function main
 Unwinding loop 5 iteration 2 file min_cosine.c line 30 function main
-Symex completed in: 0.006s
+Symex completed in: 0.005s
 size of program expression: 84 assignments
 Slicing time: 0.001s
 Generated 31 VCC(s), 1 remaining after simplification
 Encoding remaining VCC(s) using bit-vector arithmetic
-Encoding to solver time: 0.003s
+Encoding to solver time: 0.002s
 Solving with solver Boolector 2.2.0
-Runtime decision procedure: 8.793s
+Runtime decision procedure: 9.108s
 Building error trace
 
 Counterexample:

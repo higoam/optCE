@@ -177,6 +177,11 @@ Setup* Tflags::Checks(int argc, char *argv[])
 				//	      	  return setup_experiment_flags_r;
 						}
 					}
+					else if(flag_command == "--parallelize" )
+					{
+						vet_flag[13]++;
+						setup_experiment_flags.setCore(4); // No momento, sempre paraleliza com 4
+					}
 					else if(flag_command == "--library" )
 					{
 						vet_flag[15]++;

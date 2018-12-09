@@ -1,4 +1,4 @@
-#define p 1  
+#define p 10
 #define nv 2 
 #define nr 2 
 
@@ -10,7 +10,7 @@
 
     int main() {
     
-    float f_i = -0.20004;
+    float f_i = 1 -1e-05-0.2 -1e-05-0.2 -0.0001-0.2 -0.001-0.2 -0.01-0.2 -0.1-0.2 -1-0.2 -1e-05;
 
     int i,j;
     int x[3];
@@ -25,7 +25,7 @@
         //-----------------------------------------------------------       
         // Restrictions
      
-        int lim[4] = {-1*p, 1*p, -1*p, 1*p}; 
+        int lim[4] = {0*p, 1*p, 0*p, 1*p}; 
 
         for (i = 0; i < nv; i++) {
             __ESBMC_assume( (x[i]>=lim[2*i]) && (x[i]<=lim[2*i+1]) );

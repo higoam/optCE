@@ -327,6 +327,7 @@ using namespace std;
             cout << "  f(" + tratar_contra_exemplo._x1 + "," + tratar_contra_exemplo._x2 + ") = " + tratar_contra_exemplo._fjob<< endl;
 
             new_fiS = ex.fobj_current  + " -" + convert.convertDoubleString(compensar_fobj);            // Generates the new F_I Compensated
+            ex.fobj_current
             ex.fobj_current = new_fiS;
 
             gerar_arquivos.create_mi_ESBMC_G_Z3(ex, p);   // Create the other files min
