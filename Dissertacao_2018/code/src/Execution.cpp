@@ -18,10 +18,7 @@ Execution::~Execution() {
 	// TODO Auto-generated destructor stub
 }
 
-string Execution::run(Setup* experiment) {
-
-
-
+void *Execution::run(Setup* experiment) {
 
 	if(experiment->bmc == 1)
 	{
@@ -110,9 +107,9 @@ string Execution::run(Setup* experiment) {
 	}
 
 
-	string result_experiment;
+//	string result_experiment;
 
-	return result_experiment;
+//	return result_experiment;
 }
 
 
@@ -163,7 +160,12 @@ void Execution::run_ESBMC_G_BOOLECTOR(Setup* experiment)
 
   		  	cout << " ### Verificação " + convertValue.convertDoubleString(v_log)<< endl;
   			v_log_CE = "log_" + convertValue.convertDoubleString(v_log); // Increase Log
-  			command = "./esbmc min_" +experiment->name_function + ".c --boolector > " +v_log_CE;
+
+  			if(experiment->core!=0)
+  				command = "./esbmc min_" +experiment->name_function + ".c --boolector > " +v_log_CE;
+  			else
+  				command = "taskset -c" + convertValue.convertIntString(experiment->getCore()) + "./esbmc min_" +experiment->name_function + ".c --boolector > " +v_log_CE;
+
   			system(command.c_str());
 
   			tratar_contra_exemplo.take_CE_ESBMC_Boolector(v_log_CE, experiment);

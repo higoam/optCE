@@ -22,7 +22,7 @@ using namespace EXCUTION;
 
 int main(int argc, char *argv[ ]) {
 
-	pthread_t thread1;
+	pthread_t thread1, thread2;
 	int  iret1, iret2;
 
 	Tflags flags;
@@ -61,6 +61,8 @@ int main(int argc, char *argv[ ]) {
 
 	if(setup_optimization_re->getCore() != 0){
 
+
+
 		cout << endl;
 		cout << "PARALELO" << endl;
 		optimization_Part_1 = *setup_optimization_re;
@@ -73,11 +75,13 @@ int main(int argc, char *argv[ ]) {
 		optimization_Part_1.setInfX1( 0 );
 		optimization_Part_1.setSupX2( setup_optimization_re->getSupX2() );
 		optimization_Part_1.setInfX2( 0 );
+		optimization_Part_1.setCore(1);
 
 		optimization_Part_2.setSupX1( 0 );
 		optimization_Part_2.setInfX1( setup_optimization_re->getInfX1() );
 		optimization_Part_2.setSupX2( setup_optimization_re->getSupX2() );
 		optimization_Part_2.setInfX2( 0 );
+		optimization_Part_2.setCore(2);
 
 		optimization_Part_3.setSupX1( 0 );
 		optimization_Part_3.setInfX1( setup_optimization_re->getInfX1() );
@@ -91,29 +95,42 @@ int main(int argc, char *argv[ ]) {
 
 
 
+		iret1 = pthread_create( &thread1, NULL, Execution::run, (void*) &optimization_Part_1);
+
 		cout << "PARTE 1" << endl;
 		cout <<  convertValue.convertDoubleString(optimization_Part_1.l_inf_x1) + " < X1 < " + convertValue.convertDoubleString(optimization_Part_1.l_sup_x1) << endl;
 		cout <<  convertValue.convertDoubleString(optimization_Part_1.l_inf_x2) + " < X2 < " + convertValue.convertDoubleString(optimization_Part_1.l_sup_x2) << endl;
-		result_optimization = execution_optimization.run(&optimization_Part_1);
+		execution_optimization.run(&optimization_Part_1);
 		cout << endl;
+
+
+		if(iret1)
+		{
+			fprintf(stderr,"Error - pthread_create() return code: %d\n",iret1);
+		    exit(EXIT_FAILURE);
+		}
+
+
+
+
 
 		cout << "PARTE 2" << endl;
 		cout <<  convertValue.convertDoubleString(optimization_Part_2.l_inf_x1) + " < X1 < " + convertValue.convertDoubleString(optimization_Part_2.l_sup_x1) << endl;
 		cout <<  convertValue.convertDoubleString(optimization_Part_2.l_inf_x2) + " < X2 < " + convertValue.convertDoubleString(optimization_Part_2.l_sup_x2) << endl;
-		result_optimization = execution_optimization.run(&optimization_Part_2);
+		//result_optimization = execution_optimization.run(&optimization_Part_2);
 		cout << endl;
 
 		cout << "PARTE 3" << endl;
 		cout <<  convertValue.convertDoubleString(optimization_Part_3.l_inf_x1) + " < X1 < " + convertValue.convertDoubleString(optimization_Part_3.l_sup_x1) << endl;
 		cout <<  convertValue.convertDoubleString(optimization_Part_3.l_inf_x2) + " < X2 < " + convertValue.convertDoubleString(optimization_Part_3.l_sup_x2) << endl;
-		result_optimization = execution_optimization.run(&optimization_Part_3);
+		//result_optimization = execution_optimization.run(&optimization_Part_3);
 		cout << endl;
 
 
 		cout << "PARTE 4" << endl;
 		cout <<  convertValue.convertDoubleString(optimization_Part_4.l_inf_x1) + " < X1 < " + convertValue.convertDoubleString(optimization_Part_4.l_sup_x1) << endl;
 		cout <<  convertValue.convertDoubleString(optimization_Part_4.l_inf_x2) + " < X2 < " + convertValue.convertDoubleString(optimization_Part_4.l_sup_x2) << endl;
-		result_optimization = execution_optimization.run(&optimization_Part_4);
+		//result_optimization = execution_optimization.run(&optimization_Part_4);
 		cout << endl;
 
 
@@ -124,7 +141,8 @@ int main(int argc, char *argv[ ]) {
 
 	}else{
 
-		result_optimization = execution_optimization.run(setup_optimization_re);
+	//	result_optimization =
+				execution_optimization.run(setup_optimization_re);
 
 	}
 

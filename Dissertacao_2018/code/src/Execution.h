@@ -35,7 +35,7 @@ public:
 	Execution();
 	virtual ~Execution();
 
-	string run(Setup* experiment);
+	void * run(Setup* experiment);
 
     void run_ESBMC_G_BOOLECTOR(Setup* experiment);
     void run_ESBMC_G_Z3(Setup ex);

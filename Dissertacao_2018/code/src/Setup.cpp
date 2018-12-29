@@ -362,6 +362,10 @@ int SETUP::Setup::getCore() const {
 	return core;
 }
 
+const int* SETUP::Setup::getCoreOpt() const {
+	return coreOpt;
+}
+
 void SETUP::Setup::setCore(int core) {
 	this->core = core;
 }

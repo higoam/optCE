@@ -47,6 +47,8 @@ public:
 
     int core;
 
+    int coreOpt[4];
+
     float timeout_global;
     float timeout_verification;
 
@@ -176,6 +178,7 @@ public:
 	void setFcCurrentString(const string& fcCurrentString);
 	int getCore() const;
 	void setCore(int core);
+	const int* getCoreOpt() const;
 };
 
 } /* namespace SETUP */

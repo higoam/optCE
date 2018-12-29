@@ -10,7 +10,7 @@
 
     int main() {
     
-    float f_i = 0 -1e-05-0.35 -1e-05-0.35 -1e-05;
+    float f_i = 0 -1e-05-0.35 -1e-05-0.35 -1e-05-0.35001 -1e-05-0.35002 -1e-05-0.35003 -1e-05;
 
     int i,j;
     int x[3];
@@ -38,6 +38,6 @@
 
     __ESBMC_assume(fobj < f_i );
 
-    assert(fobj > f_i);
+    //assert(fobj > f_i);
     return 0;
   }
