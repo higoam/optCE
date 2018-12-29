@@ -1,0 +1,33 @@
+all: execute
+
+execute: optCE.o Adjust.o Setup.o Tinput.o Tflags.o Generatefiles.o Tcexamples.o Execution.o
+    g++ -o optCE optCE.o Adjust.o Setup.o Tinput.o Tflags.o Generatefiles.o Tcexamples.o Execution.o
+
+optCE.o:optCE.cpp Execution.cpp Execution.h Tcexamples.cpp Tcexamples.h Generatefiles.cpp Generatefiles.h Adjust.cpp Adjust.h Setup.cpp Setup.h
+    g++ -c optCE.cpp
+
+Execution.o:Execution.cpp Execution.h Tcexamples.cpp Tcexamples.h Generatefiles.cpp Generatefiles.h Adjust.cpp Adjust.h Setup.cpp Setup.h
+    g++ -c Execution.cpp
+
+Tcexamples.o:Tcexamples.cpp Tcexamples.h Generatefiles.cpp Generatefiles.h Adjust.cpp Adjust.h Setup.cpp Setup.h
+    g++ -c Tcexamples.cpp
+
+Generatefiles.o:Generatefiles.cpp Generatefiles.h Adjust.cpp Adjust.h Setup.cpp Setup.h
+    g++ -c Generatefiles.cpp
+
+Tflags.o:Tflags.cpp Tflags.h Setup.cpp Setup.h
+    g++ -c Tflags.cpp
+
+Tinput.o:Tinput.cpp Tinput.h Adjust.cpp Adjust.h Setup.cpp Setup.h
+    g++ -c .cpp
+
+Setup.o:Setup.cpp Setup.h
+    g++ -c Setup.cpp
+
+Adjust.o:Adjust.cpp Adjust.h
+    g++ -c Adjust.cpp
+
+clean:
+    rm -rf *.o
+
+ 
