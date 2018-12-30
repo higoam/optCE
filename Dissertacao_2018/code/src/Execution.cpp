@@ -36,32 +36,20 @@ void Execution::run(Setup* experiment) {
 				else if(experiment->alg== 2)
 				{
 						if(experiment->solver == 1)
-						{
-		//				run_ESBMC_S_BOOLECTOR(ex);
-						}
+							run_ESBMC_S_BOOLECTOR(experiment);
 						else if(experiment->solver == 2)
-						{
-		//				run_ESBMC_S_Z3(ex);
-						}
+							run_ESBMC_S_Z3(experiment);
 						else if(experiment->solver == 3)
-						{
-		//				run_ESBMC_S_MATHSAT(ex);
-						}
+							run_ESBMC_S_MATHSAT(experiment);
 				}
 				else if(experiment->alg== 3)
 				{
 						if(experiment->solver == 1)
-						{
-		//				run_ESBMC_C_BOOLECTOR(ex);
-						}
+							run_ESBMC_C_BOOLECTOR(experiment);
 						else if(experiment->solver == 2)
-						{
-		//				run_ESBMC_C_Z3(ex);
-						}
+							run_ESBMC_C_Z3(experiment);
 						else if(experiment->solver == 3)
-						{
-		//				run_ESBMC_C_MATHSAT(ex);
-						}
+							run_ESBMC_C_MATHSAT(experiment);
 				}
 		}
 		else if(experiment->bmc == 2)
@@ -70,41 +58,31 @@ void Execution::run(Setup* experiment) {
 				{
 						if(experiment->solver == 4)
 						{
-//				run_CBMC_G_MINISAT(ex);
+							//run_CBMC_G_MINISAT(experiment);
 						}
 				}
-			else if(experiment->alg== 2)
-			{
-				if(experiment->solver == 4)
+				else if(experiment->alg== 2)
 				{
-	//				run_CBMC_S_MINISAT(ex);
+						if(experiment->solver == 4)
+						{
+							//run_CBMC_S_MINISAT(experiment);
+						}
 				}
-			}
-			else if(experiment->alg== 3)
-			{
-				if(experiment->solver == 4)
+				else if(experiment->alg== 3)
 				{
-	//				run_CBMC_C_MINISAT(ex);
+						if(experiment->solver == 4)
+						{
+							//run_CBMC_C_MINISAT(experiment);
+						}
 				}
-			}
-	}
-	else if(experiment->bmc == 3)
-	{
-		if(experiment->solver == 1)
-		{
 		}
-		else if(experiment->solver == 2)
+		else if(experiment->bmc == 3)
 		{
+			if(experiment->alg== 1){}
+			else if(experiment->alg== 2){}
+			else if(experiment->alg== 3){}
 		}
-		else if(experiment->solver == 3)
-		{
-		}
-	}
 
-
-//	string result_experiment;
-
-//	return result_experiment;
 }
 
 
@@ -410,7 +388,6 @@ void Execution::run_ESBMC_G_Z3(Setup* experiment)
 
 }
 
-
 void Execution::run_ESBMC_G_MATHSAT(Setup* experiment)
 {
 
@@ -557,6 +534,95 @@ void Execution::run_ESBMC_G_MATHSAT(Setup* experiment)
     cout << "####################################" << endl ;
 
 }
+
+
+
+void Execution::run_ESBMC_S_BOOLECTOR(Setup* experiment){
+
+	//	Configuração do Experimento
+	//=================================
+	cout << endl;
+	cout << " Configuration Optimization" << endl;
+	cout << endl;
+	cout << "     Function: " + experiment->getNameFunction()<< endl;
+	cout << "    Algorithm: CEGIO-S" << endl;
+	cout << "          BMC: ESBMC" << endl;
+	cout << "       Solver: Boolector" << endl;
+	cout << endl;
+
+
+
+	//	Ajuste de Variáveis
+	//=================================
+	experiment->setPrecisionCurrent(1);
+	int precisionLoop = pow(10, experiment->getPrecisionTest());
+	string command = "";
+	bool stay_precision = true;
+	string new_fiS;
+	float compensar_fobj =  0.00001;
+	string compensar_fobjS;
+	int v_log = 1;
+	string v_log_CE;
+
+    experiment->setFcCurrent( convertValue.convertStringDouble(experiment->getFcStart()) );
+    experiment->setFcCurrentString( experiment->getFcStart() );
+
+
+
+	//	Gerar Restrições ASSUMES
+	//=================================
+  	experiment->setRestrictions( generate_assumes(experiment) );
+
+
+  	// Gerar Arquivo C para calcular Mínimo
+	//=================================
+  	generatefilesAUX.create_f(experiment);
+  	command  = "gcc " + experiment->getNameFunction() + ".c -o value_min";
+  	system(command.c_str());
+
+
+  	// Gerar Especificação
+	//=================================
+  	generatefilesAUX.create_specification_ESBMC_S_Boolector(experiment);
+
+
+
+
+
+
+}
+
+void Execution::run_ESBMC_S_Z3(Setup* experiment){
+
+}
+
+void Execution::run_ESBMC_S_MATHSAT(Setup* experiment){
+
+}
+
+
+
+
+
+void Execution::run_ESBMC_C_BOOLECTOR(Setup* experiment){
+
+}
+
+void Execution::run_ESBMC_C_Z3(Setup* experiment){
+
+}
+
+void Execution::run_ESBMC_C_MATHSAT(Setup* experiment){
+
+}
+
+
+
+
+
+
+
+
 
 
 string Execution::generate_assumes(Setup* experiment){
