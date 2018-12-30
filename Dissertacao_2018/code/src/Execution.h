@@ -35,19 +35,19 @@ public:
 	Execution();
 	virtual ~Execution();
 
-	void * run(Setup* experiment);
+	void run(Setup* experiment);
 
     void run_ESBMC_G_BOOLECTOR(Setup* experiment);
-    void run_ESBMC_G_Z3(Setup ex);
-    void run_ESBMC_G_MATHSAT(Setup ex);
+    void run_ESBMC_G_Z3(Setup* experiment);
+    void run_ESBMC_G_MATHSAT(Setup* experiment);
 
-    void run_ESBMC_S_BOOLECTOR(Setup ex);
-    void run_ESBMC_S_Z3(Setup ex);
-    void run_ESBMC_S_MATHSAT(Setup ex);
+    void run_ESBMC_S_BOOLECTOR(Setup* experiment);
+    void run_ESBMC_S_Z3(Setup* experiment);
+    void run_ESBMC_S_MATHSAT(Setup* experiment);
 
-    void run_ESBMC_C_BOOLECTOR(Setup ex);
-    void run_ESBMC_C_Z3(Setup ex);
-    void run_ESBMC_C_MATHSAT(Setup ex);
+    void run_ESBMC_C_BOOLECTOR(Setup* experiment);
+    void run_ESBMC_C_Z3(Setup* experiment);
+    void run_ESBMC_C_MATHSAT(Setup* experiment);
 
     void run_CBMC_G_MINISAT(Setup ex);
     void run_CBMC_S_MINISAT(Setup ex);

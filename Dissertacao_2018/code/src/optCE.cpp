@@ -22,8 +22,8 @@ using namespace EXCUTION;
 
 int main(int argc, char *argv[ ]) {
 
-	pthread_t thread1, thread2;
-	int  iret1, iret2;
+//	pthread_t thread1, thread2;
+//	int  iret1, iret2;
 
 	Tflags flags;
 	Tinput input_file;
@@ -59,10 +59,12 @@ int main(int argc, char *argv[ ]) {
 	}
 
 
-	if(setup_optimization_re->getCore() != 0){
+	execution_optimization.run(setup_optimization_re);
 
 
+//	if(setup_optimization_re->getCore() != 0){
 
+/*
 		cout << endl;
 		cout << "PARALELO" << endl;
 		optimization_Part_1 = *setup_optimization_re;
@@ -95,7 +97,7 @@ int main(int argc, char *argv[ ]) {
 
 
 
-		iret1 = pthread_create( &thread1, NULL, Execution::run, (void*) &optimization_Part_1);
+		//iret1 = pthread_create( &thread1, NULL, Execution::run, (void*) &optimization_Part_1);
 
 		cout << "PARTE 1" << endl;
 		cout <<  convertValue.convertDoubleString(optimization_Part_1.l_inf_x1) + " < X1 < " + convertValue.convertDoubleString(optimization_Part_1.l_sup_x1) << endl;
@@ -109,9 +111,6 @@ int main(int argc, char *argv[ ]) {
 			fprintf(stderr,"Error - pthread_create() return code: %d\n",iret1);
 		    exit(EXIT_FAILURE);
 		}
-
-
-
 
 
 		cout << "PARTE 2" << endl;
@@ -134,17 +133,17 @@ int main(int argc, char *argv[ ]) {
 		cout << endl;
 
 
+*/
 
-
-		cout << "GERAL" << endl;
+//		cout << "GERAL" << endl;
 //		result_optimization = execution_optimization.run(setup_optimization_re);
 
-	}else{
+//	}else{
 
 	//	result_optimization =
-				execution_optimization.run(setup_optimization_re);
 
-	}
+
+//	}
 
 
 	return 0;

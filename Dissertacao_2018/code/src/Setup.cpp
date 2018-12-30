@@ -23,12 +23,17 @@ Setup::Setup() {
 
 void Setup::printSetupExperiment()
 {
-  cout << "####### SETUP ######"<< endl;
-  cout << "ALG :" << endl;
-  cout << this->alg << endl;
+  cout << "####### SETUP TESTE ######"<< endl;
+
+  cout << "BMC: " << this->getBmc() 	<< endl;
+  cout << "ALG: " << this->getAlg() 	<< endl;
+  cout << "SOL: " << this->getSolver() 	<< endl;
+
+
+
   cout << "Name Function " + getNameFunction() << endl;
-  cout << "Fc :" << endl;
-  cout << "BMC " + this->getBmc() << endl;
+  cout << endl << "Fc :"  << endl;
+
 
 
 }

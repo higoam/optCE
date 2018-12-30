@@ -1966,71 +1966,71 @@ using namespace std;
 
     if(ex.type_restrictions == 0){
 
-      if(ex.input_format==0){
+                    if(ex.input_format==0){
 
-        generate_assumes = generate_assumes + "     \n        //-----------------------------------------------------------  ";
-        generate_assumes = generate_assumes + "     \n        // Restrictions\n";
+                      generate_assumes = generate_assumes + "     \n        //-----------------------------------------------------------  ";
+                      generate_assumes = generate_assumes + "     \n        // Restrictions\n";
 
-        generate_assumes = generate_assumes + "     \n        int lim[4] = {";
+                      generate_assumes = generate_assumes + "     \n        int lim[4] = {";
 
-        for(i=0;i<l_A;i++){
-          for(j=0;j<c_A;j++){
-            generate_assumes = generate_assumes + convert.convertIntString(matrixA[i][j]);
-            generate_assumes = generate_assumes + "*p, ";
-          }
-        }
+                      for(i=0;i<l_A;i++){
+                        for(j=0;j<c_A;j++){
+                          generate_assumes = generate_assumes + convert.convertIntString(matrixA[i][j]);
+                          generate_assumes = generate_assumes + "*p, ";
+                        }
+                      }
 
-        generate_assumes = generate_assumes.substr(0,generate_assumes.size()-2);
-        generate_assumes = generate_assumes + "};";
+                      generate_assumes = generate_assumes.substr(0,generate_assumes.size()-2);
+                      generate_assumes = generate_assumes + "};";
 
-        generate_assumes = generate_assumes + "\n";
-        generate_assumes = generate_assumes + "\n        for (i = 0; i < nv; i++) {";
-        generate_assumes = generate_assumes + "\n            __ESBMC_assume( (x[i]>=lim[2*i]) && (x[i]<=lim[2*i+1]) );";
-        generate_assumes = generate_assumes + "\n            __ESBMC_assume( X[i] == (float) x[i]/p  ); ";
-        generate_assumes = generate_assumes + "\n        }\n";
+                      generate_assumes = generate_assumes + "\n";
+                      generate_assumes = generate_assumes + "\n        for (i = 0; i < nv; i++) {";
+                      generate_assumes = generate_assumes + "\n            __ESBMC_assume( (x[i]>=lim[2*i]) && (x[i]<=lim[2*i+1]) );";
+                      generate_assumes = generate_assumes + "\n            __ESBMC_assume( X[i] == (float) x[i]/p  ); ";
+                      generate_assumes = generate_assumes + "\n        }\n";
 
 
-        generate_assumes = generate_assumes + "     \n        //-----------------------------------------------------------  \n\n";
+                      generate_assumes = generate_assumes + "     \n        //-----------------------------------------------------------  \n\n";
 
-        return generate_assumes;
+                      return generate_assumes;
 
-      }else{
+                    }else{
 
-        generate_assumes = generate_assumes + "     \n        //-----------------------------------------------------------  ";
-        generate_assumes = generate_assumes + "     \n        // Restrictions\n";
+                      generate_assumes = generate_assumes + "     \n        //-----------------------------------------------------------  ";
+                      generate_assumes = generate_assumes + "     \n        // Restrictions\n";
 
-        generate_assumes = generate_assumes + "     \n        int A[nr][nv] = {";
+                      generate_assumes = generate_assumes + "     \n        int A[nr][nv] = {";
 
-        for(i=0;i<l_A;i++){
-          for(j=0;j<c_A;j++){
-            generate_assumes = generate_assumes + convert.convertIntString(matrixA[i][j]);
-            generate_assumes = generate_assumes + "*p, ";
-          }
-        }
+                      for(i=0;i<l_A;i++){
+                        for(j=0;j<c_A;j++){
+                          generate_assumes = generate_assumes + convert.convertIntString(matrixA[i][j]);
+                          generate_assumes = generate_assumes + "*p, ";
+                        }
+                      }
 
-        generate_assumes = generate_assumes.substr(0,generate_assumes.size()-2);
-        generate_assumes = generate_assumes + "};";
+                      generate_assumes = generate_assumes.substr(0,generate_assumes.size()-2);
+                      generate_assumes = generate_assumes + "};";
 
-        generate_assumes = generate_assumes + "\n                 int B[nr] = {";
+                      generate_assumes = generate_assumes + "\n                 int B[nr] = {";
 
-        for(i=0;i<l_A;i++){
-          generate_assumes = generate_assumes + convert.convertIntString(matrixB[i]);
-          generate_assumes = generate_assumes + "*p, ";
-        }
+                      for(i=0;i<l_A;i++){
+                        generate_assumes = generate_assumes + convert.convertIntString(matrixB[i]);
+                        generate_assumes = generate_assumes + "*p, ";
+                      }
 
-        generate_assumes = generate_assumes.substr(0,generate_assumes.size()-2);
-        generate_assumes = generate_assumes + "};";
+                      generate_assumes = generate_assumes.substr(0,generate_assumes.size()-2);
+                      generate_assumes = generate_assumes + "};";
 
-        generate_assumes = generate_assumes + "     \n        float s = 0;\n";
-        generate_assumes = generate_assumes + "     \n        for (i = 0; i < nr; i++) {\n            for (j = 0; j < nv; j++){\n                 s = s + A[i][j]*x[j]/p;\n            }\n";
-        generate_assumes = generate_assumes + "            __ESBMC_assume( s < (float) B[i] );\n           s = 0;\n        }\n";
-        generate_assumes = generate_assumes + "    \n        for (i = 0; i < nv; i++) {\n            __ESBMC_assume( X[i] == (float) x[i]/p  );\n        }\n";
+                      generate_assumes = generate_assumes + "     \n        float s = 0;\n";
+                      generate_assumes = generate_assumes + "     \n        for (i = 0; i < nr; i++) {\n            for (j = 0; j < nv; j++){\n                 s = s + A[i][j]*x[j]/p;\n            }\n";
+                      generate_assumes = generate_assumes + "            __ESBMC_assume( s < (float) B[i] );\n           s = 0;\n        }\n";
+                      generate_assumes = generate_assumes + "    \n        for (i = 0; i < nv; i++) {\n            __ESBMC_assume( X[i] == (float) x[i]/p  );\n        }\n";
 
-        generate_assumes = generate_assumes + "     \n        //-----------------------------------------------------------  \n\n";
+                      generate_assumes = generate_assumes + "     \n        //-----------------------------------------------------------  \n\n";
 
-        return generate_assumes;
+                      return generate_assumes;
 
-      }
+                    }
 
     }else if(ex.type_restrictions == 1){
 
