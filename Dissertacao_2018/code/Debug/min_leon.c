@@ -1,4 +1,4 @@
-#define p 1
+#define p 10000
 #define nv 2 
 #define nr 2 
 
@@ -10,7 +10,8 @@
 
     int main() {
     
-    float f_i = 1 -1e-050 -1e-050 -0.00010 -0.001;
+    float f_c = 0;
+    float f_i = 1 -1e-050 -1e-050 -0.00010 -0.0010 -0.010 -0.10 -10 -1e-05-1e-05 -1e-05-2e-05 -1e-05-3e-05 -1e-05;
 
     int i,j;
     int x[3];
@@ -25,7 +26,7 @@
         //-----------------------------------------------------------       
         // Restrictions
      
-        int lim[4] = {0*p, 2*p, 0*p, 2*p}; 
+        int lim[4] = {-2*p, 2*p, -2*p, 2*p}; 
 
         for (i = 0; i < nv; i++) {
             __ESBMC_assume( (x[i]>=lim[2*i]) && (x[i]<=lim[2*i+1]) );
@@ -38,6 +39,13 @@
 
     __ESBMC_assume(fobj < f_i );
 
-    assert(fobj > f_i);
+    float delta = (f_i-f_c)/5;
+    if ((f_i-f_c) > 0.00001){
+      while (f_c <= f_i){
+        assert(fobj > f_c);
+        f_c += delta;
+      }
+    }
+
     return 0;
   }
