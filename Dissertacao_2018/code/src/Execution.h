@@ -49,9 +49,9 @@ public:
     void run_ESBMC_C_Z3(Setup* experiment);
     void run_ESBMC_C_MATHSAT(Setup* experiment);
 
-    void run_CBMC_G_MINISAT(Setup ex);
-    void run_CBMC_S_MINISAT(Setup ex);
-    void run_CBMC_C_MINISAT(Setup ex);
+    void run_CBMC_G_MINISAT(Setup* experiment);
+    void run_CBMC_S_MINISAT(Setup* experiment);
+    void run_CBMC_C_MINISAT(Setup* experiment);
 
     bool segment_matrix_format_1(Setup ex, string Mat);
     string remove_space(string str);

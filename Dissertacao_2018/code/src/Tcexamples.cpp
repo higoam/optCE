@@ -118,7 +118,6 @@ void Tcexamples::take_CE_ESBMC_Boolector(string name_file_log, Setup* setup_aux)
 	}
 }
 
-
 void Tcexamples::take_CE_ESBMC_Z3(string name_file_log, Setup* setup_aux)
 {
     // Adjustment Variables
@@ -257,6 +256,63 @@ void Tcexamples::take_CE_ESBMC_Mathsat(string name_file_log, Setup* setup_aux)
     {
 		setup_aux->setStatusCe(2);
     }
+}
+
+
+void Tcexamples::take_CE_CBMC_MINISAT(string name_file_log, Setup* setup_aux)
+{
+
+	// Adjustment Variables
+//	string command = "";
+	string file_log;
+//	string current_coordinates[2];
+//	string word = ":x=";
+//	ostringstream convert;
+	string aux_string = "";
+//	size_t position;
+//	int prec = setup_aux->getPrecisionCurrent();
+
+    string word1 = "X[0l]=";
+    string word2 = "X[1l]=";
+    string wordf = "fobj=";
+    size_t position1;
+    size_t position2;
+    size_t positionf;
+    size_t parenthesis;
+
+	file_log = take_file(name_file_log);
+	std::size_t found_F = file_log.find("FAILED");
+	std::size_t found_S = file_log.find("SUCCESSFUL");
+
+	if(found_F!=std::string::npos)
+	{
+
+       position1 = file_log.rfind(word1);
+       position2 = file_log.rfind(word2);
+       positionf = file_log.rfind(wordf);
+
+       aux_string = file_log.substr(position1+6, file_log.length());
+       parenthesis = aux_string.find(" ");
+       setup_aux->setX2Current( convertValue.convertStringDouble( aux_string.substr(0, parenthesis) ) );
+
+       aux_string = file_log.substr(position2+6, file_log.length());
+       parenthesis = aux_string.find(" ");
+       setup_aux->setX2Current(  convertValue.convertStringDouble( aux_string.substr(0, parenthesis) )  );
+
+       aux_string = file_log.substr(positionf+5, file_log.length());
+       parenthesis = aux_string.find(" ");
+       setup_aux->setFcFc(  convertValue.convertStringDouble( aux_string.substr(0, parenthesis)  )  );
+
+
+	}
+	else if(found_S!=std::string::npos)
+	{
+		setup_aux->setStatusCe(1);
+	}
+	else
+	{
+		setup_aux->setStatusCe(2);
+	}
 }
 
 

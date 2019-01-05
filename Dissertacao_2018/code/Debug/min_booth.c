@@ -10,7 +10,7 @@
 
     int main() {
     
-    float f_i = 0 -0.010 -1e-05-1e-05 -1e-05-2e-05 -1e-05-3e-05 -1e-05;
+    float f_i = 74 -1e-054.0625 -1e-054.0625 -1e-054.06249 -1e-054.06248 -1e-054.06247 -1e-05;
 
     int i,j;
     int x[3];
@@ -24,8 +24,8 @@
      
         //-----------------------------------------------------------       
         // Restrictions
-
-  int lim[4] = { 399990, 400010, 99990, 100010 };
+     
+        int lim[4] = {-10*p, 10*p, -10*p, 10*p}; 
 
         for (i = 0; i < nv; i++) {
             __ESBMC_assume( (x[i]>=lim[2*i]) && (x[i]<=lim[2*i+1]) );
@@ -36,8 +36,8 @@
 
     fobj = (X[0] + 2*X[1] -7)*(X[0] + 2*X[1] -7) + (2*X[0] + X[1] -5)*(2*X[0] + X[1] -5);
 
-    __ESBMC_assume(fobj < f_i );
+    __CPROVER_assume(fobj < f_i );
 
-    assert(fobj > f_i);
+    __CPROVER_assert(fobj > f_i,"");
     return 0;
   }

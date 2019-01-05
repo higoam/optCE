@@ -37,6 +37,8 @@ public:
 	void take_CE_ESBMC_Z3(string name_file_log, Setup* setup_aux);
 	void take_CE_ESBMC_Mathsat(string name_file_log, Setup* setup_aux);
 
+	void take_CE_CBMC_MINISAT(string name_file_log, Setup* setup_aux);
+
 };
 
 } /* namespace TCEXAMPLES */

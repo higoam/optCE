@@ -1,4 +1,4 @@
 esbmc
 cbmc
-optCE
 *.o
+log*

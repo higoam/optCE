@@ -329,7 +329,7 @@ Setup* Tflags::Checks(int argc, char *argv[])
       }
       else if( setup_experiment_flags.getBmc() == 2 )
       {
-    	  if(vet_flag[6]==0)
+    	  if(vet_flag[6]>=0)
     	  {
     		  setup_experiment_flags.setSolver(4);
     	  }
