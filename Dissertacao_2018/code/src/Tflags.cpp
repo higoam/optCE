@@ -505,7 +505,7 @@ void Tflags::print_help()
 void Tflags::print_version()
 {
   cout << endl;
-  cout << " optSMT version 1.0 64-bit x86_64 linux" << endl;
+  cout << " optSMT version 1.1 64-bit x86_64 linux | 17 01 2019" << endl;
   cout << endl;
 }
 

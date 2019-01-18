@@ -79,7 +79,8 @@ void Generatefiles::create_specification_ESBMC_G_Boolector(Setup* setup_aux)
   	file_min << "    int main() {\n";
 
   	file_min << "    \n";
-  	file_min << "    "+ setup_aux->getTypeData() +" f_i = " + setup_aux->fc_current_string + ";\n\n";
+//  	file_min << "    "+ setup_aux->getTypeData() +" f_i = " + setup_aux->fc_current_string + ";\n\n";
+  	file_min << "    "+ setup_aux->getTypeData() +" f_i = " + convertValue.convertDoubleString(setup_aux->getFcCurrent()) + ";\n\n";
 
   	file_min << "    int i,j;\n";
   	file_min << "    int x[3];\n";
@@ -139,7 +140,7 @@ void Generatefiles::create_specification_ESBMC_G_Z3(Setup* setup_aux)
   	file_min << "    int main() {\n";
 
   	file_min << "    \n";
-  	file_min << "    "+ setup_aux->getTypeData() +" f_i = " + setup_aux->fc_current_string + ";\n\n";
+  	file_min << "    "+ setup_aux->getTypeData() +" f_i = " + convertValue.convertDoubleString(setup_aux->getFcCurrent()) + ";\n\n";
 
   	file_min << "    int i,j;\n";
   	file_min << "    int x[3];\n";
@@ -197,7 +198,7 @@ void Generatefiles::create_specification_ESBMC_G_Mathsat(Setup* setup_aux)
   	file_min << "    int main() {\n";
 
   	file_min << "    \n";
-  	file_min << "    "+ setup_aux->getTypeData() +" f_i = " + setup_aux->fc_current_string + ";\n\n";
+  	file_min << "    "+ setup_aux->getTypeData() +" f_i = " + convertValue.convertDoubleString(setup_aux->getFcCurrent()) + ";\n\n";
 
   	file_min << "    int i,j;\n";
   	file_min << "    int x[3];\n";
@@ -621,7 +622,7 @@ void Generatefiles::create_specification_CBMC_G_MINISAT(Setup* setup_aux)
   	file_min << "    int main() {\n";
 
   	file_min << "    \n";
-  	file_min << "    "+ setup_aux->getTypeData() +" f_i = " + setup_aux->fc_current_string + ";\n\n";
+  	file_min << "    "+ setup_aux->getTypeData() +" f_i = " + convertValue.convertDoubleString(setup_aux->getFcCurrent()) + ";\n\n";
 
   	file_min << "    int i,j;\n";
   	file_min << "    int x[3];\n";

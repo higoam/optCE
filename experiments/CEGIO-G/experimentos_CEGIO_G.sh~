@@ -1,0 +1,122 @@
+#!/bin/bash
+
+declare -a functions_all=(
+#'alpine1.func'        
+#'bohachevsky_3.func'  
+#'bukin_2.func'  
+#'camel_six.func'    
+#'cosine.func'         
+#'el_attar_vidyasager_dutta.func'  
+#'leon.func'       
+#'rotated_ellipse.func'  
+#'zettl.func'
+#'bohachevsky_1.func'  
+#'booth.func'          
+#'bukin_4.func'  
+#'camel_three.func'  
+#'csendes.func'        
+#'freudenstein.func'               
+#'matyas.func'     
+#'styblinski_tang.func'  
+'zirilli.func'
+'bohachevsky_2.func'  
+'branin_RCOS.func'    
+'bukin_6.func'  
+'chen_bird.func'    
+'deckkers_arts.func'  
+'himmelblau.func'                 
+'quadratic.func'  
+'sum_squares.func'	
+);
+
+	echo
+	echo "#############  Experiments to --generalized  ##############"	
+	echo
+
+
+	for i in "${functions_all[@]}"
+	do		
+		line=$i
+		func=${line//,*}       	
+
+		echo "#############  ESBMC - Boolector  ##############"	
+		echo
+		(time ./optCE $func --esbmc --boolector --generalized --library=math2.h --precision=1) 
+		echo
+
+		echo "#############  ESBMC - Z3  ##############"	
+		echo
+		(time ./optCE $func --esbmc --z3 --generalized --library=math2.h --precision=1) 
+
+		echo "#############  ESBMC - Mathsat  ##############"	
+		echo
+		(time ./optCE $func --esbmc --mathsat --generalized --library=math2.h --precision=1)
+
+		echo "#############  CBMC - MiniSAT  ##############"	
+		echo
+		(time ./optCE $func --cbmc --minisat --generalized --library=math2.h --precision=1)
+
+		echo
+	done
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#	echo
+#	echo "#############  Experiments to --positive  ##############"	
+#	echo
+#
+#	for i in "${functions_positive[@]}"
+#	do		
+#		line=$i
+#		func=${line//,*}       	
+#
+#		(./optCE $func --esbmc --boolector --positive --library=math2.h --precision=3) 
+#		echo
+#		(./optCE $func --esbmc --z3 --positive --library=math2.h --precision=3) 
+#		echo
+#		(./optCE $func --esbmc --mathsat --positive --library=math2.h --precision=3)
+#		echo
+#		(./optCE $func --cbmc --minisat --positive --library=math2.h --precision=3) 
+#		echo
+#
+#		echo
+#	done
+#
+#	echo
+#	echo "#############  Experiments to --convex  ##############"	
+#	echo
+#
+#	for i in "${functions_positive[@]}"
+#	do		
+#		line=$i
+#		func=${line//,*}       	
+#
+#		(./optCE $func --esbmc --boolector --convex --library=math2.h --precision=3) 
+#		echo
+#		(./optCE $func --esbmc --z3 --convex --library=math2.h --precision=3) 
+#		echo
+#		(./optCE $func --esbmc --mathsat --convex --library=math2.h --precision=3)
+#		echo
+#		(./optCE $func --cbmc --minisat --convex --library=math2.h --precision=3) 
+#		echo
+
+
+
+		echo
+	done
+
