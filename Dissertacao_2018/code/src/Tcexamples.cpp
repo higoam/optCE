@@ -81,9 +81,17 @@ void Tcexamples::take_CE_ESBMC_Boolector(string name_file_log, Setup* setup_aux)
 		_x1D = convertValue.convertStringDouble(current_coordinates[0].c_str());
 		_x2D = convertValue.convertStringDouble(current_coordinates[1].c_str());
 
+//		cout << endl;
+//		cout << "X1=";
+//		cout << _x1D  << endl;
+//		cout << "X2=";
+//		cout << _x2D  << endl;
+//		cout << prec  << endl;
+
+
 		if(_x1D > 1000)
 		{
-	        _x1D = ((_x1D -4294967296)/prec);
+	        _x1D = ((_x1D -4294967295)/prec);
 			setup_aux->setX1Current( _x1D );
 		}
 		else
@@ -93,7 +101,7 @@ void Tcexamples::take_CE_ESBMC_Boolector(string name_file_log, Setup* setup_aux)
 
 		if(_x2D > 1000)
 		{
-	        _x2D = ((_x2D -4294967296)/prec);
+	        _x2D = ((_x2D -4294967295)/prec);
 			setup_aux->setX2Current( _x2D );
 		}
 		else
@@ -101,11 +109,26 @@ void Tcexamples::take_CE_ESBMC_Boolector(string name_file_log, Setup* setup_aux)
 			setup_aux->setX2Current(_x2D/prec);
 		}
 
-		command  = "./value_min " + convertValue.convertDoubleString( _x1D ) + " " + convertValue.convertDoubleString( _x2D ) + " > min_temporary.txt";
+//		cout << endl;
+//		cout << "X1=";
+//		cout << _x1D  << endl;
+//		cout << "X2=";
+//		cout << _x2D  << endl;
+//		cout << prec  << endl;
+
+		command  = "./value_min " + convertValue.convertDoubleString( setup_aux->getX1Current() ) + " " + convertValue.convertDoubleString( setup_aux->getX2Current() ) + " > min_temporary.txt";
 		system(command.c_str());
+
+//		cout << endl;
+//		system("cat min_temporary.txt");
+//		cout << endl;
 
 		string minimumS = take_file("min_temporary.txt");
 		setup_aux->setFcFc( convertValue.convertStringDouble(minimumS.substr(0, minimumS.size()).c_str()) );
+
+//		cout << endl;
+//		cout << setup_aux->getFcFc()<< endl;
+//		cout << endl;
 
 	}
 	else if(found_S!=std::string::npos)

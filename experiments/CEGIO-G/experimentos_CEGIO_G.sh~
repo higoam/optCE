@@ -7,9 +7,9 @@ declare -a functions_all=(
 #'camel_six.func'    
 #'cosine.func'         
 #'el_attar_vidyasager_dutta.func'  
-#'leon.func'       
-#'rotated_ellipse.func'  
-#'zettl.func'
+'leon.func'       
+'rotated_ellipse.func'  
+'zettl.func'
 #'bohachevsky_1.func'  
 #'booth.func'          
 #'bukin_4.func'  
@@ -19,14 +19,14 @@ declare -a functions_all=(
 #'matyas.func'     
 #'styblinski_tang.func'  
 'zirilli.func'
-'bohachevsky_2.func'  
-'branin_RCOS.func'    
-'bukin_6.func'  
-'chen_bird.func'    
-'deckkers_arts.func'  
-'himmelblau.func'                 
-'quadratic.func'  
-'sum_squares.func'	
+#'bohachevsky_2.func'  
+#'branin_RCOS.func'    
+#'bukin_6.func'  
+#'chen_bird.func'    
+#'deckkers_arts.func'  
+#'himmelblau.func'                 
+#'quadratic.func'  
+#'sum_squares.func'	
 );
 
 	echo
@@ -52,9 +52,9 @@ declare -a functions_all=(
 		echo
 		(time ./optCE $func --esbmc --mathsat --generalized --library=math2.h --precision=1)
 
-		echo "#############  CBMC - MiniSAT  ##############"	
-		echo
-		(time ./optCE $func --cbmc --minisat --generalized --library=math2.h --precision=1)
+#		echo "#############  CBMC - MiniSAT  ##############"	
+#		echo
+#		(time ./optCE $func --cbmc --minisat --generalized --library=math2.h --precision=1)
 
 		echo
 	done

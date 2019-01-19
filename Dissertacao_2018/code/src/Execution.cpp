@@ -106,7 +106,6 @@ void Execution::run_ESBMC_G_BOOLECTOR(Setup* experiment)
 	cout << endl;
 
 
-
 	//	Ajuste de Variáveis
 	//=================================
 	experiment->setPrecisionCurrent(1);
@@ -118,6 +117,8 @@ void Execution::run_ESBMC_G_BOOLECTOR(Setup* experiment)
 	string compensar_fobjS;
 	int v_log = 1;
 	string v_log_CE;
+	int cont_comp = 1;
+	float acumulador_cont = 0.0;
 
     experiment->setFcCurrent( convertValue.convertStringDouble(experiment->getFcStart()) );
     experiment->setFcCurrentString( experiment->getFcStart() );
@@ -199,19 +200,35 @@ void Execution::run_ESBMC_G_BOOLECTOR(Setup* experiment)
 
 							// Caso encontre o mesmo valor
 							}else{
-									// Increase the Compensator
-									compensar_fobj = compensar_fobj * 10;
 
-									// Atualiza Função Candidata para uma nova especificação, Considerando Compensador
-									experiment->setFcCurrent(experiment->fc_current - compensar_fobj);
+									if(cont_comp < 3){
 
-									// Incrementa Log
-									v_log++;
+										cont_comp++;
+										// Increase the Compensator
+										compensar_fobj = compensar_fobj * 10;
+										acumulador_cont = acumulador_cont + compensar_fobj;
+										cout << endl << " COMP: " + convertValue.convertDoubleString(compensar_fobj) << endl;
+										cout << " ACU_COMP: " + convertValue.convertDoubleString(acumulador_cont) << endl;
 
-									// Gera nova Especificação com nova Função Candidata (Aqui não incrementa a precisão)
-									generatefilesAUX.create_specification_ESBMC_G_Boolector(experiment);
+										// Atualiza Função Candidata para uma nova especificação, Considerando Compensador
+										experiment->setFcCurrent(experiment->fc_current - compensar_fobj);
+
+										// Incrementa Log
+										v_log++;
+
+										// Gera nova Especificação com nova Função Candidata (Aqui não incrementa a precisão)
+										generatefilesAUX.create_specification_ESBMC_G_Boolector(experiment);
+
+									}
+
 							}
-							//stay_precision = true;
+
+					}
+
+					if(cont_comp == 3){
+						acumulador_cont=0;
+						cont_comp=1;
+						stay_precision = false;
 					}
 
 		  			cout << endl << " ### f("+ convertValue.convertDoubleString(experiment->getX1Current()) +
