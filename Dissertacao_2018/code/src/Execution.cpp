@@ -32,7 +32,10 @@ void Execution::run(Setup* experiment) {
 							run_ESBMC_G_Z3(experiment);
 						else if(experiment->solver == 3)
 							run_ESBMC_G_MATHSAT(experiment);
-				}
+						else if(experiment->solver == 5)
+							run_ESBMC_G_CVC(experiment);
+						else if(experiment->solver == 6)
+							run_ESBMC_G_YICES(experiment);				}
 				else if(experiment->alg== 2)
 				{
 						if(experiment->solver == 1)
@@ -41,6 +44,7 @@ void Execution::run(Setup* experiment) {
 							run_ESBMC_S_Z3(experiment);
 						else if(experiment->solver == 3)
 							run_ESBMC_S_MATHSAT(experiment);
+
 				}
 				else if(experiment->alg == 3)
 				{
@@ -76,12 +80,8 @@ void Execution::run(Setup* experiment) {
 						}
 				}
 		}
-		else if(experiment->bmc == 3)
-		{
-			if(experiment->alg== 1){}
-			else if(experiment->alg== 2){}
-			else if(experiment->alg== 3){}
-		}
+
+
 
 }
 
@@ -201,9 +201,9 @@ void Execution::run_ESBMC_G_BOOLECTOR(Setup* experiment)
 							// Caso encontre o mesmo valor
 							}else{
 
-									if(cont_comp < 3){
+//									if(cont_comp < 3){
 
-										cont_comp++;
+//										cont_comp++;
 										// Increase the Compensator
 										compensar_fobj = compensar_fobj * 10;
 										acumulador_cont = acumulador_cont + compensar_fobj;
@@ -219,18 +219,18 @@ void Execution::run_ESBMC_G_BOOLECTOR(Setup* experiment)
 										// Gera nova Especificação com nova Função Candidata (Aqui não incrementa a precisão)
 										generatefilesAUX.create_specification_ESBMC_G_Boolector(experiment);
 
-									}
+//									}
 
 							}
 
 					}
-
+/*
 					if(cont_comp == 3){
 						acumulador_cont=0;
 						cont_comp=1;
 						stay_precision = false;
 					}
-
+*/
 		  			cout << endl << " ### f("+ convertValue.convertDoubleString(experiment->getX1Current()) +
 		  								"," +
 		  								convertValue.convertDoubleString(experiment->getX2Current()) +
@@ -393,7 +393,6 @@ void Execution::run_ESBMC_G_Z3(Setup* experiment)
 			compensar_fobj =  0.00001;
 
 			// Gera nova Especificação com nova Função Candidata
-			experiment->setFcCurrent( experiment->getFcCurrent() - compensar_fobj);
 			generatefilesAUX.create_specification_ESBMC_G_Z3(experiment);
 
 	} // Fim While Externo
@@ -462,6 +461,8 @@ void Execution::run_ESBMC_G_MATHSAT(Setup* experiment)
 	//=================================
   	while(experiment->getPrecisionCurrent() <= precisionLoop)
   	{
+
+		cout << endl << " ### Precisão Atual " + convertValue.convertDoubleString(experiment->getPrecisionCurrent())<< endl;
 
   			// Verifica Precisão - While Interno
   			while( stay_precision )
@@ -540,6 +541,317 @@ void Execution::run_ESBMC_G_MATHSAT(Setup* experiment)
 
 			// Gera nova Especificação com nova Função Candidata
 			generatefilesAUX.create_specification_ESBMC_G_Mathsat(experiment);
+
+
+	} // Fim While Externo
+
+    cout << "####################################" << endl ;
+    cout << " Global Minimum: " ;
+    cout << "f(" + convertValue.convertDoubleString(experiment->getX1Current()) + "," + convertValue.convertDoubleString(experiment->getX2Current()) + ") = " + convertValue.convertDoubleString(experiment->getFcCurrent()) << endl;
+    cout << "####################################" << endl ;
+
+}
+
+void Execution::run_ESBMC_G_CVC(Setup* experiment)
+{
+
+	//	Configuração do Experimento
+	//=================================
+	cout << endl;
+	cout << " Configuration Optimization" << endl;
+	cout << endl;
+	cout << "     Function: " + experiment->getNameFunction()<< endl;
+	cout << "    Algorithm: CEGIO-G" << endl;
+	cout << "          BMC: ESBMC" << endl;
+	cout << "       Solver: CVC" << endl;
+	cout << endl;
+
+
+	//	Ajuste de Variáveis
+	//=================================
+	experiment->setPrecisionCurrent(1);
+	int precisionLoop = pow(10, experiment->getPrecisionTest());
+	string command = "";
+	bool stay_precision = true;
+	string new_fiS;
+	float compensar_fobj =  0.00001;
+	string compensar_fobjS;
+	int v_log = 1;
+	string v_log_CE;
+	int cont_comp = 1;
+	float acumulador_cont = 0.0;
+
+    experiment->setFcCurrent( convertValue.convertStringDouble(experiment->getFcStart()) );
+    experiment->setFcCurrentString( experiment->getFcStart() );
+
+
+	//	Gerar Restrições ASSUMES
+	//=================================
+  	experiment->setRestrictions( generate_assumes(experiment) );
+
+
+  	// Gerar Arquivo C para calcular Mínimo
+	//=================================
+  	generatefilesAUX.create_f(experiment);
+  	command  = "gcc " + experiment->getNameFunction() + ".c -o value_min";
+  	system(command.c_str());
+
+
+  	// Gerar Especificação
+	//=================================
+  	generatefilesAUX.create_specification_ESBMC_G_Boolector(experiment);
+
+  	cout << " Start while" << endl;
+  	cout << " ###            f_i: " + convertValue.convertDoubleString(experiment->getFcCurrent())<< endl;
+  	cout << " ### Precisão Atual: " + convertValue.convertDoubleString(experiment->getPrecisionCurrent())<< endl;
+  	cout << " ### Precisão Reque: " + convertValue.convertDoubleString(precisionLoop)<< endl;
+
+  	// Loop de Otimização
+	//=================================
+  	while(experiment->getPrecisionCurrent() <= precisionLoop)
+  	{
+
+  			cout << endl << " ### Precisão Atual " + convertValue.convertDoubleString(experiment->getPrecisionCurrent())<< endl;
+
+  			// Verifica Precisão - While Interno
+  			while( stay_precision )
+  			{
+
+					 // Incrementa Logs
+					cout << " ### Verificação " + convertValue.convertDoubleString(v_log);
+					v_log_CE = "log_" + convertValue.convertDoubleString(v_log);
+
+					 // Verifica Especificação
+					command = "./esbmc min_" +experiment->name_function + ".c --boolector > " +v_log_CE;	// <- AQUI
+					system(command.c_str());
+
+					// Analisa Contra-Exmplo
+					tratar_contra_exemplo.take_CE_ESBMC_CVC(v_log_CE, experiment);
+
+					// Verificação desconhecida
+					if(experiment->getStatusCe() == 2){
+
+
+							cout << "COUNTEREXAMPLE UNKNOWN" << endl;
+							//  Stop While Internal
+							break;
+
+					// Verificação Sucesso
+					}else if(experiment->getStatusCe() == 1){
+							v_log++;
+							stay_precision = false;
+
+					// Verificação Falhou
+					}else{
+
+							// Caso valor encontrado seja menor que o ultimo candidato
+							if( experiment->getFcFc() < experiment->getFcCurrent() ){
+
+									// Minimo valor valido é atualizado
+									experiment->setFcCurrent(experiment->getFcFc());
+
+									// Logs Incrementados
+									v_log++;
+
+									// Atualiza Função Candidata para uma nova especificação
+									experiment->setFcCurrent(experiment->getFcFc());
+
+									// Gera nova Especificação com nova Função Candidata (Aqui não incrementa a precisão)
+									generatefilesAUX.create_specification_ESBMC_G_Boolector(experiment);
+
+							// Caso encontre o mesmo valor
+							}else{
+
+										// Increase the Compensator
+										compensar_fobj = compensar_fobj * 10;
+										acumulador_cont = acumulador_cont + compensar_fobj;
+										cout << endl << " COMP: " + convertValue.convertDoubleString(compensar_fobj) << endl;
+										cout << " ACU_COMP: " + convertValue.convertDoubleString(acumulador_cont) << endl;
+
+										// Atualiza Função Candidata para uma nova especificação, Considerando Compensador
+										experiment->setFcCurrent(experiment->fc_current - compensar_fobj);
+
+										// Incrementa Log
+										v_log++;
+
+										// Gera nova Especificação com nova Função Candidata (Aqui não incrementa a precisão)
+										generatefilesAUX.create_specification_ESBMC_G_Boolector(experiment);
+
+
+							}
+
+					}
+
+					cout << endl << " ### f("+ convertValue.convertDoubleString(experiment->getX1Current()) +
+		  								"," +
+		  								convertValue.convertDoubleString(experiment->getX2Current()) +
+		  								")="+
+		  								convertValue.convertDoubleString(experiment->getFcCurrent()) + " "<< endl;
+
+  			} // Fim While Interno
+
+
+			// Atualiza Precisão
+			experiment->setPrecisionCurrent(experiment->getPrecisionCurrent() * 10);
+			stay_precision = true;
+			compensar_fobj =  0.00001;
+
+			// Gera nova Especificação com nova Função Candidata
+			generatefilesAUX.create_specification_ESBMC_G_Boolector(experiment);
+
+
+	} // Fim While Externo
+
+    cout << "####################################" << endl ;
+    cout << " Global Minimum: " ;
+    cout << "f(" + convertValue.convertDoubleString(experiment->getX1Current()) + "," + convertValue.convertDoubleString(experiment->getX2Current()) + ") = " + convertValue.convertDoubleString(experiment->getFcCurrent()) << endl;
+    cout << "####################################" << endl ;
+
+}
+
+void Execution::run_ESBMC_G_YICES(Setup* experiment)
+{
+
+	//	Configuração do Experimento
+	//=================================
+	cout << endl;
+	cout << " Configuration Optimization" << endl;
+	cout << endl;
+	cout << "     Function: " + experiment->getNameFunction()<< endl;
+	cout << "    Algorithm: CEGIO-G" << endl;
+	cout << "          BMC: ESBMC" << endl;
+	cout << "       Solver: Yices" << endl;
+	cout << endl;
+
+
+	//	Ajuste de Variáveis
+	//=================================
+	experiment->setPrecisionCurrent(1);
+	int precisionLoop = pow(10, experiment->getPrecisionTest());
+	string command = "";
+	bool stay_precision = true;
+	string new_fiS;
+	float compensar_fobj =  0.00001;
+	string compensar_fobjS;
+	int v_log = 1;
+	string v_log_CE;
+	int cont_comp = 1;
+	float acumulador_cont = 0.0;
+
+    experiment->setFcCurrent( convertValue.convertStringDouble(experiment->getFcStart()) );
+    experiment->setFcCurrentString( experiment->getFcStart() );
+
+
+	//	Gerar Restrições ASSUMES
+	//=================================
+  	experiment->setRestrictions( generate_assumes(experiment) );
+
+
+  	// Gerar Arquivo C para calcular Mínimo
+	//=================================
+  	generatefilesAUX.create_f(experiment);
+  	command  = "gcc " + experiment->getNameFunction() + ".c -o value_min";
+  	system(command.c_str());
+
+
+  	// Gerar Especificação
+	//=================================
+  	generatefilesAUX.create_specification_ESBMC_G_Boolector(experiment);
+
+  	cout << " Start while" << endl;
+  	cout << " ###            f_i: " + convertValue.convertDoubleString(experiment->getFcCurrent())<< endl;
+  	cout << " ### Precisão Atual: " + convertValue.convertDoubleString(experiment->getPrecisionCurrent())<< endl;
+  	cout << " ### Precisão Reque: " + convertValue.convertDoubleString(precisionLoop)<< endl;
+
+  	// Loop de Otimização
+	//=================================
+  	while(experiment->getPrecisionCurrent() <= precisionLoop)
+  	{
+
+  			cout << endl << " ### Precisão Atual " + convertValue.convertDoubleString(experiment->getPrecisionCurrent())<< endl;
+
+  			// Verifica Precisão - While Interno
+  			while( stay_precision )
+  			{
+
+					 // Incrementa Logs
+					cout << " ### Verificação " + convertValue.convertDoubleString(v_log);
+					v_log_CE = "log_" + convertValue.convertDoubleString(v_log);
+
+					 // Verifica Especificação
+					command = "./esbmc min_" +experiment->name_function + ".c --boolector > " +v_log_CE;	//   <-Aqui Por Yices
+					system(command.c_str());
+
+					// Analisa Contra-Exmplo
+					tratar_contra_exemplo.take_CE_ESBMC_Yices(v_log_CE, experiment);
+
+					// Verificação desconhecida
+					if(experiment->getStatusCe() == 2){
+
+							cout << "COUNTEREXAMPLE UNKNOWN" << endl;
+							//  Stop While Internal
+							break;
+
+					// Verificação Sucesso
+					}else if(experiment->getStatusCe() == 1){
+							v_log++;
+							stay_precision = false;
+
+					// Verificação Falhou
+					}else{
+
+							// Caso valor encontrado seja menor que o ultimo candidato
+							if( experiment->getFcFc() < experiment->getFcCurrent() ){
+
+									// Minimo valor valido é atualizado
+									experiment->setFcCurrent(experiment->getFcFc());
+
+									// Logs Incrementados
+									v_log++;
+
+									// Atualiza Função Candidata para uma nova especificação
+									experiment->setFcCurrent(experiment->getFcFc());
+
+									// Gera nova Especificação com nova Função Candidata (Aqui não incrementa a precisão)
+									generatefilesAUX.create_specification_ESBMC_G_Boolector(experiment);
+
+							// Caso encontre o mesmo valor
+							}else{
+
+										compensar_fobj = compensar_fobj * 10;
+										acumulador_cont = acumulador_cont + compensar_fobj;
+										cout << endl << " COMP: " + convertValue.convertDoubleString(compensar_fobj) << endl;
+										cout << " ACU_COMP: " + convertValue.convertDoubleString(acumulador_cont) << endl;
+
+										// Atualiza Função Candidata para uma nova especificação, Considerando Compensador
+										experiment->setFcCurrent(experiment->fc_current - compensar_fobj);
+
+										// Incrementa Log
+										v_log++;
+
+										// Gera nova Especificação com nova Função Candidata (Aqui não incrementa a precisão)
+										generatefilesAUX.create_specification_ESBMC_G_Boolector(experiment);
+
+							}
+
+					}
+
+					cout << endl << " ### f("+ convertValue.convertDoubleString(experiment->getX1Current()) +
+		  								"," +
+		  								convertValue.convertDoubleString(experiment->getX2Current()) +
+		  								")="+
+		  								convertValue.convertDoubleString(experiment->getFcCurrent()) + " "<< endl;
+
+  			} // Fim While Interno
+
+
+			// Atualiza Precisão
+			experiment->setPrecisionCurrent(experiment->getPrecisionCurrent() * 10);
+			stay_precision = true;
+			compensar_fobj =  0.00001;
+
+			// Gera nova Especificação com nova Função Candidata
+			generatefilesAUX.create_specification_ESBMC_G_Boolector(experiment);
 
 
 	} // Fim While Externo
@@ -1465,6 +1777,8 @@ void Execution::run_ESBMC_C_MATHSAT(Setup* experiment){
 
 
 }
+
+
 
 
 void Execution::run_CBMC_G_MINISAT(Setup* experiment)

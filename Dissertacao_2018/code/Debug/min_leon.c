@@ -10,7 +10,7 @@
 
     int main() {
     
-    float f_i = 0;
+    float f_i = -2e-05;
 
     int i,j;
     int x[3];

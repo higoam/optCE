@@ -1,4 +1,4 @@
-#define p 100
+#define p 10
 #define nv 2 
 #define nr 2 
 
@@ -10,7 +10,7 @@
 
     int main() {
     
-    float f_i = -0.003779;
+    float f_i = 0;
 
     int i,j;
     int x[3];

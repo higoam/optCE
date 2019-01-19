@@ -30,7 +30,7 @@ Setup* Tflags::Checks(int argc, char *argv[])
     string name_funcion;
     string flag_command;
     string flag_value;
-    int vet_flag[20] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int vet_flag[25] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 
 	// Caso tenha apenas 1 argumento, implica dizer não foi inserido a função
@@ -151,6 +151,14 @@ Setup* Tflags::Checks(int argc, char *argv[])
 			{
 				vet_flag[13]++;
 			}
+			else if(string(argv[i]) == "--cvc" )
+			{
+				vet_flag[19]++;
+			}
+			else if(string(argv[i]) == "--yices" )
+			{
+				vet_flag[20]++;
+			}
 			else
 			{
 				auxS = string(argv[i]);
@@ -232,9 +240,19 @@ Setup* Tflags::Checks(int argc, char *argv[])
 						{
 							cout << "Unknown value: " + string(argv[i]) << endl;
 					          setup_experiment_flags.setFailure(true);
-
-		//			          setup_experiment_flags_r = &setup_experiment_flags;
-		//			          return setup_experiment_flags_r;
+						}
+					}
+					else if(flag_command == "--precision-direct")
+					{
+						vet_flag[21]++;
+						if(check_if_number(flag_value))
+						{
+							setup_experiment_flags.setPrecisionTest(auxConvert.convertStringInt(flag_value));
+						}
+						else
+						{
+							cout << "Unknown value: " + string(argv[i]) << endl;
+					          setup_experiment_flags.setFailure(true);
 						}
 					}
 					else
@@ -302,7 +320,15 @@ Setup* Tflags::Checks(int argc, char *argv[])
       //***************************************************
       if( setup_experiment_flags.getBmc() == 1 )
       {
-    	  if(vet_flag[3]==0 && vet_flag[4]==0 && vet_flag[5]==0)
+    	  if(vet_flag[19]>0)
+    	  {
+    		  setup_experiment_flags.setSolver(5);
+    	  }
+    	  else if(vet_flag[20]>0)
+    	  {
+    		  setup_experiment_flags.setSolver(6);
+    	  }
+    	  else if(vet_flag[3]==0 && vet_flag[4]==0 && vet_flag[5]==0)
     	  {
     		  setup_experiment_flags.setSolver(3);
     	  }
@@ -441,6 +467,14 @@ Setup* Tflags::Checks(int argc, char *argv[])
       {
     	  setup_experiment_flags.setPrecisionTest(3);
       }
+
+      if(vet_flag[19]==0)
+      {
+    	  //Precisamso criar uma variavel no setup para idetinticar 1 de 0 e conseguirmos definir se se é o algorimo de precisao direta.
+
+    	  setup_experiment_flags.setPrecisionTest(3);
+      }
+
     }
 
 
@@ -505,7 +539,7 @@ void Tflags::print_help()
 void Tflags::print_version()
 {
   cout << endl;
-  cout << " optSMT version 1.1 64-bit x86_64 linux | 17 01 2019" << endl;
+  cout << " optSMT version 1.2 64-bit x86_64 linux | 19 01 2019" << endl;
   cout << endl;
 }
 

@@ -1,4 +1,4 @@
-#define p 100
+#define p 1000
 #define nv 2 
 #define nr 2 
 

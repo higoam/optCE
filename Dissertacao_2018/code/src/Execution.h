@@ -40,6 +40,8 @@ public:
     void run_ESBMC_G_BOOLECTOR(Setup* experiment);
     void run_ESBMC_G_Z3(Setup* experiment);
     void run_ESBMC_G_MATHSAT(Setup* experiment);
+    void run_ESBMC_G_CVC(Setup* experiment);
+    void run_ESBMC_G_YICES(Setup* experiment);
 
     void run_ESBMC_S_BOOLECTOR(Setup* experiment);
     void run_ESBMC_S_Z3(Setup* experiment);
