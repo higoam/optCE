@@ -622,7 +622,7 @@ void Execution::run_ESBMC_G_CVC(Setup* experiment)
 					v_log_CE = "log_" + convertValue.convertDoubleString(v_log);
 
 					 // Verifica Especificação
-					command = "./esbmc min_" +experiment->name_function + ".c --boolector > " +v_log_CE;	// <- AQUI
+					command = "./esbmc min_" +experiment->name_function + ".c --cvc > " +v_log_CE;	// <- AQUI
 					system(command.c_str());
 
 					// Analisa Contra-Exmplo
@@ -779,7 +779,7 @@ void Execution::run_ESBMC_G_YICES(Setup* experiment)
 					v_log_CE = "log_" + convertValue.convertDoubleString(v_log);
 
 					 // Verifica Especificação
-					command = "./esbmc min_" +experiment->name_function + ".c --boolector > " +v_log_CE;	//   <-Aqui Por Yices
+					command = "./esbmc min_" +experiment->name_function + ".c --yices > " +v_log_CE;	//   <-Aqui Por Yices
 					system(command.c_str());
 
 					// Analisa Contra-Exmplo
