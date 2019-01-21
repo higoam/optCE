@@ -1,0 +1,4 @@
+fobj = abs2(x1*x1 +x2*x2 +x1*x2) + abs2(sin2(x1)) + abs2(cos2(x2));
+#
+A = [5 -5; 5 -5];
+
