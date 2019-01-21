@@ -187,8 +187,8 @@ Setup* Tflags::Checks(int argc, char *argv[])
 					}
 					else if(flag_command == "--parallelize" )
 					{
-						vet_flag[13]++;
-						setup_experiment_flags.setCore(4); // No momento, sempre paraleliza com 4
+//						vet_flag[13]++;
+//						setup_experiment_flags.setCore(4); // No momento, sempre paraleliza com 4
 					}
 					else if(flag_command == "--library" )
 					{
@@ -241,8 +241,9 @@ Setup* Tflags::Checks(int argc, char *argv[])
 							cout << "Unknown value: " + string(argv[i]) << endl;
 					          setup_experiment_flags.setFailure(true);
 						}
+
 					}
-					else if(flag_command == "--precision-direct")
+					else if(flag_command == "--direct-precision")
 					{
 						vet_flag[21]++;
 						if(check_if_number(flag_value))
@@ -263,6 +264,7 @@ Setup* Tflags::Checks(int argc, char *argv[])
 	//			          setup_experiment_flags_r = &setup_experiment_flags;
 	//			          return setup_experiment_flags_r;
 					}
+
 				}
 				else   // There is not =
 				{
@@ -272,10 +274,9 @@ Setup* Tflags::Checks(int argc, char *argv[])
 	//		          setup_experiment_flags_r = &setup_experiment_flags;
 //			          return setup_experiment_flags_r;
 				}
+
 			}
     	}
-
-
 
     	// Delete option when delimiting solver without delimiting MC
     	//************************************************
@@ -465,14 +466,14 @@ Setup* Tflags::Checks(int argc, char *argv[])
 
       if(vet_flag[18]==0)
       {
-    	  setup_experiment_flags.setPrecisionTest(3);
+    	  //setup_experiment_flags.setPrecisionTest(3);
       }
 
       if(vet_flag[19]==0)
       {
     	  //Precisamso criar uma variavel no setup para idetinticar 1 de 0 e conseguirmos definir se se é o algorimo de precisao direta.
 
-    	  setup_experiment_flags.setPrecisionTest(3);
+    	  //setup_experiment_flags.setPrecisionTest(3);
       }
 
     }
@@ -539,7 +540,7 @@ void Tflags::print_help()
 void Tflags::print_version()
 {
   cout << endl;
-  cout << " optSMT version 1.2 64-bit x86_64 linux | 19 01 2019" << endl;
+  cout << " optSMT version 1.3 64-bit x86_64 linux | 21 01 2019" << endl;
   cout << endl;
 }
 
