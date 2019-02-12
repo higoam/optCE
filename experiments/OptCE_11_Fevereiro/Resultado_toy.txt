@@ -1,0 +1,70 @@
+
+ESBMC -  CASA
+
+GERAL
+
+higo@robusto:~/eclipse-workspace/optCE/Debug$ time ./optCE toy.func --esbmc --boolector --generalized --library=math2.h --restriction --start-value=10000
+treatment_input_format_constraints
+
+ Configuration Optimization
+
+     Function: toy
+    Algorithm: CEGIO-G
+
+
+ ### Precisão Atual 1
+     f(0,0)=3600 
+
+ ### Precisão Atual 10
+
+ ### Precisão Atual 100
+     f(652.94,652.93)=2039.58 
+     f(2.02,2)=1920 
+
+ ### Precisão Atual 1000
+####################################
+ Global Minimum: f(2.02,2) = 1920
+####################################
+
+real	17m50,073s
+user	13m36,840s
+sys	0m5,427s
+
+
+
+POSITIVO
+
+higo@robusto:~/eclipse-workspace/optCE/Debug$ time ./optCE toy.func --esbmc --boolector --positive --library=math2.h --restriction --start-value=10000
+treatment_input_format_constraints
+
+ Configuration Optimization
+
+     Function: toy
+    Algorithm: CEGIO-S
+
+
+ ### Precisão Atual 1
+     f(0,0)=3600 
+
+ ### Precisão Atual 10
+
+ ### Precisão Atual 100
+     f(0.43,0.43)=2520 
+     f(1.43,1.47)=2460 
+     f(0.34,0.38)=2460 
+     f(0.15,0.15)=2340 
+     f(0.11,0.12)=2100 
+     f(0.1,0.06)=2040 
+     f(1.72,1.72)=1980 
+     f(652.49,652.47)=1920.56 
+     f(0.38,0.36)=1920 
+
+ ### Precisão Atual 1000
+####################################
+ Global Minimum: f(0.38,0.36) = 1920
+####################################
+
+real	15m42,318s
+user	14m57,820s
+sys	0m4,870s
+
