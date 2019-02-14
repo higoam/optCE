@@ -1,0 +1,6 @@
+fobj = abs2(X1)*abs2(X1) + abs2(X2)*abs2(X2)*abs2(X2);
+#
+A = [-1 1; -1 1];
+
+
+

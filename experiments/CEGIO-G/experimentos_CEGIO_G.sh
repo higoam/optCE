@@ -53,7 +53,7 @@ declare -a functions_hard=(
 );
 
 declare -a functions_all=(
-#'adjiman.func'
+'adjiman.func'
 'alpine1.func'
 'bartels.func'
 'beale.func'
