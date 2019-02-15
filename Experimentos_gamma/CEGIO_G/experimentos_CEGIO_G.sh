@@ -1,6 +1,21 @@
 #!/bin/bash
 
 declare -a functions=(
+'adjiman.func'
+'bohachevsky_1.func'
+'bohachevsky_3.func'
+'branin_RCOS.func'
+'camel_six.func'
+'camel_three.func'
+'cosine.func'
+'scahffer_1.func'
+'styblinski_tang.func'
+'trecanni.func'
+'tsoulos.func'
+'ursem_1.func'
+'wayburn_seader_1.func'
+'zirilli.func'
+#
 'alpine1.func'
 'egg_crate.func'
 'himmelblau.func'
@@ -10,6 +25,19 @@ declare -a functions=(
 'sphere.func'
 'wayburn_seader_2.func'
 'price_1.func'
+#
+'booth.func'
+'chung_reynolds.func'
+'cube.func'
+'dixon_price.func'
+'power_sum.func'
+'schumer.func'
+'sum_squares.func'
+'matyas.func'
+'rotated_ellipse.func'
+'zettl.func'
+'mccormick.func'
+'godstein_price.func'
 );
 
 	echo

@@ -13,7 +13,7 @@ declare -a functions=(
 );
 
 	echo
-	echo "#############  Experiments to --generalized  ##############"	
+	echo "#############  Experiments to --positive CEGIO-S prec2  ##############"	
 	echo
 
 	echo "#############  CBMC - MINISAT  ##############"	
@@ -23,7 +23,7 @@ declare -a functions=(
 		func=${line//,*}       	
 
 		echo
-		(time ./optCE $func --cbmc --minisat --generalized --library=math2.h --precision=2 >> resultado_exp_Artigo_MINISAT.txt) 
+		(time ./optCE $func --cbmc --minisat --positive --library=math2.h --precision=2 >> resultado_exp_CEGIO_S_MINISAT.txt) 
 		echo
 	done
 
@@ -34,7 +34,7 @@ declare -a functions=(
 		func=${line//,*}       	
 
 		echo
-		(time ./optCE $func --esbmc --mathsat --generalized --library=math2.h --precision=2 >> resultado_exp_Artigo_MATHSAT.txt) 
+		(time ./optCE $func --esbmc --mathsat --positive --library=math2.h --precision=2 >> resultado_exp_CEGIO_S_MATHSAT.txt) 
 		echo
 	done
 
@@ -46,7 +46,7 @@ declare -a functions=(
 		func=${line//,*}       	
 
 		echo
-		(time ./optCE $func --esbmc --boolector --generalized --library=math2.h --precision=2 >> resultado_exp_Artigo_BOOLECTOR.txt) 
+		(time ./optCE $func --esbmc --boolector --positive --library=math2.h --precision=2 >> resultado_exp_CEGIO_S_BOOLECTOR.txt) 
 		echo
 	done
 
@@ -57,7 +57,7 @@ declare -a functions=(
 		func=${line//,*}       	
 
 		echo
-		(time ./optCE $func --esbmc --z3 --generalized --library=math2.h --precision=2 >> resultado_exp_Artigo_Z3.txt) 
+		(time ./optCE $func --esbmc --z3 --positive --library=math2.h --precision=2 >> resultado_exp_CEGIO_S_Z3.txt) 
 		echo
 	done
 
