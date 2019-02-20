@@ -1,0 +1,247 @@
+
+ Configuration Optimization
+
+     Function: chen_v
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_chen_v.c  > log_1 2>> log_1
+f(33,13)=-1e-06 
+     ** ./cbmc min_chen_v.c  > log_2 2>> log_2
+f(3,17)=-6.8e-05 
+     ** ./cbmc min_chen_v.c  > log_3 2>> log_3
+f(5,10)=-0.001237 
+     ** ./cbmc min_chen_v.c  > log_4 2>> log_4
+f(-0,1)=-0.008 
+     ** ./cbmc min_chen_v.c  > log_5 2>> log_5
+f(40,99)=-0.011111 
+     ** ./cbmc min_chen_v.c  > log_6 2>> log_6
+f(-11,-28)=-0.09999 
+     ** ./cbmc min_chen_v.c  > log_7 2>> log_7
+     ** Incremento Ajust: 0
+     ** ./cbmc min_chen_v.c  > log_8 2>> log_8
+f(-0,0)=-0.100434 
+     ** ./cbmc min_chen_v.c  > log_9 2>> log_9
+     ** Incremento Ajust: 0
+     ** ./cbmc min_chen_v.c  > log_10 2>> log_10
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.100434
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_chen_v.c  > log_11 2>> log_11
+f(0.1,-0.2)=-0.15667 
+     ** ./cbmc min_chen_v.c  > log_12 2>> log_12
+f(-0,-0.3)=-2.49407 
+     ** ./cbmc min_chen_v.c  > log_13 2>> log_13
+f(-1.8,5.1)=-1000 
+     ** ./cbmc min_chen_v.c  > log_14 2>> log_14
+f(0.9,-0.3)=-1000 
+     ** ./cbmc min_chen_v.c  > log_15 2>> log_15
+     ** Incremento Ajust: 0
+     ** ./cbmc min_chen_v.c  > log_16 2>> log_16
+     ** Incremento Ajust: 1
+     ** ./cbmc min_chen_v.c  > log_17 2>> log_17
+
+### Precisão Atual 100
+     ** ./cbmc min_chen_v.c  > log_18 2>> log_18
+     ** Incremento Ajust: 0
+     ** ./cbmc min_chen_v.c  > log_19 2>> log_19
+     ** Incremento Ajust: 1
+     ** ./cbmc min_chen_v.c  > log_20 2>> log_20
+
+### Precisão Atual 1000
+     ** ./cbmc min_chen_v.c  > log_21 2>> log_21
+     ** Incremento Ajust: 0
+     ** ./cbmc min_chen_v.c  > log_22 2>> log_22
+     ** Incremento Ajust: 1
+     ** ./cbmc min_chen_v.c  > log_23 2>> log_23
+####################################
+ Global Minimum: f(0.75,-0) = -1000
+####################################
+
+ Configuration Optimization
+
+     Function: chen_bird
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_chen_bird.c  > log_1 2>> log_1
+f(0,0)=-1000.01 
+     ** ./cbmc min_chen_bird.c  > log_2 2>> log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: -1000.01
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_chen_bird.c  > log_3 2>> log_3
+f(0.5,-0.5)=-2000 
+     ** ./cbmc min_chen_bird.c  > log_4 2>> log_4
+     ** Incremento Ajust: 0
+     ** ./cbmc min_chen_bird.c  > log_5 2>> log_5
+     ** Incremento Ajust: 1
+     ** ./cbmc min_chen_bird.c  > log_6 2>> log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: -1000.01
+     ** Precisão 10: -2000
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./cbmc min_chen_bird.c  > log_7 2>> log_7
+     ** Vai cancelar tudo
+     ** Precisão 1: -1000.01
+     ** Precisão 10: -2000
+     ** Precisão 100: -2000
+     ** Precisão 1000: 0
+
+### Precisão Atual 1000
+     ** ./cbmc min_chen_bird.c  > log_8 2>> log_8
+     ** Vai cancelar tudo
+     ** Precisão 1: -1000.01
+     ** Precisão 10: -2000
+     ** Precisão 100: -2000
+     ** Precisão 1000: -2000
+####################################
+ Global Minimum: f(0.5,0.5) = -2000
+####################################
+
+ Configuration Optimization
+
+     Function: h1
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_h1.c  > log_1 2>> log_1
+
+ Configuration Optimization
+
+     Function: chen_v
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_chen_v.c  > log_1 2>> log_1
+f(-4,0)=-7.1e-05 
+     ** ./cbmc min_chen_v.c  > log_2 2>> log_2
+
+ Configuration Optimization
+
+     Function: chen_v
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_chen_v.c  > log_1 2>> log_1
+f(-2,-0)=-0.00026 
+     ** ./cbmc min_chen_v.c  > log_2 2>> log_2
+f(1,-0)=-0.005235 
+     ** ./cbmc min_chen_v.c  > log_3 2>> log_3
+f(4,9)=-0.011115 
+     ** ./cbmc min_chen_v.c  > log_4 2>> log_4
+f(0,-1)=-0.011271 
+     ** ./cbmc min_chen_v.c  > log_5 2>> log_5
+f(-0,-0)=-0.100434 
+     ** ./cbmc min_chen_v.c  > log_6 2>> log_6
+     ** Incremento Ajust: 0
+     ** ./cbmc min_chen_v.c  > log_7 2>> log_7
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.100434
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_chen_v.c  > log_8 2>> log_8
+f(0,1.6)=-0.101816 
+     ** ./cbmc min_chen_v.c  > log_9 2>> log_9
+f(0.6,0.4)=-0.10864 
+     ** ./cbmc min_chen_v.c  > log_10 2>> log_10
+f(-0.4,-1.4)=-0.277774 
+     ** ./cbmc min_chen_v.c  > log_11 2>> log_11
+f(-0,1.5)=-1000 
+     ** ./cbmc min_chen_v.c  > log_12 2>> log_12
+f(0.5,1)=-1000 
+     ** ./cbmc min_chen_v.c  > log_13 2>> log_13
+     ** Incremento Ajust: 0
+     ** ./cbmc min_chen_v.c  > log_14 2>> log_14
+     ** Incremento Ajust: 1
+     ** ./cbmc min_chen_v.c  > log_15 2>> log_15
+f(0.3,0.9)=-1000.04 
+     ** ./cbmc min_chen_v.c  > log_16 2>> log_16
+f(0.4,0.7)=-1002.49 
+     ** ./cbmc min_chen_v.c  > log_17 2>> log_17
+     ** Incremento Ajust: 0
+     ** ./cbmc min_chen_v.c  > log_18 2>> log_18
+     ** Incremento Ajust: 1
+     ** ./cbmc min_chen_v.c  > log_19 2>> log_19
+
+### Precisão Atual 100
+     ** ./cbmc min_chen_v.c  > log_20 2>> log_20
+f(0.38,0.74)=-1003.89 
+     ** ./cbmc min_chen_v.c  > log_21 2>> log_21
+     ** Incremento Ajust: 0
+     ** ./cbmc min_chen_v.c  > log_22 2>> log_22
+     ** Incremento Ajust: 1
+     ** ./cbmc min_chen_v.c  > log_23 2>> log_23
+
+### Precisão Atual 1000
+     ** ./cbmc min_chen_v.c  > log_24 2>> log_24
+f(0.388,0.72)=-1058.82 
+     ** ./cbmc min_chen_v.c  > log_25 2>> log_25
+f(0.391,0.718)=-1064.77 
+     ** ./cbmc min_chen_v.c  > log_26 2>> log_26
+f(0.389,0.722)=-1961.54 
+     ** ./cbmc min_chen_v.c  > log_27 2>> log_27
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.100434
+     ** Precisão 10: -1961.54
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10000
+     ** ./cbmc min_chen_v.c  > log_28 2>> log_28
+f(0.3889,0.7221)=-1986.53 
+     ** ./cbmc min_chen_v.c  > log_29 2>> log_29
+f(0.3889,0.7222)=-1999.6 
+     ** ./cbmc min_chen_v.c  > log_30 2>> log_30
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.100434
+     ** Precisão 10: -1961.54
+     ** Precisão 100: -1999.6
+     ** Precisão 1000: 0
+
+### Precisão Atual 100000
+     ** ./cbmc min_chen_v.c  > log_31 2>> log_31
+f(0.38889,0.72221)=-1999.86 
+     ** ./cbmc min_chen_v.c  > log_32 2>> log_32
+f(0.38889,0.72222)=-2000 
+     ** ./cbmc min_chen_v.c  > log_33 2>> log_33
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.100434
+     ** Precisão 10: -1961.54
+     ** Precisão 100: -1999.6
+     ** Precisão 1000: -2000
+####################################
+ Global Minimum: f(0.38889,0.72222) = -2000
+####################################
+
+ Configuration Optimization
+
+     Function: chen_bird
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_chen_bird.c  > log_1 2>> log_1
+f(-1,1)=-1000 
+     ** ./cbmc min_chen_bird.c  > log_2 2>> log_2
+f(0,1)=-1000.01 
+     ** ./cbmc min_chen_bird.c  > log_3 2>> log_3

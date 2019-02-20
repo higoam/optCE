@@ -1,10 +1,10 @@
 #!/bin/bash
 
 declare -a functions=(
-#'alpine1.func'
-#'cosine.func'
-#'styblinski_tang.func'
-#'zirilli.func'
+'alpine1.func'
+'cosine.func'
+'styblinski_tang.func'
+'zirilli.func'
 'booth.func'
 'himmelblau.func'
 'leon.func'
@@ -13,21 +13,21 @@ declare -a functions=(
 'rotated_ellipse_02.func'
 );
 
-#	echo
-#	echo "#############  Experiments to --generalized CEGIO-G prec3 ##############"	
-#	echo
+	echo
+	echo "#############  Experiments to --generalized CEGIO-G prec3 ##############"	
+	echo
 
-#	echo "#############  CBMC - MINISAT  ##############"	
+	echo "#############  CBMC - MINISAT  ##############"	
 #	for i in "${functions[@]}"
 #	do		
 #		line=$i
-		func=${line//,*}       	
-
+#		func=${line//,*}       	
+#
 #		echo
-#		(time ./optCE $func --cbmc --minisat --generalized --library=math2.h --precision=3 >> resultado_exp_Artigo_MINISAT.txt) 
+#		(time ./optCE_1000 $func --cbmc --minisat --generalized --library=math2.h --precision=3 >> resultado_exp_Artigo_MINISAT.txt) 
 #		echo
 #	done
-
+#
 	echo "#############  ESBMC - Mathsat  ##############"	
 	for i in "${functions[@]}"
 	do		
@@ -35,30 +35,30 @@ declare -a functions=(
 		func=${line//,*}       	
 
 		echo
-		(time ./optCE $func --esbmc --mathsat --generalized --library=math2.h --precision=3 >> resultado_exp_Artigo_MATHSAT.txt) 
+		(time ./optCE_1000 $func --esbmc --mathsat --generalized --library=math2.h --precision=3 >> resultado_exp_Artigo_MATHSAT.txt) 
 		echo
 	done
 
 
-#	echo "#############  ESBMC - Boolector  ##############"	
-#	for i in "${functions[@]}"
-#	do		
-#		line=$i
-#		func=${line//,*}       	
+	echo "#############  ESBMC - Boolector  ##############"	
+	for i in "${functions[@]}"
+	do		
+		line=$i
+		func=${line//,*}       	
 
-#		echo
-#		(time ./optCE $func --esbmc --boolector --generalized --library=math2.h --precision=3 >> resultado_exp_Artigo_BOOLECTOR.txt) 
-#		echo
-#	done
+		echo
+		(time ./optCE_1000 $func --esbmc --boolector --generalized --library=math2.h --precision=3 >> resultado_exp_Artigo_BOOLECTOR.txt) 
+		echo
+	done
 
-#	echo "#############  ESBMC - Z3  ##############"	
-#	for i in "${functions[@]}"
-#	do		
-#		line=$i
-#		func=${line//,*}       	
-#
-#		echo
-#		(time ./optCE $func --esbmc --z3 --generalized --library=math2.h --precision=3 >> resultado_exp_Artigo_Z3.txt) 
-#		echo
-#	done
+	echo "#############  ESBMC - Z3  ##############"	
+	for i in "${functions[@]}"
+	do		
+		line=$i
+		func=${line//,*}       	
+
+		echo
+		(time ./optCE_1000 $func --esbmc --z3 --generalized --library=math2.h --precision=3 >> resultado_exp_Artigo_Z3.txt) 
+		echo
+	done
 

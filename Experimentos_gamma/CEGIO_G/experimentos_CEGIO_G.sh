@@ -7,35 +7,35 @@ declare -a functions=(
 'branin_RCOS.func'
 'camel_six.func'
 'camel_three.func'
-'cosine.func'
+#'cosine.func'
 'scahffer_1.func'
-'styblinski_tang.func'
+#'styblinski_tang.func'
 'trecanni.func'
 'tsoulos.func'
 'ursem_1.func'
 'wayburn_seader_1.func'
-'zirilli.func'
+#'zirilli.func'
 #
-'alpine1.func'
+#'alpine1.func'
 'egg_crate.func'
-'himmelblau.func'
-'leon.func'
+#'himmelblau.func'
+#'leon.func'
 'price_4.func'
 'schwefel_2_25.func'
 'sphere.func'
 'wayburn_seader_2.func'
 'price_1.func'
 #
-'booth.func'
+#'booth.func'
 'chung_reynolds.func'
 'cube.func'
 'dixon_price.func'
 'power_sum.func'
 'schumer.func'
-'sum_squares.func'
+#'sum_squares.func'
 'matyas.func'
-'rotated_ellipse.func'
-'zettl.func'
+#'rotated_ellipse.func'
+#'zettl.func'
 'mccormick.func'
 'godstein_price.func'
 );
@@ -51,7 +51,7 @@ declare -a functions=(
 		func=${line//,*}       	
 
 		echo
-		(time ./optCE $func --cbmc --minisat --generalized --library=math2.h --precision=2 >> resultado_exp_CEGIO_G_MINISAT.txt) 
+		(time ./optCE_1000 $func --cbmc --minisat --generalized --library=math2.h --precision=3 >> resultado_exp_CEGIO_G_MINISAT.txt) 
 		echo
 	done
 
@@ -62,7 +62,7 @@ declare -a functions=(
 		func=${line//,*}       	
 
 		echo
-		(time ./optCE $func --esbmc --mathsat --generalized --library=math2.h --precision=2 >> resultado_exp_CEGIO_G_MATHSAT.txt) 
+		(time ./optCE_1000 $func --esbmc --mathsat --generalized --library=math2.h --precision=3 >> resultado_exp_CEGIO_G_MATHSAT.txt) 
 		echo
 	done
 
@@ -74,7 +74,7 @@ declare -a functions=(
 		func=${line//,*}       	
 
 		echo
-		(time ./optCE $func --esbmc --boolector --generalized --library=math2.h --precision=2 >> resultado_exp_CEGIO_G_BOOLECTOR.txt) 
+		(time ./optCE_1000 $func --esbmc --boolector --generalized --library=math2.h --precision=3 >> resultado_exp_CEGIO_G_BOOLECTOR.txt) 
 		echo
 	done
 
@@ -85,7 +85,7 @@ declare -a functions=(
 		func=${line//,*}       	
 
 		echo
-		(time ./optCE $func --esbmc --z3 --generalized --library=math2.h --precision=2 >> resultado_exp_CEGIO_G_Z3.txt) 
+		(time ./optCE_1000 $func --esbmc --z3 --generalized --library=math2.h --precision=3 >> resultado_exp_CEGIO_G_Z3.txt) 
 		echo
 	done
 

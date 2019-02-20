@@ -1,0 +1,456 @@
+
+ Configuration Optimization
+
+     Function: alpine1
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_alpine1.c  > log_1 2>> log_1
+f(3,0)=0.72336 
+     ** ./cbmc min_alpine1.c  > log_2 2>> log_2
+f(-3,-0)=0.12336 
+     ** ./cbmc min_alpine1.c  > log_3 2>> log_3
+     ** Incremento Ajust: 0
+     ** ./cbmc min_alpine1.c  > log_4 2>> log_4
+f(-0,0)=0 
+     ** ./cbmc min_alpine1.c  > log_5 2>> log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_alpine1.c  > log_6 2>> log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./cbmc min_alpine1.c  > log_7 2>> log_7
+
+ Configuration Optimization
+
+     Function: cosine
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_cosine.c  > log_1 2>> log_1
+f(-1,0)=1 
+     ** ./cbmc min_cosine.c  > log_2 2>> log_2
+f(-0,-0)=-0.2 
+     ** ./cbmc min_cosine.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.2
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_cosine.c  > log_4 2>> log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.2
+     ** Precisão 10: -0.2
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./cbmc min_cosine.c  > log_5 2>> log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.2
+     ** Precisão 10: -0.2
+     ** Precisão 100: -0.2
+     ** Precisão 1000: 0
+
+### Precisão Atual 1000
+     ** ./cbmc min_cosine.c  > log_6 2>> log_6
+
+ Configuration Optimization
+
+     Function: styblinski_tang
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_styblinski_tang.c  > log_1 2>> log_1
+f(3,0)=-24 
+     ** ./cbmc min_styblinski_tang.c  > log_2 2>> log_2
+f(0,-3)=-39 
+     ** ./cbmc min_styblinski_tang.c  > log_3 2>> log_3
+f(-4,-3)=-49 
+     ** ./cbmc min_styblinski_tang.c  > log_4 2>> log_4
+f(3,-3)=-63 
+     ** ./cbmc min_styblinski_tang.c  > log_5 2>> log_5
+f(-3,-2)=-68 
+     ** ./cbmc min_styblinski_tang.c  > log_6 2>> log_6
+f(-3,-3)=-78 
+     ** ./cbmc min_styblinski_tang.c  > log_7 2>> log_7
+     ** Vai cancelar tudo
+     ** Precisão 1: -78
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_styblinski_tang.c  > log_8 2>> log_8
+f(-3,-2.9)=-78.166 
+     ** ./cbmc min_styblinski_tang.c  > log_9 2>> log_9
+f(-2.9,-2.9)=-78.3319 
+     ** ./cbmc min_styblinski_tang.c  > log_10 2>> log_10
+     ** Vai cancelar tudo
+     ** Precisão 1: -78
+     ** Precisão 10: -78.3319
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./cbmc min_styblinski_tang.c  > log_11 2>> log_11
+     ** Vai cancelar tudo
+     ** Precisão 1: -78
+     ** Precisão 10: -78.3319
+     ** Precisão 100: -78.3319
+     ** Precisão 1000: 0
+
+### Precisão Atual 1000
+     ** ./cbmc min_styblinski_tang.c  > log_12 2>> log_12
+f(-2.901,-2.902)=-78.3322 
+     ** ./cbmc min_styblinski_tang.c  > log_13 2>> log_13
+
+ Configuration Optimization
+
+     Function: zirilli
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_zirilli.c  > log_1 2>> log_1
+f(0,-0)=0 
+     ** ./cbmc min_zirilli.c  > log_2 2>> log_2
+f(-1,0)=-0.35 
+     ** ./cbmc min_zirilli.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.35
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_zirilli.c  > log_4 2>> log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.35
+     ** Precisão 10: -0.35
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./cbmc min_zirilli.c  > log_5 2>> log_5
+f(-1.01,0.03)=-0.350449 
+     ** ./cbmc min_zirilli.c  > log_6 2>> log_6
+f(-1.03,0)=-0.352073 
+     ** ./cbmc min_zirilli.c  > log_7 2>> log_7
+f(-1.05,-0.02)=-0.352173 
+     ** ./cbmc min_zirilli.c  > log_8 2>> log_8
+f(-1.05,0.01)=-0.352323 
+     ** ./cbmc min_zirilli.c  > log_9 2>> log_9
+f(-1.04,0)=-0.352335 
+     ** ./cbmc min_zirilli.c  > log_10 2>> log_10
+     ** Incremento Ajust: 0
+     ** ./cbmc min_zirilli.c  > log_11 2>> log_11
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.35
+     ** Precisão 10: -0.35
+     ** Precisão 100: -0.352335
+     ** Precisão 1000: 0
+
+### Precisão Atual 1000
+     ** ./cbmc min_zirilli.c  > log_12 2>> log_12
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.35
+     ** Precisão 10: -0.35
+     ** Precisão 100: -0.352335
+     ** Precisão 1000: -0.352335
+####################################
+ Global Minimum: f(-1.04,0) = -0.352335
+####################################
+
+ Configuration Optimization
+
+     Function: booth
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_booth.c  > log_1 2>> log_1
+f(-0,2)=18 
+     ** ./cbmc min_booth.c  > log_2 2>> log_2
+f(3,2)=9 
+     ** ./cbmc min_booth.c  > log_3 2>> log_3
+f(3,1)=8 
+     ** ./cbmc min_booth.c  > log_4 2>> log_4
+f(1,2)=5 
+     ** ./cbmc min_booth.c  > log_5 2>> log_5
+f(1,3)=0 
+     ** ./cbmc min_booth.c  > log_6 2>> log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_booth.c  > log_7 2>> log_7
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./cbmc min_booth.c  > log_8 2>> log_8
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 1000
+     ** ./cbmc min_booth.c  > log_9 2>> log_9
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(1,3) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: himmelblau
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_himmelblau.c  > log_1 2>> log_1
+f(-3,3)=2 
+     ** ./cbmc min_himmelblau.c  > log_2 2>> log_2
+f(3,2)=0 
+     ** ./cbmc min_himmelblau.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_himmelblau.c  > log_4 2>> log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./cbmc min_himmelblau.c  > log_5 2>> log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 1000
+     ** ./cbmc min_himmelblau.c  > log_6 2>> log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(3,2) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: leon
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_leon.c  > log_1 2>> log_1
+f(0,-0)=1 
+     ** ./cbmc min_leon.c  > log_2 2>> log_2
+f(1,1)=0 
+     ** ./cbmc min_leon.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_leon.c  > log_4 2>> log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./cbmc min_leon.c  > log_5 2>> log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 1000
+     ** ./cbmc min_leon.c  > log_6 2>> log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(1,1) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: zettl
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_zettl.c  > log_1 2>> log_1
+f(0,0)=0 
+     ** ./cbmc min_zettl.c  > log_2 2>> log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_zettl.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./cbmc min_zettl.c  > log_4 2>> log_4
+f(-0.04,0)=-0.003341 
+     ** ./cbmc min_zettl.c  > log_5 2>> log_5
+f(-0.03,0)=-0.003791 
+     ** ./cbmc min_zettl.c  > log_6 2>> log_6
+     ** Incremento Ajust: 0
+     ** ./cbmc min_zettl.c  > log_7 2>> log_7
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: -0.003791
+     ** Precisão 1000: 0
+
+### Precisão Atual 1000
+     ** ./cbmc min_zettl.c  > log_8 2>> log_8
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: -0.003791
+     ** Precisão 1000: -0.003791
+####################################
+ Global Minimum: f(-0.03,0) = -0.003791
+####################################
+
+ Configuration Optimization
+
+     Function: sum_squares
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_sum_squares.c  > log_1 2>> log_1
+f(1,0)=1 
+     ** ./cbmc min_sum_squares.c  > log_2 2>> log_2
+f(0,-0)=0 
+     ** ./cbmc min_sum_squares.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_sum_squares.c  > log_4 2>> log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./cbmc min_sum_squares.c  > log_5 2>> log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 1000
+     ** ./cbmc min_sum_squares.c  > log_6 2>> log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,-0) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: rotated_ellipse_02
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_rotated_ellipse_02.c  > log_1 2>> log_1
+f(-0,-0)=0 
+     ** ./cbmc min_rotated_ellipse_02.c  > log_2 2>> log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_rotated_ellipse_02.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./cbmc min_rotated_ellipse_02.c  > log_4 2>> log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 1000
+     ** ./cbmc min_rotated_ellipse_02.c  > log_5 2>> log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(-0,-0) = 0
+####################################

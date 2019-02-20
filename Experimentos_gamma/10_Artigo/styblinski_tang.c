@@ -1,0 +1,20 @@
+
+    #include <stdio.h> 
+    #include <stdlib.h> 
+    #include "math2.h" 
+
+  int main(int argc, char *argv[ ]) {
+
+    float fobj,X1,X2;
+    X1 = atof(argv[1]);
+    X2 = atof(argv[2]);
+
+
+    fobj = 0.5*( (X1*X1*X1*X1 -16*X1*X1 +5*X1) + (X2*X2*X2*X2 -16*X2*X2 +5*X2));
+
+
+
+    printf("%f", fobj);
+
+    return 0;
+  }
