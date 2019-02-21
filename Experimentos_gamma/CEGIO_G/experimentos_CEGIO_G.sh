@@ -51,7 +51,7 @@ declare -a functions=(
 		func=${line//,*}       	
 
 		echo
-		(time ./optCE_1000 $func --cbmc --minisat --generalized --library=math2.h --precision=3 >> resultado_exp_CEGIO_G_MINISAT.txt) 
+		(time ./optCE_1000 $func --cbmc --minisat --generalized --library=math2.h --precision=3 >> resultado_exp_CEGIO_G_MINISAT.txt >> resultado_exp_CEGIO_G_MINISAT.txt ) 
 		echo
 	done
 

@@ -1,0 +1,10 @@
+
+
+
+# Arrumar Planilhas, por Domínio e Mínimo.
+# Executar Testes com CEGIO-G (Coletar dados Mínimo e Tempo)
+# Executar Testes com Artigo (Coletar tempo)
+# Executar Toy Verificação Com ESBMC Mathsat e CBMC
+# Preparar testes CEGIO-S
+# Preparar testes CEGIO-F
+
