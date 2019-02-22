@@ -1,0 +1,386 @@
+
+ Configuration Optimization
+
+     Function: camel_six
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --boolector min_camel_six.c  > log_1
+f(0,0)=0 
+     ** ./esbmc --boolector min_camel_six.c  > log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --boolector min_camel_six.c  > log_3
+f(0.1,0.2)=-0.09381 
+     ** ./esbmc --boolector min_camel_six.c  > log_4
+f(0,-0.3)=-0.3276 
+     ** ./esbmc --boolector min_camel_six.c  > log_5
+f(-0.3,-0.8)=-0.338367 
+     ** ./esbmc --boolector min_camel_six.c  > log_6
+f(0.2,0.7)=-0.702939 
+     ** ./esbmc --boolector min_camel_six.c  > log_7
+f(-0.2,0.8)=-0.924939 
+     ** ./esbmc --boolector min_camel_six.c  > log_8
+f(-0.1,0.6)=-0.94181 
+     ** ./esbmc --boolector min_camel_six.c  > log_9
+f(0.2,-0.7)=-0.982939 
+     ** ./esbmc --boolector min_camel_six.c  > log_10
+f(0,-0.7)=-0.9996 
+     ** ./esbmc --boolector min_camel_six.c  > log_11
+f(-0.1,0.7)=-1.02981 
+     ** ./esbmc --boolector min_camel_six.c  > log_12
+     ** Incremento Ajust: 0
+     ** ./esbmc --boolector min_camel_six.c  > log_13
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: -1.02981
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./esbmc --boolector min_camel_six.c  > log_14
+f(0.09,-0.71)=-1.03157 
+     ** ./esbmc --boolector min_camel_six.c  > log_15
+     ** Incremento Ajust: 0
+     ** ./esbmc --boolector min_camel_six.c  > log_16
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: -1.02981
+     ** Precisão 100: -1.03157
+     ** Precisão 1000: 0
+
+### Precisão Atual 1000
+     ** ./esbmc --boolector min_camel_six.c  > log_17
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: -1.02981
+     ** Precisão 100: -1.03157
+     ** Precisão 1000: -1.03157
+####################################
+ Global Minimum: f(-0.09,0.71) = -1.03157
+####################################
+
+ Configuration Optimization
+
+     Function: camel_three
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --boolector min_camel_three.c  > log_1
+f(0,0)=0 
+     ** ./esbmc --boolector min_camel_three.c  > log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --boolector min_camel_three.c  > log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: cosine
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --boolector min_cosine.c  > log_1
+f(-1,-1)=2.2 
+     ** ./esbmc --boolector min_cosine.c  > log_2
+f(0,-1)=1 
+     ** ./esbmc --boolector min_cosine.c  > log_3
+     ** Incremento Ajust: 0
+     ** ./esbmc --boolector min_cosine.c  > log_4
+f(0,0)=-0.2 
+     ** ./esbmc --boolector min_cosine.c  > log_5
+     ** Incremento Ajust: 0
+     ** ./esbmc --boolector min_cosine.c  > log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.2
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --boolector min_cosine.c  > log_7
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.2
+     ** Precisão 10: -0.2
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = -0.2
+####################################
+
+ Configuration Optimization
+
+     Function: scahffer_1
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --boolector min_scahffer_1.c  > log_1
+f(-1,-1)=0.57246 
+     ** ./esbmc --boolector min_scahffer_1.c  > log_2
+f(1,-2)=0.022306 
+     ** ./esbmc --boolector min_scahffer_1.c  > log_3
+     ** Incremento Ajust: 0
+     ** ./esbmc --boolector min_scahffer_1.c  > log_4
+f(0,0)=0 
+     ** ./esbmc --boolector min_scahffer_1.c  > log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --boolector min_scahffer_1.c  > log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: styblinski_tang
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --boolector min_styblinski_tang.c  > log_1
+f(0,0)=0 
+     ** ./esbmc --boolector min_styblinski_tang.c  > log_2
+f(2,0)=-19 
+     ** ./esbmc --boolector min_styblinski_tang.c  > log_3
+f(2,-2)=-48 
+     ** ./esbmc --boolector min_styblinski_tang.c  > log_4
+f(3,-2)=-53 
+     ** ./esbmc --boolector min_styblinski_tang.c  > log_5
+f(2,-3)=-58 
+     ** ./esbmc --boolector min_styblinski_tang.c  > log_6
+f(3,-3)=-63 
+     ** ./esbmc --boolector min_styblinski_tang.c  > log_7
+f(-3,-3)=-78 
+     ** ./esbmc --boolector min_styblinski_tang.c  > log_8
+     ** Vai cancelar tudo
+     ** Precisão 1: -78
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --boolector min_styblinski_tang.c  > log_9
+f(-2.8,-2.9)=-78.1532 
+     ** ./esbmc --boolector min_styblinski_tang.c  > log_10
+f(-2.9,-3)=-78.166 
+     ** ./esbmc --boolector min_styblinski_tang.c  > log_11
+f(-2.9,-2.9)=-78.3319 
+     ** ./esbmc --boolector min_styblinski_tang.c  > log_12
+     ** Incremento Ajust: 0
+     ** ./esbmc --boolector min_styblinski_tang.c  > log_13
+     ** Vai cancelar tudo
+     ** Precisão 1: -78
+     ** Precisão 10: -78.3319
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./esbmc --boolector min_styblinski_tang.c  > log_14
+     ** Vai cancelar tudo
+     ** Precisão 1: -78
+     ** Precisão 10: -78.3319
+     ** Precisão 100: -78.3319
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(-2.9,-2.9) = -78.3319
+####################################
+
+ Configuration Optimization
+
+     Function: trecanni
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --boolector min_trecanni.c  > log_1
+f(0,0)=0 
+     ** ./esbmc --boolector min_trecanni.c  > log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --boolector min_trecanni.c  > log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: tsoulos
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --boolector min_tsoulos.c  > log_1
+f(1,-1)=0.679366 
+     ** ./esbmc --boolector min_tsoulos.c  > log_2
+     ** Incremento Ajust: 0
+     ** ./esbmc --boolector min_tsoulos.c  > log_3
+f(0,-1)=-0.660317 
+     ** ./esbmc --boolector min_tsoulos.c  > log_4
+f(0,0)=-2 
+     ** ./esbmc --boolector min_tsoulos.c  > log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: -2
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --boolector min_tsoulos.c  > log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: -2
+     ** Precisão 10: -2
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = -2
+####################################
+
+ Configuration Optimization
+
+     Function: ursem_1
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --boolector min_ursem_1.c  > log_1
+f(-2,0)=-2.65364 
+     ** ./esbmc --boolector min_ursem_1.c  > log_2
+f(2,-1)=-3.27455 
+     ** ./esbmc --boolector min_ursem_1.c  > log_3
+f(2,0)=-4.65364 
+     ** ./esbmc --boolector min_ursem_1.c  > log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: -4.65364
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --boolector min_ursem_1.c  > log_5
+f(1.8,-0.1)=-4.78177 
+     ** ./esbmc --boolector min_ursem_1.c  > log_6
+f(1.6,-0.1)=-4.78331 
+     ** ./esbmc --boolector min_ursem_1.c  > log_7
+f(1.7,-0.1)=-4.80181 
+     ** ./esbmc --boolector min_ursem_1.c  > log_8
+f(1.7,0)=-4.8168 
+     ** ./esbmc --boolector min_ursem_1.c  > log_9
+     ** Vai cancelar tudo
+     ** Precisão 1: -4.65364
+     ** Precisão 10: -4.8168
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./esbmc --boolector min_ursem_1.c  > log_10
+     ** Vai cancelar tudo
+     ** Precisão 1: -4.65364
+     ** Precisão 10: -4.8168
+     ** Precisão 100: -4.8168
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(1.7,0) = -4.8168
+####################################
+
+ Configuration Optimization
+
+     Function: wayburn_seader_1
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --boolector min_wayburn_seader_1.c  > log_1
+f(0,2)=5 
+     ** ./esbmc --boolector min_wayburn_seader_1.c  > log_2
+f(1,2)=0 
+     ** ./esbmc --boolector min_wayburn_seader_1.c  > log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --boolector min_wayburn_seader_1.c  > log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(1,2) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: zirilli
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --boolector min_zirilli.c  > log_1
+f(0,0)=0 
+     ** ./esbmc --boolector min_zirilli.c  > log_2
+f(1,0)=-0.15 
+     ** ./esbmc --boolector min_zirilli.c  > log_3
+     ** Incremento Ajust: 0
+     ** ./esbmc --boolector min_zirilli.c  > log_4
+f(-1,0)=-0.35 
+     ** ./esbmc --boolector min_zirilli.c  > log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.35
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --boolector min_zirilli.c  > log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.35
+     ** Precisão 10: -0.35
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(-1,0) = -0.35
+####################################

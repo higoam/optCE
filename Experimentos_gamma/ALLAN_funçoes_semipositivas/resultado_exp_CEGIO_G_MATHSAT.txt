@@ -1,0 +1,352 @@
+
+ Configuration Optimization
+
+     Function: alpine1
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_alpine1.c > log_1
+f(-4,-8)=10.5421 
+     ** ./esbmc --mathsat min_alpine1.c > log_2
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_alpine1.c > log_3
+f(-4,-4)=6.85442 
+     ** ./esbmc --mathsat min_alpine1.c > log_4
+f(-4,-2)=5.0458 
+     ** ./esbmc --mathsat min_alpine1.c > log_5
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_alpine1.c > log_6
+f(-4,-1)=4.16868 
+     ** ./esbmc --mathsat min_alpine1.c > log_7
+f(-4,-3)=3.55057 
+     ** ./esbmc --mathsat min_alpine1.c > log_8
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_alpine1.c > log_9
+f(-4,0)=3.42721 
+     ** ./esbmc --mathsat min_alpine1.c > log_10
+f(-6,0)=2.27649 
+     ** ./esbmc --mathsat min_alpine1.c > log_11
+f(6,0)=1.07649 
+     ** ./esbmc --mathsat min_alpine1.c > log_12
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_alpine1.c > log_13
+     ** Incremento Ajust: 1
+     ** ./esbmc --mathsat min_alpine1.c > log_14
+f(-3,-3)=0.24672 
+     ** ./esbmc --mathsat min_alpine1.c > log_15
+f(0,0)=0 
+     ** ./esbmc --mathsat min_alpine1.c > log_16
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_alpine1.c > log_17
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: egg_crate
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_egg_crate.c > log_1
+f(0,-1)=18.7018 
+     ** ./esbmc --mathsat min_egg_crate.c > log_2
+f(0,3)=9.49787 
+     ** ./esbmc --mathsat min_egg_crate.c > log_3
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_egg_crate.c > log_4
+     ** Incremento Ajust: 1
+     ** ./esbmc --mathsat min_egg_crate.c > log_5
+f(0,0)=0 
+     ** ./esbmc --mathsat min_egg_crate.c > log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_egg_crate.c > log_7
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: himmelblau
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_himmelblau.c > log_1
+f(4,-3)=40 
+     ** ./esbmc --mathsat min_himmelblau.c > log_2
+f(4,-2)=10 
+     ** ./esbmc --mathsat min_himmelblau.c > log_3
+f(-4,-3)=8 
+     ** ./esbmc --mathsat min_himmelblau.c > log_4
+f(3,2)=0 
+     ** ./esbmc --mathsat min_himmelblau.c > log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_himmelblau.c > log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(3,2) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: leon
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_leon.c > log_1
+     ** Vai cancelar tudo
+     ** Precisão 1: -5.92178e-24
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_leon.c > log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: -5.92178e-24
+     ** Precisão 10: -5.92178e-24
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = -5.92178e-24
+####################################
+
+ Configuration Optimization
+
+     Function: price_4
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_price_4.c > log_1
+f(1,-2)=16 
+     ** ./esbmc --mathsat min_price_4.c > log_2
+f(0,-1)=4 
+     ** ./esbmc --mathsat min_price_4.c > log_3
+f(0,1)=0 
+     ** ./esbmc --mathsat min_price_4.c > log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_price_4.c > log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,1) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: schwefel_2_25
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_schwefel_2_25.c > log_1
+f(0,0)=2 
+     ** ./esbmc --mathsat min_schwefel_2_25.c > log_2
+f(1,1)=0 
+     ** ./esbmc --mathsat min_schwefel_2_25.c > log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_schwefel_2_25.c > log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(1,1) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: sphere
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_sphere.c > log_1
+f(0,0)=0 
+     ** ./esbmc --mathsat min_sphere.c > log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_sphere.c > log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: wayburn_seader_2
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_wayburn_seader_2.c > log_1
+f(0,2)=1.43544 
+     ** ./esbmc --mathsat min_wayburn_seader_2.c > log_2
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_wayburn_seader_2.c > log_3
+f(0,1)=0.115685 
+     ** ./esbmc --mathsat min_wayburn_seader_2.c > log_4
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_wayburn_seader_2.c > log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0.115685
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_wayburn_seader_2.c > log_6
+f(0.7,1.1)=0.018122 
+     ** ./esbmc --mathsat min_wayburn_seader_2.c > log_7
+f(0.2,1)=0 
+     ** ./esbmc --mathsat min_wayburn_seader_2.c > log_8
+     ** Vai cancelar tudo
+     ** Precisão 1: 0.115685
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./esbmc --mathsat min_wayburn_seader_2.c > log_9
+     ** Vai cancelar tudo
+     ** Precisão 1: 0.115685
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0.2,1) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: price_1
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_price_1.c > log_1
+f(-2,-4)=10 
+     ** ./esbmc --mathsat min_price_1.c > log_2
+f(-2,-5)=9 
+     ** ./esbmc --mathsat min_price_1.c > log_3
+f(-4,4)=2 
+     ** ./esbmc --mathsat min_price_1.c > log_4
+f(-4,5)=1 
+     ** ./esbmc --mathsat min_price_1.c > log_5
+f(-5,5)=0 
+     ** ./esbmc --mathsat min_price_1.c > log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_price_1.c > log_7
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(-5,5) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: rotated_ellipse
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_rotated_ellipse.c > log_1
+f(-2,-2)=38.4308 
+     ** ./esbmc --mathsat min_rotated_ellipse.c > log_2
+f(0,-1)=13 
+     ** ./esbmc --mathsat min_rotated_ellipse.c > log_3
+f(-1,-1)=9.6077 
+     ** ./esbmc --mathsat min_rotated_ellipse.c > log_4
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_rotated_ellipse.c > log_5
+f(1,0)=7 
+     ** ./esbmc --mathsat min_rotated_ellipse.c > log_6
+f(0,0)=0 
+     ** ./esbmc --mathsat min_rotated_ellipse.c > log_7
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_rotated_ellipse.c > log_8
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################

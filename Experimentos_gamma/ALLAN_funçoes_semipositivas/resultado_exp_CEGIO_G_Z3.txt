@@ -1,0 +1,310 @@
+
+ Configuration Optimization
+
+     Function: alpine1
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --z3 min_alpine1.c > log_1
+f(0,0)=0 
+     ** ./esbmc --z3 min_alpine1.c > log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --z3 min_alpine1.c > log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: egg_crate
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --z3 min_egg_crate.c > log_1
+f(0,0)=0 
+     ** ./esbmc --z3 min_egg_crate.c > log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --z3 min_egg_crate.c > log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: himmelblau
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --z3 min_himmelblau.c > log_1
+f(3,-3)=50 
+     ** ./esbmc --z3 min_himmelblau.c > log_2
+f(-3,2)=36 
+     ** ./esbmc --z3 min_himmelblau.c > log_3
+f(-4,-3)=8 
+     ** ./esbmc --z3 min_himmelblau.c > log_4
+f(3,2)=0 
+     ** ./esbmc --z3 min_himmelblau.c > log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --z3 min_himmelblau.c > log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(3,2) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: leon
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --z3 min_leon.c > log_1
+f(0,0)=1 
+     ** ./esbmc --z3 min_leon.c > log_2
+f(1,1)=0 
+     ** ./esbmc --z3 min_leon.c > log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --z3 min_leon.c > log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(1,1) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: price_4
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --z3 min_price_4.c > log_1
+f(0,0)=0 
+     ** ./esbmc --z3 min_price_4.c > log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --z3 min_price_4.c > log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: schwefel_2_25
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --z3 min_schwefel_2_25.c > log_1
+f(0,2)=18 
+     ** ./esbmc --z3 min_schwefel_2_25.c > log_2
+f(0,0)=2 
+     ** ./esbmc --z3 min_schwefel_2_25.c > log_3
+f(1,1)=0 
+     ** ./esbmc --z3 min_schwefel_2_25.c > log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --z3 min_schwefel_2_25.c > log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(1,1) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: sphere
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --z3 min_sphere.c > log_1
+f(4,0)=16 
+     ** ./esbmc --z3 min_sphere.c > log_2
+f(0,1)=1 
+     ** ./esbmc --z3 min_sphere.c > log_3
+f(0,0)=0 
+     ** ./esbmc --z3 min_sphere.c > log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --z3 min_sphere.c > log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: wayburn_seader_2
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --z3 min_wayburn_seader_2.c > log_1
+f(0,1)=0.115685 
+     ** ./esbmc --z3 min_wayburn_seader_2.c > log_2
+     ** Incremento Ajust: 0
+     ** ./esbmc --z3 min_wayburn_seader_2.c > log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0.115685
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --z3 min_wayburn_seader_2.c > log_4
+f(0.5,1)=0.008123 
+     ** ./esbmc --z3 min_wayburn_seader_2.c > log_5
+f(0.4,1)=0.000395 
+     ** ./esbmc --z3 min_wayburn_seader_2.c > log_6
+     ** Incremento Ajust: 0
+     ** ./esbmc --z3 min_wayburn_seader_2.c > log_7
+f(0.2,1)=0 
+     ** ./esbmc --z3 min_wayburn_seader_2.c > log_8
+     ** Vai cancelar tudo
+     ** Precisão 1: 0.115685
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./esbmc --z3 min_wayburn_seader_2.c > log_9
+     ** Vai cancelar tudo
+     ** Precisão 1: 0.115685
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0.2,1) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: price_1
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --z3 min_price_1.c > log_1
+f(5,4)=1 
+     ** ./esbmc --z3 min_price_1.c > log_2
+f(5,-5)=0 
+     ** ./esbmc --z3 min_price_1.c > log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --z3 min_price_1.c > log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(5,-5) = 0
+####################################
+
+ Configuration Optimization
+
+     Function: rotated_ellipse
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --z3 min_rotated_ellipse.c > log_1
+f(1,1)=9.6077 
+     ** ./esbmc --z3 min_rotated_ellipse.c > log_2
+     ** Incremento Ajust: 0
+     ** ./esbmc --z3 min_rotated_ellipse.c > log_3
+f(0,0)=0 
+     ** ./esbmc --z3 min_rotated_ellipse.c > log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --z3 min_rotated_ellipse.c > log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################

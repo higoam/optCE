@@ -1,0 +1,138 @@
+
+Maquinas_Experimentos CEGIO_G Boolector_z3_mathsat 4_Fevereiro
+
+Instalar
+sudo apt-get install gcc-multilib g++-multilib
+
+
+ nohup ./experimentos_CEGIO_G.sh &
+
+
+Repo optCE
+git clone https://github.com/higoam/optCE.git
+
+==========================================================
+Alison - Executando
+#'adjiman.func'			-
+#'bohachevsky_1.func'		-
+#'bohachevsky_3.func'		-
+#'branin_RCOS.func'		-
+#'camel_six.func'		-
+#'camel_three.func'		-
+#'cosine.func'			-
+#'scahffer_1.func'		-
+#'styblinski_tang.func'		-
+#'quadratic.func'		-
+#'trecanni.func'		-
+#'tsoulos.func'			-
+#'ursem_1.func'			-
+#'wayburn_seader_1.func'	-	
+#'zirilli.func'			-
+
+==========================================================
+Allan - Executando		
+#'alpine1.func'			-
+#'egg_crate.func'		-
+#'himmelblau.func'		- 		
+#'leon.func'			-
+#'price_4.func'			-
+#'schwefel_2_25.func'		-
+#'sphere.func'			-
+#'wayburn_seader_2.func'	-	
+#'bartels.func'			-	
+#'beale.func'			-
+#'bukin_4.func'			-
+#'bukin_6.func'			-
+#'price_1.func'			-
+#'rosenbrock.func'  		-
+#'s2.func'			-
+
+==========================================================
+Josiel
+#'booth.func'			-
+#'chung.func'			-
+#'cube.func'			-
+#'dixon_price.func'		-
+#'power_sum.func'		-
+#'schumer.func'			-
+#'sum_squares.func'		-
+#'matyas.func'			-
+#'rotated_ellipse.func'		-
+#'zettl.func'			-
+#'sum_squares.func'		-
+#'outra_func.func' 		-
+#'mccormick.func'		-
+#'godstein_price.func'		-
+#'trid.func'			-
+
+
+
+
+
+==========================================================
+Outros
+#'bukin_2.func'
+#'chen_bird.func'
+#'chen_v.func'
+#'csendes.func'
+#'deckkers_arts.func'
+#'el_attar_vidyasager_dutta.func'
+#'engvall.func'
+#'freudenstein.func'
+#'scahffer_2.func'
+#'scahffer_4.func'
+#'wayburn_seader_3.func'
+#'bohachevsky_2.func'
+#'rastrigin.func'
+#'cigar.func'
+#'levy_n13.func'
+#'zakharov.func'
+
+
+
+
+
+
+
+
+higo
+ssh higof@105.103.67.99
+Sidia2018
+
+Alison
+ssh alisonl@105.103.67.76
+Sidia356!
+
+System
+ssh system@105.103.43.239
+sidiasystem
+
+Vinicius
+ssh vshaurich@105.103.67.85
+Sidia2018	
+
+Allan
+ssh allanb@105.103.67.35
+cruzdebr901428
+
+Josiel
+ssh josiels@105.103.67.36
+Sidia2018
+
+==========================================================
+
+Copiando um arquivo remoto para m?quina local:
+scp user@domain:/pasta-remota/arquivo-remoto.txt /pasta-local/arquivo-local.txt
+
+Enviando um arquivo local para um servidor remoto:
+scp /pasta-local/arquivo-local.txt user@domain:/pasta-remota/arquivo-remoto.txt
+
+Copiando pastas e subpastas do servidor remoto para m?quina local:
+scp -r user@domain:/pasta-remota/ /pasta-local/
+
+Enviando pastas e subpastas da m?quina local para o servidor remoto:
+scp -r /pasta-local/ user@domain:/pasta-remota/
+
+
+
+
