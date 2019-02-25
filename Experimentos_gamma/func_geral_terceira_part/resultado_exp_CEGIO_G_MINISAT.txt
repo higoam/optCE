@@ -1,0 +1,499 @@
+#############  Experiments to --generalized CEGIO-G Prec 3  ##############
+#############  CBMC - MINISAT  ##############
+
+ Configuration Optimization
+
+     Function: wayburn_seader_1
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_wayburn_seader_1.c  > log_1 2>> log_1
+f(0,-2)=37 
+     ** ./cbmc min_wayburn_seader_1.c  > log_2 2>> log_2
+f(0,2)=5 
+     ** ./cbmc min_wayburn_seader_1.c  > log_3 2>> log_3
+f(1,2)=0 
+     ** ./cbmc min_wayburn_seader_1.c  > log_4 2>> log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_wayburn_seader_1.c  > log_5 2>> log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(1,2) = 0
+####################################
+
+real	0m8.758s
+user	0m8.688s
+sys	0m0.072s
+
+ Configuration Optimization
+
+     Function: zirilli
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_zirilli.c  > log_1 2>> log_1
+f(-3,4)=23.45 
+     ** ./cbmc min_zirilli.c  > log_2 2>> log_2
+f(-0,0)=0 
+     ** ./cbmc min_zirilli.c  > log_3 2>> log_3
+#############  Experiments to --generalized CEGIO-G Prec 3  ##############
+#############  CBMC - MINISAT  ##############
+
+ Configuration Optimization
+
+     Function: wayburn_seader_1
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_wayburn_seader_1.c  > log_1 2>> log_1
+f(0,2)=5 
+     ** ./cbmc min_wayburn_seader_1.c  > log_2 2>> log_2
+f(1,2)=0 
+     ** ./cbmc min_wayburn_seader_1.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_wayburn_seader_1.c  > log_4 2>> log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(1,2) = 0
+####################################
+
+real	0m8.228s
+user	0m8.140s
+sys	0m0.087s
+
+ Configuration Optimization
+
+     Function: zirilli
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_zirilli.c  > log_1 2>> log_1
+f(-1,1)=0.15 
+     ** ./cbmc min_zirilli.c  > log_2 2>> log_2
+f(-1,0)=-0.35 
+     ** ./cbmc min_zirilli.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.35
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_zirilli.c  > log_4 2>> log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: -0.35
+     ** Precisão 10: -0.35
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(-1,0) = -0.35
+####################################
+
+real	14m49.395s
+user	14m48.629s
+sys	0m0.651s
+
+ Configuration Optimization
+
+     Function: rotated_ellipse
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_rotated_ellipse.c  > log_1 2>> log_1
+f(2,2)=38.4308 
+     ** ./cbmc min_rotated_ellipse.c  > log_2 2>> log_2
+f(-0,-0)=0 
+     ** ./cbmc min_rotated_ellipse.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_rotated_ellipse.c  > log_4 2>> log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(-0,-0) = 0
+####################################
+
+real	0m7.371s
+user	0m7.264s
+sys	0m0.094s
+
+ Configuration Optimization
+
+     Function: booth
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_booth.c  > log_1 2>> log_1
+f(1,3)=0 
+     ** ./cbmc min_booth.c  > log_2 2>> log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_booth.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(1,3) = 0
+####################################
+
+real	0m0.983s
+user	0m0.931s
+sys	0m0.047s
+
+ Configuration Optimization
+
+     Function: chung_reynolds
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_chung_reynolds.c  > log_1 2>> log_1
+f(1,1)=4 
+     ** ./cbmc min_chung_reynolds.c  > log_2 2>> log_2
+f(0,0)=0 
+     ** ./cbmc min_chung_reynolds.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_chung_reynolds.c  > log_4 2>> log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m1.231s
+user	0m1.182s
+sys	0m0.049s
+
+ Configuration Optimization
+
+     Function: cube
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_cube.c  > log_1 2>> log_1
+f(0,0)=1 
+     ** ./cbmc min_cube.c  > log_2 2>> log_2
+f(1,1)=0 
+     ** ./cbmc min_cube.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_cube.c  > log_4 2>> log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(1,1) = 0
+####################################
+
+real	0m2.197s
+user	0m2.105s
+sys	0m0.087s
+
+ Configuration Optimization
+
+     Function: mccormick
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_mccormick.c  > log_1 2>> log_1
+f(1,-2)=2.65853 
+     ** ./cbmc min_mccormick.c  > log_2 2>> log_2
+f(-1,-2)=-1.64112 
+     ** ./cbmc min_mccormick.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: -1.64112
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_mccormick.c  > log_4 2>> log_4
+f(-0.4,-1.6)=-1.8693 
+     ** ./cbmc min_mccormick.c  > log_5 2>> log_5
+f(-0.5,-1.5)=-1.9093 
+     ** ./cbmc min_mccormick.c  > log_6 2>> log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: -1.64112
+     ** Precisão 10: -1.9093
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./cbmc min_mccormick.c  > log_7 2>> log_7
+f(-0.54,-1.53)=-1.91286 
+     ** ./cbmc min_mccormick.c  > log_8 2>> log_8
+     ** Incremento Ajust: 0
+     ** ./cbmc min_mccormick.c  > log_9 2>> log_9
+f(-0.56,-1.55)=-1.91302 
+     ** ./cbmc min_mccormick.c  > log_10 2>> log_10
+f(-0.55,-1.55)=-1.91321 
+     ** ./cbmc min_mccormick.c  > log_11 2>> log_11
+     ** Vai cancelar tudo
+     ** Precisão 1: -1.64112
+     ** Precisão 10: -1.9093
+     ** Precisão 100: -1.91321
+     ** Precisão 1000: 0
+
+### Precisão Atual 1000
+     ** ./cbmc min_mccormick.c  > log_12 2>> log_12
+     ** Vai cancelar tudo
+     ** Precisão 1: -1.64112
+     ** Precisão 10: -1.9093
+     ** Precisão 100: -1.91321
+     ** Precisão 1000: -1.91321
+####################################
+ Global Minimum: f(-0.55,-1.55) = -1.91321
+####################################
+
+real	1654m29.415s
+user	1653m59.468s
+sys	0m20.765s
+
+ Configuration Optimization
+
+     Function: godstein_price
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_godstein_price.c  > log_1 2>> log_1
+f(0,-1)=3 
+     ** ./cbmc min_godstein_price.c  > log_2 2>> log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 3
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_godstein_price.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 3
+     ** Precisão 10: 3
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,-1) = 3
+####################################
+
+real	13m24.434s
+user	13m23.445s
+sys	0m0.910s
+
+ Configuration Optimization
+
+     Function: schumer
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_schumer.c  > log_1 2>> log_1
+f(-1,0)=1 
+     ** ./cbmc min_schumer.c  > log_2 2>> log_2
+f(0,0)=0 
+     ** ./cbmc min_schumer.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_schumer.c  > log_4 2>> log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m2.567s
+user	0m2.464s
+sys	0m0.093s
+terminate called after throwing an instance of 'std::out_of_range'
+  what():  basic_string::substr: __pos (which is 1) > this->size() (which is 0)
+Could not open file with function!
+./experimentos_CEGIO_G.sh: line 48: 21641 Aborted                 ./optCE_1000 $func --cbmc --minisat --generalized --library=math2.h --precision=3
+
+real	0m0.001s
+user	0m0.001s
+sys	0m0.000s
+
+ Configuration Optimization
+
+     Function: matyas
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_matyas.c  > log_1 2>> log_1
+f(0,0)=0 
+     ** ./cbmc min_matyas.c  > log_2 2>> log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_matyas.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m11.559s
+user	0m11.462s
+sys	0m0.098s
+
+ Configuration Optimization
+
+     Function: rotated_ellipse_02
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_rotated_ellipse_02.c  > log_1 2>> log_1
+f(-0,-0)=0 
+     ** ./cbmc min_rotated_ellipse_02.c  > log_2 2>> log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_rotated_ellipse_02.c  > log_3 2>> log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(-0,-0) = 0
+####################################
+
+real	0m2.682s
+user	0m2.638s
+sys	0m0.044s
+
+ Configuration Optimization
+
+     Function: zettl
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_zettl.c  > log_1 2>> log_1
+f(2,2)=-16.5 
+     ** ./cbmc min_zettl.c  > log_2 2>> log_2
+f(-0,4)=-256 
+     ** ./cbmc min_zettl.c  > log_3 2>> log_3
+f(1,10)=-9801.25 
+     ** ./cbmc min_zettl.c  > log_4 2>> log_4
+f(10,5)=-11027.5 
+     ** ./cbmc min_zettl.c  > log_5 2>> log_5
+f(-3,10)=-13224.2 
+     ** ./cbmc min_zettl.c  > log_6 2>> log_6
+f(7,9)=-13457.8 
+     ** ./cbmc min_zettl.c  > log_7 2>> log_7
+f(10,7)=-16643.5 
+     ** ./cbmc min_zettl.c  > log_8 2>> log_8
+f(-5,10)=-18223.8 
+     ** ./cbmc min_zettl.c  > log_9 2>> log_9
+f(7,10)=-18226.8 
+     ** ./cbmc min_zettl.c  > log_10 2>> log_10
+f(9,9)=-20738.2 
+     ** ./cbmc min_zettl.c  > log_11 2>> log_11
+f(9,10)=-26571.2 
+     ** ./cbmc min_zettl.c  > log_12 2>> log_12
+f(10,10)=-32402.5 
+     ** ./cbmc min_zettl.c  > log_13 2>> log_13
+     ** Vai cancelar tudo
+     ** Precisão 1: -32402.5
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./cbmc min_zettl.c  > log_14 2>> log_14
+     ** Vai cancelar tudo
+     ** Precisão 1: -32402.5
+     ** Precisão 10: -32402.5
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(10,10) = -32402.5
+####################################
+
+real	0m13.360s
+user	0m13.104s
+sys	0m0.252s
+#############  ESBMC - Mathsat  ##############
+#############  ESBMC - Boolector  ##############
+#############  ESBMC - Z3  ##############
