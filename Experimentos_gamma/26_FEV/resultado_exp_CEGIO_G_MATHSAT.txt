@@ -1,0 +1,194 @@
+
+ Configuration Optimization
+
+     Function: adjiman
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_adjiman.c > log_1
+f(-1,-1)=0.045351 
+     ** ./esbmc --mathsat min_adjiman.c > log_2
+f(1,-1)=-0.954649 
+     ** ./esbmc --mathsat min_adjiman.c > log_3
+f(1,0)=-1 
+     ** ./esbmc --mathsat min_adjiman.c > log_4
+f(2,1)=-1.35018 
+     ** ./esbmc --mathsat min_adjiman.c > log_5
+f(2,0)=-2 
+     ** ./esbmc --mathsat min_adjiman.c > log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: -2
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_adjiman.c > log_7
+f(2,0.1)=-2.02174 
+     ** ./esbmc --mathsat min_adjiman.c > log_8
+     ** Vai cancelar tudo
+     ** Precisão 1: -2
+     ** Precisão 10: -2.02174
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./esbmc --mathsat min_adjiman.c > log_9
+     ** Vai cancelar tudo
+     ** Precisão 1: -2
+     ** Precisão 10: -2.02174
+     ** Precisão 100: -2.02174
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(2,0.1) = -2.02174
+####################################
+
+real	93m50.228s
+user	93m45.268s
+sys	0m4.232s
+
+ Configuration Optimization
+
+     Function: bohachevsky_1
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_bohachevsky_1.c > log_1
+f(-9,0)=81.6 
+     ** ./esbmc --mathsat min_bohachevsky_1.c > log_2
+f(6,-4)=68 
+     ** ./esbmc --mathsat min_bohachevsky_1.c > log_3
+f(-1,-5)=51.6 
+     ** ./esbmc --mathsat min_bohachevsky_1.c > log_4
+f(-4,4)=48 
+     ** ./esbmc --mathsat min_bohachevsky_1.c > log_5
+f(6,1)=38 
+     ** ./esbmc --mathsat min_bohachevsky_1.c > log_6
+f(-5,-2)=33.6 
+     ** ./esbmc --mathsat min_bohachevsky_1.c > log_7
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_bohachevsky_1.c > log_8
+f(-4,-2)=24 
+     ** ./esbmc --mathsat min_bohachevsky_1.c > log_9
+f(0,-2)=8 
+     ** ./esbmc --mathsat min_bohachevsky_1.c > log_10
+f(1,0)=1.6 
+     ** ./esbmc --mathsat min_bohachevsky_1.c > log_11
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_bohachevsky_1.c > log_12
+f(0,0)=0 
+     ** ./esbmc --mathsat min_bohachevsky_1.c > log_13
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_bohachevsky_1.c > log_14
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	44m43.087s
+user	44m38.096s
+sys	0m4.820s
+
+ Configuration Optimization
+
+     Function: bohachevsky_3
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_bohachevsky_3.c > log_1
+f(-3,1)=11.6 
+     ** ./esbmc --mathsat min_bohachevsky_3.c > log_2
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_bohachevsky_3.c > log_3
+f(-2,-1)=6 
+     ** ./esbmc --mathsat min_bohachevsky_3.c > log_4
+f(-1,1)=3.6 
+     ** ./esbmc --mathsat min_bohachevsky_3.c > log_5
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_bohachevsky_3.c > log_6
+f(-1,0)=1.6 
+     ** ./esbmc --mathsat min_bohachevsky_3.c > log_7
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_bohachevsky_3.c > log_8
+f(0,0)=0 
+     ** ./esbmc --mathsat min_bohachevsky_3.c > log_9
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_bohachevsky_3.c > log_10
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	58m7.546s
+user	58m5.360s
+sys	0m1.908s
+
+ Configuration Optimization
+
+     Function: branin_RCOS
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_branin_RCOS.c > log_1
+f(8,1)=8.88956 
+     ** ./esbmc --mathsat min_branin_RCOS.c > log_2
+f(9,1)=2.55083 
+     ** ./esbmc --mathsat min_branin_RCOS.c > log_3
+f(10,3)=1.94315 
+     ** ./esbmc --mathsat min_branin_RCOS.c > log_4
+f(3,2)=0.644534 
+     ** ./esbmc --mathsat min_branin_RCOS.c > log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0.644534
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_branin_RCOS.c > log_6
+f(3.2,2.3)=0.419176 
+     ** ./esbmc --mathsat min_branin_RCOS.c > log_7
+f(3.1,2.4)=0.414719 
+     ** ./esbmc --mathsat min_branin_RCOS.c > log_8
+f(9.4,2.4)=0.40377 
+     ** ./esbmc --mathsat min_branin_RCOS.c > log_9
+f(9.4,2.5)=0.402935 
+     ** ./esbmc --mathsat min_branin_RCOS.c > log_10
+     ** Vai cancelar tudo
+     ** Precisão 1: 0.644534
+     ** Precisão 10: 0.402935
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./esbmc --mathsat min_branin_RCOS.c > log_11
+f(3.11,2.3)=0.402679 
+     ** ./esbmc --mathsat min_branin_RCOS.c > log_12
+f(9.43,2.49)=0.398131 
+     ** ./esbmc --mathsat min_branin_RCOS.c > log_13
+f(9.42,2.47)=0.397998 
+     ** ./esbmc --mathsat min_branin_RCOS.c > log_14
