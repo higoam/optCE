@@ -1,0 +1,149 @@
+
+ Configuration Optimization
+
+     Function: bohachevsky_3
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --boolector min_bohachevsky_3.c  > log_1
+f(-4,-1)=18 
+     ** ./esbmc --boolector min_bohachevsky_3.c  > log_2
+f(0,-1)=2 
+     ** ./esbmc --boolector min_bohachevsky_3.c  > log_3
+f(1,0)=1.6 
+     ** ./esbmc --boolector min_bohachevsky_3.c  > log_4
+     ** Incremento Ajust: 0
+     ** ./esbmc --boolector min_bohachevsky_3.c  > log_5
+f(0,0)=0 
+     ** ./esbmc --boolector min_bohachevsky_3.c  > log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --boolector min_bohachevsky_3.c  > log_7
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	98m11.076s
+user	97m49.602s
+sys	0m7.856s
+
+ Configuration Optimization
+
+     Function: branin_RCOS
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_1
+f(-3,8)=15.9964 
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_2
+f(2,4)=6.44815 
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_3
+f(-2,10)=6.09421 
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_4
+     ** Incremento Ajust: 0
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_5
+f(10,4)=2.93724 
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_6
+f(9,3)=1.99082 
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_7
+f(10,3)=1.94315 
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_8
+f(9,2)=1.27082 
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_9
+f(3,2)=0.644534 
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_10
+     ** Vai cancelar tudo
+     ** Precisão 1: 0.644534
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_11
+f(3.2,2.3)=0.419176 
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_12
+f(9.4,2.5)=0.402935 
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_13
+     ** Vai cancelar tudo
+     ** Precisão 1: 0.644534
+     ** Precisão 10: 0.402935
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_14
+f(9.43,2.5)=0.398442 
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_15
+f(3.15,2.27)=0.398229 
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_16
+f(9.42,2.48)=0.398078 
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_17
+f(3.14,2.28)=0.397913 
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_18
+     ** Vai cancelar tudo
+     ** Precisão 1: 0.644534
+     ** Precisão 10: 0.402935
+     ** Precisão 100: 0.397913
+     ** Precisão 1000: 0
+
+### Precisão Atual 1000
+     ** ./esbmc --boolector min_branin_RCOS.c  > log_19
+     ** Vai cancelar tudo
+     ** Precisão 1: 0.644534
+     ** Precisão 10: 0.402935
+     ** Precisão 100: 0.397913
+     ** Precisão 1000: 0.397913
+####################################
+ Global Minimum: f(3.14,2.28) = 0.397913
+####################################
+
+real	783m54.745s
+user	781m34.102s
+sys	0m48.620s
+
+ Configuration Optimization
+
+     Function: scahffer_1
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --boolector min_scahffer_1.c  > log_1
+f(-1,-2)=0.022306 
+     ** ./esbmc --boolector min_scahffer_1.c  > log_2
+     ** Incremento Ajust: 0
+     ** ./esbmc --boolector min_scahffer_1.c  > log_3
+f(0,0)=0 
+     ** ./esbmc --boolector min_scahffer_1.c  > log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --boolector min_scahffer_1.c  > log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	8m30.493s
+user	8m26.715s
+sys	0m2.791s

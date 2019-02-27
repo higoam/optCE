@@ -1,0 +1,98 @@
+
+ Configuration Optimization
+
+     Function: bohachevsky_3
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --z3 min_bohachevsky_3.c > log_1
+f(0,0)=0 
+     ** ./esbmc --z3 min_bohachevsky_3.c > log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --z3 min_bohachevsky_3.c > log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	374m34.955s
+user	373m24.573s
+sys	0m23.101s
+
+ Configuration Optimization
+
+     Function: branin_RCOS
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --z3 min_branin_RCOS.c > log_1
+f(0,8)=23.6021 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_2
+f(0,6)=19.6021 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_3
+f(9,6)=16.1508 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_4
+f(8,3)=10.7479 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_5
+f(4,4)=9.01017 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_6
+f(3,5)=7.31646 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_7
+f(2,4)=6.44815 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_8
+f(4,2)=3.81319 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_9
+f(9,3)=1.99082 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_10
+f(3,3)=0.868509 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_11
+f(3,2)=0.644534 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_12
+     ** Vai cancelar tudo
+     ** Precisão 1: 0.644534
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --z3 min_branin_RCOS.c > log_13
+f(3,2.4)=0.494124 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_14
+f(9.3,2.5)=0.488986 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_15
+f(3.2,2.3)=0.419176 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_16
+f(3.2,2.2)=0.415155 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_17
+f(9.4,2.5)=0.402935 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_18
+     ** Vai cancelar tudo
+     ** Precisão 1: 0.644534
+     ** Precisão 10: 0.402935
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 100
+     ** ./esbmc --z3 min_branin_RCOS.c > log_19
+f(9.45,2.48)=0.401209 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_20
+f(9.45,2.51)=0.401127 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_21
+f(3.13,2.3)=0.398787 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_22
+f(9.42,2.49)=0.398359 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_23
+f(9.43,2.49)=0.398131 
+     ** ./esbmc --z3 min_branin_RCOS.c > log_24
