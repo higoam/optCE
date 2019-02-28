@@ -1,0 +1,10 @@
+#############  Experiments to --positive CEGIO-S Prec 3  ##############
+#############  CBMC - MINISAT  ##############
+
+ Configuration Optimization
+
+     Function: egg_crate
+    Algorithm: CEGIO-S
+
+
+ ### Precisão Atual 1

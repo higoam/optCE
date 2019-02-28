@@ -17,7 +17,7 @@ declare -a functions=(
 #'zirilli.func'
 #'rotated_ellipse.func'
 #
-'alpine1.func'
+#'alpine1.func'
 'egg_crate.func'
 'himmelblau.func'
 'leon.func'
