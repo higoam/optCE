@@ -1,3 +1,5 @@
+#############  Experiments to --generalized CEGIO-G Prec 3  ##############
+#############  CBMC - MINISAT  ##############
 
  Configuration Optimization
 
@@ -7,30 +9,38 @@
 
 ### Precisão Atual 1
      ** ./cbmc min_alpine1.c  > log_1 2>> log_1
-f(3,0)=0.72336 
+f(1,-1)=1.68294 
      ** ./cbmc min_alpine1.c  > log_2 2>> log_2
-f(-3,-0)=0.12336 
+f(-3,6)=1.19985 
      ** ./cbmc min_alpine1.c  > log_3 2>> log_3
-     ** Incremento Ajust: 0
+f(0,-1)=0.741471 
      ** ./cbmc min_alpine1.c  > log_4 2>> log_4
-f(-0,0)=0 
+f(0,-3)=0.12336 
      ** ./cbmc min_alpine1.c  > log_5 2>> log_5
+     ** Incremento Ajust: 0
+     ** ./cbmc min_alpine1.c  > log_6 2>> log_6
+f(-0,0)=0 
+     ** ./cbmc min_alpine1.c  > log_7 2>> log_7
      ** Vai cancelar tudo
      ** Precisão 1: 0
-     ** Precisão 10: 4.59135e-41
+     ** Precisão 10: 4.59121e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
 ### Precisão Atual 10
-     ** ./cbmc min_alpine1.c  > log_6 2>> log_6
+     ** ./cbmc min_alpine1.c  > log_8 2>> log_8
      ** Vai cancelar tudo
      ** Precisão 1: 0
      ** Precisão 10: 0
      ** Precisão 100: 0
      ** Precisão 1000: 0
+####################################
+ Global Minimum: f(-0,0) = 0
+####################################
 
-### Precisão Atual 100
-     ** ./cbmc min_alpine1.c  > log_7 2>> log_7
+real	78m46.381s
+user	78m44.728s
+sys	0m1.312s
 
  Configuration Optimization
 
@@ -40,10 +50,12 @@ f(-0,0)=0
 
 ### Precisão Atual 1
      ** ./cbmc min_cosine.c  > log_1 2>> log_1
-f(-1,0)=1 
+f(-1,-1)=2.2 
      ** ./cbmc min_cosine.c  > log_2 2>> log_2
-f(-0,-0)=-0.2 
+f(0,1)=1 
      ** ./cbmc min_cosine.c  > log_3 2>> log_3
+f(-0,-0)=-0.2 
+     ** ./cbmc min_cosine.c  > log_4 2>> log_4
      ** Vai cancelar tudo
      ** Precisão 1: -0.2
      ** Precisão 10: 4.59163e-41
@@ -51,23 +63,19 @@ f(-0,-0)=-0.2
      ** Precisão 1000: 0
 
 ### Precisão Atual 10
-     ** ./cbmc min_cosine.c  > log_4 2>> log_4
+     ** ./cbmc min_cosine.c  > log_5 2>> log_5
      ** Vai cancelar tudo
      ** Precisão 1: -0.2
      ** Precisão 10: -0.2
      ** Precisão 100: 0
      ** Precisão 1000: 0
+####################################
+ Global Minimum: f(-0,-0) = -0.2
+####################################
 
-### Precisão Atual 100
-     ** ./cbmc min_cosine.c  > log_5 2>> log_5
-     ** Vai cancelar tudo
-     ** Precisão 1: -0.2
-     ** Precisão 10: -0.2
-     ** Precisão 100: -0.2
-     ** Precisão 1000: 0
-
-### Precisão Atual 1000
-     ** ./cbmc min_cosine.c  > log_6 2>> log_6
+real	23m52.997s
+user	23m51.560s
+sys	0m1.344s
 
  Configuration Optimization
 
@@ -77,9 +85,9 @@ f(-0,-0)=-0.2
 
 ### Precisão Atual 1
      ** ./cbmc min_styblinski_tang.c  > log_1 2>> log_1
-f(3,0)=-24 
+f(-0,2)=-19 
      ** ./cbmc min_styblinski_tang.c  > log_2 2>> log_2
-f(0,-3)=-39 
+f(-3,0)=-39 
      ** ./cbmc min_styblinski_tang.c  > log_3 2>> log_3
 f(-4,-3)=-49 
      ** ./cbmc min_styblinski_tang.c  > log_4 2>> log_4
@@ -91,7 +99,7 @@ f(-3,-3)=-78
      ** ./cbmc min_styblinski_tang.c  > log_7 2>> log_7
      ** Vai cancelar tudo
      ** Precisão 1: -78
-     ** Precisão 10: 4.59163e-41
+     ** Precisão 10: 4.59149e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
@@ -114,11 +122,13 @@ f(-2.9,-2.9)=-78.3319
      ** Precisão 10: -78.3319
      ** Precisão 100: -78.3319
      ** Precisão 1000: 0
+####################################
+ Global Minimum: f(-2.9,-2.9) = -78.3319
+####################################
 
-### Precisão Atual 1000
-     ** ./cbmc min_styblinski_tang.c  > log_12 2>> log_12
-f(-2.901,-2.902)=-78.3322 
-     ** ./cbmc min_styblinski_tang.c  > log_13 2>> log_13
+real	3m43.651s
+user	3m43.180s
+sys	0m0.368s
 
  Configuration Optimization
 
@@ -128,54 +138,36 @@ f(-2.901,-2.902)=-78.3322
 
 ### Precisão Atual 1
      ** ./cbmc min_zirilli.c  > log_1 2>> log_1
-f(0,-0)=0 
+f(0,-5)=12.5 
      ** ./cbmc min_zirilli.c  > log_2 2>> log_2
-f(-1,0)=-0.35 
+f(-2,0)=1.8 
      ** ./cbmc min_zirilli.c  > log_3 2>> log_3
+f(-1,2)=1.65 
+     ** ./cbmc min_zirilli.c  > log_4 2>> log_4
+f(1,0)=-0.15 
+     ** ./cbmc min_zirilli.c  > log_5 2>> log_5
+f(-1,0)=-0.35 
+     ** ./cbmc min_zirilli.c  > log_6 2>> log_6
      ** Vai cancelar tudo
      ** Precisão 1: -0.35
-     ** Precisão 10: 4.59149e-41
+     ** Precisão 10: 4.59135e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
 ### Precisão Atual 10
-     ** ./cbmc min_zirilli.c  > log_4 2>> log_4
+     ** ./cbmc min_zirilli.c  > log_7 2>> log_7
      ** Vai cancelar tudo
      ** Precisão 1: -0.35
      ** Precisão 10: -0.35
      ** Precisão 100: 0
      ** Precisão 1000: 0
-
-### Precisão Atual 100
-     ** ./cbmc min_zirilli.c  > log_5 2>> log_5
-f(-1.01,0.03)=-0.350449 
-     ** ./cbmc min_zirilli.c  > log_6 2>> log_6
-f(-1.03,0)=-0.352073 
-     ** ./cbmc min_zirilli.c  > log_7 2>> log_7
-f(-1.05,-0.02)=-0.352173 
-     ** ./cbmc min_zirilli.c  > log_8 2>> log_8
-f(-1.05,0.01)=-0.352323 
-     ** ./cbmc min_zirilli.c  > log_9 2>> log_9
-f(-1.04,0)=-0.352335 
-     ** ./cbmc min_zirilli.c  > log_10 2>> log_10
-     ** Incremento Ajust: 0
-     ** ./cbmc min_zirilli.c  > log_11 2>> log_11
-     ** Vai cancelar tudo
-     ** Precisão 1: -0.35
-     ** Precisão 10: -0.35
-     ** Precisão 100: -0.352335
-     ** Precisão 1000: 0
-
-### Precisão Atual 1000
-     ** ./cbmc min_zirilli.c  > log_12 2>> log_12
-     ** Vai cancelar tudo
-     ** Precisão 1: -0.35
-     ** Precisão 10: -0.35
-     ** Precisão 100: -0.352335
-     ** Precisão 1000: -0.352335
 ####################################
- Global Minimum: f(-1.04,0) = -0.352335
+ Global Minimum: f(-1,0) = -0.35
 ####################################
+
+real	14m47.551s
+user	14m47.264s
+sys	0m0.212s
 
  Configuration Optimization
 
@@ -185,16 +177,12 @@ f(-1.04,0)=-0.352335
 
 ### Precisão Atual 1
      ** ./cbmc min_booth.c  > log_1 2>> log_1
-f(-0,2)=18 
+f(2,-0)=26 
      ** ./cbmc min_booth.c  > log_2 2>> log_2
-f(3,2)=9 
+f(3,0)=17 
      ** ./cbmc min_booth.c  > log_3 2>> log_3
-f(3,1)=8 
-     ** ./cbmc min_booth.c  > log_4 2>> log_4
-f(1,2)=5 
-     ** ./cbmc min_booth.c  > log_5 2>> log_5
 f(1,3)=0 
-     ** ./cbmc min_booth.c  > log_6 2>> log_6
+     ** ./cbmc min_booth.c  > log_4 2>> log_4
      ** Vai cancelar tudo
      ** Precisão 1: 0
      ** Precisão 10: 4.59149e-41
@@ -202,23 +190,7 @@ f(1,3)=0
      ** Precisão 1000: 0
 
 ### Precisão Atual 10
-     ** ./cbmc min_booth.c  > log_7 2>> log_7
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
-### Precisão Atual 100
-     ** ./cbmc min_booth.c  > log_8 2>> log_8
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
-### Precisão Atual 1000
-     ** ./cbmc min_booth.c  > log_9 2>> log_9
+     ** ./cbmc min_booth.c  > log_5 2>> log_5
      ** Vai cancelar tudo
      ** Precisão 1: 0
      ** Precisão 10: 0
@@ -228,6 +200,10 @@ f(1,3)=0
  Global Minimum: f(1,3) = 0
 ####################################
 
+real	0m2.284s
+user	0m2.204s
+sys	0m0.044s
+
  Configuration Optimization
 
      Function: himmelblau
@@ -236,34 +212,28 @@ f(1,3)=0
 
 ### Precisão Atual 1
      ** ./cbmc min_himmelblau.c  > log_1 2>> log_1
-f(-3,3)=2 
+f(4,2)=50 
      ** ./cbmc min_himmelblau.c  > log_2 2>> log_2
-f(3,2)=0 
+f(-3,2)=36 
      ** ./cbmc min_himmelblau.c  > log_3 2>> log_3
+f(4,-1)=20 
+     ** ./cbmc min_himmelblau.c  > log_4 2>> log_4
+f(3,-2)=16 
+     ** ./cbmc min_himmelblau.c  > log_5 2>> log_5
+f(4,-2)=10 
+     ** ./cbmc min_himmelblau.c  > log_6 2>> log_6
+f(-4,-3)=8 
+     ** ./cbmc min_himmelblau.c  > log_7 2>> log_7
+f(3,2)=0 
+     ** ./cbmc min_himmelblau.c  > log_8 2>> log_8
      ** Vai cancelar tudo
      ** Precisão 1: 0
-     ** Precisão 10: 4.59121e-41
+     ** Precisão 10: 4.59163e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
 ### Precisão Atual 10
-     ** ./cbmc min_himmelblau.c  > log_4 2>> log_4
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
-### Precisão Atual 100
-     ** ./cbmc min_himmelblau.c  > log_5 2>> log_5
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
-### Precisão Atual 1000
-     ** ./cbmc min_himmelblau.c  > log_6 2>> log_6
+     ** ./cbmc min_himmelblau.c  > log_9 2>> log_9
      ** Vai cancelar tudo
      ** Precisão 1: 0
      ** Precisão 10: 0
@@ -272,6 +242,10 @@ f(3,2)=0
 ####################################
  Global Minimum: f(3,2) = 0
 ####################################
+
+real	0m6.075s
+user	0m5.956s
+sys	0m0.048s
 
  Configuration Optimization
 
@@ -287,7 +261,7 @@ f(1,1)=0
      ** ./cbmc min_leon.c  > log_3 2>> log_3
      ** Vai cancelar tudo
      ** Precisão 1: 0
-     ** Precisão 10: 4.59135e-41
+     ** Precisão 10: 4.59149e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
@@ -298,25 +272,13 @@ f(1,1)=0
      ** Precisão 10: 0
      ** Precisão 100: 0
      ** Precisão 1000: 0
-
-### Precisão Atual 100
-     ** ./cbmc min_leon.c  > log_5 2>> log_5
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
-### Precisão Atual 1000
-     ** ./cbmc min_leon.c  > log_6 2>> log_6
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
 ####################################
  Global Minimum: f(1,1) = 0
 ####################################
+
+real	0m1.746s
+user	0m1.660s
+sys	0m0.048s
 
  Configuration Optimization
 
@@ -326,46 +288,28 @@ f(1,1)=0
 
 ### Precisão Atual 1
      ** ./cbmc min_zettl.c  > log_1 2>> log_1
-f(0,0)=0 
+f(-0,0)=-0 
      ** ./cbmc min_zettl.c  > log_2 2>> log_2
      ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59163e-41
+     ** Precisão 1: -0
+     ** Precisão 10: 4.59149e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
 ### Precisão Atual 10
      ** ./cbmc min_zettl.c  > log_3 2>> log_3
      ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
+     ** Precisão 1: -0
+     ** Precisão 10: -0
      ** Precisão 100: 0
      ** Precisão 1000: 0
-
-### Precisão Atual 100
-     ** ./cbmc min_zettl.c  > log_4 2>> log_4
-f(-0.04,0)=-0.003341 
-     ** ./cbmc min_zettl.c  > log_5 2>> log_5
-f(-0.03,0)=-0.003791 
-     ** ./cbmc min_zettl.c  > log_6 2>> log_6
-     ** Incremento Ajust: 0
-     ** ./cbmc min_zettl.c  > log_7 2>> log_7
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: -0.003791
-     ** Precisão 1000: 0
-
-### Precisão Atual 1000
-     ** ./cbmc min_zettl.c  > log_8 2>> log_8
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: -0.003791
-     ** Precisão 1000: -0.003791
 ####################################
- Global Minimum: f(-0.03,0) = -0.003791
+ Global Minimum: f(-0,0) = -0
 ####################################
+
+real	0m2.473s
+user	0m2.404s
+sys	0m0.028s
 
  Configuration Optimization
 
@@ -375,13 +319,13 @@ f(-0.03,0)=-0.003791
 
 ### Precisão Atual 1
      ** ./cbmc min_sum_squares.c  > log_1 2>> log_1
-f(1,0)=1 
+f(0,1)=2 
      ** ./cbmc min_sum_squares.c  > log_2 2>> log_2
 f(0,-0)=0 
      ** ./cbmc min_sum_squares.c  > log_3 2>> log_3
      ** Vai cancelar tudo
      ** Precisão 1: 0
-     ** Precisão 10: 4.59135e-41
+     ** Precisão 10: 4.59149e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
@@ -392,65 +336,20 @@ f(0,-0)=0
      ** Precisão 10: 0
      ** Precisão 100: 0
      ** Precisão 1000: 0
-
-### Precisão Atual 100
-     ** ./cbmc min_sum_squares.c  > log_5 2>> log_5
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
-### Precisão Atual 1000
-     ** ./cbmc min_sum_squares.c  > log_6 2>> log_6
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
 ####################################
  Global Minimum: f(0,-0) = 0
 ####################################
 
- Configuration Optimization
+real	0m1.559s
+user	0m1.508s
+sys	0m0.020s
+terminate called after throwing an instance of 'std::out_of_range'
+  what():  basic_string::substr: __pos (which is 1) > this->size() (which is 0)
+Could not open file with function!
+./experimentos_Artigo.sh: line 21:  3529 Aborted                 (core dumped) ./optCE_1000 $func --cbmc --minisat --generalized --library=math2.h --precision=3
 
-     Function: rotated_ellipse_02
-     Algorithm: CEGIO-G
-
-
-### Precisão Atual 1
-     ** ./cbmc min_rotated_ellipse_02.c  > log_1 2>> log_1
-f(-0,-0)=0 
-     ** ./cbmc min_rotated_ellipse_02.c  > log_2 2>> log_2
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59135e-41
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
-### Precisão Atual 10
-     ** ./cbmc min_rotated_ellipse_02.c  > log_3 2>> log_3
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
-### Precisão Atual 100
-     ** ./cbmc min_rotated_ellipse_02.c  > log_4 2>> log_4
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
-### Precisão Atual 1000
-     ** ./cbmc min_rotated_ellipse_02.c  > log_5 2>> log_5
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-####################################
- Global Minimum: f(-0,-0) = 0
-####################################
+real	0m0.308s
+user	0m0.000s
+sys	0m0.000s
+#############  ESBMC - Boolector  ##############
+#############  ESBMC - Z3  ##############

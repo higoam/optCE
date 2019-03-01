@@ -18,16 +18,16 @@ declare -a functions=(
 	echo
 
 	echo "#############  CBMC - MINISAT  ##############"	
-#	for i in "${functions[@]}"
-#	do		
-#		line=$i
-#		func=${line//,*}       	
-#
-#		echo
-#		(time ./optCE_1000 $func --cbmc --minisat --generalized --library=math2.h --precision=3 >> resultado_exp_Artigo_MINISAT.txt) 
-#		echo
-#	done
-#
+	for i in "${functions[@]}"
+	do		
+		line=$i
+		func=${line//,*}       	
+
+		echo
+	(time ./optCE_1000 $func --cbmc --minisat --generalized --library=math2.h --precision=3 >> resultado_exp_Artigo_MINISAT.txt) 
+		echo
+	done
+
 	echo "#############  ESBMC - Mathsat  ##############"	
 	for i in "${functions[@]}"
 	do		
