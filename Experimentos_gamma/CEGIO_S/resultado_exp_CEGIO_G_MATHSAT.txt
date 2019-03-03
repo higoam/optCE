@@ -1,5 +1,4 @@
-#############  Experiments to --positive CEGIO-S Prec 3  ##############
-#############  CBMC - MINISAT  ##############
+#############  ESBMC - Mathsat  ##############
 
  Configuration Optimization
 
@@ -8,11 +7,13 @@
 
 
  ### Precisão Atual 1
+     f(-4,-4)=26 
+     f(4,-2)=10 
      f(-4,-3)=8 
      f(3,2)=0 
      ** Vai cancelar tudo
      ** Precisão 1: 0
-     ** Precisão 10: 4.59135e-41
+     ** Precisão 10: 4.59121e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
@@ -26,9 +27,9 @@
  Global Minimum: f(3,2) = 0
 ####################################
 
-real	0m4,975s
-user	0m3,217s
-sys	0m0,125s
+real	1m20,710s
+user	1m18,804s
+sys	0m0,374s
 
  Configuration Optimization
 
@@ -37,7 +38,6 @@ sys	0m0,125s
 
 
  ### Precisão Atual 1
-     f(0,0)=1 
      f(1,1)=0 
      ** Vai cancelar tudo
      ** Precisão 1: 0
@@ -55,9 +55,9 @@ sys	0m0,125s
  Global Minimum: f(1,1) = 0
 ####################################
 
-real	0m3,079s
-user	0m2,915s
-sys	0m0,147s
+real	0m13,680s
+user	0m13,508s
+sys	0m0,166s
 
  Configuration Optimization
 
@@ -66,10 +66,13 @@ sys	0m0,147s
 
 
  ### Precisão Atual 1
-     f(0,0)=0 
+     f(-1,-1)=68 
+     f(1,-2)=16 
+     f(0,-1)=4 
+     f(0,1)=0 
      ** Vai cancelar tudo
      ** Precisão 1: 0
-     ** Precisão 10: 4.59135e-41
+     ** Precisão 10: 4.59149e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
@@ -80,12 +83,12 @@ sys	0m0,147s
      ** Precisão 100: 0
      ** Precisão 1000: 0
 ####################################
- Global Minimum: f(0,0) = 0
+ Global Minimum: f(0,1) = 0
 ####################################
 
-real	0m2,026s
-user	0m1,859s
-sys	0m0,125s
+real	0m36,914s
+user	0m36,435s
+sys	0m0,426s
 
  Configuration Optimization
 
@@ -94,12 +97,11 @@ sys	0m0,125s
 
 
  ### Precisão Atual 1
-     f(2,0)=10 
-     f(1,0)=2 
+     f(0,0)=2 
      f(1,1)=0 
      ** Vai cancelar tudo
      ** Precisão 1: 0
-     ** Precisão 10: 4.59121e-41
+     ** Precisão 10: 4.59163e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
@@ -113,9 +115,9 @@ sys	0m0,125s
  Global Minimum: f(1,1) = 0
 ####################################
 
-real	0m4,806s
-user	0m4,657s
-sys	0m0,154s
+real	2m18,229s
+user	2m17,128s
+sys	0m0,431s
 
  Configuration Optimization
 
@@ -127,7 +129,7 @@ sys	0m0,154s
      f(0,0)=0 
      ** Vai cancelar tudo
      ** Precisão 1: 0
-     ** Precisão 10: 4.59149e-41
+     ** Precisão 10: 4.59163e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
@@ -141,9 +143,9 @@ sys	0m0,154s
  Global Minimum: f(0,0) = 0
 ####################################
 
-real	0m1,147s
-user	0m1,064s
-sys	0m0,087s
+real	0m4,575s
+user	0m3,874s
+sys	0m0,343s
 
  Configuration Optimization
 
@@ -152,14 +154,14 @@ sys	0m0,087s
 
 
  ### Precisão Atual 1
-     f(0,-1)=41 
-     f(3,-0)=29 
-     f(-2,5)=9 
-     f(5,-4)=1 
-     f(5,5)=0 
+     f(-2,-4)=10 
+     f(-2,-5)=9 
+     f(-4,4)=2 
+     f(-4,5)=1 
+     f(-5,5)=0 
      ** Vai cancelar tudo
      ** Precisão 1: 0
-     ** Precisão 10: 4.59149e-41
+     ** Precisão 10: 4.59163e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
@@ -170,12 +172,12 @@ sys	0m0,087s
      ** Precisão 100: 0
      ** Precisão 1000: 0
 ####################################
- Global Minimum: f(5,5) = 0
+ Global Minimum: f(-5,5) = 0
 ####################################
 
-real	0m10,300s
-user	0m9,729s
-sys	0m0,226s
+real	0m27,769s
+user	0m26,437s
+sys	0m0,600s
 
  Configuration Optimization
 
@@ -184,6 +186,9 @@ sys	0m0,226s
 
 
  ### Precisão Atual 1
+     f(-2,-1)=17 
+     f(-1,-1)=12 
+     f(1,-1)=8 
      f(1,1)=0 
      ** Vai cancelar tudo
      ** Precisão 1: 0
@@ -201,6 +206,6 @@ sys	0m0,226s
  Global Minimum: f(1,1) = 0
 ####################################
 
-real	0m2,911s
-user	0m2,779s
-sys	0m0,105s
+real	0m8,808s
+user	0m8,267s
+sys	0m0,344s

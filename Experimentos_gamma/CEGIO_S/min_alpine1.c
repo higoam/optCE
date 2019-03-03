@@ -8,7 +8,7 @@
 
     int main() {
     
-    float f_i = 87;
+    float f_i = 61;
 
     float f_c = 0;
     float fobj;    

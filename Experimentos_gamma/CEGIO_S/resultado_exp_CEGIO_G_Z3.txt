@@ -1,5 +1,4 @@
-#############  Experiments to --positive CEGIO-S Prec 3  ##############
-#############  CBMC - MINISAT  ##############
+#############  ESBMC - Z3  ##############
 
  Configuration Optimization
 
@@ -8,11 +7,10 @@
 
 
  ### Precisão Atual 1
-     f(-4,-3)=8 
      f(3,2)=0 
      ** Vai cancelar tudo
      ** Precisão 1: 0
-     ** Precisão 10: 4.59135e-41
+     ** Precisão 10: 4.59149e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
@@ -26,9 +24,9 @@
  Global Minimum: f(3,2) = 0
 ####################################
 
-real	0m4,975s
-user	0m3,217s
-sys	0m0,125s
+real	1m41,705s
+user	1m40,310s
+sys	0m0,798s
 
  Configuration Optimization
 
@@ -41,7 +39,7 @@ sys	0m0,125s
      f(1,1)=0 
      ** Vai cancelar tudo
      ** Precisão 1: 0
-     ** Precisão 10: 4.59163e-41
+     ** Precisão 10: 4.59149e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
@@ -55,9 +53,9 @@ sys	0m0,125s
  Global Minimum: f(1,1) = 0
 ####################################
 
-real	0m3,079s
-user	0m2,915s
-sys	0m0,147s
+real	0m8,774s
+user	0m8,398s
+sys	0m0,363s
 
  Configuration Optimization
 
@@ -69,7 +67,7 @@ sys	0m0,147s
      f(0,0)=0 
      ** Vai cancelar tudo
      ** Precisão 1: 0
-     ** Precisão 10: 4.59135e-41
+     ** Precisão 10: 4.59163e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
@@ -83,9 +81,9 @@ sys	0m0,147s
  Global Minimum: f(0,0) = 0
 ####################################
 
-real	0m2,026s
-user	0m1,859s
-sys	0m0,125s
+real	0m48,662s
+user	0m44,348s
+sys	0m0,731s
 
  Configuration Optimization
 
@@ -94,8 +92,7 @@ sys	0m0,125s
 
 
  ### Precisão Atual 1
-     f(2,0)=10 
-     f(1,0)=2 
+     f(0,0)=2 
      f(1,1)=0 
      ** Vai cancelar tudo
      ** Precisão 1: 0
@@ -113,9 +110,9 @@ sys	0m0,125s
  Global Minimum: f(1,1) = 0
 ####################################
 
-real	0m4,806s
-user	0m4,657s
-sys	0m0,154s
+real	3m35,913s
+user	2m59,673s
+sys	0m2,744s
 
  Configuration Optimization
 
@@ -124,6 +121,7 @@ sys	0m0,154s
 
 
  ### Precisão Atual 1
+     f(0,1)=1 
      f(0,0)=0 
      ** Vai cancelar tudo
      ** Precisão 1: 0
@@ -141,9 +139,9 @@ sys	0m0,154s
  Global Minimum: f(0,0) = 0
 ####################################
 
-real	0m1,147s
-user	0m1,064s
-sys	0m0,087s
+real	0m3,412s
+user	0m3,018s
+sys	0m0,331s
 
  Configuration Optimization
 
@@ -152,39 +150,10 @@ sys	0m0,087s
 
 
  ### Precisão Atual 1
-     f(0,-1)=41 
-     f(3,-0)=29 
-     f(-2,5)=9 
-     f(5,-4)=1 
+     f(1,5)=16 
+     f(-5,2)=9 
+     f(5,3)=4 
      f(5,5)=0 
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59149e-41
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
- ### Precisão Atual 10
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-####################################
- Global Minimum: f(5,5) = 0
-####################################
-
-real	0m10,300s
-user	0m9,729s
-sys	0m0,226s
-
- Configuration Optimization
-
-     Function: dixon_price
-    Algorithm: CEGIO-S
-
-
- ### Precisão Atual 1
-     f(1,1)=0 
      ** Vai cancelar tudo
      ** Precisão 1: 0
      ** Precisão 10: 4.59135e-41
@@ -198,9 +167,41 @@ sys	0m0,226s
      ** Precisão 100: 0
      ** Precisão 1000: 0
 ####################################
+ Global Minimum: f(5,5) = 0
+####################################
+
+real	0m7,428s
+user	0m6,748s
+sys	0m0,617s
+
+ Configuration Optimization
+
+     Function: dixon_price
+    Algorithm: CEGIO-S
+
+
+ ### Precisão Atual 1
+     f(2,2)=51 
+     f(2,0)=3 
+     f(1,0)=2 
+     f(2,1)=1 
+     f(1,1)=0 
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+ ### Precisão Atual 10
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
  Global Minimum: f(1,1) = 0
 ####################################
 
-real	0m2,911s
-user	0m2,779s
-sys	0m0,105s
+real	0m4,373s
+user	0m4,068s
+sys	0m0,294s
