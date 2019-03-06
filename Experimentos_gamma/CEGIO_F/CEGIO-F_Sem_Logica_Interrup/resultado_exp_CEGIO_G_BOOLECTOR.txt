@@ -1,0 +1,554 @@
+#############  ESBMC - Boolector  ##############
+run_CEGIO_F
+
+ Configuration Optimization
+
+     Function: cube
+    Algorithm: CEGIO-F
+
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+
+ ### Precisão Atual 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(0,0)=1 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(1,1)=0 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 10
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 100
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 1000
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+####################################
+ Global Minimum: f(-4.29496e+08,-2.14748e+08) = -0.0111
+####################################
+
+real	0m55,489s
+user	0m29,119s
+sys	0m0,732s
+run_CEGIO_F
+
+ Configuration Optimization
+
+     Function: chung_reynolds
+    Algorithm: CEGIO-F
+
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+
+ ### Precisão Atual 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(0,0)=0 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 10
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 100
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 1000
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	1m8,291s
+user	0m39,234s
+sys	0m0,747s
+run_CEGIO_F
+
+ Configuration Optimization
+
+     Function: cigar
+    Algorithm: CEGIO-F
+
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+
+ ### Precisão Atual 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+file min_cigar.c line 11 function main: failed to find symbol `c::inf'
+CONVERSION ERROR
+COUNTEREXAMPLE UNKNOWN
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 10
+file min_cigar.c line 11 function main: failed to find symbol `c::inf'
+CONVERSION ERROR
+COUNTEREXAMPLE UNKNOWN
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 100
+file min_cigar.c line 11 function main: failed to find symbol `c::inf'
+CONVERSION ERROR
+COUNTEREXAMPLE UNKNOWN
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 1000
+file min_cigar.c line 11 function main: failed to find symbol `c::inf'
+CONVERSION ERROR
+COUNTEREXAMPLE UNKNOWN
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+####################################
+ Global Minimum: f(-1,-1) = -inf
+####################################
+
+real	1m35,039s
+user	0m56,800s
+sys	0m3,023s
+run_CEGIO_F
+
+ Configuration Optimization
+
+     Function: zakharov
+    Algorithm: CEGIO-F
+
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+
+ ### Precisão Atual 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(0,0)=0 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 10
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 100
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 1000
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	4m17,093s
+user	2m44,159s
+sys	0m1,062s
+run_CEGIO_F
+
+ Configuration Optimization
+
+     Function: sphere
+    Algorithm: CEGIO-F
+
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+
+ ### Precisão Atual 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(7,4)=65 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(0,2)=4 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(0,0)=0 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 10
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 100
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 1000
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m30,060s
+user	0m15,337s
+sys	0m0,503s
+run_CEGIO_F
+
+ Configuration Optimization
+
+     Function: schumer
+    Algorithm: CEGIO-F
+
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+
+ ### Precisão Atual 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(0,0)=0 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 10
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 100
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 1000
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	2m16,721s
+user	1m15,480s
+sys	0m0,742s
+run_CEGIO_F
+
+ Configuration Optimization
+
+     Function: sum_squares
+    Algorithm: CEGIO-F
+
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+
+ ### Precisão Atual 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(0,0)=0 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 10
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 100
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 1000
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m27,431s
+user	0m15,343s
+sys	0m0,428s
+run_CEGIO_F
+
+ Configuration Optimization
+
+     Function: matyas
+    Algorithm: CEGIO-F
+
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+
+ ### Precisão Atual 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(0,0)=0 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 10
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 100
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 1000
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+####################################
+ Global Minimum: f(0.01,0.01) = -0.0001
+####################################
+
+real	4m43,793s
+user	2m48,617s
+sys	0m1,441s
+run_CEGIO_F
+
+ Configuration Optimization
+
+     Function: rotated_ellipse_02
+    Algorithm: CEGIO-F
+
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+
+ ### Precisão Atual 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(1,1)=1 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(0,0)=0 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 10
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 100
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 1000
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	1m44,767s
+user	1m5,472s
+sys	0m0,674s
+run_CEGIO_F
+
+ Configuration Optimization
+
+     Function: zettl
+    Algorithm: CEGIO-F
+
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+
+ ### Precisão Atual 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(0,0)=0 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 10
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 100
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+     f(-0.02,-0.05)=-0.00316 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 1000
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+####################################
+ Global Minimum: f(-0.02,-0.05) = -0.00316
+####################################
+
+real	1m47,587s
+user	1m12,698s
+sys	0m0,880s
+run_CEGIO_F
+
+ Configuration Optimization
+
+     Function: power_sum
+    Algorithm: CEGIO-F
+
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+
+ ### Precisão Atual 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(1,-1)=2 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(0,-1)=1 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(0,0)=0 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 10
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 100
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 1000
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m31,385s
+user	0m19,360s
+sys	0m0,527s
+run_CEGIO_F
+
+ Configuration Optimization
+
+     Function: schwefel_2_20
+    Algorithm: CEGIO-F
+
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+
+ ### Precisão Atual 1
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(-1,-2)=3 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(0,2)=2 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(0,-1)=1 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 0
+     f(0,0)=0 
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 10
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 100
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+
+ ### Precisão Atual 1000
+create_specification_CEGIO_F_Matrix_sem_FOR
+mudar espaco: 1
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m10,247s
+user	0m6,959s
+sys	0m0,476s

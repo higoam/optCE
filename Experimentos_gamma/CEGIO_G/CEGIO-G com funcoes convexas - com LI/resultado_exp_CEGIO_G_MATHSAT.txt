@@ -1,0 +1,448 @@
+
+ Configuration Optimization
+
+     Function: cube
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_cube.c > log_1
+f(-1,-1)=4 
+     ** ./esbmc --mathsat min_cube.c > log_2
+f(1,1)=0 
+     ** ./esbmc --mathsat min_cube.c > log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_cube.c > log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(1,1) = 0
+####################################
+
+real	0m23,053s
+user	0m22,685s
+sys	0m0,356s
+
+ Configuration Optimization
+
+     Function: chung_reynolds
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_chung_reynolds.c > log_1
+f(-2,-2)=64 
+     ** ./esbmc --mathsat min_chung_reynolds.c > log_2
+f(-2,-1)=25 
+     ** ./esbmc --mathsat min_chung_reynolds.c > log_3
+f(-1,-1)=4 
+     ** ./esbmc --mathsat min_chung_reynolds.c > log_4
+f(0,-1)=1 
+     ** ./esbmc --mathsat min_chung_reynolds.c > log_5
+f(0,0)=0 
+     ** ./esbmc --mathsat min_chung_reynolds.c > log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_chung_reynolds.c > log_7
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m10,748s
+user	0m10,148s
+sys	0m0,594s
+
+ Configuration Optimization
+
+     Function: cigar
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_cigar.c > log_1
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_cigar.c > log_2
+     ** Incremento Ajust: 1
+     ** ./esbmc --mathsat min_cigar.c > log_3
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_cigar.c > log_4
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_cigar.c > log_5
+     ** Incremento Ajust: 1
+     ** ./esbmc --mathsat min_cigar.c > log_6
+
+### Precisão Atual 100
+     ** ./esbmc --mathsat min_cigar.c > log_7
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_cigar.c > log_8
+     ** Incremento Ajust: 1
+     ** ./esbmc --mathsat min_cigar.c > log_9
+
+### Precisão Atual 1000
+     ** ./esbmc --mathsat min_cigar.c > log_10
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_cigar.c > log_11
+     ** Incremento Ajust: 1
+     ** ./esbmc --mathsat min_cigar.c > log_12
+####################################
+ Global Minimum: f(0.002,-0.06) = 6.84061e+12
+####################################
+
+real	0m13,052s
+user	0m12,417s
+sys	0m0,598s
+
+ Configuration Optimization
+
+     Function: zakharov
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_zakharov.c > log_1
+f(-1,-1)=9.3125 
+     ** ./esbmc --mathsat min_zakharov.c > log_2
+f(0,-1)=3 
+     ** ./esbmc --mathsat min_zakharov.c > log_3
+f(1,-1)=2.3125 
+     ** ./esbmc --mathsat min_zakharov.c > log_4
+f(1,0)=1.3125 
+     ** ./esbmc --mathsat min_zakharov.c > log_5
+f(0,0)=0 
+     ** ./esbmc --mathsat min_zakharov.c > log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_zakharov.c > log_7
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m21,586s
+user	0m21,011s
+sys	0m0,571s
+
+ Configuration Optimization
+
+     Function: sphere
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_sphere.c > log_1
+f(0,0)=0 
+     ** ./esbmc --mathsat min_sphere.c > log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_sphere.c > log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m2,104s
+user	0m1,953s
+sys	0m0,151s
+
+ Configuration Optimization
+
+     Function: schumer
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_schumer.c > log_1
+f(-2,-2)=32 
+     ** ./esbmc --mathsat min_schumer.c > log_2
+f(-2,-1)=17 
+     ** ./esbmc --mathsat min_schumer.c > log_3
+f(-1,-1)=2 
+     ** ./esbmc --mathsat min_schumer.c > log_4
+f(0,-1)=1 
+     ** ./esbmc --mathsat min_schumer.c > log_5
+f(0,0)=0 
+     ** ./esbmc --mathsat min_schumer.c > log_6
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_schumer.c > log_7
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m39,641s
+user	0m38,865s
+sys	0m0,730s
+
+ Configuration Optimization
+
+     Function: sum_squares
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_sum_squares.c > log_1
+f(-4,-2)=24 
+     ** ./esbmc --mathsat min_sum_squares.c > log_2
+f(-4,-1)=18 
+     ** ./esbmc --mathsat min_sum_squares.c > log_3
+f(-2,-2)=12 
+     ** ./esbmc --mathsat min_sum_squares.c > log_4
+f(-2,-1)=6 
+     ** ./esbmc --mathsat min_sum_squares.c > log_5
+f(-1,-1)=3 
+     ** ./esbmc --mathsat min_sum_squares.c > log_6
+f(0,-1)=2 
+     ** ./esbmc --mathsat min_sum_squares.c > log_7
+f(-1,0)=1 
+     ** ./esbmc --mathsat min_sum_squares.c > log_8
+f(0,0)=0 
+     ** ./esbmc --mathsat min_sum_squares.c > log_9
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_sum_squares.c > log_10
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m12,663s
+user	0m12,008s
+sys	0m0,650s
+
+ Configuration Optimization
+
+     Function: matyas
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_matyas.c > log_1
+f(0,-8)=16.64 
+     ** ./esbmc --mathsat min_matyas.c > log_2
+f(0,-4)=4.16 
+     ** ./esbmc --mathsat min_matyas.c > log_3
+     ** Incremento Ajust: 0
+     ** ./esbmc --mathsat min_matyas.c > log_4
+f(0,-2)=1.04 
+     ** ./esbmc --mathsat min_matyas.c > log_5
+f(0,-1)=0.26 
+     ** ./esbmc --mathsat min_matyas.c > log_6
+f(-1,-1)=0.04 
+     ** ./esbmc --mathsat min_matyas.c > log_7
+f(0,0)=0 
+     ** ./esbmc --mathsat min_matyas.c > log_8
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59121e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_matyas.c > log_9
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	6m44,834s
+user	6m43,922s
+sys	0m0,855s
+
+ Configuration Optimization
+
+     Function: rotated_ellipse_02
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_rotated_ellipse_02.c > log_1
+f(-1,-1)=1 
+     ** ./esbmc --mathsat min_rotated_ellipse_02.c > log_2
+f(0,0)=0 
+     ** ./esbmc --mathsat min_rotated_ellipse_02.c > log_3
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59149e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_rotated_ellipse_02.c > log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m4,905s
+user	0m4,724s
+sys	0m0,181s
+
+ Configuration Optimization
+
+     Function: zettl
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_zettl.c > log_1
+f(0,-1)=1 
+     ** ./esbmc --mathsat min_zettl.c > log_2
+f(1,-1)=0.25 
+     ** ./esbmc --mathsat min_zettl.c > log_3
+f(0,0)=0 
+     ** ./esbmc --mathsat min_zettl.c > log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_zettl.c > log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m12,124s
+user	0m11,807s
+sys	0m0,316s
+
+ Configuration Optimization
+
+     Function: power_sum
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_power_sum.c > log_1
+f(-1,-1)=2 
+     ** ./esbmc --mathsat min_power_sum.c > log_2
+f(-1,0)=1 
+     ** ./esbmc --mathsat min_power_sum.c > log_3
+f(0,0)=0 
+     ** ./esbmc --mathsat min_power_sum.c > log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_power_sum.c > log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m5,112s
+user	0m4,856s
+sys	0m0,253s
+
+ Configuration Optimization
+
+     Function: schwefel_2_20
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_schwefel_2_20.c > log_1
+f(0,-2)=2 
+     ** ./esbmc --mathsat min_schwefel_2_20.c > log_2
+f(0,-1)=1 
+     ** ./esbmc --mathsat min_schwefel_2_20.c > log_3
+f(0,0)=0 
+     ** ./esbmc --mathsat min_schwefel_2_20.c > log_4
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 4.59135e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --mathsat min_schwefel_2_20.c > log_5
+     ** Vai cancelar tudo
+     ** Precisão 1: 0
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m2,925s
+user	0m2,721s
+sys	0m0,202s

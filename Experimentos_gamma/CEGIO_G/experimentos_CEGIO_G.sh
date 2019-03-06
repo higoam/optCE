@@ -16,6 +16,8 @@ declare -a functions=(
 #'wayburn_seader_1.func'
 #'zirilli.func'
 #'rotated_ellipse.func'
+'godstein_price.func'
+#'engvall.func'
 #
 #'alpine1.func'
 #'egg_crate.func'
@@ -27,31 +29,37 @@ declare -a functions=(
 #'wayburn_seader_2.func'
 #'price_1.func'
 #'dixon_price.func'
+#'rosenbrock.func'
+#'wayburn_seader_1.func'
+#'qing.func'
+#'beale.func'
 #
-#'booth.func'
-#'chung_reynolds.func'
 #'cube.func'
-#'mccormick.func'
-#'godstein_price.func'
+#'chung_reynolds.func'
+#'cigar.func'
+#'zakharov.func'
+#'sphere.func'
 #'schumer.func'
 #'sum_squares.func'
 #'matyas.func'
 #'rotated_ellipse_02.func'
 #'zettl.func'
+#'power_sum.func'
+#'schwefel_2_20.func'
 );
 
-	echo "#############  Experiments to --generalized CEGIO-G Prec 3  ##############"	>> resultado_exp_CEGIO_G_MINISAT.txt
-	echo "#############  Experiments to --generalized CEGIO-G Prec 3  ##############"	
+	echo "#############  Experiments to --generalized --double CEGIO-G Prec 3  ##############"	>> resultado_exp_CEGIO_G_MINISAT.txt
+	echo "#############  Experiments to --generalized --double CEGIO-G Prec 3  ##############"	
 
-	echo "#############  CBMC - MINISAT  ##############"	>> resultado_exp_CEGIO_G_MINISAT.txt
-	echo "#############  CBMC - MINISAT  ##############"
-	for i in "${functions[@]}"
-	do		
-		line=$i
-		func=${line//,*}       	
-
-		(time ./optCE_1000 $func --cbmc --minisat --generalized --library=math2.h --precision=3) &>> resultado_exp_CEGIO_G_MINISAT.txt
-	done
+#	echo "#############  CBMC - MINISAT  ##############"	>> resultado_exp_CEGIO_G_MINISAT.txt
+#	echo "#############  CBMC - MINISAT  ##############"
+#	for i in "${functions[@]}"
+#	do		
+#		line=$i
+#		func=${line//,*}       	
+#
+#		(time ./optCE_1000 $func --cbmc --minisat --generalized --double --library=math2.h --precision=3) &>> resultado_exp_CEGIO_G_MINISAT.txt
+#	done
 
 	echo "#############  ESBMC - Mathsat  ##############"	>> resultado_exp_CEGIO_G_MINISAT.txt	
 	echo "#############  ESBMC - Mathsat  ##############"	
@@ -60,7 +68,7 @@ declare -a functions=(
 		line=$i
 		func=${line//,*}       	
 
-		(time ./optCE_1000 $func --esbmc --mathsat --generalized --library=math2.h --precision=3) &>> resultado_exp_CEGIO_G_MATHSAT.txt 
+		(time ./optCE_1000 $func --esbmc --mathsat --generalized --double --library=math2.h --precision=3) &>> resultado_exp_CEGIO_G_MATHSAT.txt 
 	done
 
 	echo "#############  ESBMC - Boolector  ##############"	>> resultado_exp_CEGIO_G_MINISAT.txt
@@ -70,7 +78,7 @@ declare -a functions=(
 		line=$i
 		func=${line//,*}       	
 
-		(time ./optCE_1000 $func --esbmc --boolector --generalized --library=math2.h --precision=3) &>> resultado_exp_CEGIO_G_BOOLECTOR.txt 
+		(time ./optCE_1000 $func --esbmc --boolector --generalized --double --library=math2.h --precision=3) &>> resultado_exp_CEGIO_G_BOOLECTOR.txt 
 	done
 
 	echo "#############  ESBMC - Z3  ##############" >> resultado_exp_CEGIO_G_MINISAT.txt
@@ -80,6 +88,6 @@ declare -a functions=(
 		line=$i
 		func=${line//,*}       	
 
-		(time ./optCE_1000 $func --esbmc --z3 --generalized --library=math2.h --precision=3) &>> resultado_exp_CEGIO_G_Z3.txt 
+		(time ./optCE_1000 $func --esbmc --z3 --generalized --double --library=math2.h --precision=3) &>> resultado_exp_CEGIO_G_Z3.txt 
 	done
 

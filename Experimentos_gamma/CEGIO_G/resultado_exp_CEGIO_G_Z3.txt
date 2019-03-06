@@ -1,0 +1,44 @@
+
+ Configuration Optimization
+
+     Function: godstein_price
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --z3 min_godstein_price.c > log_1
+f(0,-1)=3 
+     ** ./esbmc --z3 min_godstein_price.c > log_2
+     ** Vai cancelar tudo
+     ** Precisão 1: 3
+     ** Precisão 10: 4.59163e-41
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+### Precisão Atual 10
+     ** ./esbmc --z3 min_godstein_price.c > log_3
+     ** Incremento Ajust: 0
+     ** ./esbmc --z3 min_godstein_price.c > log_4
+     ** Incremento Ajust: 1
+     ** ./esbmc --z3 min_godstein_price.c > log_5
+
+### Precisão Atual 100
+     ** ./esbmc --z3 min_godstein_price.c > log_6
+     ** Incremento Ajust: 0
+     ** ./esbmc --z3 min_godstein_price.c > log_7
+     ** Incremento Ajust: 1
+     ** ./esbmc --z3 min_godstein_price.c > log_8
+
+### Precisão Atual 1000
+     ** ./esbmc --z3 min_godstein_price.c > log_9
+     ** Incremento Ajust: 0
+     ** ./esbmc --z3 min_godstein_price.c > log_10
+     ** Incremento Ajust: 1
+     ** ./esbmc --z3 min_godstein_price.c > log_11
+####################################
+ Global Minimum: f(-0.649,0.882) = 3
+####################################
+
+real	1m29,633s
+user	1m27,861s
+sys	0m1,673s

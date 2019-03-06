@@ -1,0 +1,266 @@
+#############  ESBMC - Mathsat  ##############
+
+ Configuration Optimization
+
+     Function: booth
+    Algorithm: CEGIO-S
+
+
+ ### Precisão Atual 1
+     f(-4,6)=50 
+     f(-4,7)=45 
+     f(-2,4)=26 
+     f(-2,6)=18 
+     f(-2,5)=17 
+     f(-1,4)=9 
+     f(-1,5)=8 
+     f(0,3)=5 
+     f(2,2)=2 
+     f(1,3)=0 
+
+ ### Precisão Atual 10
+
+ ### Precisão Atual 100
+
+ ### Precisão Atual 1000
+####################################
+ Global Minimum: f(1,3) = 0
+####################################
+
+real	0m8,876s
+user	0m7,296s
+sys	0m0,387s
+
+ Configuration Optimization
+
+     Function: price_1
+    Algorithm: CEGIO-S
+
+
+ ### Precisão Atual 1
+     f(-2,0)=34 
+     f(-2,4)=10 
+     f(-2,5)=9 
+     f(-4,-5)=1 
+     f(-5,5)=0 
+
+ ### Precisão Atual 10
+
+ ### Precisão Atual 100
+
+ ### Precisão Atual 1000
+####################################
+ Global Minimum: f(-5,5) = 0
+####################################
+
+real	0m5,062s
+user	0m4,701s
+sys	0m0,358s
+
+ Configuration Optimization
+
+     Function: himmelblau
+    Algorithm: CEGIO-S
+
+
+ ### Precisão Atual 1
+     f(4,-3)=40 
+     f(4,-2)=10 
+     f(-4,-3)=8 
+     f(3,2)=0 
+
+ ### Precisão Atual 10
+
+ ### Precisão Atual 100
+
+ ### Precisão Atual 1000
+####################################
+ Global Minimum: f(3,2) = 0
+####################################
+
+real	0m5,319s
+user	0m4,991s
+sys	0m0,321s
+
+ Configuration Optimization
+
+     Function: leon
+    Algorithm: CEGIO-S
+
+
+ ### Precisão Atual 1
+     f(1,1)=0 
+
+ ### Precisão Atual 10
+
+ ### Precisão Atual 100
+
+ ### Precisão Atual 1000
+####################################
+ Global Minimum: f(1,1) = 0
+####################################
+
+real	0m2,175s
+user	0m2,018s
+sys	0m0,155s
+
+ Configuration Optimization
+
+     Function: price_4
+    Algorithm: CEGIO-S
+
+
+ ### Precisão Atual 1
+     f(0,-2)=36 
+     f(0,-1)=4 
+     f(0,1)=0 
+
+ ### Precisão Atual 10
+
+ ### Precisão Atual 100
+
+ ### Precisão Atual 1000
+####################################
+ Global Minimum: f(0,1) = 0
+####################################
+
+real	0m7,200s
+user	0m6,797s
+sys	0m0,397s
+
+ Configuration Optimization
+
+     Function: schwefel_2_25
+    Algorithm: CEGIO-S
+
+
+ ### Precisão Atual 1
+
+ ### Precisão Atual 10
+
+ ### Precisão Atual 100
+
+ ### Precisão Atual 1000
+####################################
+ Global Minimum: f(0,0) = 0
+####################################
+
+real	0m1,337s
+user	0m1,223s
+sys	0m0,113s
+
+ Configuration Optimization
+
+     Function: rosenbrock
+    Algorithm: CEGIO-S
+
+
+ ### Precisão Atual 1
+     f(-1,1)=4 
+     f(0,0)=1 
+     f(1,1)=0 
+
+ ### Precisão Atual 10
+
+ ### Precisão Atual 100
+
+ ### Precisão Atual 1000
+####################################
+ Global Minimum: f(1,1) = 0
+####################################
+
+real	0m3,679s
+user	0m3,449s
+sys	0m0,228s
+
+ Configuration Optimization
+
+     Function: wayburn_seader_1
+    Algorithm: CEGIO-S
+
+
+ ### Precisão Atual 1
+     f(-1,2)=16 
+     f(1,2)=0 
+
+ ### Precisão Atual 10
+
+ ### Precisão Atual 100
+
+ ### Precisão Atual 1000
+####################################
+ Global Minimum: f(1,2) = 0
+####################################
+
+real	0m6,701s
+user	0m6,427s
+sys	0m0,269s
+
+ Configuration Optimization
+
+     Function: qing
+    Algorithm: CEGIO-S
+
+
+ ### Precisão Atual 1
+     f(0,-8)=-62 
+
+ ### Precisão Atual 10
+
+ ### Precisão Atual 100
+
+ ### Precisão Atual 1000
+####################################
+ Global Minimum: f(0,-8) = -62
+####################################
+
+real	0m3,073s
+user	0m2,873s
+sys	0m0,198s
+
+ Configuration Optimization
+
+     Function: dixon_price
+    Algorithm: CEGIO-S
+
+
+ ### Precisão Atual 1
+     f(0,-1)=9 
+     f(1,-1)=8 
+     f(2,0)=3 
+     f(2,1)=1 
+     f(1,1)=0 
+
+ ### Precisão Atual 10
+
+ ### Precisão Atual 100
+
+ ### Precisão Atual 1000
+####################################
+ Global Minimum: f(1,1) = 0
+####################################
+
+real	0m6,212s
+user	0m5,833s
+sys	0m0,373s
+
+ Configuration Optimization
+
+     Function: beale
+    Algorithm: CEGIO-S
+
+
+ ### Precisão Atual 1
+
+ ### Precisão Atual 10
+
+ ### Precisão Atual 100
+
+ ### Precisão Atual 1000
+####################################
+ Global Minimum: f(-5,-4) = -96.111
+####################################
+
+real	0m11,931s
+user	0m11,489s
+sys	0m0,439s

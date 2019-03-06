@@ -2,205 +2,34 @@
 
  Configuration Optimization
 
-     Function: himmelblau
+     Function: beale
     Algorithm: CEGIO-S
 
 
  ### Precisão Atual 1
-     f(3,1)=10 
-     f(3,2)=0 
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59135e-41
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
+     f(0,0)=14.2031 
+     f(2,0)=0.703125 
+     ** Incremento Ajust: 0
+     ** Incremento Ajust: 1
 
  ### Precisão Atual 10
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
+     ** Incremento Ajust: 0
+     ** Incremento Ajust: 1
+
+ ### Precisão Atual 100
+     f(2.7,0.25)=0.355803 
+     ** Incremento Ajust: 0
+     f(2.26,0.34)=0.269159 
+     ** Incremento Ajust: 0
+     ** Incremento Ajust: 1
+
+ ### Precisão Atual 1000
+     ** Incremento Ajust: 0
+     ** Incremento Ajust: 1
 ####################################
- Global Minimum: f(3,2) = 0
-####################################
-
-real	1m33,348s
-user	1m32,730s
-sys	0m0,419s
-
- Configuration Optimization
-
-     Function: leon
-    Algorithm: CEGIO-S
-
-
- ### Precisão Atual 1
-     f(0,0)=1 
-     f(1,1)=0 
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59135e-41
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
- ### Precisão Atual 10
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-####################################
- Global Minimum: f(1,1) = 0
+ Global Minimum: f(-4.29496e+06,-4.29496e+06) = 0.269159
 ####################################
 
-real	0m22,326s
-user	0m22,074s
-sys	0m0,219s
-
- Configuration Optimization
-
-     Function: price_4
-    Algorithm: CEGIO-S
-
-
- ### Precisão Atual 1
-     f(0,0)=0 
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59149e-41
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
- ### Precisão Atual 10
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-####################################
- Global Minimum: f(0,0) = 0
-####################################
-
-real	0m39,252s
-user	0m39,003s
-sys	0m0,188s
-
- Configuration Optimization
-
-     Function: schwefel_2_25
-    Algorithm: CEGIO-S
-
-
- ### Precisão Atual 1
-     f(2,2)=10 
-     f(0,0)=2 
-     f(1,1)=0 
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59121e-41
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
- ### Precisão Atual 10
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-####################################
- Global Minimum: f(1,1) = 0
-####################################
-
-real	1m20,954s
-user	1m20,646s
-sys	0m0,258s
-
- Configuration Optimization
-
-     Function: sphere
-    Algorithm: CEGIO-S
-
-
- ### Precisão Atual 1
-     f(0,7)=49 
-     f(0,2)=4 
-     f(0,0)=0 
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59163e-41
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
- ### Precisão Atual 10
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-####################################
- Global Minimum: f(0,0) = 0
-####################################
-
-real	0m2,509s
-user	0m2,277s
-sys	0m0,218s
-
- Configuration Optimization
-
-     Function: price_1
-    Algorithm: CEGIO-S
-
-
- ### Precisão Atual 1
-     f(5,-5)=0 
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59149e-41
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
- ### Precisão Atual 10
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-####################################
- Global Minimum: f(5,-5) = 0
-####################################
-
-real	0m10,916s
-user	0m10,702s
-sys	0m0,193s
-
- Configuration Optimization
-
-     Function: dixon_price
-    Algorithm: CEGIO-S
-
-
- ### Precisão Atual 1
-     f(-1,0)=6 
-     f(2,0)=3 
-     f(1,0)=2 
-     f(1,1)=0 
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59149e-41
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
- ### Precisão Atual 10
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-####################################
- Global Minimum: f(1,1) = 0
-####################################
-
-real	0m12,248s
-user	0m11,930s
-sys	0m0,288s
+real	3m27,896s
+user	3m26,402s
+sys	0m1,275s

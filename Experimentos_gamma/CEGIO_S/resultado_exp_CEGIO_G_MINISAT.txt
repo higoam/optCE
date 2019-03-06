@@ -3,42 +3,55 @@
 
  Configuration Optimization
 
-     Function: himmelblau
+     Function: beale
     Algorithm: CEGIO-S
 
 
  ### Precisão Atual 1
-     f(-4,-3)=8 
-     f(3,2)=0 
+     f(-1,-1)=38.7031 
+     f(0,3)=14.2031 
+     f(1,-0)=4.45312 
+     f(2,0)=0.703125 
      ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59135e-41
+     ** Precisão 1: 0.703125
+     ** Precisão 10: 4.59149e-41
      ** Precisão 100: 0
      ** Precisão 1000: 0
 
  ### Precisão Atual 10
+     f(3.2,0.6)=0.102706 
+     f(3.4,0.6)=0.026724 
+     f(3.1,0.5)=0.015781 
+     f(3,0.5)=0 
      ** Vai cancelar tudo
-     ** Precisão 1: 0
+     ** Precisão 1: 0.703125
+     ** Precisão 10: 0
+     ** Precisão 100: 0
+     ** Precisão 1000: 0
+
+ ### Precisão Atual 100
+     ** Vai cancelar tudo
+     ** Precisão 1: 0.703125
      ** Precisão 10: 0
      ** Precisão 100: 0
      ** Precisão 1000: 0
 ####################################
- Global Minimum: f(3,2) = 0
+ Global Minimum: f(3,0.5) = 0
 ####################################
 
-real	0m4,975s
-user	0m3,217s
-sys	0m0,125s
+real	2m7,555s
+user	2m6,177s
+sys	0m0,807s
+#############  Experiments to --positive CEGIO-S Prec 3  ##############
+#############  CBMC - MINISAT  ##############
 
  Configuration Optimization
 
-     Function: leon
+     Function: beale
     Algorithm: CEGIO-S
 
 
  ### Precisão Atual 1
-     f(0,0)=1 
-     f(1,1)=0 
      ** Vai cancelar tudo
      ** Precisão 1: 0
      ** Precisão 10: 4.59163e-41
@@ -52,155 +65,9 @@ sys	0m0,125s
      ** Precisão 100: 0
      ** Precisão 1000: 0
 ####################################
- Global Minimum: f(1,1) = 0
-####################################
-
-real	0m3,079s
-user	0m2,915s
-sys	0m0,147s
-
- Configuration Optimization
-
-     Function: price_4
-    Algorithm: CEGIO-S
-
-
- ### Precisão Atual 1
-     f(0,0)=0 
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59135e-41
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
- ### Precisão Atual 10
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-####################################
  Global Minimum: f(0,0) = 0
 ####################################
 
-real	0m2,026s
-user	0m1,859s
-sys	0m0,125s
-
- Configuration Optimization
-
-     Function: schwefel_2_25
-    Algorithm: CEGIO-S
-
-
- ### Precisão Atual 1
-     f(2,0)=10 
-     f(1,0)=2 
-     f(1,1)=0 
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59121e-41
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
- ### Precisão Atual 10
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-####################################
- Global Minimum: f(1,1) = 0
-####################################
-
-real	0m4,806s
-user	0m4,657s
-sys	0m0,154s
-
- Configuration Optimization
-
-     Function: sphere
-    Algorithm: CEGIO-S
-
-
- ### Precisão Atual 1
-     f(0,0)=0 
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59149e-41
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
- ### Precisão Atual 10
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-####################################
- Global Minimum: f(0,0) = 0
-####################################
-
-real	0m1,147s
-user	0m1,064s
-sys	0m0,087s
-
- Configuration Optimization
-
-     Function: price_1
-    Algorithm: CEGIO-S
-
-
- ### Precisão Atual 1
-     f(0,-1)=41 
-     f(3,-0)=29 
-     f(-2,5)=9 
-     f(5,-4)=1 
-     f(5,5)=0 
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59149e-41
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
- ### Precisão Atual 10
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-####################################
- Global Minimum: f(5,5) = 0
-####################################
-
-real	0m10,300s
-user	0m9,729s
-sys	0m0,226s
-
- Configuration Optimization
-
-     Function: dixon_price
-    Algorithm: CEGIO-S
-
-
- ### Precisão Atual 1
-     f(1,1)=0 
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 4.59135e-41
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-
- ### Precisão Atual 10
-     ** Vai cancelar tudo
-     ** Precisão 1: 0
-     ** Precisão 10: 0
-     ** Precisão 100: 0
-     ** Precisão 1000: 0
-####################################
- Global Minimum: f(1,1) = 0
-####################################
-
-real	0m2,911s
-user	0m2,779s
-sys	0m0,105s
+real	0m3,893s
+user	0m1,082s
+sys	0m0,142s

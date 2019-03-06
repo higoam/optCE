@@ -1,0 +1,10 @@
+#############  ESBMC - Mathsat  ##############
+
+ Configuration Optimization
+
+     Function: alpine1
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./esbmc --mathsat min_alpine1.c > log_1

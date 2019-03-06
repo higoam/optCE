@@ -1,0 +1,17 @@
+#############  Experiments to --generalized --double CEGIO-G Prec 3  ##############
+#############  CBMC - MINISAT  ##############
+
+ Configuration Optimization
+
+     Function: godstein_price
+     Algorithm: CEGIO-G
+
+
+### Precisão Atual 1
+     ** ./cbmc min_godstein_price.c  > log_1 2>> log_1
+f(0,-1)=3 
+     ** ./cbmc min_godstein_price.c  > log_2 2>> log_2
+#############  Experiments to --generalized --double CEGIO-G Prec 3  ##############
+#############  ESBMC - Mathsat  ##############
+#############  ESBMC - Boolector  ##############
+#############  ESBMC - Z3  ##############
